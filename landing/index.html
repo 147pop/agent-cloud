@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ask your agent for infrastructure. See the price and limits. Approve the exact plan. Then it runs.">
+  <title>Agent cloud | Infrastructure in one prompt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600;700&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: oklch(0.16 0.04 273);
+      --muted: oklch(0.43 0.045 273);
+      --line: oklch(0.86 0.025 273);
+      --canvas: oklch(0.98 0.006 273);
+      --white: oklch(1 0 0);
+      --blue: oklch(0.52 0.23 273);
+      --blue-dark: oklch(0.31 0.18 273);
+      --lime: oklch(0.84 0.18 119);
+      --coral: oklch(0.68 0.18 35);
+      --positive: oklch(0.72 0.17 150);
+      --terminal: #101012;
+      --terminal-surface: #1a1a1d;
+      --terminal-line: #34343a;
+      --terminal-copy: #e8e8eb;
+      --terminal-muted: #8b8b92;
+      --claude: #cd694a;
+      --codex: #5cc2e0;
+      --grok: #a5a5ab;
+      --shell: min(1180px, calc(100% - 40px));
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      min-width: 0;
+      overflow-x: clip;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, a { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+    p { text-wrap: pretty; }
+    h1, h2, h3 { line-height: 0.98; letter-spacing: -0.038em; text-wrap: balance; }
+    h1 { font-size: clamp(3.6rem, 8vw, 6rem); }
+    h2 { font-size: clamp(2.5rem, 5.5vw, 4.75rem); }
+    h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); }
+    :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+    ::selection { background: var(--lime); color: var(--ink); }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 20;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: var(--white);
+      transform: translateY(-150%);
+      transition: transform 160ms var(--ease);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .shell { width: var(--shell); margin-inline: auto; }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      background: var(--blue);
+      color: var(--white);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -14vw;
+      bottom: -35vw;
+      width: 72vw;
+      aspect-ratio: 1;
+      border: clamp(48px, 7vw, 110px) solid color-mix(in oklch, var(--lime), transparent 12%);
+      border-radius: 50%;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .topbar {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      width: var(--shell);
+      min-height: 76px;
+      margin-inline: auto;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid oklch(1 0 0 / 0.24);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; letter-spacing: -0.02em; }
+    .topbar nav { display: flex; align-items: center; gap: 24px; font-size: 0.9rem; }
+    .topbar nav a { color: oklch(1 0 0 / 0.84); text-decoration: none; }
+    .topbar nav a:hover { color: var(--white); }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(300px, 0.72fr) minmax(560px, 1.28fr);
+      gap: clamp(38px, 6vw, 88px);
+      width: var(--shell);
+      margin-inline: auto;
+      padding-block: clamp(66px, 9vw, 120px) 96px;
+      align-items: center;
+    }
+    .hero-copy { align-self: start; padding-top: clamp(6px, 4vw, 54px); }
+    .hero h1 { max-width: 9ch; }
+    .hero-copy > p { max-width: 52ch; margin-top: 28px; color: oklch(1 0 0 / 0.84); font-size: clamp(1.05rem, 1.8vw, 1.24rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .cta {
+      display: inline-flex;
+      min-height: 48px;
+      padding: 0 18px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid oklch(1 0 0 / 0.36);
+      border-radius: 8px;
+      color: var(--white);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 180ms var(--ease), background 180ms ease;
+    }
+    .cta:hover { transform: translateY(-2px); background: oklch(1 0 0 / 0.1); }
+    .cta.primary { border-color: var(--lime); background: var(--lime); color: var(--ink); }
+    .cta.primary:hover { background: oklch(0.89 0.18 119); }
+
+    .demo-stage { min-width: 0; }
+    .demo-picker { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-bottom: 13px; }
+    .picker-group { display: flex; flex-wrap: wrap; gap: 6px; }
+    .picker-label { align-self: center; margin-right: 4px; color: oklch(1 0 0 / 0.65); font-size: 0.76rem; }
+    .picker-group button {
+      min-height: 36px;
+      padding: 0 11px;
+      border: 1px solid oklch(1 0 0 / 0.28);
+      border-radius: 7px;
+      background: transparent;
+      color: oklch(1 0 0 / 0.74);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .picker-group button:hover { color: var(--white); border-color: oklch(1 0 0 / 0.56); }
+    .picker-group button[aria-pressed="true"] { border-color: var(--white); background: var(--white); color: var(--blue-dark); }
+    .agent-picker button[aria-pressed="true"][data-agent="claude"] { border-color: var(--claude); background: var(--claude); color: #170d0a; }
+    .agent-picker button[aria-pressed="true"][data-agent="codex"] { border-color: var(--codex); background: var(--codex); color: #061418; }
+    .agent-picker button[aria-pressed="true"][data-agent="grok"] { border-color: #d2d2d5; background: #d2d2d5; color: #161616; }
+
+    .term-window {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--terminal);
+      box-shadow: 0 24px 60px -26px oklch(0.12 0.08 273 / 0.82);
+      color: var(--terminal-copy);
+      font-family: 'Azeret Mono', ui-monospace, monospace;
+    }
+    .term-screen { display: flex; min-height: 600px; max-height: 660px; flex-direction: column; padding: 16px; font-size: 0.73rem; line-height: 1.62; }
+    .session-header { flex: 0 0 auto; }
+    .transcript { min-height: 255px; padding-block: 14px; overflow-y: auto; scrollbar-color: #45454c transparent; }
+    .transcript > * + * { margin-top: 10px; }
+    .term-composer { flex: 0 0 auto; margin-top: auto; }
+
+    .grok-status { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 9px; color: #8b8b92; font-size: 0.68rem; }
+
+    .user-message { display: flex; min-width: 0; gap: 8px; color: #fff; }
+    .user-message span:last-child { min-width: 0; overflow-wrap: anywhere; }
+    .agent-claude .user-message { padding: 2px 0; background: #37373a; }
+    .agent-claude .user-message .caret { color: #616168; }
+    .agent-codex .user-message .caret { font-weight: 700; }
+    .assistant-message { color: #cfcfd4; }
+    .approval-box { padding: 12px; border: 1px solid #575760; border-radius: 7px; }
+    .agent-claude .approval-box { border-color: var(--claude); }
+    .approval-title { color: #ededf0; font-weight: 700; }
+    .approval-copy { margin-top: 4px; color: #96969e; }
+    .approval-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+    .approve-plan, .reject-plan {
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid #51515a;
+      border-radius: 5px;
+      background: transparent;
+      color: #cfcfd4;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.68rem;
+    }
+    .approve-plan { border-color: #80d894; background: #80d894; color: #102115; font-weight: 700; }
+    .approve-plan:hover { background: #9ae9aa; }
+    .reject-plan:hover { border-color: #898992; color: #fff; }
+    .approval-box.approved { border-color: #4ea96f; }
+    .approval-box.approved .approval-copy { color: #80d894; }
+    .approval-box.approved .approval-actions { display: none; }
+
+    .claude-composer .effort { padding-bottom: 4px; color: #8f8f96; text-align: right; font-size: 0.66rem; }
+    .claude-input { display: flex; min-height: 32px; align-items: center; border-top: 1px solid #808080; border-bottom: 1px solid #808080; color: #c0caf5; }
+    .composer-text { min-width: 0; flex: 1; padding-left: 1ch; overflow-wrap: anywhere; }
+    .composer-mode { margin-top: 5px; color: #949494; font-size: 0.66rem; }
+    .composer-mode b { color: #ffd700; }
+    .codex-input { min-height: 72px; padding: 24px 10px; background: #353535; color: #ededed; }
+    .codex-input .caret { display: inline-block; width: 2ch; font-weight: 700; }
+    .codex-meta-line { padding: 4px 0 0 2ch; color: #f6e2b7; font-size: 0.66rem; }
+    .codex-meta-line span { color: #abdfa7; }
+    .grok-input { position: relative; min-height: 42px; padding: 9px; border: 1px solid #505058; border-radius: 4px; color: #e1e1e1; }
+    .grok-input .composer-text { padding-left: 1ch; }
+    .grok-model { position: absolute; right: 9px; bottom: -10px; max-width: calc(100% - 18px); padding-inline: 5px; overflow: hidden; background: var(--terminal); color: #9a9aa3; font-size: 0.64rem; text-overflow: ellipsis; white-space: nowrap; }
+    .typing-caret::after { content: '█'; margin-left: 1px; animation: blink 900ms steps(1, end) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .section { padding-block: clamp(88px, 12vw, 154px); }
+
+    .closing { padding-block: clamp(90px, 13vw, 170px); background: var(--coral); }
+    .closing-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.55fr); gap: 50px; align-items: end; }
+    .closing h2 { max-width: 12ch; color: oklch(0.18 0.05 35); }
+    .closing-side { padding-top: 20px; border-top: 2px solid oklch(0.24 0.07 35); }
+    .closing-side p { color: oklch(0.27 0.07 35); }
+    .closing-side a { display: inline-flex; margin-top: 22px; color: oklch(0.18 0.05 35); font-weight: 800; text-underline-offset: 4px; }
+
+    .reveal { animation: rise 700ms var(--ease) both; }
+    .reveal.delay { animation-delay: 100ms; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 1040px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr); gap: 28px 50px; align-items: end; }
+      .hero h1 { grid-column: 1; }
+      .hero-copy > p { grid-column: 2; grid-row: 2; }
+      .hero-actions { grid-column: 1 / -1; }
+      .demo-stage { max-width: 820px; }
+      .term-screen { min-height: 570px; }
+    }
+    @media (max-width: 760px) {
+      :root { --shell: min(100% - 28px, 1180px); }
+      .topbar nav { display: none; }
+      .hero-grid { padding-top: 52px; }
+      .hero-copy { display: block; }
+      .hero-copy > p { margin-top: 24px; }
+      .hero-actions { margin-top: 28px; }
+      .demo-picker { align-items: flex-start; flex-direction: column; }
+      .term-screen { min-height: 620px; max-height: 720px; padding: 12px; font-size: 0.69rem; }
+      .closing-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      :root { --shell: min(100% - 20px, 1180px); }
+      h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
+      h2 { font-size: 2.65rem; }
+      .topbar { min-height: 66px; }
+      .brand { font-size: 0.9rem; }
+      .hero::after { width: 110vw; right: -52vw; bottom: -28vw; }
+      .hero-grid { padding-bottom: 66px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .picker-group { width: 100%; }
+      .picker-group button { flex: 1 1 0; padding-inline: 7px; }
+      .picker-label { width: 100%; }
+      .term-screen { min-height: 650px; max-height: 760px; }
+      .approval-actions { flex-direction: column; }
+      .approve-plan, .reject-plan { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .logo-rail { overflow-x: auto !important; mask-image: none !important; }
+      .logo-set-copy { display: none !important; }
+    }
+
+    /* Minimal monochrome landing treatment. The terminal keeps each agent's native colors. */
+    :root {
+      --ink: #0a0a0a;
+      --muted: #666;
+      --line: #e5e5e5;
+      --canvas: #fff;
+      --white: #fff;
+      --blue: #0a0a0a;
+      --blue-dark: #0a0a0a;
+      --lime: #0a0a0a;
+      --coral: #0a0a0a;
+      --shell: min(1080px, calc(100% - 48px));
+    }
+    body { background: #fff; font-family: 'Geist', Arial, sans-serif; }
+    .reveal, .reveal.delay { animation: none; }
+    ::selection { background: #111; color: #fff; }
+    .term-window :focus-visible { outline-color: #fff; }
+    h1, h2, h3 { letter-spacing: -0.04em; }
+    h1 { font-size: clamp(3.4rem, 7vw, 5.5rem); }
+    h2 { font-size: clamp(2.3rem, 4.7vw, 4rem); }
+
+    .hero { min-height: auto; overflow: visible; background: #fff; color: var(--ink); }
+    .hero::after { display: none; }
+    .topbar { min-height: 64px; border-color: var(--line); }
+    .brand { min-height: 44px; color: var(--ink); }
+    .topbar nav { gap: 22px; }
+    .topbar nav a { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; color: #666; }
+    .topbar nav a:hover { color: #000; }
+
+    .hero-grid { display: block; width: var(--shell); padding-block: clamp(86px, 12vw, 150px) 112px; }
+    .hero-copy { display: flex; padding: 0; align-items: center; flex-direction: column; text-align: center; }
+    .hero h1 { max-width: 14ch; }
+    .hero-copy > p { max-width: 720px; margin-top: 24px; color: #666; font-size: clamp(1rem, 1.8vw, 1.2rem); text-wrap: balance; }
+    .hero-actions { margin-top: 30px; }
+    .cta { min-height: 44px; padding-inline: 18px; border-color: #d8d8d8; border-radius: 7px; color: #111; }
+    .cta:hover { background: #f5f5f5; }
+    .cta.primary { border-color: #000; background: #000; color: #fff; }
+    .cta.primary:hover { background: #2a2a2a; }
+
+    .demo-stage { width: min(960px, 100%); margin: 48px auto 0; }
+    .demo-picker { min-height: 52px; margin: 0 0 8px; padding: 8px 10px; align-items: center; border: 1px solid var(--line); border-radius: 8px; background: #fafafa; }
+    .picker-label { color: #666; }
+    .agent-picker { margin-left: auto; }
+    .agent-picker .picker-label { margin: 0 0 0 4px; }
+    .picker-group button { min-height: 32px; border: 0; border-radius: 6px; color: #666; transition: background 160ms var(--ease), color 160ms var(--ease); }
+    .picker-group button:hover { border: 0; background: #eee; color: #111; }
+    .picker-group button[aria-pressed="true"],
+    .agent-picker button[aria-pressed="true"][data-agent="claude"],
+    .agent-picker button[aria-pressed="true"][data-agent="codex"],
+    .agent-picker button[aria-pressed="true"][data-agent="grok"] { border: 0; background: #111; color: #fff; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .term-window { border: 1px solid #262626; border-radius: 10px; box-shadow: none; }
+    .term-screen { --terminal-height: 800px; height: var(--terminal-height); min-height: var(--terminal-height); max-height: var(--terminal-height); padding: 24px; font-size: 0.8125rem; line-height: 1.58; }
+    .session-header:empty { display: none; }
+    .transcript { min-height: 0; flex: 1 1 auto; padding-top: 2px; overflow-y: hidden; }
+    .transcript > * + * { margin-top: 12px; }
+
+    .native-tool { color: #cfcfd3; }
+    .native-tool > div:first-child { display: flex; min-width: 0; gap: 8px; align-items: baseline; }
+    .native-marker { flex: 0 0 auto; color: #4ea96f; }
+    .native-command { min-width: 0; color: #c0caf5; overflow-wrap: anywhere; }
+    .native-tool-result { padding-left: 24px; color: #85858e; white-space: pre-wrap; }
+    .claude-tool .native-command { color: #c0caf5; }
+    .codex-tool .native-command { color: #5cc2e0; }
+    .grok-tool .native-command { color: #e1e1e1; }
+    .grok-tool strong { color: #c0c0c0; }
+    .hook-count { color: #999; }
+    .hook-count b { color: #00ff00; }
+
+    .agent-native-output { display: flex; min-width: 0; gap: 9px; padding-left: 24px; color: #686872; }
+    .agent-native-output pre { min-width: 0; color: #9a9aa3; font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .agent-claude .agent-native-output > span { color: #565f89; }
+    .agent-codex .agent-native-output { padding-left: 16px; }
+    .agent-grok .agent-native-output { padding-left: 22px; border-left: 1px solid #00ff00; }
+
+    .native-permission { margin-top: 16px; font: inherit; }
+    .native-permission .approval-title { color: #e7e7ea; font-weight: 600; }
+    .native-permission .approval-copy { margin-top: 4px; color: #8b8b94; }
+    .native-options { display: grid; gap: 2px; margin-top: 9px; }
+    .native-options .approve-plan, .native-options .reject-plan { width: 100%; min-height: 26px; padding: 2px 6px; border: 0; border-radius: 3px; background: transparent; color: #8b8b94; text-align: left; font-family: inherit; font-size: inherit; }
+    .native-options .selected-option { color: #e8e8eb; font-weight: 600; }
+    .native-options button:hover, .native-options button:focus-visible { background: #242428; color: #fff; }
+    .claude-permission { padding: 8px 12px 10px; border: 1px solid #cd694a; border-radius: 0; }
+    .claude-permission legend { padding: 0 8px; color: #cd694a; }
+    .claude-permission .selected-option { background: #cd694a1f; }
+    .codex-permission { padding: 4px 0; border: 0; }
+    .codex-permission .selected-option { color: #f6e2b7; }
+    .grok-permission { padding: 0; border: 0; }
+    .permission-rule { padding-left: 12px; border-left: 1px solid #808080; }
+    .permission-hint { margin-top: 8px; color: #9a9aa3; font-size: 0.68rem; }
+    .permission-hint b { color: #e1e1e1; }
+    .approval-box.approved { border-color: inherit; }
+    .approval-box.approved .approval-copy { color: #80d894; }
+
+    .native-result { color: #cfcfd3; }
+    .native-result .assistant-message { color: #cfcfd3; }
+    .native-result pre { margin-top: 6px; padding-left: 16px; color: #a9a9b0; font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+    .section { padding-block: clamp(82px, 10vw, 124px); border-top: 1px solid var(--line); }
+    .capabilities { border-top: 1px solid var(--line); }
+    .capability { padding-block: clamp(76px, 9vw, 118px); overflow: hidden; background: #fff; color: #111; }
+    .capability + .capability { border-top: 1px solid var(--line); }
+    .capability.dark { border-color: #2a2a2a; background: #0a0a0a; color: #fff; }
+    .capability-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.55fr); gap: 64px; align-items: end; }
+    .capability-head h2 { font-size: clamp(3.6rem, 7vw, 5.75rem); }
+    .capability-head p { max-width: 42ch; color: #666; font-size: clamp(1rem, 1.6vw, 1.15rem); text-wrap: pretty; }
+    .capability.dark .capability-head p { color: #b8b8b8; }
+    .logo-rail { margin-top: clamp(36px, 5vw, 58px); overflow: hidden; border-block: 1px solid var(--line); mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); }
+    .capability.dark .logo-rail { border-color: #2a2a2a; }
+    .logo-track { display: flex; width: max-content; will-change: transform; }
+    .logo-track.is-ready { animation: logo-roll 34s linear infinite; }
+    .capability.deploy .logo-track.is-ready { animation-direction: reverse; animation-duration: 38s; }
+    .capability.continue .logo-track.is-ready { animation-duration: 31s; }
+    .logo-rail:hover .logo-track { animation-play-state: paused; }
+    .logo-set { display: flex; flex: 0 0 auto; }
+    .logo-item { display: flex; width: 196px; min-height: 122px; padding: 22px 18px 18px; align-items: center; flex-direction: column; justify-content: space-between; gap: 12px; border-right: 1px solid var(--line); }
+    .capability.dark .logo-item { border-color: #2a2a2a; }
+    .logo-art { display: grid; width: 100%; height: 60px; place-items: center; }
+    .logo-art img, .logo-art .pi-logo { display: block; width: 56px; height: 56px; object-fit: contain; }
+    .logo-art.wide img { width: min(150px, 100%); height: 56px; }
+    .logo-art.minecraft-logo { width: min(150px, 100%); height: 56px; }
+    .logo-art.minecraft-logo img { width: 64px; height: 64px; transform: scale(1.08); }
+    .logo-item figcaption { color: #555; font-size: 0.875rem; font-weight: 600; text-align: center; }
+    .capability.dark .logo-item figcaption { color: #c8c8c8; }
+    @keyframes logo-roll {
+      from { transform: translate3d(-33.333333%, 0, 0); }
+      to { transform: translate3d(-66.666667%, 0, 0); }
+    }
+
+    .operations { border-top: 1px solid var(--line); background: #fff; }
+    .operations-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.55fr); gap: 64px; align-items: end; }
+    .operations-head h2 { font-size: clamp(2.8rem, 4.8vw, 4.2rem); }
+    .operations-head p { max-width: 36ch; color: #666; font-size: clamp(1rem, 1.6vw, 1.15rem); text-wrap: pretty; }
+    .cloud-terminal { margin-top: clamp(42px, 6vw, 64px); overflow: hidden; border: 1px solid #242424; background: #0a0a0a; color: #b8b8bd; font-family: 'Azeret Mono', monospace; font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+    .cloud-terminal-body { padding: clamp(24px, 4vw, 40px); }
+    .cli-block + .cli-block { margin-top: 32px; padding-top: 32px; border-top: 1px solid #292929; }
+    .cli-command { display: flex; gap: 10px; align-items: center; color: #ededee; }
+    .cli-command > span:first-child { color: #77777d; }
+    .cli-command code { color: inherit; font: inherit; }
+    .resource-list { margin-top: 16px; border-top: 1px solid #292929; }
+    .resource-row { display: grid; grid-template-columns: minmax(180px, 1.5fr) minmax(90px, 0.7fr) minmax(90px, 0.7fr) minmax(100px, 0.8fr); gap: 18px; padding: 12px 0; align-items: center; border-bottom: 1px solid #222; }
+    .resource-head { padding-block: 9px; color: #66666c; font-size: 0.875rem; }
+    .resource-name { color: #e4e4e6; }
+    .resource-name small { margin-left: 8px; color: #68686e; font: inherit; }
+    .terminal-status, .resource-meta, .resource-spend { color: #aaaab0; }
+    .usage-output { display: grid; width: min(320px, 100%); margin-top: 14px; gap: 8px; }
+    .usage-output div { display: flex; justify-content: space-between; gap: 18px; }
+    .usage-output dt { color: #74747b; }
+    .usage-output dd { color: #d9d9dc; }
+    .log-output { display: grid; margin-top: 14px; gap: 7px; color: #aaaab0; }
+    .log-output span { overflow-wrap: anywhere; }
+    .log-output time { margin-right: 12px; color: #626269; }
+    .closing { border-top: 1px solid var(--line); background: #fff; }
+    .closing h2 { color: #111; }
+    .closing-side { border-top-color: #d7d7d7; }
+    .closing-side p { color: #666; }
+    .closing-side a { display: inline-flex; min-height: 44px; align-items: center; color: #111; }
+
+    @media (max-width: 1040px) {
+      .hero-copy { display: flex; }
+      .hero-copy > p, .hero-actions { grid-column: auto; grid-row: auto; }
+      .demo-stage { max-width: none; }
+    }
+    @media (max-width: 900px) {
+      .picker-group button, .native-options .approve-plan, .native-options .reject-plan { min-height: 44px; }
+      .capability-head { grid-template-columns: 1fr; gap: 18px; }
+      .picker-group button, .picker-label, .term-screen, .composer-mode, .claude-composer .effort, .codex-meta-line, .grok-model, .grok-status, .permission-hint { font-size: 0.875rem; }
+      .term-screen { --terminal-height: 872px; }
+      .operations-head { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (max-width: 760px) {
+      :root { --shell: min(100% - 28px, 1080px); }
+      .topbar { display: none; }
+      .hero-grid { padding-block: 72px 84px; }
+      .demo-stage { margin-top: 54px; }
+      .demo-picker { align-items: stretch; border-radius: 8px; flex-direction: column; }
+      .picker-group { width: 100%; }
+      .agent-picker { margin-left: 0; }
+      .picker-group button { flex: 1; }
+    }
+    @media (max-width: 600px) {
+      .demo-stage { margin-top: 42px; }
+      .demo-picker { min-height: 0; margin-bottom: 8px; padding: 0; gap: 8px; border: 0; background: transparent; }
+      .picker-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; padding: 3px; gap: 3px; border: 1px solid var(--line); border-radius: 8px; background: #f5f5f5; }
+      .agent-picker { margin-left: 0; }
+      .picker-label { display: none; }
+      .picker-group button { min-height: 44px; padding-inline: 4px; border-radius: 6px; }
+      .term-window { border-radius: 8px; }
+      .term-screen { --terminal-height: auto; height: auto; min-height: 0; max-height: none; padding: 16px 14px; font-size: 0.875rem; line-height: 1.48; }
+      .transcript { min-height: 0; flex: 0 0 auto; padding: 0; overflow: visible; }
+      .transcript > * + * { margin-top: 10px; }
+      .term-composer { margin-top: 24px; }
+      .agent-native-output, .agent-codex .agent-native-output, .agent-grok .agent-native-output { padding-left: 0; gap: 6px; }
+      .native-tool-result { padding-left: 18px; }
+      .native-permission { margin-top: 12px; }
+      .native-options { margin-top: 8px; gap: 2px; }
+      .native-permission .approval-copy { line-height: 1.42; }
+      .claude-composer .effort, .composer-hint, .codex-path { display: none; }
+      .composer-mode { margin-top: 7px; }
+      .codex-input { min-height: 44px; padding: 12px 8px; }
+      .codex-meta-line { padding-left: 0; }
+      .grok-status span:last-child, .hook-count { display: none; }
+      .grok-tool strong { min-width: 0; overflow-wrap: anywhere; }
+      .grok-model { position: static; display: block; margin-top: 6px; padding: 0; background: transparent; }
+      .native-result pre { padding-left: 0; }
+      .capability { padding-block: 68px; }
+      .capability-head h2 { font-size: clamp(3.4rem, 17vw, 4.6rem); }
+      .logo-rail { margin-top: 34px; mask-image: none; }
+      .logo-item { width: 168px; min-height: 112px; padding-inline: 14px; }
+    }
+    @media (max-width: 480px) {
+      :root { --shell: min(100% - 20px, 1080px); }
+      h1 { font-size: clamp(3rem, 14vw, 4rem); }
+      h2 { font-size: 2.35rem; }
+      .topbar nav { display: none; }
+      .hero-grid { padding-top: 64px; }
+      .picker-group button { min-height: 44px; }
+      .cloud-terminal { font-size: 0.875rem; }
+      .cloud-terminal-body { padding: 22px 16px; }
+      .resource-head { display: none; }
+      .resource-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 14px; padding: 13px 4px; }
+      .resource-name small { display: block; margin: 3px 0 0; }
+      .resource-meta { grid-column: 1; color: #6f6f76; }
+      .resource-meta::before { content: 'expires '; }
+      .resource-spend { grid-column: 2; grid-row: 2; }
+      .log-output time { display: block; margin: 0 0 2px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <header class="topbar">
+        <a class="brand" href="#main-content" aria-label="Agent cloud home">agent cloud</a>
+        <nav aria-label="Primary navigation">
+          <a href="#demo">Demo</a>
+          <a href="#capabilities">Capabilities</a>
+        </nav>
+      </header>
+
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <h1 id="hero-title">Infrastructure in one prompt.</h1>
+          <p>Host a server, deploy a repository, or keep working in the cloud from Claude, Codex, or Grok. See the price and limits. Approve the hash. Then it runs.</p>
+          <div class="hero-actions">
+            <a class="cta primary" href="#demo">Try the demo</a>
+          </div>
+        </div>
+
+        <div class="demo-stage reveal delay" id="demo">
+          <div class="demo-picker">
+            <div class="picker-group flow-picker" role="group" aria-label="Choose a cloud flow">
+              <span class="picker-label">Flow</span>
+              <button type="button" aria-pressed="true" data-flow="host">Host</button>
+              <button type="button" aria-pressed="false" data-flow="deploy">Deploy</button>
+              <button type="button" aria-pressed="false" data-flow="continue">Continue</button>
+            </div>
+            <div class="picker-group agent-picker" role="group" aria-label="Choose an agent">
+              <button type="button" aria-pressed="false" data-agent="grok">Grok</button>
+              <button type="button" aria-pressed="false" data-agent="codex">Codex</button>
+              <button type="button" aria-pressed="true" data-agent="claude">Claude</button>
+              <span class="picker-label">Agent</span>
+            </div>
+            <span class="sr-only" id="terminalTitle">Claude Code · Host</span>
+          </div>
+
+          <section class="term-window agent-claude" aria-label="Interactive agent conversation" aria-live="polite">
+            <div class="term-screen">
+              <div class="session-header" id="sessionHeader"></div>
+              <div class="transcript" id="transcript"></div>
+              <div class="term-composer" id="termComposer"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities" id="capabilities" aria-label="What one prompt can run">
+      <article class="capability host" aria-labelledby="host-title">
+        <div class="shell">
+          <header class="capability-head">
+            <h2 id="host-title">Host</h2>
+            <p>Spin up a ready-to-play server for tonight. It sleeps when empty and shuts down on schedule.</p>
+          </header>
+          <div class="logo-rail" aria-label="Game server templates">
+            <div class="logo-track">
+              <div class="logo-set">
+                <figure class="logo-item"><div class="logo-art minecraft-logo"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/minecraft.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Minecraft</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/892970/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>Valheim</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/105600/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>Terraria</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/427520/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>Factorio</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/108600/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>Project Zomboid</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1623730/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>Palworld</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/526870/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>Satisfactory</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art wide"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1604030/capsule_231x87.jpg" alt="" loading="lazy" decoding="async"></div><figcaption>V Rising</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="capability deploy dark" aria-labelledby="deploy-title">
+        <div class="shell">
+          <header class="capability-head">
+            <h2 id="deploy-title">Deploy</h2>
+            <p>Ship an app, database, or worker from one prompt. Keep it private and set a hard spending limit.</p>
+          </header>
+          <div class="logo-rail" aria-label="Deployment templates">
+            <div class="logo-track">
+              <div class="logo-set">
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/docker.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Docker</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/node-js.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Node.js</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/postgresql.svg" alt="" loading="lazy" decoding="async"></div><figcaption>PostgreSQL</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/redis.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Redis</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/n8n.svg" alt="" loading="lazy" decoding="async"></div><figcaption>n8n</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/wordpress.svg" alt="" loading="lazy" decoding="async"></div><figcaption>WordPress</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/grafana.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Grafana</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/metabase.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Metabase</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="capability continue" aria-labelledby="continue-title">
+        <div class="shell">
+          <header class="capability-head">
+            <h2 id="continue-title">Continue</h2>
+            <p>Send your workspace to the cloud and keep the agent working after your laptop closes.</p>
+          </header>
+          <div class="logo-rail" aria-label="Supported coding agents and editors">
+            <div class="logo-track">
+              <div class="logo-set">
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/claude.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Claude</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/openai.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Codex</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.simpleicons.org/cursor" alt="" loading="lazy" decoding="async"></div><figcaption>Cursor</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/grok.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Grok</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/github-copilot.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Copilot</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><svg class="pi-logo" viewBox="0 0 470 470" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M0 0H352.07V234.71H234.71V352.07H117.36V469.43H0V0ZM117.36 117.36V234.71H234.71V117.36H117.36Z"></path><path fill="currentColor" d="M352.07 234.71H469.43V469.43H352.07V234.71Z"></path></svg></div><figcaption>Pi</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/zed.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Zed</figcaption></figure>
+                <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/visual-studio-code.svg" alt="" loading="lazy" decoding="async"></div><figcaption>VS Code</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section operations" id="operations" aria-labelledby="operations-title">
+      <div class="shell">
+        <header class="operations-head">
+          <h2 id="operations-title">Use the CLI.</h2>
+          <p>The same commands work for you and your agent.</p>
+        </header>
+
+        <div class="cloud-terminal" role="region" aria-label="Cloud command line example">
+          <div class="cloud-terminal-body">
+            <div class="cli-block">
+              <div class="cli-command"><span aria-hidden="true">$</span><code>cloud list</code></div>
+              <div class="resource-list" aria-label="Active cloud workloads">
+                <div class="resource-row resource-head" aria-hidden="true"><span>workload</span><span>status</span><span>expires</span><span>spend</span></div>
+                <div class="resource-row"><span class="resource-name">game_7H9 <small>minecraft</small></span><span class="terminal-status">sleeping</span><span class="resource-meta">4h 12m</span><span class="resource-spend">$0.00</span></div>
+                <div class="resource-row"><span class="resource-name">deploy_482 <small>web + postgres</small></span><span class="terminal-status">running</span><span class="resource-meta">47h 56m</span><span class="resource-spend">$0.18 / $3</span></div>
+                <div class="resource-row"><span class="resource-name">workspace_123 <small>agent</small></span><span class="terminal-status">testing</span><span class="resource-meta">10h 41m</span><span class="resource-spend">$0.86 / $2</span></div>
+              </div>
+            </div>
+
+            <div class="cli-block">
+              <div class="cli-command"><span aria-hidden="true">$</span><code>cloud usage</code></div>
+              <dl class="usage-output">
+                <div><dt>credits</dt><dd>$7.42</dd></div>
+                <div><dt>running</dt><dd>$1.04</dd></div>
+                <div><dt>limits</dt><dd>$5.00</dd></div>
+              </dl>
+            </div>
+
+            <div class="cli-block">
+              <div class="cli-command"><span aria-hidden="true">$</span><code>cloud logs workspace_123 --tail 3</code></div>
+              <div class="log-output"><span><time>18:42:14</time> workspace resumed on worker-04</span><span><time>18:42:19</time> npm test</span><span><time>18:42:51</time> 128 passed · 0 failed</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="shell closing-grid">
+        <h2 id="closing-title">Infrastructure in one prompt.</h2>
+        <div class="closing-side">
+          <p>Host. Deploy. Continue.</p>
+          <a href="#demo">Try the demo ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    var activeFlow = 'host';
+    var activeAgent = 'claude';
+    var demoRun = 0;
+    var demoTimers = [];
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var compactMedia = window.matchMedia('(max-width: 600px)');
+
+    var flows = {
+      host: {
+        label: 'Host',
+        prompt: 'Host a private Minecraft Java server for eight friends tonight. Use the free tier if available, stop it after six hours, and keep the world for seven days.',
+        mobilePrompt: 'Host a private Minecraft server for eight friends tonight. Stop it after six hours.',
+        mobilePlanLabels: ['Template', 'Access', 'Limit', 'Price'],
+        mobileApproval: 'Approve this server with its six-hour lease and free-tier limits.',
+        intro: "I'll check capacity and show the exact plan. Nothing runs yet.",
+        tool: 'cloud.plan({ template: "game.minecraft-java", players: 8 })',
+        toolResult: 'Plan ready · no charge · no server created',
+        hash: 'sha256:7c91b3e2…',
+        plan: [
+          ['Template', 'game.minecraft-java'],
+          ['Access', 'Private allowlist · Java 1.21'],
+          ['Start', 'Spare capacity or queue'],
+          ['Limit', '6-hour TTL · idle suspend'],
+          ['World', 'Retain 7 days'],
+          ['Price', 'USD 0.00 · free tier']
+        ],
+        approval: 'Approve this exact server plan. Public routing and the six-hour lease start only after approval.',
+        postTools: [
+          ['cloud.apply({ plan_hash: "7c91b3e2" })', 'Placement reserved · worker-03'],
+          ['cloud.status("game_7H9")', 'Paper ready · 8 slots · event_seq 12']
+        ],
+        resultTitle: 'Server ready',
+        result: 'address  mc-7h9.play.example\nstatus   online\nexpires  today at 23:30\nworld    retained until Sep 7'
+      },
+      deploy: {
+        label: 'Deploy',
+        prompt: 'Deploy this repository with Postgres. Keep the preview private for 48 hours and cap total spend at USD 3.',
+        mobilePrompt: 'Deploy this repository with Postgres. Keep it private and cap spend at USD 3.',
+        mobilePlanLabels: ['Source', 'Runtime', 'Access', 'Limit', 'Estimate'],
+        mobileApproval: 'Approve this private deployment with its USD 3 spending cap.',
+        intro: "I'll inspect the repository and price the build. Nothing runs yet.",
+        tool: 'cloud.plan({ template: "app.git-web", database: "postgres" })',
+        toolResult: 'Plan ready · repository read only · no build started',
+        hash: 'sha256:21a40f8c…',
+        plan: [
+          ['Source', 'Current repository · branch main'],
+          ['Runtime', 'Node 22 · approved builder'],
+          ['Data', 'Postgres 16 · 2 GB volume'],
+          ['Access', 'Private WorkOS preview'],
+          ['Limit', '48-hour TTL · USD 3.00 cap'],
+          ['Estimate', 'USD 1.42 from prepaid credits']
+        ],
+        approval: 'Approve this hash to reserve up to USD 3. Any image, access, or lifetime change creates a new plan.',
+        postTools: [
+          ['cloud.apply({ plan_hash: "21a40f8c" })', 'Build started · idempotency key accepted'],
+          ['cloud.logs("deploy_482", { tail: 3 })', 'Build passed · database healthy · route active']
+        ],
+        resultTitle: 'Private preview ready',
+        result: 'url      https://pr-482.preview.example\naccess   heyfardo organization\nspent    USD 0.18 of USD 3.00\nexpires  in 47h 56m'
+      },
+      continue: {
+        label: 'Continue',
+        prompt: 'Move this task to the cloud and keep running the tests after I close my laptop. Stop after 12 hours and never spend more than USD 2.',
+        mobilePrompt: 'Move this task to the cloud for 12 hours and stop at USD 2.',
+        mobilePlanLabels: ['Workspace', 'Context', 'Secrets', 'Limit', 'Estimate'],
+        mobileApproval: 'Approve this handoff with its 12-hour lease and USD 2 cap.',
+        intro: "I'll package the workspace and context, then show the exact cloud plan. Nothing uploads yet.",
+        tool: 'cloud.plan({ template: "workspace.agent", handoff: "current" })',
+        toolResult: 'Handoff verified · 183 MB · no upload started',
+        hash: 'sha256:c8749f1a…',
+        plan: [
+          ['Workspace', 'Repository + branch + local changes'],
+          ['Context', 'Task summary + test evidence + env manifest'],
+          ['Runtime', 'Current agent in a durable workspace'],
+          ['Secrets', 'Only explicitly approved credentials'],
+          ['Limit', '12-hour TTL · USD 2.00 cap'],
+          ['Estimate', 'USD 0.86 from prepaid credits']
+        ],
+        approval: 'Approve this handoff and spending cap. The platform moves workspace state and context, not a proprietary session format.',
+        postTools: [
+          ['cloud.apply({ plan_hash: "c8749f1a" })', 'Snapshot uploaded · worker-04 reserved'],
+          ['cloud.status("workspace_123")', 'Agent resumed · tests running · event_seq 184']
+        ],
+        resultTitle: 'Work continues in the cloud',
+        result: 'workspace  workspace_123\nbranch     feat/billing-policy\nstatus     tests running\nreturn     agent cloud pull workspace_123'
+      }
+    };
+
+    var agents = {
+      claude: { label: 'Claude Code', model: 'Fable 5 with xhigh effort' },
+      codex: { label: 'OpenAI Codex', model: 'gpt-5.6-sol low' },
+      grok: { label: 'Grok', model: 'Grok 4.5 (xhigh)' }
+    };
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>'"]/g, function(character) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character];
+      });
+    }
+
+    function clearDemoTimers() {
+      demoTimers.forEach(function(timer) { window.clearTimeout(timer); });
+      demoTimers = [];
+    }
+
+    function isCompactDemo() {
+      return compactMedia.matches;
+    }
+
+    function demoPrompt(flow) {
+      return isCompactDemo() ? flow.mobilePrompt : flow.prompt;
+    }
+
+    function schedule(callback, delay) {
+      var timer = window.setTimeout(callback, reducedMotion || isCompactDemo() ? 0 : delay);
+      demoTimers.push(timer);
+    }
+
+    function renderSessionHeader() {
+      var html = '';
+      if (activeAgent === 'grok') {
+        html = '<div class="grok-status"><span> main&nbsp; ~/projects/agent-cloud</span><span>18K / 500K&nbsp; │ &nbsp;1/3 <b style="color:#00ff00">✓</b></span></div>';
+      }
+      document.getElementById('sessionHeader').innerHTML = html;
+    }
+
+    function renderComposer(text, typing) {
+      var safe = escapeHTML(text);
+      var caretClass = typing ? ' typing-caret' : '';
+      var html = '';
+      if (activeAgent === 'claude') {
+        html = '<div class="claude-composer"><div class="effort">◉ xhigh · /effort</div><div class="claude-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="composer-mode"><b>⏵⏵ auto mode on</b><span class="composer-hint"> (shift+tab to cycle) · ← for agents</span></div></div>';
+      } else if (activeAgent === 'codex') {
+        html = '<div class="codex-composer"><div class="codex-input"><span class="caret" aria-hidden="true">›</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="codex-meta-line">' + escapeHTML(agents.codex.model) + '<span class="codex-path"> · ~/projects/agent-cloud</span></div></div>';
+      } else {
+        html = '<div class="grok-composer"><div class="grok-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span><span class="grok-model">' + escapeHTML(agents.grok.model) + ' · plan approval</span></div></div>';
+      }
+      document.getElementById('termComposer').innerHTML = html;
+    }
+
+    function userMessage(text) {
+      var caret = activeAgent === 'codex' ? '›' : '❯';
+      return '<div class="user-message"><span class="caret" aria-hidden="true">' + caret + '</span><span>' + escapeHTML(text) + '</span></div>';
+    }
+
+    function assistantMessage(text) {
+      return '<div class="assistant-message">' + escapeHTML(text) + '</div>';
+    }
+
+    function toolLine(name, result) {
+      if (activeAgent === 'claude') {
+        return '<div class="native-tool claude-tool"><div><span class="native-marker" aria-hidden="true">⏺</span><span class="native-command">' + escapeHTML(name) + '</span></div><div class="native-tool-result"><span aria-hidden="true">⎿</span> ' + escapeHTML(result) + '</div></div>';
+      }
+      if (activeAgent === 'codex') {
+        return '<div class="native-tool codex-tool"><div><span class="native-marker" aria-hidden="true">•</span><span class="native-command">Called ' + escapeHTML(name) + '</span></div><div class="native-tool-result">└ ' + escapeHTML(result) + '</div></div>';
+      }
+      return '<div class="native-tool grok-tool"><div><span class="native-marker" aria-hidden="true">◆</span><strong>Run ' + escapeHTML(name) + '</strong> <span class="hook-count">[hooks: <b>1</b>]</span></div><div class="native-tool-result">' + escapeHTML(result) + '</div></div>';
+    }
+
+    function planBox(flow) {
+      var output = ['plan_id  plan_' + flow.hash.slice(7, 15), 'hash     ' + flow.hash];
+      var plan = isCompactDemo() ? flow.plan.filter(function(pair) { return flow.mobilePlanLabels.includes(pair[0]); }) : flow.plan;
+      plan.forEach(function(pair) { output.push(pair[0].toLowerCase().padEnd(9, ' ') + pair[1]); });
+      var prefix = activeAgent === 'claude' ? '<span aria-hidden="true">⎿</span> ' : activeAgent === 'codex' ? '└ ' : '';
+      return '<div class="native-plan agent-native-output">' + prefix + '<pre>' + escapeHTML(output.join('\n')) + '</pre></div>';
+    }
+
+    function approvalBox(flow) {
+      var hash = escapeHTML(flow.hash);
+      var approval = escapeHTML(isCompactDemo() ? flow.mobileApproval : flow.approval);
+      if (activeAgent === 'claude') {
+        return '<fieldset class="native-permission claude-permission approval-box" id="approvalBox"><legend>Plan approval</legend><div class="approval-title">Approve ' + hash + '</div><div class="approval-copy">' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">❯</span> 1. Yes</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. No, change the plan</button></div></fieldset>';
+      }
+      if (activeAgent === 'codex') {
+        return '<div class="native-permission codex-permission approval-box" id="approvalBox"><div class="approval-title">Approve exact plan?</div><div class="approval-copy">' + hash + ' · ' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">›</span> 1. Approve and run</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. Reject and add feedback</button></div><div class="permission-hint">Press enter to confirm or esc to go back</div></div>';
+      }
+      return '<div class="native-permission grok-permission approval-box" id="approvalBox"><div class="permission-rule"><div class="approval-title">Approve exact plan</div><div class="approval-copy">' + hash + '<br>' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()">1 <span aria-hidden="true">(●)</span> Yes, proceed</button><button class="reject-plan" type="button" onclick="rejectPlan()">2 <span aria-hidden="true">(○)</span> No, reject</button></div></div><div class="permission-hint"><b>1/2</b>:select │ Ctrl+c:cancel</div></div>';
+    }
+
+    function resultBox(flow) {
+      var lead = activeAgent === 'grok' && !isCompactDemo() ? 'Turn completed. ' : '';
+      return '<div class="native-result"><div class="assistant-message">' + escapeHTML(lead + flow.resultTitle + '.') + '</div><pre>' + escapeHTML(flow.result) + '</pre></div>';
+    }
+
+    function appendTranscript(html) {
+      var transcript = document.getElementById('transcript');
+      transcript.insertAdjacentHTML('beforeend', html);
+      transcript.scrollTop = transcript.scrollHeight;
+    }
+
+    function showPlan(run) {
+      var flow = flows[activeFlow];
+      var pieces = [
+        userMessage(demoPrompt(flow)),
+        assistantMessage(flow.intro),
+        toolLine(flow.tool, flow.toolResult),
+        planBox(flow),
+        approvalBox(flow)
+      ];
+      pieces.forEach(function(piece, index) {
+        schedule(function() {
+          if (run !== demoRun) return;
+          appendTranscript(piece);
+          if (index === 0) renderComposer('', false);
+        }, 170 + index * 230);
+      });
+    }
+
+    function typePrompt(run) {
+      var prompt = demoPrompt(flows[activeFlow]);
+      if (reducedMotion || isCompactDemo()) {
+        renderComposer(prompt, false);
+        showPlan(run);
+        return;
+      }
+      var index = 0;
+      function typeNext() {
+        if (run !== demoRun) return;
+        index += 1;
+        renderComposer(prompt.slice(0, index), index < prompt.length);
+        if (index < prompt.length) {
+          var timer = window.setTimeout(typeNext, 11);
+          demoTimers.push(timer);
+        } else {
+          schedule(function() { if (run === demoRun) showPlan(run); }, 220);
+        }
+      }
+      typeNext();
+    }
+
+    function startDemo() {
+      clearDemoTimers();
+      demoRun += 1;
+      var run = demoRun;
+      var flow = flows[activeFlow];
+      var agent = agents[activeAgent];
+      var terminal = document.querySelector('.term-window');
+      terminal.className = 'term-window agent-' + activeAgent;
+      document.getElementById('terminalTitle').textContent = agent.label + ' · ' + flow.label;
+      document.getElementById('transcript').innerHTML = '';
+      renderSessionHeader();
+      renderComposer('', true);
+      schedule(function() { typePrompt(run); }, 420);
+    }
+
+    function selectFlow(flow) {
+      activeFlow = flow;
+      document.querySelectorAll('[data-flow]').forEach(function(button) {
+        button.setAttribute('aria-pressed', String(button.dataset.flow === flow));
+      });
+      startDemo();
+    }
+
+    function selectAgent(agent) {
+      activeAgent = agent;
+      document.querySelectorAll('[data-agent]').forEach(function(button) {
+        button.setAttribute('aria-pressed', String(button.dataset.agent === agent));
+      });
+      startDemo();
+    }
+
+    function approvePlan() {
+      var flow = flows[activeFlow];
+      var run = demoRun;
+      var box = document.getElementById('approvalBox');
+      if (!box || box.classList.contains('approved')) return;
+      box.classList.add('approved');
+      box.querySelector('.approval-title').textContent = '✓ Exact plan approved';
+      box.querySelector('.approval-copy').textContent = isCompactDemo() ? flow.hash + ' matched.' : flow.hash + ' matched. Applying once with the approved limits.';
+      flow.postTools.forEach(function(pair, index) {
+        schedule(function() {
+          if (run !== demoRun) return;
+          appendTranscript(toolLine(pair[0], pair[1]));
+        }, 160 + index * 260);
+      });
+      schedule(function() {
+        if (run !== demoRun) return;
+        appendTranscript(resultBox(flow));
+      }, 160 + flow.postTools.length * 280);
+    }
+
+    function rejectPlan() {
+      var box = document.getElementById('approvalBox');
+      if (!box) return;
+      box.querySelector('.approval-title').textContent = 'Plan rejected';
+      box.querySelector('.approval-copy').textContent = 'Nothing ran and no credits were held. Ask the agent to change the plan.';
+      box.querySelector('.approval-actions').remove();
+    }
+
+
+    document.querySelectorAll('.logo-track').forEach(function(track) {
+      var source = track.querySelector('.logo-set');
+      for (var index = 0; index < 2; index += 1) {
+        var copy = source.cloneNode(true);
+        copy.classList.add('logo-set-copy');
+        copy.setAttribute('aria-hidden', 'true');
+        track.appendChild(copy);
+      }
+      track.classList.add('is-ready');
+    });
+
+    document.querySelectorAll('[data-flow]').forEach(function(button) {
+      button.addEventListener('click', function() { selectFlow(button.dataset.flow); });
+    });
+    document.querySelectorAll('[data-agent]').forEach(function(button) {
+      button.addEventListener('click', function() { selectAgent(button.dataset.agent); });
+    });
+    compactMedia.addEventListener('change', startDemo);
+    window.addEventListener('load', startDemo);
+  </script>
+</body>
+</html>
