@@ -1,0 +1,18 @@
+services:
+  paper:
+    image: itzg/minecraft-server@sha256:efa878ddb49cf5251b2e5f2ad71b08fd2f7236c1f7907433f6697258b31d2ce4
+    container_name: cloud-mc-paper-e0
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "26.2"
+      PAPER_BUILD: "121"
+      UID: "1000"
+      GID: "1000"
+      MEMORY: "4G"
+      ENABLE_RCON: "false"
+    ports:
+      - "127.0.0.1:25565:25565"
+    volumes:
+      - ./data:/data
+    restart: "no"
