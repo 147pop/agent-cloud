@@ -2,7 +2,7 @@
 
 The requested **Vanilla 1.20.1 / 2400 MB** comparison completed on Oracle on 2026-09-05. All eight cases passed their actions, save, clean stop and marker recovery. Counts 1, 2 and 4 met the measured performance rule in both repetitions. The [selected E0 profile](../profile.vanilla.json) therefore permits **four players and one instance**, with three CPU cores, a 2400 MiB heap and a 3200 MiB container cap.
 
-Eight players completed both repetitions and averaged about 20 TPS during the action phases. They failed the minimum one-minute TPS criterion in windows that include connection work. This is a bounded profile decision, not proof that eight players cannot play or that four is Oracle's general capacity.
+Eight players completed both repetitions. During the actions, their observed averages were about 20 TPS, the normal server rate. The first one-minute averages still included time spent connecting and preparing the players, so those readings fell below the 19 TPS threshold. Four passed the complete measured rule twice; eight passed the actions and persistence but missed that initial performance requirement.
 
 ## What matches the Aternos reference
 
@@ -31,14 +31,13 @@ The declared rule is minimum available one-minute TPS >=19 and p95 reported mean
 
 Only available windows ending during an action phase count. A short first phase can have no complete minute window. The worst eight-player windows begin 35.5 and 37.6 seconds before exploration and end about 26 seconds into it. They therefore include the connection/setup workload. Query duration reached 4.10 seconds, so these are timed estimates, not exact tick-boundary measurements. Even allowing the full endpoint-query timing interval, the first eight-player minimum is between 14.95 and 15.44 TPS, below the threshold.
 
-| Eight-player case | Phase | Duration, seconds | Observed mean TPS | Minimum available 1m TPS | p95 JFR mean MSPT |
-| --- | --- | ---: | ---: | ---: | ---: |
-| r1-n8 | new chunks | 81.4 | 20.00 | 15.20 | 17.87 |
-| r1-n8 | existing chunks | 48.6 | 19.99 | 19.99 | 35.52 |
-| r1-n8 | combat | 63.0 | 20.00 | 19.78 | 43.09 |
-| r2-n8 | new chunks | 83.8 | 19.99 | 18.44 | 20.89 |
-| r2-n8 | existing chunks | 48.6 | 20.00 | 19.67 | 37.11 |
-| r2-n8 | combat | 62.9 | 20.00 | 19.93 | 44.51 |
+| Eight players on Oracle, Vanilla 1.20.1 | First repetition | Second repetition |
+| --- | ---: | ---: |
+| New terrain, minimum one-minute TPS | 15.20 | 18.44 |
+| Loaded return route, minimum one-minute TPS | 19.99 | 19.67 |
+| Combat, minimum one-minute TPS | 19.78 | 19.93 |
+
+Each cell is the lowest average over about 60 seconds observed during that phase. It is not the server's tick rate at one instant. The first row includes the earlier connection/setup work described above. Looking only at the observations within each action phase gives means of 19.99 to 20 TPS. The earlier 18.8 / 19.0 exploration table belongs to Paper, not this Vanilla run.
 
 Phase means use the first and last counter observations within that phase and are capped at the nominal 20 TPS. Their actual observation durations remain in the [derived measurements](vanilla-measurements.json). Eight-player exploration took 81.4 and 83.8 seconds, versus about 48.6 seconds for the loaded return route. Action-phase chunk waits totalled 258.9 and 278.1 player-seconds, with longest individual waits of 2.00 and 2.31 seconds. Near-20 TPS alone does not describe the time spent waiting for terrain.
 
