@@ -1,0 +1,41 @@
+{
+  "captured_at": "2026-09-05T14:51:36.787748+00:00",
+  "hostname": {
+    "exit_code": 0,
+    "stdout": "game-host",
+    "stderr": ""
+  },
+  "running_containers": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "all_containers": {
+    "exit_code": 0,
+    "stdout": "cloud-mc-benchmark-e0\tExited (0) 2 minutes ago",
+    "stderr": ""
+  },
+  "listening_ports": {
+    "exit_code": 0,
+    "stdout": "Netid State  Recv-Q Send-Q      Local Address:Port  Peer Address:PortProcess                                                   \nudp   UNCONN 0      0              127.0.0.54:53         0.0.0.0:*    users:((\"systemd-resolve\",pid=569,fd=16))                \nudp   UNCONN 0      0           127.0.0.53%lo:53         0.0.0.0:*    users:((\"systemd-resolve\",pid=569,fd=14))                \nudp   UNCONN 0      0      10.240.0.126%enp0s6:68         0.0.0.0:*    users:((\"systemd-network\",pid=771,fd=21))                \nudp   UNCONN 0      0                 0.0.0.0:111        0.0.0.0:*    users:((\"rpcbind\",pid=556,fd=5),(\"systemd\",pid=1,fd=204))\nudp   UNCONN 0      0                    [::]:111           [::]:*    users:((\"rpcbind\",pid=556,fd=7),(\"systemd\",pid=1,fd=206))\ntcp   LISTEN 0      4096        127.0.0.53%lo:53         0.0.0.0:*    users:((\"systemd-resolve\",pid=569,fd=15))                \ntcp   LISTEN 0      4096            127.0.0.1:39973      0.0.0.0:*    users:((\"containerd\",pid=3384,fd=12))                    \ntcp   LISTEN 0      4096              0.0.0.0:22         0.0.0.0:*    users:((\"sshd\",pid=1760,fd=3),(\"systemd\",pid=1,fd=218))  \ntcp   LISTEN 0      4096              0.0.0.0:111        0.0.0.0:*    users:((\"rpcbind\",pid=556,fd=4),(\"systemd\",pid=1,fd=203))\ntcp   LISTEN 0      4096           127.0.0.54:53         0.0.0.0:*    users:((\"systemd-resolve\",pid=569,fd=17))                \ntcp   LISTEN 0      4096                 [::]:22            [::]:*    users:((\"sshd\",pid=1760,fd=4),(\"systemd\",pid=1,fd=219))  \ntcp   LISTEN 0      4096                 [::]:111           [::]:*    users:((\"rpcbind\",pid=556,fd=6),(\"systemd\",pid=1,fd=205))",
+    "stderr": ""
+  },
+  "memory": {
+    "exit_code": 0,
+    "stdout": "total        used        free      shared  buff/cache   available\nMem:     25139412992   764538880 18075275264     5586944  6637416448 24374874112\nSwap:              0           0           0",
+    "stderr": ""
+  },
+  "disk": {
+    "exit_code": 0,
+    "stdout": "Filesystem       1B-blocks       Used   Available Use% Mounted on\n/dev/sda1      50884108288 6848684032 44018647040  14% /",
+    "stderr": ""
+  },
+  "source_sha256": {
+    "run.py": "66a9c7a8da78c355a70dcbe472827ce2d72f9d02fa4523de6e25f0db5b16009d",
+    "players.js": "409269a8d00988e64b8ed797df670201752f2bd084f7a9dcfc583590c3e57ca8",
+    "compose.yml": "a9f7443f731a63b563c35024b67b8fbe863a7165de694abf9e963a2b3885aabf",
+    "package.json": "6c4a22582e0531e3b60a44b994a37c8e8a20bddfb96fc1a9a7b69263f1028e2f",
+    "package-lock.json": "1d92a61a92ea73b0a8936f4b0fde9a999cdad6ba5d711de7dd839657c47d4744"
+  },
+  "summary_sha256": "3e58e7c7972c94152cbef46b1a364240f64aff373fb04b3c3f0844b2c93f58cd"
+}

@@ -1,0 +1,3449 @@
+{
+  "recording": {
+    "events": [{
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:19.120030087Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.02662719S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:20.122126431Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.105897088S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:21.127840827Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.016715513S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:22.129983611Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.02102643S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:23.132483085Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.02873472S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:24.133771927Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.010980247S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:25.135516501Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006825962S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:26.136411733Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00598295S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:27.137115801Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005534676S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:28.148860311Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005100437S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:29.149634220Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005105609S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:30.165759882Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.008332905S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:31.167360412Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.010623609S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:32.169622919Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.013945897S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:33.175078748Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.023854122S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:34.176226506Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.014340506S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:35.177279462Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.013315356S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:36.180749879Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.020936898S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:37.182086202Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.012257633S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:38.182448860Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.011141012S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:39.183373173Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.011496716S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:40.187035675Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00877084S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:41.190071641Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00660694S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:42.190912711Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.008100425S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:43.197627892Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.015099569S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:44.199159059Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007026868S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:45.200030570Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.009925631S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:46.201040844Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.011087109S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:47.202044998Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006895581S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:48.212591636Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.008077817S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:49.214099362Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006181499S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:50.214930072Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.0060883S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:51.215900944Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006901616S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:52.218794746Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006928653S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:53.224653304Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.010671264S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:54.225747580Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.008946955S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:55.228561980Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006596464S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:56.230512958Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007836266S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:57.233668006Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006645319S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:58.242079269Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.009922272S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:50:59.244199811Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007131659S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:00.245124482Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006526692S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:01.246007072Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007779402S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:02.246934183Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006737587S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:03.246984191Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007867329S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:04.247896742Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007491452S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:05.248819013Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005548952S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:06.249634081Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006222415S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:07.264863438Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007007334S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:08.250502357Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006620995S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:09.251424507Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007299826S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:10.252460061Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006271077S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:11.253407772Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007397876S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:12.254360443Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007099006S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:13.261358149Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006012117S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:14.262320820Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005738768S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:15.263187849Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007548066S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:16.264021997Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00582583S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:17.264740582Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005686665S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:18.269212023Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005349234S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:19.270211775Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006544007S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:20.270990481Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007452858S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:21.271681545Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005881522S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:22.272494172Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005557311S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:23.280639907Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007773712S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:24.281492455Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005010832S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:25.282280681Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005191263S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:26.283161550Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004912529S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:27.283971617Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005542812S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:28.289752691Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00714711S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:29.290636599Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005325472S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:30.291500427Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007175955S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:31.292496459Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006983046S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:32.293313245Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005900233S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:33.300211748Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006510632S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:34.301078335Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005298245S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:35.301914842Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005223436S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:36.302890993Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005546953S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:37.303756581Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005106007S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:38.307175194Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00543777S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:39.308079782Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007293165S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:40.308988851Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005186313S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:41.309826397Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005006283S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:42.310714305Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005316154S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:43.317629128Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005512657S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:44.318546676Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005162645S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:45.319374542Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004666057S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:46.320282691Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004776613S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:47.321221Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.007090163S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:48.325799842Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004848444S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:49.326741151Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004758784S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:50.327649739Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004450358S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:51.328468485Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004439275S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:52.329451354Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004713123S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:53.336398017Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004655995S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:54.337177242Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004665377S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:55.338002507Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004695846S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:56.338761691Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004545576S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:57.339498314Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.004567881S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:58.344827375Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005225016S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:51:59.345739803Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005460091S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:00.346606630Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005165478S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:01.347538458Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005506431S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:02.348304322Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005355288S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:03.355407028Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005407732S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:04.356332735Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005741485S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:05.357157201Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005304156S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:06.357959225Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005502558S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:07.358866932Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005756313S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:08.366890502Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006942413S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:09.367900931Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005683844S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:10.368808519Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00596785S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:11.369536261Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006068086S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:12.370352286Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006303938S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:13.377358149Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005855777S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:14.378309817Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005589185S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:15.379203203Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005292316S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:16.380042308Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005331837S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:17.380878773Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005174748S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:18.416105038Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.008060909S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:19.417098147Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005482607S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:20.417909131Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005240909S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:21.418763597Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005162266S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:22.419688424Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005295988S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:23.426548762Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005507549S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:24.427445868Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005388019S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:25.428282253Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005304322S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:26.429146638Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005281028S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:27.429974222Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005288854S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:28.435232920Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005541404S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:29.436155067Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005303658S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:30.436890448Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005488216S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:31.437626750Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005335158S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:32.438472614Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005418592S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:33.446485062Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005530457S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:34.447433449Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005388417S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:35.448210392Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005525593S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:36.449029696Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005388625S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:37.449851879Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005472089S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:38.454353957Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005440468S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:39.455106419Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005531197S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:40.456094926Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005430863S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:41.457018152Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005554612S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:42.457712533Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005549426S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:43.465529295Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005646506S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:44.466362758Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005655576S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:45.467288104Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005830404S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:46.468210610Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005690345S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:47.469635049Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005875259S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:48.473340906Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005649908S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:49.474182809Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006046681S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:50.474944031Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005705872S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:51.475663611Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005572052S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:52.476481314Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005952394S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:53.484439399Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005727475S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:54.485264822Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005778692S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:55.486182528Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006651973S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:56.487045272Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005649284S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:57.487811453Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.006057705S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:58.492562256Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005795103S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:52:59.493450560Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.005553051S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:53:00.494286903Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.00592469S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:53:01.495117726Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.003868156S"
+      }
+    }, {
+      "type": "minecraft.ServerTickTime", 
+      "values": {
+        "startTime": "2026-09-05T17:53:02.496019231Z", 
+        "duration": "PT0S", 
+        "eventThread": {
+          "osName": "JFR Periodic Tasks", 
+          "osThreadId": 515, 
+          "javaName": "JFR Periodic Tasks", 
+          "javaThreadId": 47, 
+          "group": {
+            "parent": {
+              "parent": null, 
+              "name": "system"
+            }, 
+            "name": "main"
+          }
+        }, 
+        "stackTrace": null, 
+        "averageTickDuration": "PT0.003607799S"
+      }
+    }]
+  }
+}

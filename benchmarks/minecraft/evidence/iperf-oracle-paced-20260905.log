@@ -1,0 +1,120 @@
+-----------------------------------------------------------
+Server listening on 5201 (test #1)
+-----------------------------------------------------------
+Accepted connection from 203.0.113.12, port 49274
+[  6] local 10.240.0.126 port 5201 connected to 203.0.113.12 port 49280
+[ ID] Interval           Transfer     Bitrate
+[  6]   0.00-1.00   sec   128 KBytes  1.05 Mbits/sec                  
+[  6]   1.00-2.00   sec  1.25 MBytes  10.5 Mbits/sec                  
+[  6]   2.00-3.00   sec  4.38 MBytes  36.7 Mbits/sec                  
+[  6]   3.00-4.00   sec  5.88 MBytes  49.3 Mbits/sec                  
+[  6]   4.00-5.00   sec  5.88 MBytes  49.3 Mbits/sec                  
+[  6]   5.00-6.00   sec  6.00 MBytes  50.3 Mbits/sec                  
+[  6]   6.00-7.00   sec  6.00 MBytes  50.3 Mbits/sec                  
+[  6]   7.00-8.00   sec  5.88 MBytes  49.3 Mbits/sec                  
+[  6]   8.00-9.00   sec  5.50 MBytes  46.1 Mbits/sec                  
+[  6]   9.00-10.00  sec  6.00 MBytes  50.3 Mbits/sec                  
+[  6]  10.00-11.00  sec  5.75 MBytes  48.2 Mbits/sec                  
+[  6]  11.00-12.00  sec  3.88 MBytes  32.5 Mbits/sec                  
+[  6]  12.00-13.00  sec  2.88 MBytes  24.1 Mbits/sec                  
+[  6]  13.00-14.00  sec  3.25 MBytes  27.3 Mbits/sec                  
+[  6]  14.00-15.00  sec  1.38 MBytes  11.5 Mbits/sec                  
+[  6]  15.00-16.00  sec  5.00 MBytes  41.9 Mbits/sec                  
+[  6]  16.00-17.00  sec  6.00 MBytes  50.3 Mbits/sec                  
+[  6]  17.00-18.00  sec  5.88 MBytes  49.3 Mbits/sec                  
+[  6]  18.00-19.00  sec  5.88 MBytes  49.3 Mbits/sec                  
+[  6]  19.00-20.00  sec  5.75 MBytes  48.2 Mbits/sec                  
+[  6]  20.00-20.20  sec  1.12 MBytes  47.2 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  6]   0.00-20.20  sec  93.6 MBytes  38.9 Mbits/sec                  receiver
+-----------------------------------------------------------
+Server listening on 5201 (test #2)
+-----------------------------------------------------------
+Accepted connection from 203.0.113.12, port 45752
+[  6] local 10.240.0.126 port 5201 connected to 203.0.113.12 port 45760
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  6]   0.00-1.00   sec  1.12 MBytes  9.44 Mbits/sec    0    226 KBytes       
+[  6]   1.00-2.00   sec  7.88 MBytes  66.1 Mbits/sec    0   6.41 MBytes       
+[  6]   2.00-3.00   sec  6.75 MBytes  56.6 Mbits/sec  2157   2.81 MBytes       
+[  6]   3.00-4.00   sec  5.62 MBytes  47.2 Mbits/sec  2498   1.95 MBytes       
+[  6]   4.00-5.00   sec  8.50 MBytes  71.3 Mbits/sec  259   1.54 MBytes       
+[  6]   5.00-6.00   sec  6.00 MBytes  50.3 Mbits/sec    0   1.63 MBytes       
+[  6]   6.00-7.00   sec  5.88 MBytes  49.3 Mbits/sec    0   1.64 MBytes       
+[  6]   7.00-8.00   sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]   8.00-9.00   sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]   9.00-10.00  sec  5.88 MBytes  49.3 Mbits/sec    0   1.64 MBytes       
+[  6]  10.00-11.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  11.00-12.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  12.00-13.00  sec  5.88 MBytes  49.3 Mbits/sec    0   1.64 MBytes       
+[  6]  13.00-14.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  14.00-15.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  15.00-16.00  sec  5.88 MBytes  49.3 Mbits/sec    0   1.64 MBytes       
+[  6]  16.00-17.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  17.00-18.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  18.00-19.00  sec  5.88 MBytes  49.3 Mbits/sec    0   1.64 MBytes       
+[  6]  19.00-20.00  sec  6.00 MBytes  50.3 Mbits/sec    0   1.64 MBytes       
+[  6]  20.00-20.19  sec  1.12 MBytes  48.4 Mbits/sec    0   1.64 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  6]   0.00-20.19  sec   120 MBytes  50.0 Mbits/sec  4914             sender
+-----------------------------------------------------------
+Server listening on 5201 (test #3)
+-----------------------------------------------------------
+Accepted connection from 203.0.113.12, port 36540
+[  6] local 10.240.0.126 port 5201 connected to 203.0.113.12 port 44633
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  6]   0.00-1.00   sec   483 KBytes  3.95 Mbits/sec  0.241 ms  0/412 (0%)  
+[  6]   1.00-2.00   sec   611 KBytes  5.00 Mbits/sec  0.169 ms  0/521 (0%)  
+[  6]   2.00-3.00   sec   611 KBytes  5.00 Mbits/sec  0.034 ms  0/521 (0%)  
+[  6]   3.00-4.00   sec   611 KBytes  5.00 Mbits/sec  0.026 ms  0/521 (0%)  
+[  6]   4.00-5.00   sec   609 KBytes  4.99 Mbits/sec  0.052 ms  0/520 (0%)  
+[  6]   5.00-6.00   sec   612 KBytes  5.01 Mbits/sec  0.376 ms  0/522 (0%)  
+[  6]   6.00-7.00   sec   611 KBytes  5.00 Mbits/sec  0.074 ms  0/521 (0%)  
+[  6]   7.00-8.00   sec   609 KBytes  4.99 Mbits/sec  0.041 ms  0/520 (0%)  
+[  6]   8.00-9.00   sec   611 KBytes  5.00 Mbits/sec  0.084 ms  0/521 (0%)  
+[  6]   9.00-10.00  sec   611 KBytes  5.00 Mbits/sec  0.046 ms  0/521 (0%)  
+[  6]  10.00-11.00  sec   609 KBytes  4.99 Mbits/sec  0.036 ms  0/520 (0%)  
+[  6]  11.00-12.00  sec   611 KBytes  5.00 Mbits/sec  0.098 ms  0/521 (0%)  
+[  6]  12.00-13.00  sec   611 KBytes  5.00 Mbits/sec  0.044 ms  0/522 (0%)  
+[  6]  13.00-14.00  sec   609 KBytes  4.99 Mbits/sec  0.025 ms  0/520 (0%)  
+[  6]  14.00-15.00  sec   611 KBytes  5.00 Mbits/sec  0.034 ms  0/521 (0%)  
+[  6]  15.00-16.00  sec   611 KBytes  5.00 Mbits/sec  0.050 ms  0/521 (0%)  
+[  6]  16.00-17.00  sec   609 KBytes  4.99 Mbits/sec  0.365 ms  0/520 (0%)  
+[  6]  17.00-18.00  sec   612 KBytes  5.01 Mbits/sec  0.029 ms  0/522 (0%)  
+[  6]  18.00-19.00  sec   611 KBytes  5.00 Mbits/sec  0.023 ms  0/521 (0%)  
+[  6]  19.00-20.00  sec   609 KBytes  4.99 Mbits/sec  0.046 ms  0/520 (0%)  
+[  6]  20.00-20.20  sec   123 KBytes  5.00 Mbits/sec  0.058 ms  0/105 (0%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  6]   0.00-20.20  sec  11.9 MBytes  4.95 Mbits/sec  0.058 ms  0/10413 (0%)  receiver
+-----------------------------------------------------------
+Server listening on 5201 (test #4)
+-----------------------------------------------------------
+Accepted connection from 203.0.113.12, port 54192
+[  6] local 10.240.0.126 port 5201 connected to 203.0.113.12 port 44584
+[ ID] Interval           Transfer     Bitrate         Total Datagrams
+[  6]   0.00-1.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   1.00-2.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   2.00-3.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   3.00-4.00   sec   609 KBytes  4.99 Mbits/sec  520  
+[  6]   4.00-5.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   5.00-6.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   6.00-7.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   7.00-8.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   8.00-9.00   sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]   9.00-10.00  sec   609 KBytes  4.99 Mbits/sec  520  
+[  6]  10.00-11.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  11.00-12.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  12.00-13.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  13.00-14.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  14.00-15.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  15.00-16.00  sec   609 KBytes  4.99 Mbits/sec  520  
+[  6]  16.00-17.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  17.00-18.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  18.00-19.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  19.00-20.00  sec   611 KBytes  5.00 Mbits/sec  521  
+[  6]  20.00-20.21  sec   130 KBytes  5.02 Mbits/sec  111  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  6]   0.00-20.21  sec  12.0 MBytes  5.00 Mbits/sec  0.000 ms  0/10528 (0%)  sender

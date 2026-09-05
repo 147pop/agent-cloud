@@ -1,0 +1,108 @@
+{
+  "status": "incomplete; no qualified profile",
+  "source_commit": "e731fcd",
+  "completed_cases": [
+    {
+      "case": "r1-n1",
+      "players": 1,
+      "cold_seconds": 70.47339944401756,
+      "warm_seconds": 36.983644884079695,
+      "save_seconds": 0.9967646260047331,
+      "stop_seconds": 1.5793048730120063,
+      "minimum_tps_1m": 19.1,
+      "p95_mean_mspt_5s": 13.9,
+      "mean_cpu_cores": 0.6732051803920287,
+      "peak_cpu_cores": 1.9879128887721509,
+      "peak_container_gib": 4.114231109619141,
+      "peak_java_rss_gib": 3.8865203857421875,
+      "peak_sampled_heap_gib": 2.216796875,
+      "world_growth_mib": 10.56590461730957,
+      "mib_per_player_hour": 105.63682216985318,
+      "phase_seconds": {
+        "new_chunks": 51.16100001335144,
+        "existing_chunks": 48.44700002670288,
+        "combat": 62.4449999332428
+      },
+      "action_chunk_wait_player_seconds": 2.644,
+      "confirmed_hits": 56
+    },
+    {
+      "case": "r1-n2",
+      "players": 2,
+      "cold_seconds": 59.70418017706834,
+      "warm_seconds": 33.01613541797269,
+      "save_seconds": 1.8152942969463766,
+      "stop_seconds": 1.782676788046956,
+      "minimum_tps_1m": 18.6,
+      "p95_mean_mspt_5s": 13.6,
+      "mean_cpu_cores": 0.9063745258435691,
+      "peak_cpu_cores": 1.9612688295910545,
+      "peak_container_gib": 4.066448211669922,
+      "peak_java_rss_gib": 3.834026336669922,
+      "peak_sampled_heap_gib": 2.439453125,
+      "world_growth_mib": 17.69387722015381,
+      "mib_per_player_hour": 87.18570661694316,
+      "phase_seconds": {
+        "new_chunks": 53.793999910354614,
+        "existing_chunks": 48.76100015640259,
+        "combat": 62.776000022888184
+      },
+      "action_chunk_wait_player_seconds": 9.131,
+      "confirmed_hits": 112
+    },
+    {
+      "case": "r1-n4",
+      "players": 4,
+      "cold_seconds": 58.01174342504237,
+      "warm_seconds": 33.95134179096203,
+      "save_seconds": 3.728441813029349,
+      "stop_seconds": 2.706939645926468,
+      "minimum_tps_1m": 18.3,
+      "p95_mean_mspt_5s": 17.2,
+      "mean_cpu_cores": 1.1428600837048324,
+      "peak_cpu_cores": 1.7656482859412659,
+      "peak_container_gib": 4.447505950927734,
+      "peak_java_rss_gib": 4.202411651611328,
+      "peak_sampled_heap_gib": 3.06640625,
+      "world_growth_mib": 33.569024085998535,
+      "mib_per_player_hour": 70.89640090874471,
+      "phase_seconds": {
+        "new_chunks": 75.74000000953674,
+        "existing_chunks": 49.34099984169006,
+        "combat": 62.81700015068054
+      },
+      "action_chunk_wait_player_seconds": 88.905,
+      "confirmed_hits": 225
+    },
+    {
+      "case": "r1-n8",
+      "players": 8,
+      "cold_seconds": 62.08304968604352,
+      "warm_seconds": 36.95979363005608,
+      "save_seconds": 7.86306258791592,
+      "stop_seconds": 3.2015366880223155,
+      "minimum_tps_1m": 18.5,
+      "p95_mean_mspt_5s": 40.8,
+      "mean_cpu_cores": 1.2964837978862056,
+      "peak_cpu_cores": 2.0257306523395258,
+      "peak_container_gib": 4.598834991455078,
+      "peak_java_rss_gib": 4.5185394287109375,
+      "peak_sampled_heap_gib": 3.107421875,
+      "world_growth_mib": 66.01920127868652,
+      "mib_per_player_hour": 49.77010633187814,
+      "phase_seconds": {
+        "new_chunks": 142.80100011825562,
+        "existing_chunks": 53.39800000190735,
+        "combat": 62.98199987411499
+      },
+      "action_chunk_wait_player_seconds": 598.229,
+      "confirmed_hits": 450
+    }
+  ],
+  "interrupted_run": {
+    "label": "acceptance3",
+    "error": "Benchmark stopped to protect the host: Protected app took 1.186s",
+    "protected_unchanged": true
+  },
+  "candidate_three_cpu": "Benchmark stopped to protect the host: Protected app took 1.243s"
+}

@@ -1,0 +1,117 @@
+{
+  "label": "profile3cpu",
+  "started_at": 1788579400.2395678,
+  "parameters": {
+    "label": "profile3cpu",
+    "players": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "seconds": 60,
+    "repeats": 2
+  },
+  "host": "control-host",
+  "original_before": {
+    "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+    "started_at": "2026-09-05T03:26:11.741698161Z",
+    "running": true,
+    "restarts": 0,
+    "health": "healthy",
+    "pid": 1960582
+  },
+  "protected_before": {
+    "co-tenant-app": {
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "running": true,
+      "restarts": 0,
+      "health": null,
+      "pid": 200673
+    },
+    "co-tenant-db": {
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "running": true,
+      "restarts": 0,
+      "health": "healthy",
+      "pid": 49768
+    }
+  },
+  "cases": [
+    {
+      "name": "r1-n1",
+      "players": 1,
+      "repeat": 1,
+      "started_at": 1788579401.4198372,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 55.689527787966654,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618392
+    }
+  ],
+  "app_baseline_seconds": [
+    0.10238374990876764,
+    0.0723684539552778,
+    0.056817854987457395,
+    0.04409526498056948,
+    0.04088998108636588
+  ],
+  "source_sha256": {
+    "run.py": "c88db2839d2af286c7072cd1f9803533e4615509087bd15d25d24e3f9f215b7c",
+    "players.js": "409269a8d00988e64b8ed797df670201752f2bd084f7a9dcfc583590c3e57ca8",
+    "compose.yml": "a9f7443f731a63b563c35024b67b8fbe863a7165de694abf9e963a2b3885aabf",
+    "package-lock.json": "1d92a61a92ea73b0a8936f4b0fde9a999cdad6ba5d711de7dd839657c47d4744"
+  },
+  "error": "Benchmark stopped to protect the host: Protected app took 1.243s",
+  "original_restored_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=20 motd='A Minecraft Server'",
+  "protected_after": {
+    "co-tenant-app": {
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "running": true,
+      "restarts": 0,
+      "health": null,
+      "pid": 200673
+    },
+    "co-tenant-db": {
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "running": true,
+      "restarts": 0,
+      "health": "healthy",
+      "pid": 49768
+    }
+  },
+  "original_after": {
+    "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+    "started_at": "2026-09-05T03:39:12.977230224Z",
+    "running": true,
+    "restarts": 0,
+    "health": "healthy",
+    "pid": 1967576
+  },
+  "app_after_seconds": 0.0808820059755817,
+  "finished_at": 1788579579.92895,
+  "guard_failures": [
+    "Protected app took 1.243s"
+  ],
+  "complete": false
+}

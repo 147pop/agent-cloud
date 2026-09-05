@@ -1,0 +1,257 @@
+{
+  "label": "acceptance3",
+  "started_at": 1788577169.063061,
+  "parameters": {
+    "label": "acceptance3",
+    "players": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "seconds": 60,
+    "repeats": 2
+  },
+  "host": "control-host",
+  "original_before": {
+    "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+    "started_at": "2026-09-05T02:58:39.501722592Z",
+    "running": true,
+    "restarts": 0,
+    "health": "healthy",
+    "pid": 1921318
+  },
+  "protected_before": {
+    "co-tenant-app": {
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "running": true,
+      "restarts": 0,
+      "health": null,
+      "pid": 200673
+    },
+    "co-tenant-db": {
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "running": true,
+      "restarts": 0,
+      "health": "healthy",
+      "pid": 49768
+    }
+  },
+  "cases": [
+    {
+      "name": "r1-n1",
+      "players": 1,
+      "repeat": 1,
+      "started_at": 1788577170.1967468,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 70.47339944401756,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618411,
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 0.9967646260047331,
+      "world_bytes_after": 17697565,
+      "heap_after_players": "Connected to remote JVM\nJVM response code = 0\ngarbage-first heap   total reserved 4194304K, committed 4194304K, used 1081344K [0x0000000700000000, 0x0000000800000000)\n region size 2048K, 344 young (704512K), 32 survivors (65536K)\n\n",
+      "stop_seconds": 1.5793048730120063,
+      "warm_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 36.983644884079695,
+      "marker_restore": "Test passed"
+    },
+    {
+      "name": "r1-n2",
+      "players": 2,
+      "repeat": 1,
+      "started_at": 1788577459.7084396,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 59.70418017706834,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618402,
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 1.8152942969463766,
+      "world_bytes_after": 25171777,
+      "heap_after_players": "Connected to remote JVM\nJVM response code = 0\ngarbage-first heap   total reserved 4194304K, committed 4194304K, used 2557952K [0x0000000700000000, 0x0000000800000000)\n region size 2048K, 975 young (1996800K), 39 survivors (79872K)\n\n",
+      "stop_seconds": 1.782676788046956,
+      "warm_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 33.01613541797269,
+      "marker_restore": "Test passed"
+    },
+    {
+      "name": "r1-n4",
+      "players": 4,
+      "repeat": 1,
+      "started_at": 1788577746.3492668,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 58.01174342504237,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618395,
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 3.728441813029349,
+      "world_bytes_after": 41818068,
+      "heap_after_players": "Connected to remote JVM\nJVM response code = 0\ngarbage-first heap   total reserved 4194304K, committed 4194304K, used 3215360K [0x0000000700000000, 0x0000000800000000)\n region size 2048K, 1105 young (2263040K), 47 survivors (96256K)\n\n",
+      "stop_seconds": 2.706939645926468,
+      "warm_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 33.95134179096203,
+      "marker_restore": "Test passed"
+    },
+    {
+      "name": "r1-n8",
+      "players": 8,
+      "repeat": 1,
+      "started_at": 1788578079.3618655,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 62.08304968604352,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618402,
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 7.86306258791592,
+      "world_bytes_after": 75844552,
+      "heap_after_players": "Connected to remote JVM\nJVM response code = 0\ngarbage-first heap   total reserved 4194304K, committed 4194304K, used 1351680K [0x0000000700000000, 0x0000000800000000)\n region size 2048K, 89 young (182272K), 64 survivors (131072K)\n\n",
+      "stop_seconds": 3.2015366880223155,
+      "warm_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 36.95979363005608,
+      "marker_restore": "Test passed"
+    },
+    {
+      "name": "r2-n1",
+      "players": 1,
+      "repeat": 2,
+      "started_at": 1788578553.427216,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 66.04510480596218,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618392
+    }
+  ],
+  "app_baseline_seconds": [
+    0.09691264398861676,
+    0.07625079189892858,
+    0.06767562695313245,
+    0.03955312492325902,
+    0.0385185630293563
+  ],
+  "source_sha256": {
+    "run.py": "c88db2839d2af286c7072cd1f9803533e4615509087bd15d25d24e3f9f215b7c",
+    "players.js": "409269a8d00988e64b8ed797df670201752f2bd084f7a9dcfc583590c3e57ca8",
+    "compose.yml": "b9a135de3310487bf16c78b19850d8f69c9a388481d51916690872179ee84176",
+    "package-lock.json": "1d92a61a92ea73b0a8936f4b0fde9a999cdad6ba5d711de7dd839657c47d4744"
+  },
+  "error": "Benchmark stopped to protect the host: Protected app took 1.186s",
+  "original_restored_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=20 motd='A Minecraft Server'",
+  "protected_after": {
+    "co-tenant-app": {
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "running": true,
+      "restarts": 0,
+      "health": null,
+      "pid": 200673
+    },
+    "co-tenant-db": {
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "running": true,
+      "restarts": 0,
+      "health": "healthy",
+      "pid": 49768
+    }
+  },
+  "original_after": {
+    "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+    "started_at": "2026-09-05T03:26:11.741698161Z",
+    "running": true,
+    "restarts": 0,
+    "health": "healthy",
+    "pid": 1960582
+  },
+  "app_after_seconds": 0.07968666101805866,
+  "finished_at": 1788578804.8769157,
+  "guard_failures": [
+    "Protected app took 1.186s"
+  ],
+  "complete": false
+}

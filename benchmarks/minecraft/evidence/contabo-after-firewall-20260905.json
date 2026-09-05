@@ -1,0 +1,27 @@
+{
+  "observed_at": 1788614952.3433108,
+  "containers": [
+    {
+      "name": "/co-tenant-app",
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "restarts": 0,
+      "running": true
+    },
+    {
+      "name": "/co-tenant-db",
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "restarts": 0,
+      "running": true
+    },
+    {
+      "name": "/cloud-mc-paper-e0",
+      "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+      "started_at": "2026-09-05T03:39:12.977230224Z",
+      "restarts": 0,
+      "running": true
+    }
+  ],
+  "listener_stopped": true
+}

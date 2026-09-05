@@ -1,0 +1,55 @@
+{
+  "observed_at": 1788615599.7153153,
+  "expect": "open",
+  "results": [
+    {
+      "host": "127.0.0.1",
+      "protocol": "tcp",
+      "port": 2379,
+      "reachable": true,
+      "marker_received": true
+    },
+    {
+      "host": "127.0.0.1",
+      "protocol": "tcp",
+      "port": 2380,
+      "reachable": true,
+      "marker_received": true
+    },
+    {
+      "host": "127.0.0.1",
+      "protocol": "tcp",
+      "port": 6443,
+      "reachable": true,
+      "marker_received": true
+    },
+    {
+      "host": "127.0.0.1",
+      "protocol": "tcp",
+      "port": 10250,
+      "reachable": true,
+      "marker_received": true
+    },
+    {
+      "host": "127.0.0.1",
+      "protocol": "udp",
+      "port": 8472,
+      "reachable": true,
+      "marker_received": true
+    },
+    {
+      "host": "127.0.0.1",
+      "protocol": "udp",
+      "port": 51820,
+      "reachable": true,
+      "marker_received": true
+    },
+    {
+      "host": "127.0.0.1",
+      "protocol": "udp",
+      "port": 51821,
+      "reachable": true,
+      "marker_received": true
+    }
+  ]
+}

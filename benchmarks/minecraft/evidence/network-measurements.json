@@ -1,0 +1,68 @@
+{
+  "started_at": 1788616040.1194775,
+  "finished_at": 1788616155.4337451,
+  "ipv4_path_mtu": 1500,
+  "tcp_target_mbit_s": 50,
+  "udp_target_mbit_s": 5,
+  "transfer_seconds": 20,
+  "latency": [
+    {
+      "direction": "contabo-oracle",
+      "samples": 100,
+      "p50_ms": 194.0,
+      "p95_ms": 194.0,
+      "maximum_ms": 202.0,
+      "packet_loss_percent": 0,
+      "per_packet_resolution_ms": 1
+    },
+    {
+      "direction": "oracle-contabo",
+      "samples": 100,
+      "p50_ms": 194.0,
+      "p95_ms": 194.0,
+      "maximum_ms": 202.0,
+      "packet_loss_percent": 0,
+      "per_packet_resolution_ms": 1
+    }
+  ],
+  "transfers": [
+    {
+      "direction": "contabo-oracle",
+      "protocol": "tcp",
+      "received_mbit_s": 38.878158013594074,
+      "received_bytes": 98172928,
+      "retransmits": 0
+    },
+    {
+      "direction": "contabo-oracle",
+      "protocol": "udp",
+      "received_mbit_s": 4.948342644690863,
+      "received_bytes": 12495600,
+      "jitter_ms": 0.05817485382332464,
+      "lost_packets": 0,
+      "reported_lost_percent": 0
+    },
+    {
+      "direction": "oracle-contabo",
+      "protocol": "tcp",
+      "received_mbit_s": 49.96180856927327,
+      "received_bytes": 124911616,
+      "retransmits": 4914
+    },
+    {
+      "direction": "oracle-contabo",
+      "protocol": "udp",
+      "received_mbit_s": 4.997162089555984,
+      "received_bytes": 12494400,
+      "jitter_ms": 0.7441682855891726,
+      "lost_packets": 7,
+      "reported_lost_percent": 0.06648936170212766
+    }
+  ],
+  "app_samples": 109,
+  "maximum_app_seconds": 0.9457532200030982,
+  "source_sha256": {
+    "network.py": "73419e0dc2750a9c7988520e4d79ca01762200914939f05e78301983973bc38f",
+    "run.py": "c88db2839d2af286c7072cd1f9803533e4615509087bd15d25d24e3f9f215b7c"
+  }
+}

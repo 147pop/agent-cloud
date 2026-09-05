@@ -1,0 +1,16 @@
+nohup: ignoring input
+{"event": "listening", "ports": [2379, 2380, 6443, 10250, 8472, 51820, 51821]}
+{"event": "received", "port": 2379, "peer": "127.0.0.1"}
+{"event": "received", "port": 2380, "peer": "127.0.0.1"}
+{"event": "received", "port": 8472, "peer": "127.0.0.1"}
+{"event": "received", "port": 6443, "peer": "127.0.0.1"}
+{"event": "received", "port": 10250, "peer": "127.0.0.1"}
+{"event": "received", "port": 51820, "peer": "127.0.0.1"}
+{"event": "received", "port": 51821, "peer": "127.0.0.1"}
+{"event": "received", "port": 2380, "peer": "127.0.0.1"}
+{"event": "received", "port": 2379, "peer": "127.0.0.1"}
+{"event": "received", "port": 6443, "peer": "127.0.0.1"}
+{"event": "received", "port": 10250, "peer": "127.0.0.1"}
+{"event": "received", "port": 51820, "peer": "127.0.0.1"}
+{"event": "received", "port": 51821, "peer": "127.0.0.1"}
+{"event": "received", "port": 8472, "peer": "127.0.0.1"}

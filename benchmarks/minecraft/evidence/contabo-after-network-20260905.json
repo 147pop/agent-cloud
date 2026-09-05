@@ -1,0 +1,35 @@
+{
+  "observed_at": 1788616560.799411,
+  "containers": [
+    {
+      "name": "/co-tenant-app",
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "restarts": 0,
+      "running": true
+    },
+    {
+      "name": "/co-tenant-db",
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "restarts": 0,
+      "running": true
+    },
+    {
+      "name": "/cloud-mc-paper-e0",
+      "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+      "started_at": "2026-09-05T03:39:12.977230224Z",
+      "restarts": 0,
+      "running": true
+    }
+  ],
+  "caddy": "MainPID=200552\nActiveState=active\nActiveEnterTimestamp=Wed 2026-08-26 19:52:05 CEST\n",
+  "app_after_seconds": [
+    0.1268894380191341,
+    0.07219971797894686,
+    0.6841222089715302,
+    0.8666617069393396,
+    0.13683370291255414
+  ],
+  "docker_stats": "{\"BlockIO\":\"170MB / 93.8MB\",\"CPUPerc\":\"3.64%\",\"Container\":\"ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6\",\"ID\":\"ae038043744f\",\"MemPerc\":\"44.91%\",\"MemUsage\":\"3.483GiB / 7.755GiB\",\"Name\":\"cloud-mc-paper-e0\",\"NetIO\":\"190kB / 66.4kB\",\"PIDs\":\"59\"}\n{\"BlockIO\":\"255MB / 16.5MB\",\"CPUPerc\":\"0.02%\",\"Container\":\"25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582\",\"ID\":\"25d3af040a47\",\"MemPerc\":\"1.64%\",\"MemUsage\":\"130.5MiB / 7.755GiB\",\"Name\":\"co-tenant-app\",\"NetIO\":\"42MB / 214MB\",\"PIDs\":\"11\"}\n{\"BlockIO\":\"1.61GB / 926kB\",\"CPUPerc\":\"0.00%\",\"Container\":\"354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3\",\"ID\":\"354033a0d8d0\",\"MemPerc\":\"0.41%\",\"MemUsage\":\"32.39MiB / 7.755GiB\",\"Name\":\"co-tenant-db\",\"NetIO\":\"8.35MB / 34.4MB\",\"PIDs\":\"8\"}\n"
+}
