@@ -1,5 +1,7 @@
 # E0 measurements
 
+The current comparison target is [Aternos' Vanilla 1.20.1 / 2400 MB reference](aternos-reference.md), requested on 2026-09-05. Use `run.py LABEL --host oracle --vanilla`. The reference document separates Aternos' published values, local test choices and native Vanilla measurements. The completed Paper report below describes the earlier recipe.
+
 TES-51 measures the shared Contabo disk. TES-55 runs fixed player scenarios. TES-56 records their resource use and selects a beta profile from the results.
 
 The benchmark uses a separate Paper container and fresh worlds. It preserves `infra/paper/docker-compose.yml` and the existing world. Salta Cyber Club, PostgreSQL and Caddy are outside its mutation scope.
@@ -25,7 +27,7 @@ Each default route covers 480 blocks at height 300 in 16-block steps. The client
 
 `compose.yml` fixes the Paper image digest, version 26.2 and build 121. The candidate gets three CPU cores, a 4 GiB Java heap and a 5 GiB container memory limit, with view distance 6 and simulation distance 4. Bots have a separate one-core, 1 GiB container limit.
 
-The complete Oracle ARM battery qualified one player in both repetitions. The [selected profile](profile.json) reserves one CPU core, 2 GiB of memory and 20 GiB of free disk for the host, and allows one Paper instance. Read the [E0 report](../e0-report-2026-09-05.md) for all eight results and their limits. The benchmark keeps `MAX_PLAYERS=8` so it can reproduce the measured cases; E1 must apply the selected limit of one.
+The earlier Oracle ARM Paper battery qualified one player in both repetitions. Its [stored profile](profile.json) reserves one CPU core, 2 GiB of memory and 20 GiB of free disk for the host, and allows one Paper instance. Read the [Paper E0 report](../e0-report-2026-09-05.md) for all eight results and their limits. The benchmark keeps `MAX_PLAYERS=8` to reproduce every case. The new Vanilla comparison will determine the profile for the requested Aternos reference; the Paper result is not a Vanilla player limit.
 
 The two-core candidate at commit `e731fcd` completed one round of all four player counts in `evidence/acceptance3`. Counts 2, 4 and 8 fell below the TPS threshold. A protected-app response of 1.186 seconds stopped the second round. A subsequent baseline of 18 requests peaked at 127 ms. The three-core candidate at commit `de938d0` stopped during its first case when a protected-app response took 1.243 seconds. Both runs restored the original Paper container and verified the protected containers. Neither battery qualifies a profile. Read the [measurement report](evidence/paper-report.md) before running further load on this shared host.
 

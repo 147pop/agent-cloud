@@ -1,0 +1,10 @@
+services:
+  paper:
+    image: itzg/minecraft-server@sha256:310c2c5c473d93183085985394c39f7df9cfaccb0f9d35c008206e87a06f5119
+    mem_limit: 3200m
+    memswap_limit: 3200m
+    environment:
+      TYPE: VANILLA
+      VERSION: "1.20.1"
+      PAPER_BUILD: ""
+      MEMORY: 2400M

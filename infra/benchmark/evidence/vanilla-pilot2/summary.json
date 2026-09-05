@@ -1,0 +1,71 @@
+{
+  "label": "vanilla-pilot2",
+  "started_at": 1788628929.31171,
+  "parameters": {
+    "label": "vanilla-pilot2",
+    "host": "oracle",
+    "vanilla": true,
+    "players": [
+      8
+    ],
+    "seconds": 10,
+    "repeats": 1
+  },
+  "host": "game-host",
+  "original_before": null,
+  "protected_before": {},
+  "cases": [
+    {
+      "name": "r1-n8",
+      "players": 8,
+      "repeat": 1,
+      "started_at": 1788628929.3127363,
+      "cold_status": "127.0.0.1:25565 : version=1.20.1 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 52.93700570299916,
+      "jvm_flags": "Connected to remote JVM\nResponse code = 0\n-XX:CICompilerCount=3 -XX:ConcGCThreads=1 -XX:G1ConcRefinementThreads=4 -XX:G1EagerReclaimRemSetThreshold=16 -XX:G1HeapRegionSize=2097152 -XX:GCDrainStackTargetSize=64 -XX:InitialHeapSize=2516582400 -XX:MarkStackSize=4194304 -XX:MaxHeapSize=2516582400 -XX:MaxNewSize=1509949440 -XX:MinHeapDeltaBytes=2097152 -XX:MinHeapSize=2516582400 -XX:NonNMethodCodeHeapSize=5832908 -XX:NonProfiledCodeHeapSize=122912666 -XX:ProfiledCodeHeapSize=122912666 -XX:ReservedCodeCacheSize=251658240 -XX:+SegmentedCodeCache -XX:SoftMaxHeapSize=2516582400 -XX:-THPStackMitigation -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseG1GC \n\n",
+      "container_limits": {
+        "NanoCpus": 3000000000,
+        "Memory": 3355443200,
+        "MemorySwap": 3355443200
+      },
+      "recipe_sha256": {
+        "minecraft_server.1.20.1.jar": "3af73a9dc5a102e38147946360dd27d4d70bae7055bf91cf2151cd5d121b79e0"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 4441012,
+      "jfr_start": "JFR profiling started",
+      "jfr_stop": "JFR profiling stopped and dumped to debug/server-2026-09-05-172302.jfr",
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 5.729478594999819,
+      "world_bytes_after": 28720939,
+      "heap_after_players": "Connected to remote JVM\nResponse code = 0\n garbage-first heap   total 2457600K, used 619808K [0x000000076a000000, 0x0000000800000000)\n  region size 2048K, 105 young (215040K), 0 survivors (0K)\n Metaspace       used 81142K, committed 82112K, reserved 1179648K\n  class space    used 11642K, committed 12096K, reserved 1048576K\n\n",
+      "stop_seconds": 4.57007408500067,
+      "warm_status": "127.0.0.1:25565 : version=1.20.1 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 22.424546782000107,
+      "marker_restore": "Test passed"
+    }
+  ],
+  "app_baseline_seconds": [],
+  "source_sha256": {
+    "run.py": "6dfb584137f6c4a169fe646b88a165e05d2c7e7b93f8e94596952143d2f5447f",
+    "players.js": "c52862fee7c5cd8189e9c23bc367ebf9f0407d1b5aeede431c218f8df3fa3079",
+    "compose.yml": "a9f7443f731a63b563c35024b67b8fbe863a7165de694abf9e963a2b3885aabf",
+    "package-lock.json": "1d92a61a92ea73b0a8936f4b0fde9a999cdad6ba5d711de7dd839657c47d4744",
+    "compose.vanilla.yml": "58fdf64bc1c5a1aacc0c0f2c8e91649099be31cba47ceb2111cafde41dbee7f0"
+  },
+  "scenarios_complete": true,
+  "protected_after": {},
+  "finished_at": 1788629100.7869864,
+  "guard_failures": [],
+  "complete": true
+}

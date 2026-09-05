@@ -59,6 +59,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('label')
     parser.add_argument('--host', choices=['contabo', 'oracle'], default='contabo')
+    parser.add_argument('--vanilla', action='store_true', help='Oracle Vanilla 1.20.1 with a 2400M heap')
     parser.add_argument('--players', nargs='+', type=int, default=[1, 2, 4, 8])
     parser.add_argument('--seconds', type=int, default=60)
     parser.add_argument('--repeats', type=int, default=2)
@@ -66,9 +67,11 @@ def main():
     assert re.fullmatch(r'[a-z0-9-]+', args.label)
     assert args.players and all(value in (1, 2, 4, 8) for value in args.players)
     assert 10 <= args.seconds <= 300 and 1 <= args.repeats <= 3
+    assert not args.vanilla or args.host == 'oracle', 'The pinned Vanilla image is ARM64'
     assert os.geteuid() == 0, 'Run through the authorized sudo session'
     assert shutil.disk_usage(ROOT).free > 20 * 1024**3
     assert (ROOT / '.env').is_file()
+    compose_files = ['-f', 'compose.yml'] + (['-f', 'compose.vanilla.yml'] if args.vanilla else [])
     def interrupted(signum, frame):
         raise RuntimeError(f'Interrupted by signal {signum}')
     signal.signal(signal.SIGTERM, interrupted)
@@ -90,7 +93,8 @@ def main():
               'host': os.uname().nodename, 'original_before': original,
               'protected_before': protected, 'cases': [], 'app_baseline_seconds': [app_probe() for _ in range(5)] if protected else [],
               'source_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ['run.py', 'players.js', 'compose.yml', 'package-lock.json']}}
+                                for name in ['run.py', 'players.js', 'compose.yml', 'package-lock.json']
+                                + (['compose.vanilla.yml'] if args.vanilla else [])}}
     abort = threading.Event()
     finished = threading.Event()
     current = {'stage': 'baseline', 'case': None}
@@ -127,8 +131,15 @@ def main():
                                     status_text = Path(f'/proc/{parts[0]}/status').read_text()
                                     record['java_rss_bytes'] = int(re.search(r'VmRSS:\s+(\d+)', status_text).group(1)) * 1024
                             if current['stage'] == 'players':
-                                record['tps'] = rcon('tps')
-                                record['mspt'] = rcon('mspt')
+                                if args.vanilla:
+                                    started = time.time()
+                                    tick_response = rcon('time query gametime')
+                                    record['game_tick_query_seconds'] = time.time() - started
+                                    record['game_tick_time'] = started + record['game_tick_query_seconds'] / 2
+                                    record['game_ticks'] = int(re.fullmatch(r'The time is (\d+)', tick_response)[1])
+                                else:
+                                    record['tps'] = rcon('tps')
+                                    record['mspt'] = rcon('mspt')
                                 if int(time.time()) // 30 != sample.last_heap:
                                     record['heap'] = command('docker', 'exec', SERVER, 'sh', '-c', 'jattach "$(pidof java)" jcmd GC.heap_info').stdout
                                     sample.last_heap = int(time.time()) // 30
@@ -164,7 +175,7 @@ def main():
                 except subprocess.TimeoutExpired:
                     pass
             time.sleep(2)
-        raise RuntimeError('Paper did not become ready in 240 seconds')
+        raise RuntimeError('Minecraft did not become ready in 240 seconds')
 
     worker = threading.Thread(target=sample, daemon=True)
     worker.start()
@@ -188,23 +199,33 @@ def main():
                 case = {'name': name, 'players': count, 'repeat': repeat, 'started_at': time.time()}
                 result['cases'].append(case)
                 started = time.monotonic()
-                command('docker', 'compose', '-p', 'cloud-e0-benchmark', '-f', 'compose.yml', 'up', '-d', '--force-recreate', env=env, timeout=180)
+                command('docker', 'compose', '-p', 'cloud-e0-benchmark', *compose_files, 'up', '-d', '--force-recreate', env=env, timeout=180)
                 case['cold_status'] = ready()
                 case['cold_ready_seconds'] = time.monotonic() - started
                 tracked = ['paper-26.2-121.jar', 'bukkit.yml', 'spigot.yml', 'config/paper-global.yml', 'config/paper-world-defaults.yml']
+                if args.vanilla:
+                    tracked = [path.name for path in data.glob('*.jar')]
+                    assert len(tracked) == 1, 'Expected one Vanilla server JAR'
+                    case['jvm_flags'] = command('docker', 'exec', SERVER, 'sh', '-c', 'jattach "$(pidof java)" jcmd VM.flags').stdout
+                    limits = json.loads(command('docker', 'inspect', SERVER).stdout)[0]['HostConfig']
+                    case['container_limits'] = {key: limits[key] for key in ['NanoCpus', 'Memory', 'MemorySwap']}
                 case['recipe_sha256'] = {path: hashlib.sha256((data / path).read_bytes()).hexdigest() for path in tracked}
                 if len(result['cases']) > 1:
                     assert case['recipe_sha256'] == result['cases'][0]['recipe_sha256'], 'Downloaded recipe changed between runs'
                 properties = dict(line.split('=', 1) for line in (data / 'server.properties').read_text().splitlines() if '=' in line and not line.startswith('#'))
                 case['properties'] = {key: properties[key] for key in ['level-seed', 'max-players', 'view-distance', 'simulation-distance', 'online-mode', 'gamemode', 'difficulty', 'allow-flight']}
                 case['world_bytes_before'] = world_bytes(data)
+                if args.vanilla:
+                    case['jfr_start'] = rcon('jfr start')
+                    assert case['jfr_start'] == 'JFR profiling started', case['jfr_start']
                 current['stage'] = 'players'
                 with (output / f'{name}-players.jsonl').open('w') as stream:
                     player_process = subprocess.Popen(['docker', 'run', '--rm', '--name', PLAYERS,
                         '--network', f'container:{SERVER}', '--cpus', '1', '--memory', '1g', '--memory-swap', '1g',
                         '--pids-limit', '128', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
                         '--read-only', '--tmpfs', '/tmp', '--user', '1001:1001',
-                        '-v', f'{ROOT}:/work:ro', '-w', '/work', NODE, 'node', 'players.js', str(count), str(args.seconds)],
+                        '-v', f'{ROOT}:/work:ro', '-w', '/work', NODE, 'node', 'players.js', str(count), str(args.seconds),
+                        '1.20.1' if args.vanilla else '26.2'],
                         stdout=stream, stderr=subprocess.STDOUT)
                     deadline = time.monotonic() + args.seconds * 5 + count * 100 + 120
                     try:
@@ -217,6 +238,13 @@ def main():
                         command('docker', 'stop', '-t', '5', PLAYERS, check=False, timeout=15)
                         player_process.wait(timeout=15)
                 current['stage'] = 'save'
+                if args.vanilla:
+                    case['jfr_stop'] = rcon('jfr stop')
+                    recordings = list(data.rglob('*.jfr'))
+                    assert len(recordings) == 1, 'Expected one native JFR recording'
+                    recording = '/data/' + str(recordings[0].relative_to(data))
+                    ticks = command('docker', 'exec', SERVER, 'jfr', 'print', '--json', '--events', 'minecraft.ServerTickTime', recording)
+                    (output / f'{name}-ticks.json').write_text(ticks.stdout)
                 case['marker_create'] = rcon('setblock 0 201 0 minecraft:diamond_block')
                 assert 'Changed the block' in case['marker_create'], 'World marker was not created'
                 started = time.monotonic()

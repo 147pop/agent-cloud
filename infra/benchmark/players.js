@@ -4,8 +4,10 @@ const mineflayer = require('mineflayer')
 
 const count = Number(process.argv[2])
 const seconds = Number(process.argv[3] || 60)
+const version = process.argv[4] || '26.2'
 assert([1, 2, 4, 8].includes(count), 'Use 1, 2, 4 or 8 players')
 assert(Number.isInteger(seconds) && seconds >= 10 && seconds <= 300)
+assert(['26.2', '1.20.1'].includes(version), 'Use a measured server version')
 const bots = []
 const observations = []
 let sampler
@@ -27,7 +29,7 @@ async function waitForColumn(bot, position) {
 
 async function connect(index) {
   const username = `Bench${String(index + 1).padStart(2, '0')}`
-  const bot = mineflayer.createBot({ host: '127.0.0.1', port: 25565, username, auth: 'offline', version: '26.2' })
+  const bot = mineflayer.createBot({ host: '127.0.0.1', port: 25565, username, auth: 'offline', version })
   bots.push(bot)
   const record = { username, chunks: 0, attacks: 0, confirmed_hits: 0, hurt_events: 0, kills: 0 }
   observations.push(record)
@@ -111,9 +113,13 @@ async function combat(index) {
       lastSummon = Date.now()
     } else if (target) {
       await bot.lookAt(target.position.offset(0, 1, 0))
-      // Minecraft 26.2 moved attacks out of use_entity.
-      bot._client.write('attack', { entityId: target.id })
-      bot.swingArm()
+      if (version === '26.2') {
+        // Minecraft 26.2 moved attacks out of use_entity.
+        bot._client.write('attack', { entityId: target.id })
+        bot.swingArm()
+      } else {
+        bot.attack(target)
+      }
       observations[index].attacks++
     }
     await sleep(700)
@@ -123,7 +129,7 @@ async function combat(index) {
 }
 
 async function main() {
-  log('connecting', { players: count, phase_seconds: seconds, version: '26.2' })
+  log('connecting', { players: count, phase_seconds: seconds, version })
   for (let index = 0; index < count; index++) await connect(index)
   sampler = setInterval(() => log('sample', { players: bots.map(bot => ({
     username: bot.username, position: bot.entity.position,
