@@ -12,6 +12,8 @@ ionice -c3 nice -n 19 python3 disk.py evidence/disk.json
 
 The Paper runner requires Python 3, Docker, Compose and the existing `cloud-mc-paper-e0` container. Install the bot dependencies in this directory with `npm ci --ignore-scripts --no-audit --no-fund` using Node 22 or newer. Create a mode-600 `.env` containing a private `RCON_PASSWORD`. The runner supplies `BENCH_DATA` for each fresh world.
 
+On the dedicated Oracle ARM host, use `--host oracle` for both `disk.py` and `run.py`. This requires ARM64 and, for Paper, no running containers. That host has no original Paper container or Salta application to stop or probe. The same memory, disk, OOM and performance checks apply. Both pinned image indexes include ARM64.
+
 ```sh
 sudo python3 run.py trial --players 1 --seconds 10 --repeats 1
 sudo python3 run.py acceptance
@@ -34,5 +36,9 @@ Each label creates new evidence and data directories. Existing labels are reject
 A player count qualifies for the candidate profile when both repetitions pass the action and persistence checks, the minimum sampled one-minute TPS is at least 19, and the 95th percentile of sampled five-second mean tick times is at most 50 ms. Only samples inside the three action phases count toward these performance thresholds. Connection and startup costs remain in the raw evidence. A percentile of window averages is not a percentile of individual ticks.
 
 Validate a finished default battery and derive the measurements with `python3 summarize.py evidence/acceptance`. Run `python3 summarize.py --self-test` to check metric parsing.
+
+`firewall.py serve` binds temporary IPv4 listeners on TCP 2379, 2380, 6443 and 10250, and UDP 8472, 51820 and 51821. It exits after 120 seconds. Run `firewall.py probe --expect open` on the host, then `firewall.py probe --host PUBLIC_IP --expect blocked` from an external machine while those listeners remain active. Repeat the local probe afterward. These commands assert the expected result and print dated JSON. They do not change firewall rules.
+
+With an `iperf3` server on Oracle and TCP/UDP 5201 restricted to Contabo, run `network.py ORACLE_IP evidence/network` on Contabo. It records 100 pings, IPv4 probes around MTU 1500, and 20-second transfers in both directions. TCP is capped at 50 Mbit/s and UDP at 5 Mbit/s with 1200-byte datagrams. The existing app must keep responding within one second. The measured transfer rates are bounded by these caps, not estimates of maximum link capacity. Run the same ping and MTU commands from Oracle toward Contabo to record the reverse path. Remove the temporary 5201 ingress rules and stop iperf afterward.
 
 The bot packages use the [Complexity-ML 26.2 compatibility distribution](https://github.com/Complexity-ML/mineflayer-26.2), because the [upstream client does not yet support 26.2](https://github.com/PrismarineJS/mineflayer/issues/3940). The release URLs and integrity hashes are fixed in `package-lock.json`. This dependency is confined to the benchmark. Tick metrics use Paper's [tps and mspt commands](https://docs.papermc.io/paper/reference/commands/). Heap metrics use the image's existing `jattach` command. Spark's asynchronous responses were incomplete over RCON in the initial probe.

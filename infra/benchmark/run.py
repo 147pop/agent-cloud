@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the E0 scenarios on the authorized Contabo host, preserving the E0 recipe."""
+"""Run the E0 scenarios on Contabo or the dedicated Oracle ARM host."""
 import argparse
 import hashlib
 import json
@@ -58,6 +58,7 @@ def world_bytes(data):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('label')
+    parser.add_argument('--host', choices=['contabo', 'oracle'], default='contabo')
     parser.add_argument('--players', nargs='+', type=int, default=[1, 2, 4, 8])
     parser.add_argument('--seconds', type=int, default=60)
     parser.add_argument('--repeats', type=int, default=2)
@@ -74,14 +75,20 @@ def main():
     signal.signal(signal.SIGINT, interrupted)
     output = ROOT / 'evidence' / args.label
     output.mkdir(parents=True, exist_ok=False)
-    original = state(ORIGINAL)
-    assert original['running'], 'Expected the original E0 container to be running'
-    status = command('docker', 'exec', ORIGINAL, 'mc-monitor', 'status', '--host', '127.0.0.1', '--port', '25565').stdout
-    assert re.search(r'\bonline=0\b', status), 'Do not interrupt real players'
-    protected = {name: state(name) for name in PROTECTED}
+    original = None
+    protected = {}
+    if args.host == 'contabo':
+        original = state(ORIGINAL)
+        assert original['running'], 'Expected the original E0 container to be running'
+        status = command('docker', 'exec', ORIGINAL, 'mc-monitor', 'status', '--host', '127.0.0.1', '--port', '25565').stdout
+        assert re.search(r'\bonline=0\b', status), 'Do not interrupt real players'
+        protected = {name: state(name) for name in PROTECTED}
+    else:
+        assert os.uname().machine == 'aarch64', 'Oracle candidate must be ARM64'
+        assert not command('docker', 'ps', '-q').stdout.strip(), 'Oracle candidate must have no running containers'
     result = {'label': args.label, 'started_at': time.time(), 'parameters': vars(args),
               'host': os.uname().nodename, 'original_before': original,
-              'protected_before': protected, 'cases': [], 'app_baseline_seconds': [app_probe() for _ in range(5)],
+              'protected_before': protected, 'cases': [], 'app_baseline_seconds': [app_probe() for _ in range(5)] if protected else [],
               'source_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ['run.py', 'players.js', 'compose.yml', 'package-lock.json']}}
     abort = threading.Event()
@@ -94,10 +101,11 @@ def main():
             while not finished.is_set():
                 record = {'time': time.time(), **current.copy()}
                 try:
-                    record['app_seconds'] = app_probe()
+                    if protected:
+                        record['app_seconds'] = app_probe()
                     memory = dict(line.split(':', 1) for line in Path('/proc/meminfo').read_text().splitlines())
                     record['available_bytes'] = int(memory['MemAvailable'].split()[0]) * 1024
-                    assert record['available_bytes'] > 1024**3, 'Less than 1 GiB available on the shared host'
+                    assert record['available_bytes'] > 1024**3, 'Less than 1 GiB available on the host'
                     assert shutil.disk_usage(ROOT).free > 20 * 1024**3, 'Less than 20 GiB free disk'
                     record['pressure_io'] = Path('/proc/pressure/io').read_text().strip()
                     record['pressure_memory'] = Path('/proc/pressure/memory').read_text().strip()
@@ -161,7 +169,8 @@ def main():
     worker = threading.Thread(target=sample, daemon=True)
     worker.start()
     try:
-        command('docker', 'stop', '-t', '120', ORIGINAL, timeout=150)
+        if original:
+            command('docker', 'stop', '-t', '120', ORIGINAL, timeout=150)
         for repeat in range(1, args.repeats + 1):
             for count in args.players:
                 guard()
@@ -247,11 +256,12 @@ def main():
         worker.join(timeout=60)
         command('docker', 'stop', '-t', '5', PLAYERS, check=False, timeout=15)
         command('docker', 'stop', '-t', '120', SERVER, check=False, timeout=150)
-        command('docker', 'start', ORIGINAL)
-        result['original_restored_status'] = ready(ORIGINAL)
-        result['protected_after'] = {name: state(name) for name in PROTECTED}
-        result['original_after'] = state(ORIGINAL)
-        result['app_after_seconds'] = app_probe()
+        if original:
+            command('docker', 'start', ORIGINAL)
+            result['original_restored_status'] = ready(ORIGINAL)
+            result['original_after'] = state(ORIGINAL)
+            result['app_after_seconds'] = app_probe()
+        result['protected_after'] = {name: state(name) for name in protected}
         result['finished_at'] = time.time()
         result['guard_failures'] = failures
         result['complete'] = bool(result.get('scenarios_complete') and not failures and protected == result['protected_after'])

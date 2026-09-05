@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Bounded, QD1 disk measurements for TES-51. Run on Linux with ionice -c3."""
+import argparse
 import json
 import mmap
 import os
@@ -29,16 +30,23 @@ def percentile(values, fraction):
 
 
 def main():
-    destination = Path(sys.argv[1]).resolve()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('destination', type=Path)
+    parser.add_argument('--host', choices=['contabo', 'oracle'], default='contabo')
+    args = parser.parse_args()
+    destination = args.destination.resolve()
+    if args.host == 'oracle':
+        assert os.uname().machine == 'aarch64', 'Oracle candidate must be ARM64'
     assert not destination.exists(), 'Do not overwrite evidence'
     assert shutil.disk_usage(destination.parent).free > 20 * 1024**3
     result = {'started_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
-              'host': os.uname().nodename, 'command': 'ionice -c3 nice -n 19 python3 disk.py OUTPUT.json',
+              'host': os.uname().nodename, 'parameters': {'host': args.host},
+              'command': f'ionice -c3 nice -n 19 python3 disk.py OUTPUT.json --host {args.host}',
               'filesystem': subprocess.check_output(['findmnt', '-J', '-T', str(destination.parent)], text=True),
               'file_bytes': 256 * 1024**2, 'queue_depth': 1,
               'flags': ['O_DIRECT', 'O_DSYNC'], 'seed': 20260904,
               'free_bytes_before': shutil.disk_usage(destination.parent).free,
-              'app_seconds': [app_probe() for _ in range(5)], 'phases': []}
+              'app_seconds': [app_probe() for _ in range(5)] if args.host == 'contabo' else [], 'phases': []}
     rng = random.Random(result['seed'])
     try:
         with tempfile.TemporaryDirectory(prefix='e0-disk-', dir=destination.parent) as directory:
@@ -67,7 +75,8 @@ def main():
                                 view.release()
                             phase['latency_ms'].append((time.monotonic() - before) * 1000)
                             if time.monotonic() - last_probe >= 1:
-                                result['app_seconds'].append(app_probe())
+                                if args.host == 'contabo':
+                                    result['app_seconds'].append(app_probe())
                                 last_probe = time.monotonic()
                             time.sleep(pause)
                         phase['wall_seconds'] = time.monotonic() - start
@@ -77,7 +86,8 @@ def main():
                         print(json.dumps({k: v for k, v in phase.items() if k != 'latency_ms'}), flush=True)
             finally:
                 os.close(fd)
-        result['app_seconds'].append(app_probe())
+        if args.host == 'contabo':
+            result['app_seconds'].append(app_probe())
         result['free_bytes_after'] = shutil.disk_usage(destination.parent).free
         result['complete'] = True
     finally:

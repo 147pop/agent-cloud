@@ -85,8 +85,9 @@ def summarize(directory):
                 'p95_mean_mspt_5s': p95([numbers(sample['mspt'])[0] for sample in phase_samples])}
         rows.append(row)
     qualified = [count for count in (1, 2, 4, 8) if all(row['performance_pass'] for row in rows if row['players'] == count)]
+    app_samples = [sample['app_seconds'] for sample in samples if 'app_seconds' in sample]
     return {'cases': rows, 'qualified_player_counts': qualified,
-            'app_samples': len(samples), 'maximum_app_seconds': max(sample['app_seconds'] for sample in samples),
+            'app_samples': len(app_samples), 'maximum_app_seconds': max(app_samples, default=None),
             'minimum_available_gib': min(sample['available_bytes'] for sample in samples) / 1024**3,
             'elapsed_minutes': (summary['finished_at'] - summary['started_at']) / 60}
 
