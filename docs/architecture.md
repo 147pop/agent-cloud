@@ -13,7 +13,7 @@ The [catalog](../catalog/README.md) separates the product, its executable recipe
 ## First managed path
 
 ```mermaid
-flowchart LR
+flowchart TD
     Client[Codex or Cloud web] -->|HTTPS| Edge[Cloudflare Worker]
     Edge -->|Access and Tunnel| Control[cloud-control]
     Control --> DB[(PostgreSQL)]
