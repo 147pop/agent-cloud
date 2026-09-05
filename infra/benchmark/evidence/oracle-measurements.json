@@ -1,0 +1,355 @@
+{
+  "cases": [
+    {
+      "case": "r1-n1",
+      "players": 1,
+      "cold_ready_seconds": 48.8578995429998,
+      "warm_ready_seconds": 26.405373493000297,
+      "save_seconds": 1.0032081809999909,
+      "stop_seconds": 1.4421790670003247,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.5,
+      "p95_mean_mspt_5s": 4.6,
+      "maximum_tick_ms": 414.8,
+      "mean_cpu_cores": 0.5844796706330133,
+      "peak_cpu_cores": 1.7444419715639476,
+      "peak_container_gib": 4.241809844970703,
+      "peak_java_rss_gib": 4.011409759521484,
+      "peak_sampled_heap_gib": 2.221811294555664,
+      "world_growth_mib": 10.539039611816406,
+      "mib_per_player_hour": 107.44145433541951,
+      "confirmed_hits": 56,
+      "performance_pass": true,
+      "phases": {
+        "new_chunks": {
+          "seconds": 49.276000022888184,
+          "samples": 10,
+          "minimum_tps_1m": 19.5,
+          "p95_mean_mspt_5s": 11.3
+        },
+        "existing_chunks": {
+          "seconds": 48.30299997329712,
+          "samples": 9,
+          "minimum_tps_1m": 19.9,
+          "p95_mean_mspt_5s": 2.7
+        },
+        "combat": {
+          "seconds": 62.3510000705719,
+          "samples": 12,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 2.7
+        }
+      },
+      "action_chunk_wait_player_seconds": 0,
+      "longest_action_chunk_wait_seconds": 0
+    },
+    {
+      "case": "r1-n2",
+      "players": 2,
+      "cold_ready_seconds": 46.78521241000044,
+      "warm_ready_seconds": 26.411868280999897,
+      "save_seconds": 1.9436306870002227,
+      "stop_seconds": 1.6839109860002281,
+      "action_samples": 32,
+      "minimum_tps_1m": 18.6,
+      "p95_mean_mspt_5s": 5.9,
+      "maximum_tick_ms": 87.4,
+      "mean_cpu_cores": 0.8121193398678104,
+      "peak_cpu_cores": 1.7790513723246013,
+      "peak_container_gib": 4.381748199462891,
+      "peak_java_rss_gib": 4.143196105957031,
+      "peak_sampled_heap_gib": 2.4514694213867188,
+      "world_growth_mib": 17.411592483520508,
+      "mib_per_player_hour": 84.00737645279978,
+      "confirmed_hits": 112,
+      "performance_pass": false,
+      "phases": {
+        "new_chunks": {
+          "seconds": 53.638999938964844,
+          "samples": 10,
+          "minimum_tps_1m": 18.6,
+          "p95_mean_mspt_5s": 6.7
+        },
+        "existing_chunks": {
+          "seconds": 48.30200004577637,
+          "samples": 10,
+          "minimum_tps_1m": 19.6,
+          "p95_mean_mspt_5s": 5.9
+        },
+        "combat": {
+          "seconds": 62.85199999809265,
+          "samples": 12,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 4.2
+        }
+      },
+      "action_chunk_wait_player_seconds": 10.218,
+      "longest_action_chunk_wait_seconds": 3.706
+    },
+    {
+      "case": "r1-n4",
+      "players": 4,
+      "cold_ready_seconds": 46.79063847600037,
+      "warm_ready_seconds": 26.40121499299994,
+      "save_seconds": 3.9769218430001274,
+      "stop_seconds": 2.3884556549996887,
+      "action_samples": 39,
+      "minimum_tps_1m": 18.4,
+      "p95_mean_mspt_5s": 13.6,
+      "maximum_tick_ms": 101.9,
+      "mean_cpu_cores": 1.0315239006664887,
+      "peak_cpu_cores": 2.06367711981514,
+      "peak_container_gib": 4.546298980712891,
+      "peak_java_rss_gib": 4.287437438964844,
+      "peak_sampled_heap_gib": 2.5673828125,
+      "world_growth_mib": 33.460434913635254,
+      "mib_per_player_hour": 63.22321923325536,
+      "confirmed_hits": 225,
+      "performance_pass": false,
+      "phases": {
+        "new_chunks": {
+          "seconds": 90.90499997138977,
+          "samples": 17,
+          "minimum_tps_1m": 18.4,
+          "p95_mean_mspt_5s": 4.2
+        },
+        "existing_chunks": {
+          "seconds": 48.38599991798401,
+          "samples": 10,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 14.9
+        },
+        "combat": {
+          "seconds": 62.9539999961853,
+          "samples": 12,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 8.1
+        }
+      },
+      "action_chunk_wait_player_seconds": 139.782,
+      "longest_action_chunk_wait_seconds": 6.504
+    },
+    {
+      "case": "r1-n8",
+      "players": 8,
+      "cold_ready_seconds": 48.81355683000038,
+      "warm_ready_seconds": 26.40853390400025,
+      "save_seconds": 7.802932219000013,
+      "stop_seconds": 3.0013560880001933,
+      "action_samples": 60,
+      "minimum_tps_1m": 18.8,
+      "p95_mean_mspt_5s": 16.2,
+      "maximum_tick_ms": 139.1,
+      "mean_cpu_cores": 1.1516687757938764,
+      "peak_cpu_cores": 2.1269453670350416,
+      "peak_container_gib": 4.823081970214844,
+      "peak_java_rss_gib": 4.5354461669921875,
+      "peak_sampled_heap_gib": 3.0068359375,
+      "world_growth_mib": 65.00683975219727,
+      "mib_per_player_hour": 39.766157146672576,
+      "confirmed_hits": 449,
+      "performance_pass": false,
+      "phases": {
+        "new_chunks": {
+          "seconds": 195.6560001373291,
+          "samples": 38,
+          "minimum_tps_1m": 18.8,
+          "p95_mean_mspt_5s": 7.3
+        },
+        "existing_chunks": {
+          "seconds": 49.32699990272522,
+          "samples": 10,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 22.5
+        },
+        "combat": {
+          "seconds": 62.867000102996826,
+          "samples": 12,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 15.2
+        }
+      },
+      "action_chunk_wait_player_seconds": 953.959,
+      "longest_action_chunk_wait_seconds": 16.249
+    },
+    {
+      "case": "r2-n1",
+      "players": 1,
+      "cold_ready_seconds": 48.8146527670001,
+      "warm_ready_seconds": 26.41683922500033,
+      "save_seconds": 1.028551202000017,
+      "stop_seconds": 1.451113465999697,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.5,
+      "p95_mean_mspt_5s": 5.3,
+      "maximum_tick_ms": 498.2,
+      "mean_cpu_cores": 0.5482397029897219,
+      "peak_cpu_cores": 1.777431104075876,
+      "peak_container_gib": 4.289417266845703,
+      "peak_java_rss_gib": 4.058448791503906,
+      "peak_sampled_heap_gib": 1.5951147079467773,
+      "world_growth_mib": 10.75542163848877,
+      "mib_per_player_hour": 109.1143461876134,
+      "confirmed_hits": 57,
+      "performance_pass": true,
+      "phases": {
+        "new_chunks": {
+          "seconds": 49.34299993515015,
+          "samples": 10,
+          "minimum_tps_1m": 19.5,
+          "p95_mean_mspt_5s": 11.9
+        },
+        "existing_chunks": {
+          "seconds": 48.3199999332428,
+          "samples": 9,
+          "minimum_tps_1m": 19.9,
+          "p95_mean_mspt_5s": 2.7
+        },
+        "combat": {
+          "seconds": 62.94500017166138,
+          "samples": 12,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 2.6
+        }
+      },
+      "action_chunk_wait_player_seconds": 0,
+      "longest_action_chunk_wait_seconds": 0
+    },
+    {
+      "case": "r2-n2",
+      "players": 2,
+      "cold_ready_seconds": 46.83067237299974,
+      "warm_ready_seconds": 26.402715249000266,
+      "save_seconds": 1.927314669000225,
+      "stop_seconds": 1.702895258999888,
+      "action_samples": 32,
+      "minimum_tps_1m": 18.9,
+      "p95_mean_mspt_5s": 6.2,
+      "maximum_tick_ms": 30.6,
+      "mean_cpu_cores": 0.8019349550421453,
+      "peak_cpu_cores": 1.807143235723655,
+      "peak_container_gib": 4.410320281982422,
+      "peak_java_rss_gib": 4.170078277587891,
+      "peak_sampled_heap_gib": 1.8095703125,
+      "world_growth_mib": 17.49232006072998,
+      "mib_per_player_hour": 84.45077303223101,
+      "confirmed_hits": 112,
+      "performance_pass": false,
+      "phases": {
+        "new_chunks": {
+          "seconds": 53.82100009918213,
+          "samples": 10,
+          "minimum_tps_1m": 18.9,
+          "p95_mean_mspt_5s": 6.3
+        },
+        "existing_chunks": {
+          "seconds": 48.263999938964844,
+          "samples": 9,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 5.6
+        },
+        "combat": {
+          "seconds": 62.8289999961853,
+          "samples": 13,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 4.3
+        }
+      },
+      "action_chunk_wait_player_seconds": 6.213,
+      "longest_action_chunk_wait_seconds": 3.506
+    },
+    {
+      "case": "r2-n4",
+      "players": 4,
+      "cold_ready_seconds": 48.80772482100019,
+      "warm_ready_seconds": 26.40328646999933,
+      "save_seconds": 3.9719213039998067,
+      "stop_seconds": 2.318958609999754,
+      "action_samples": 40,
+      "minimum_tps_1m": 18.4,
+      "p95_mean_mspt_5s": 13.1,
+      "maximum_tick_ms": 110.1,
+      "mean_cpu_cores": 1.0517330588441454,
+      "peak_cpu_cores": 2.024227686795873,
+      "peak_container_gib": 4.551753997802734,
+      "peak_java_rss_gib": 4.2958984375,
+      "peak_sampled_heap_gib": 2.521484375,
+      "world_growth_mib": 33.478599548339844,
+      "mib_per_player_hour": 63.084240290371994,
+      "confirmed_hits": 224,
+      "performance_pass": false,
+      "phases": {
+        "new_chunks": {
+          "seconds": 93.80000019073486,
+          "samples": 18,
+          "minimum_tps_1m": 18.4,
+          "p95_mean_mspt_5s": 4.1
+        },
+        "existing_chunks": {
+          "seconds": 48.598999977111816,
+          "samples": 9,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 14.8
+        },
+        "combat": {
+          "seconds": 62.77799987792969,
+          "samples": 13,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 7.9
+        }
+      },
+      "action_chunk_wait_player_seconds": 160.912,
+      "longest_action_chunk_wait_seconds": 12.813
+    },
+    {
+      "case": "r2-n8",
+      "players": 8,
+      "cold_ready_seconds": 46.80061157199998,
+      "warm_ready_seconds": 26.39625467099995,
+      "save_seconds": 8.11446175799938,
+      "stop_seconds": 3.0755480170000737,
+      "action_samples": 55,
+      "minimum_tps_1m": 19.0,
+      "p95_mean_mspt_5s": 19.5,
+      "maximum_tick_ms": 121.1,
+      "mean_cpu_cores": 1.1389806201887016,
+      "peak_cpu_cores": 1.933066200573602,
+      "peak_container_gib": 4.816932678222656,
+      "peak_java_rss_gib": 4.524845123291016,
+      "peak_sampled_heap_gib": 3.146484375,
+      "world_growth_mib": 65.63676834106445,
+      "mib_per_player_hour": 45.41284916820257,
+      "confirmed_hits": 449,
+      "performance_pass": true,
+      "phases": {
+        "new_chunks": {
+          "seconds": 170.13899993896484,
+          "samples": 33,
+          "minimum_tps_1m": 19.0,
+          "p95_mean_mspt_5s": 7.5
+        },
+        "existing_chunks": {
+          "seconds": 49.51100015640259,
+          "samples": 10,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 23.9
+        },
+        "combat": {
+          "seconds": 62.84299993515015,
+          "samples": 12,
+          "minimum_tps_1m": 20.0,
+          "p95_mean_mspt_5s": 14.7
+        }
+      },
+      "action_chunk_wait_player_seconds": 786.795,
+      "longest_action_chunk_wait_seconds": 13.933
+    }
+  ],
+  "qualified_player_counts": [
+    1
+  ],
+  "app_samples": 0,
+  "maximum_app_seconds": null,
+  "minimum_available_gib": 17.847076416015625,
+  "elapsed_minutes": 44.87733269929886
+}
