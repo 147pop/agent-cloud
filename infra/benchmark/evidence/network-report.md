@@ -1,6 +1,6 @@
-# E0 network measurements
+# Network results, 2026-09-05
 
-Measured on 2026-09-05 between Contabo `203.0.113.12` and Oracle Santiago `203.0.113.11`. The [derived values](network-measurements.json) retain the source checksums. [Raw output and exact commands](network-paced-20260905/summary.json) cover every transfer and the Contabo-side probes. Oracle's [reverse ping](ping-oracle-contabo-20260905.txt) and [MTU probes](mtu-oracle-contabo-1473-20260905.txt) complete the opposite path.
+The Contabo to Oracle path has a **194 ms round trip** and an effective IPv4 MTU of 1500. E1 must account for that latency and verify the pod network.
 
 | Measurement | Contabo to Oracle | Oracle to Contabo |
 | --- | ---: | ---: |
@@ -15,25 +15,56 @@ Measured on 2026-09-05 between Contabo `203.0.113.12` and Oracle Santiago `203.0
 | UDP jitter reported by receiver | 0.058 ms | 0.744 ms |
 | UDP loss reported by receiver | 0 | 7 datagrams, 0.0665% |
 
-Per-packet ping output has 1 ms precision at this RTT. TCP used a 50 Mbit/s target and UDP a 5 Mbit/s target with 1200-byte datagrams. Both used iperf's application pacing and Linux socket pacing. These are bounded transfer measurements, not maximum link capacity.
+## Method and limits
 
-The first [attempt](network-20260905/summary.json) used application pacing alone. TCP caught up after slow start with a short burst that exceeded the server's 60 Mbit/s guard. The server stopped that transfer. Adding `--fq-rate` completed all four transfers with the same server guard and the same one-second protected-app limit. The failed output and both server logs remain alongside the accepted run.
+| Parameter | Value |
+| --- | --- |
+| Endpoints | Contabo `203.0.113.12`, Oracle `203.0.113.11` |
+| Transfers | 20 seconds in each direction |
+| TCP target | 50 Mbit/s |
+| UDP target | 5 Mbit/s, 1200-byte datagrams |
+| Pacing | iperf application pacing plus Linux socket pacing |
+| Ping precision | 1 ms at this RTT |
 
-The accepted run recorded 109 protected-app probes, all successful, with a maximum of 0.946 seconds. The [post-test check](contabo-after-network-20260905.json) verified unchanged identities, start times and restart counts for Salta's containers and the original E0 Paper container. Caddy retained its PID. The network test process exited; the original E0 Paper container remains running.
+These rates do not measure maximum link capacity. The first application-only pacing attempt exceeded the server's 60 Mbit/s guard. Adding `--fq-rate` completed all four transfers without changing that guard.
 
-## Path assessment
+| Evidence | Record |
+| --- | --- |
+| Accepted transfers and Contabo probes | [Raw commands and output](network-paced-20260905/summary.json) |
+| Failed pacing attempt | [Original output](network-20260905/summary.json) |
+| Derived values and checksums | [Measurements](network-measurements.json) |
+| Reverse ping | [Oracle to Contabo](ping-oracle-contabo-20260905.txt) |
+| Reverse MTU failure | [1473-byte probe](mtu-oracle-contabo-1473-20260905.txt) |
 
-Both directions passed 1472-byte ICMP payloads with the Don't Fragment bit. Payloads of 1473 bytes failed with MTU 1500 feedback. Oracle's interface MTU of 9000 must therefore not be copied into the inter-VPS tunnel configuration. Use 1420 as the E1 tunnel MTU target and verify the resulting pod path. Flannel supports an explicit WireGuard backend MTU, and K3s supports a custom Flannel configuration. See the [Flannel backend options](https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#wireguard) and [K3s network options](https://docs.k3s.io/networking/basic-network-options).
+## Implications for E1
 
-The observed path supports proceeding to the two-node K3s test. It is unsuitable for an assumption of local-network latency or lossless transfer: the round trip is about 194 ms and Oracle-to-Contabo TCP retransmitted packets. Recovery estimates must use the measured transfer rates and include disk and restore work. This test did not measure R2 access or demonstrate world recovery.
+| Finding | Next step |
+| --- | --- |
+| 1472-byte DF payload passed; 1473 failed | Use path MTU 1500, not Oracle's interface MTU 9000 |
+| WireGuard tunnel | Target MTU 1420 and verify the resulting pod path |
+| 194 ms RTT and reverse TCP retransmissions | Test K3s on this link; do not assume LAN latency or lossless transfer |
+| R2 and world recovery | Test separately in E4; no recovery-time guarantee follows from these transfers |
 
-## Firewall proof and cleanup
+[Flannel WireGuard options](https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#wireguard) · [K3s network options](https://docs.k3s.io/networking/basic-network-options)
 
-For each host, `firewall.py` created live listeners on TCP 2379, 2380, 6443 and 10250, plus UDP 8472, 51820 and 51821. Local probes received the expected marker before and after the Mac's external probe. All seven external probes timed out on both hosts. The dated `firewall-*-local`, `firewall-*-external` and `firewall-*-local-after` JSON files preserve the ordering. This proves the tested IPv4 boundary, without relying on a closed port with no listener.
+## Firewall and cleanup
 
-Both hosts also created and removed a temporary WireGuard interface successfully. K3s was not installed. Its peer allowances belong to E1 and remain closed now. The [K3s requirements](https://docs.k3s.io/installation/requirements) identify TCP 6443 for the server and UDP 51820 for the IPv4 WireGuard path; any future allowances must name only the inventoried peer addresses.
+| Check | Result |
+| --- | --- |
+| TCP ports | 2379, 2380, 6443, 10250 blocked externally on both hosts |
+| UDP ports | 8472, 51820, 51821 blocked externally on both hosts |
+| Local listeners | Expected marker before and after the external Mac probes |
+| WireGuard interfaces | Created and removed successfully on both hosts |
+| Salta | 109 successful probes, slowest 0.946 s |
+| Protected workloads | Same container identities, start times and restart counts; Caddy PID unchanged |
+| Temporary access | Oracle ICMP and TCP/UDP 5201 allowances for Contabo removed |
+| Temporary services | iperf and probe listeners stopped |
 
-Iperf was stopped after the measurements. Oracle's temporary ICMP and TCP/UDP 5201 allowances for Contabo were removed from the NSG, runtime INPUT chain and persisted rules. The [Oracle inventory](../../inventory/oracle-vps-2026-09-05.json) records the cleanup and a new successful SSH connection. Contabo received no new inbound allowance.
+Dated `firewall-*-local`, `firewall-*-external` and `firewall-*-local-after` JSON records prove the tested IPv4 boundary with live listeners. Contabo received no new inbound allowance.
+
+[Workload check](contabo-after-network-20260905.json) · [Oracle cleanup and SSH check](../../inventory/oracle-vps-2026-09-05.json)
+
+K3s was not installed. E1 must restrict its required ingress to the inventoried peers. [K3s requirements](https://docs.k3s.io/installation/requirements)
 
 ## Reproduction
 

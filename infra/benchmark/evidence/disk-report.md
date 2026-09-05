@@ -1,41 +1,57 @@
-# TES-51 worker disks
+# Disk results, 2026-09-05
 
-## Contabo
+Both disks completed the test with enough free space for the Minecraft benchmark. These paced rates do not measure maximum throughput or concurrent-server capacity.
 
-Measured on `control-host`, `203.0.113.12`, at `2026-09-05T02:07:58Z`. The tested filesystem was ext4 on `/dev/sda1`, mounted at `/`. It had 74.27 GiB free before and after the test, allowing for filesystem metadata changes.
+| Measurement | Contabo | Oracle |
+| --- | ---: | ---: |
+| Sequential write, MiB/s | 36.13 | 39.22 |
+| Sequential read, MiB/s | 45.51 | 42.73 |
+| Random write, MiB/s | 0.346 | 0.364 |
+| Random read, MiB/s | 0.356 | 0.366 |
+| Sequential write p95, ms | 13.419 | 5.880 |
+| Sequential read p95, ms | 1.414 | 3.601 |
+| Random write p95, ms | 1.327 | 0.796 |
+| Random read p95, ms | 0.853 | 0.737 |
+| Free disk after test, GiB | 74.27 | 43.38 |
 
-The test used a temporary 256 MiB file, direct synchronous I/O and one outstanding operation. Each phase ran 256 operations. Sequential phases paused 20 ms between 1 MiB operations; random phases paused 10 ms between 4 KiB operations. `ionice -c3` and `nice -n 19` gave existing work priority. No caches were dropped and no raw device was written.
+Oracle's direct reads were slower in this probe; its synchronous write latency was more consistent.
 
-| Phase | Paced throughput, MiB/s | Median latency, ms | p95 latency, ms |
-|---|---:|---:|---:|
-| Sequential write | 36.13 | 2.885 | 13.419 |
-| Sequential read | 45.51 | 0.911 | 1.414 |
-| Random write | 0.346 | 0.651 | 1.327 |
-| Random read | 0.356 | 0.371 | 0.853 |
+## Method
 
-All 21 HTTP probes to the protected application returned 200. The slowest took 135 ms. The test file was removed. This supports running the bounded Paper benchmark on this worker. It does not establish peak disk throughput or the capacity of several concurrent servers.
+| Parameter | Value |
+| --- | --- |
+| Filesystem | ext4 on `/dev/sda1`, mounted at `/`, both hosts |
+| Test file | Temporary 256 MiB file, removed afterward |
+| I/O | Direct synchronous, one outstanding operation |
+| Operations | 256 per phase, 1024 completed per host |
+| Sequential phase | 1 MiB operations, 20 ms pause |
+| Random phase | 4 KiB operations, 10 ms pause |
+| Priority | `ionice -c3`, `nice -n 19` |
+| Salta protection | 21/21 HTTP 200, slowest 135 ms |
 
-Reproduce on the authorized host from the benchmark directory with a new output name:
+Throughput includes the pauses. The test did not drop caches or write to raw devices. Oracle has no protected application endpoint, so `--host oracle` omits that probe.
+
+| Host | Measurement record |
+| --- | --- |
+| Contabo `control-host`, `203.0.113.12` | [02:07:58 UTC, raw measurements](disk-20260905.json) |
+| Oracle `game-host`, `203.0.113.11` | [After Docker preparation, before Paper](disk-oracle-20260905.json) |
+
+The raw records retain every latency, medians, filesystem details, timestamps and HTTP timings.
+
+## Reproduce
+
+From the benchmark directory on the authorized host, use a new output name.
+
+Contabo:
 
 ```sh
 ionice -c3 nice -n 19 python3 disk.py evidence/disk-new.json
 ```
 
-The [raw measurements](disk-20260905.json) contain every operation's latency, the filesystem, free space, file size, seed and HTTP timings. The [script](../disk.py) is the runnable measurement and includes a percentile self-check.
-
-## Oracle Santiago
-
-The same method ran on `game-host`, `203.0.113.11`, on 2026-09-05 after Docker preparation and before Paper. Its ext4 filesystem on `/dev/sda1` had 43.38 GiB free after the test. The temporary file was removed, and all 1024 operations completed. The [Oracle measurements](disk-oracle-20260905.json) preserve the exact timestamp, mount options and per-operation latencies.
-
-| Phase | Paced throughput, MiB/s | Median latency, ms | p95 latency, ms |
-| --- | ---: | ---: | ---: |
-| Sequential write | 39.22 | 5.401 | 5.880 |
-| Sequential read | 42.73 | 3.293 | 3.601 |
-| Random write | 0.364 | 0.642 | 0.796 |
-| Random read | 0.366 | 0.578 | 0.737 |
-
-These results and the free space support the bounded Paper benchmark on Oracle. Its direct reads were slower than Contabo's in this probe; synchronous write latency was more consistent. Neither test measures saturation throughput. Oracle had no protected application endpoint, so its explicit host selection omits that probe:
+Oracle:
 
 ```sh
 sudo ionice -c3 nice -n 19 python3 disk.py evidence/disk-new.json --host oracle
 ```
+
+[Measurement script](../disk.py) · [TES-51](https://linear.app/workspace/issue/TES-51)
