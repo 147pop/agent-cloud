@@ -1,0 +1,121 @@
+{
+  "label": "pilot8b",
+  "started_at": 1788576838.1589975,
+  "parameters": {
+    "label": "pilot8b",
+    "players": [
+      8
+    ],
+    "seconds": 10,
+    "repeats": 1
+  },
+  "host": "control-host",
+  "original_before": {
+    "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+    "started_at": "2026-09-05T02:52:46.689008397Z",
+    "running": true,
+    "restarts": 0,
+    "health": "healthy",
+    "pid": 1913101
+  },
+  "protected_before": {
+    "co-tenant-app": {
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "running": true,
+      "restarts": 0,
+      "health": null,
+      "pid": 200673
+    },
+    "co-tenant-db": {
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "running": true,
+      "restarts": 0,
+      "health": "healthy",
+      "pid": 49768
+    }
+  },
+  "cases": [
+    {
+      "name": "r1-n8",
+      "players": 8,
+      "repeat": 1,
+      "started_at": 1788576839.2562475,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 62.137637745938264,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618403,
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 5.318003964028321,
+      "world_bytes_after": 32895835,
+      "heap_after_players": "Connected to remote JVM\nJVM response code = 0\ngarbage-first heap   total reserved 4194304K, committed 4194304K, used 2259968K [0x0000000700000000, 0x0000000800000000)\n region size 2048K, 707 young (1447936K), 78 survivors (159744K)\n\n",
+      "stop_seconds": 3.872744283056818,
+      "warm_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 37.08101165795233,
+      "marker_restore": "Test passed"
+    }
+  ],
+  "app_baseline_seconds": [
+    0.08388249797280878,
+    0.07816134800668806,
+    0.036247760988771915,
+    0.033168728929013014,
+    0.039549587992951274
+  ],
+  "source_sha256": {
+    "run.py": "c88db2839d2af286c7072cd1f9803533e4615509087bd15d25d24e3f9f215b7c",
+    "players.js": "409269a8d00988e64b8ed797df670201752f2bd084f7a9dcfc583590c3e57ca8",
+    "compose.yml": "b9a135de3310487bf16c78b19850d8f69c9a388481d51916690872179ee84176",
+    "package-lock.json": "1d92a61a92ea73b0a8936f4b0fde9a999cdad6ba5d711de7dd839657c47d4744"
+  },
+  "scenarios_complete": true,
+  "original_restored_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=20 motd='A Minecraft Server'",
+  "protected_after": {
+    "co-tenant-app": {
+      "id": "25d3af040a4705ce3ca2ba98efc79dd498609814ddcee2b18d12eca75d853582",
+      "started_at": "2026-08-26T17:52:08.719742227Z",
+      "running": true,
+      "restarts": 0,
+      "health": null,
+      "pid": 200673
+    },
+    "co-tenant-db": {
+      "id": "354033a0d8d02047e9a04fa5dc71ab0b903d1219a7d17752ed9187690c5aa1d3",
+      "started_at": "2026-08-25T21:33:28.968348024Z",
+      "running": true,
+      "restarts": 0,
+      "health": "healthy",
+      "pid": 49768
+    }
+  },
+  "original_after": {
+    "id": "ae038043744f43b55045d4d00ab3cd12737efb6c7df8aac573c5d39c3dc4aeb6",
+    "started_at": "2026-09-05T02:58:39.501722592Z",
+    "running": true,
+    "restarts": 0,
+    "health": "healthy",
+    "pid": 1921318
+  },
+  "app_after_seconds": 0.07659801293630153,
+  "finished_at": 1788577150.5335355,
+  "guard_failures": [],
+  "complete": true
+}
