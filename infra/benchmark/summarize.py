@@ -72,11 +72,15 @@ def summarize(directory):
                'confirmed_hits': sum(player['confirmed_hits'] for player in players),
                'performance_pass': min(tps) >= 19 and p95(mspt) <= 50}
         row['phases'] = {}
+        waits = [event['seconds'] for event in events if event['event'] == 'chunk_wait'
+                 and phases[0][0] <= datetime.fromisoformat(event['time']).timestamp() < end]
+        row['action_chunk_wait_player_seconds'] = sum(waits)
+        row['longest_action_chunk_wait_seconds'] = max(waits, default=0)
         for index, (start, name) in enumerate(phases):
             stop = phases[index + 1][0] if index + 1 < len(phases) else end
             phase_samples = [sample for sample in selected if start <= sample['time'] < stop]
             assert len(phase_samples) >= 3, f'Insufficient samples for {name}'
-            row['phases'][name] = {'samples': len(phase_samples),
+            row['phases'][name] = {'seconds': stop - start, 'samples': len(phase_samples),
                 'minimum_tps_1m': min(numbers(sample['tps'])[0] for sample in phase_samples),
                 'p95_mean_mspt_5s': p95([numbers(sample['mspt'])[0] for sample in phase_samples])}
         rows.append(row)

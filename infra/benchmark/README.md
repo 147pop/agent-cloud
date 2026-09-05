@@ -21,7 +21,9 @@ The default run repeats the 1, 2, 4 and 8 player cases twice. Each case starts a
 
 Each default route covers 480 blocks at height 300 in 16-block steps. The clients wait up to 60 seconds for each destination chunk before moving. Waiting remains part of the measured phase. Paper confirms each route endpoint through an in-game position condition. Combat lasts 60 seconds on separate platforms. Damage packets must attribute at least one hit to each player. Network counters include login and waiting; player time runs from spawn to scenario completion.
 
-`compose.yml` fixes the Paper image digest, version 26.2 and build 121. The candidate gets two CPU cores, a 4 GiB Java heap and a 5 GiB container memory limit, with view distance 6 and simulation distance 4. These are benchmark inputs until the report qualifies them. Bots have a separate one-core, 1 GiB container limit.
+`compose.yml` fixes the Paper image digest, version 26.2 and build 121. The candidate gets three CPU cores, a 4 GiB Java heap and a 5 GiB container memory limit, with view distance 6 and simulation distance 4. These are benchmark inputs until the report qualifies them. Bots have a separate one-core, 1 GiB container limit.
+
+The two-core candidate at commit `e731fcd` completed one round of all four player counts in `evidence/acceptance3`. Counts 2, 4 and 8 fell below the TPS threshold. A protected-app response of 1.186 seconds stopped the second round. The runner restored the original Paper container and verified the protected containers. A subsequent baseline of 18 requests peaked at 127 ms. The next candidate uses three cores with the same memory limits and protection thresholds. The interrupted battery qualifies no profile.
 
 The test server uses offline identities and operator access for its bots. It binds only to `127.0.0.1:25566`; RCON has no host port. This authentication setup is only for these private scenarios. The original E0 server's authentication settings are preserved.
 
