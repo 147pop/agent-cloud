@@ -1,10 +1,10 @@
 # E0 measurements
 
-The current comparison target is [Aternos' Vanilla 1.20.1 / 2400 MB reference](aternos-reference.md), requested on 2026-09-05. Use `run.py LABEL --host oracle --vanilla`. The reference document separates Aternos' published values, local test choices and native Vanilla measurements. The completed Paper report below describes the earlier recipe.
+The current target is [Aternos' Vanilla 1.20.1 / 2400 MB reference](aternos-reference.md), requested on 2026-09-05. The completed [Vanilla results](evidence/vanilla-report.md) qualify four players under the measured rule; eight completed the actions but failed early one-minute TPS windows. The [selected profile](profile.vanilla.json) uses a 2400 MiB heap and 3200 MiB total container cap. These local memory units and limits are not a verified copy of Aternos' private configuration. Use `run.py LABEL --host oracle --vanilla` to reproduce it.
 
 TES-51 measures the shared Contabo disk. TES-55 runs fixed player scenarios. TES-56 records their resource use and selects a beta profile from the results.
 
-The benchmark uses a separate Paper container and fresh worlds. It preserves `infra/paper/docker-compose.yml` and the existing world. Salta Cyber Club, PostgreSQL and Caddy are outside its mutation scope.
+The benchmark uses a separate game container and fresh worlds. It preserves `infra/paper/docker-compose.yml` and the existing world. Salta Cyber Club, PostgreSQL and Caddy are outside its mutation scope.
 
 Run `disk.py` on the authorized Linux host. It creates a temporary 256 MiB file, uses direct synchronous I/O at queue depth one, records every operation, and removes the file. The pauses limit load. Reported throughput includes those pauses and is not the disk's maximum throughput.
 
@@ -14,7 +14,7 @@ ionice -c3 nice -n 19 python3 disk.py evidence/disk.json
 
 The Paper runner requires Python 3, Docker, Compose and the existing `cloud-mc-paper-e0` container. Install the bot dependencies in this directory with `npm ci --ignore-scripts --no-audit --no-fund` using Node 22 or newer. Create a mode-600 `.env` containing a private `RCON_PASSWORD`. The runner supplies `BENCH_DATA` for each fresh world.
 
-On the dedicated Oracle ARM host, use `--host oracle` for both `disk.py` and `run.py`. This requires ARM64 and, for Paper, no running containers. That host has no original Paper container or Salta application to stop or probe. The same memory, disk, OOM and performance checks apply. Both pinned image indexes include ARM64.
+On the dedicated Oracle ARM host, use `--host oracle` for both `disk.py` and `run.py`. The game runner requires ARM64 and no running containers. That host has no original Paper container or Salta application to stop or probe. The same memory, disk and OOM guards apply. The pinned game images support ARM64.
 
 ```sh
 sudo python3 run.py trial --players 1 --seconds 10 --repeats 1
@@ -27,7 +27,7 @@ Each default route covers 480 blocks at height 300 in 16-block steps. The client
 
 `compose.yml` fixes the Paper image digest, version 26.2 and build 121. The candidate gets three CPU cores, a 4 GiB Java heap and a 5 GiB container memory limit, with view distance 6 and simulation distance 4. Bots have a separate one-core, 1 GiB container limit.
 
-The earlier Oracle ARM Paper battery qualified one player in both repetitions. Its [stored profile](profile.json) reserves one CPU core, 2 GiB of memory and 20 GiB of free disk for the host, and allows one Paper instance. Read the [Paper E0 report](../e0-report-2026-09-05.md) for all eight results and their limits. The benchmark keeps `MAX_PLAYERS=8` to reproduce every case. The new Vanilla comparison will determine the profile for the requested Aternos reference; the Paper result is not a Vanilla player limit.
+The earlier Oracle ARM Paper battery qualified one player in both repetitions. Its [historical profile](profile.json) reserves one CPU core, 2 GiB of memory and 20 GiB of free disk for the host, and allows one Paper instance. Read the [Paper E0 report](../e0-report-2026-09-05.md) for all eight results and their limits. The benchmark keeps `MAX_PLAYERS=8` to reproduce every case. The current Vanilla profile above replaces that Paper selection for the requested reference.
 
 The two-core candidate at commit `e731fcd` completed one round of all four player counts in `evidence/acceptance3`. Counts 2, 4 and 8 fell below the TPS threshold. A protected-app response of 1.186 seconds stopped the second round. A subsequent baseline of 18 requests peaked at 127 ms. The three-core candidate at commit `de938d0` stopped during its first case when a protected-app response took 1.243 seconds. Both runs restored the original Paper container and verified the protected containers. Neither battery qualifies a profile. Read the [measurement report](evidence/paper-report.md) before running further load on this shared host.
 
@@ -37,7 +37,7 @@ The runner refuses to stop the original server if players are connected. It samp
 
 Each label creates new evidence and data directories. Existing labels are rejected. `summary.json`, `metrics.jsonl`, player events and server logs preserve the measurements and failures. A successful `complete` result requires the scenarios, world marker and cleanup checks to pass. These are E0 measurements, not the twenty K3s persistence cycles or the external-user beta.
 
-A player count qualifies for the candidate profile when both repetitions pass the action and persistence checks, the minimum sampled one-minute TPS is at least 19, and the 95th percentile of sampled five-second mean tick times is at most 50 ms. Only samples inside the three action phases count toward these performance thresholds. Connection and startup costs remain in the raw evidence. A percentile of window averages is not a percentile of individual ticks.
+For Paper, a player count qualifies when both repetitions pass the action and persistence checks, the minimum sampled one-minute TPS is at least 19, and the 95th percentile of sampled five-second mean tick times is at most 50 ms. Only samples inside the three action phases count toward these performance thresholds. Connection and startup costs remain in the raw evidence. A percentile of window averages is not a percentile of individual ticks. The [Vanilla contract](aternos-reference.md) defines its native counter and JFR measurements.
 
 Validate a finished default battery and derive the measurements with `python3 summarize.py evidence/acceptance`. Run `python3 summarize.py --self-test` to check metric parsing.
 

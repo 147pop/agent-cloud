@@ -1,0 +1,1157 @@
+[init] Changing ownership of /data to 1000 ...
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 2 1000 1000 4096 Sep  5 17:35 /data'
+[init] Image info: buildtime=2026-09-02T01:40:40.387Z,version=java17,revision=82d89ee4eb5410509109c58263f2883b685f1cd8
+[init] Resolving type given VANILLA
+[init] Successfully setup vanilla Minecraft version 1.20.1
+[init] Copying any configs from /config to /data/config
+[init] Creating server properties in /data/server.properties
+[init] Disabling whitelist functionality
+[init] Setting mode
+[39m[mc-image-helper] 17:35:14.382 INFO  : Created/updated 12 properties in /data/server.properties
+[0;39m[init] Setting initial memory to 2400M and max to 2400M
+[init] Starting the Minecraft server...
+Unpacking 1.20.1/server-1.20.1.jar (versions:1.20.1) to versions/1.20.1/server-1.20.1.jar
+Unpacking com/github/oshi/oshi-core/6.2.2/oshi-core-6.2.2.jar (libraries:com.github.oshi:oshi-core:6.2.2) to libraries/com/github/oshi/oshi-core/6.2.2/oshi-core-6.2.2.jar
+Unpacking com/google/code/gson/gson/2.10/gson-2.10.jar (libraries:com.google.code.gson:gson:2.10) to libraries/com/google/code/gson/gson/2.10/gson-2.10.jar
+Unpacking com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar (libraries:com.google.guava:failureaccess:1.0.1) to libraries/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar
+Unpacking com/google/guava/guava/31.1-jre/guava-31.1-jre.jar (libraries:com.google.guava:guava:31.1-jre) to libraries/com/google/guava/guava/31.1-jre/guava-31.1-jre.jar
+Unpacking com/mojang/authlib/4.0.43/authlib-4.0.43.jar (libraries:com.mojang:authlib:4.0.43) to libraries/com/mojang/authlib/4.0.43/authlib-4.0.43.jar
+Unpacking com/mojang/brigadier/1.1.8/brigadier-1.1.8.jar (libraries:com.mojang:brigadier:1.1.8) to libraries/com/mojang/brigadier/1.1.8/brigadier-1.1.8.jar
+Unpacking com/mojang/datafixerupper/6.0.8/datafixerupper-6.0.8.jar (libraries:com.mojang:datafixerupper:6.0.8) to libraries/com/mojang/datafixerupper/6.0.8/datafixerupper-6.0.8.jar
+Unpacking com/mojang/logging/1.1.1/logging-1.1.1.jar (libraries:com.mojang:logging:1.1.1) to libraries/com/mojang/logging/1.1.1/logging-1.1.1.jar
+Unpacking commons-io/commons-io/2.11.0/commons-io-2.11.0.jar (libraries:commons-io:commons-io:2.11.0) to libraries/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar
+Unpacking io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final.jar (libraries:io.netty:netty-buffer:4.1.82.Final) to libraries/io/netty/netty-buffer/4.1.82.Final/netty-buffer-4.1.82.Final.jar
+Unpacking io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final.jar (libraries:io.netty:netty-codec:4.1.82.Final) to libraries/io/netty/netty-codec/4.1.82.Final/netty-codec-4.1.82.Final.jar
+Unpacking io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final.jar (libraries:io.netty:netty-common:4.1.82.Final) to libraries/io/netty/netty-common/4.1.82.Final/netty-common-4.1.82.Final.jar
+Unpacking io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final.jar (libraries:io.netty:netty-handler:4.1.82.Final) to libraries/io/netty/netty-handler/4.1.82.Final/netty-handler-4.1.82.Final.jar
+Unpacking io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final.jar (libraries:io.netty:netty-resolver:4.1.82.Final) to libraries/io/netty/netty-resolver/4.1.82.Final/netty-resolver-4.1.82.Final.jar
+Unpacking io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.jar (libraries:io.netty:netty-transport:4.1.82.Final) to libraries/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.jar
+Unpacking io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final.jar (libraries:io.netty:netty-transport-classes-epoll:4.1.82.Final) to libraries/io/netty/netty-transport-classes-epoll/4.1.82.Final/netty-transport-classes-epoll-4.1.82.Final.jar
+Unpacking io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-linux-x86_64.jar (libraries:io.netty:netty-transport-native-epoll:4.1.82.Final:linux-x86_64) to libraries/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-linux-x86_64.jar
+Unpacking io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-linux-aarch_64.jar (libraries:io.netty:netty-transport-native-epoll:4.1.82.Final:linux-aarch_64) to libraries/io/netty/netty-transport-native-epoll/4.1.82.Final/netty-transport-native-epoll-4.1.82.Final-linux-aarch_64.jar
+Unpacking io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final.jar (libraries:io.netty:netty-transport-native-unix-common:4.1.82.Final) to libraries/io/netty/netty-transport-native-unix-common/4.1.82.Final/netty-transport-native-unix-common-4.1.82.Final.jar
+Unpacking it/unimi/dsi/fastutil/8.5.9/fastutil-8.5.9.jar (libraries:it.unimi.dsi:fastutil:8.5.9) to libraries/it/unimi/dsi/fastutil/8.5.9/fastutil-8.5.9.jar
+Unpacking net/java/dev/jna/jna/5.12.1/jna-5.12.1.jar (libraries:net.java.dev.jna:jna:5.12.1) to libraries/net/java/dev/jna/jna/5.12.1/jna-5.12.1.jar
+Unpacking net/java/dev/jna/jna-platform/5.12.1/jna-platform-5.12.1.jar (libraries:net.java.dev.jna:jna-platform:5.12.1) to libraries/net/java/dev/jna/jna-platform/5.12.1/jna-platform-5.12.1.jar
+Unpacking net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar (libraries:net.sf.jopt-simple:jopt-simple:5.0.4) to libraries/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar
+Unpacking org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar (libraries:org.apache.commons:commons-lang3:3.12.0) to libraries/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar
+Unpacking org/apache/logging/log4j/log4j-api/2.19.0/log4j-api-2.19.0.jar (libraries:org.apache.logging.log4j:log4j-api:2.19.0) to libraries/org/apache/logging/log4j/log4j-api/2.19.0/log4j-api-2.19.0.jar
+Unpacking org/apache/logging/log4j/log4j-core/2.19.0/log4j-core-2.19.0.jar (libraries:org.apache.logging.log4j:log4j-core:2.19.0) to libraries/org/apache/logging/log4j/log4j-core/2.19.0/log4j-core-2.19.0.jar
+Unpacking org/apache/logging/log4j/log4j-slf4j2-impl/2.19.0/log4j-slf4j2-impl-2.19.0.jar (libraries:org.apache.logging.log4j:log4j-slf4j2-impl:2.19.0) to libraries/org/apache/logging/log4j/log4j-slf4j2-impl/2.19.0/log4j-slf4j2-impl-2.19.0.jar
+Unpacking org/joml/joml/1.10.5/joml-1.10.5.jar (libraries:org.joml:joml:1.10.5) to libraries/org/joml/joml/1.10.5/joml-1.10.5.jar
+Unpacking org/slf4j/slf4j-api/2.0.1/slf4j-api-2.0.1.jar (libraries:org.slf4j:slf4j-api:2.0.1) to libraries/org/slf4j/slf4j-api/2.0.1/slf4j-api-2.0.1.jar
+Starting net.minecraft.server.Main
+[17:35:19] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[17:35:21] [ServerMain/INFO]: Loaded 7 recipes
+[17:35:21] [ServerMain/INFO]: Loaded 1271 advancements
+[17:35:22] [Server thread/INFO]: Starting minecraft server version 1.20.1
+[17:35:22] [Server thread/INFO]: Loading properties
+[17:35:22] [Server thread/INFO]: Default game type: CREATIVE
+[17:35:22] [Server thread/INFO]: Generating keypair
+[17:35:22] [Server thread/INFO]: Starting Minecraft server on *:25565
+[17:35:22] [Server thread/INFO]: Using epoll channel type
+[17:35:22] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[17:35:22] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[17:35:22] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[17:35:22] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[17:35:22] [Server thread/INFO]: Preparing level "world"
+[17:35:28] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[17:35:28] [Worker-Main-1/INFO]: Preparing spawn area: 0%
+[17:35:28] [Worker-Main-2/INFO]: Preparing spawn area: 0%
+[17:35:29] [Worker-Main-3/INFO]: Preparing spawn area: 0%
+[17:35:29] [Worker-Main-3/INFO]: Preparing spawn area: 0%
+[17:35:30] [Worker-Main-1/INFO]: Preparing spawn area: 0%
+[17:35:30] [Worker-Main-3/INFO]: Preparing spawn area: 1%
+[17:35:31] [Worker-Main-2/INFO]: Preparing spawn area: 1%
+[17:35:31] [Worker-Main-1/INFO]: Preparing spawn area: 1%
+[17:35:32] [Worker-Main-3/INFO]: Preparing spawn area: 2%
+[17:35:32] [Worker-Main-2/INFO]: Preparing spawn area: 3%
+[17:35:33] [Worker-Main-3/INFO]: Preparing spawn area: 5%
+[17:35:33] [Worker-Main-1/INFO]: Preparing spawn area: 6%
+[17:35:34] [Worker-Main-1/INFO]: Preparing spawn area: 8%
+[17:35:34] [Worker-Main-1/INFO]: Preparing spawn area: 9%
+[17:35:35] [Worker-Main-1/INFO]: Preparing spawn area: 10%
+[17:35:35] [Worker-Main-1/INFO]: Preparing spawn area: 12%
+[17:35:36] [Worker-Main-3/INFO]: Preparing spawn area: 14%
+[17:35:36] [Worker-Main-1/INFO]: Preparing spawn area: 15%
+[17:35:37] [Worker-Main-2/INFO]: Preparing spawn area: 16%
+[17:35:37] [Worker-Main-2/INFO]: Preparing spawn area: 18%
+[17:35:38] [Worker-Main-2/INFO]: Preparing spawn area: 21%
+[17:35:38] [Worker-Main-3/INFO]: Preparing spawn area: 22%
+[17:35:39] [Worker-Main-1/INFO]: Preparing spawn area: 24%
+[17:35:39] [Worker-Main-2/INFO]: Preparing spawn area: 26%
+[17:35:40] [Worker-Main-1/INFO]: Preparing spawn area: 28%
+[17:35:41] [Worker-Main-3/INFO]: Preparing spawn area: 29%
+[17:35:41] [Worker-Main-2/INFO]: Preparing spawn area: 29%
+[17:35:41] [Worker-Main-3/INFO]: Preparing spawn area: 29%
+[17:35:42] [Worker-Main-2/INFO]: Preparing spawn area: 30%
+[17:35:42] [Worker-Main-2/INFO]: Preparing spawn area: 32%
+[17:35:43] [Worker-Main-3/INFO]: Preparing spawn area: 34%
+[17:35:43] [Worker-Main-3/INFO]: Preparing spawn area: 35%
+[17:35:44] [Worker-Main-3/INFO]: Preparing spawn area: 38%
+[17:35:44] [Worker-Main-2/INFO]: Preparing spawn area: 42%
+[17:35:45] [Worker-Main-2/INFO]: Preparing spawn area: 43%
+[17:35:45] [Worker-Main-2/INFO]: Preparing spawn area: 45%
+[17:35:46] [Worker-Main-3/INFO]: Preparing spawn area: 47%
+[17:35:46] [Worker-Main-1/INFO]: Preparing spawn area: 51%
+[17:35:47] [Worker-Main-3/INFO]: Preparing spawn area: 54%
+[17:35:47] [Worker-Main-1/INFO]: Preparing spawn area: 56%
+[17:35:48] [Worker-Main-1/INFO]: Preparing spawn area: 58%
+[17:35:48] [Worker-Main-1/INFO]: Preparing spawn area: 61%
+[17:35:49] [Worker-Main-2/INFO]: Preparing spawn area: 64%
+[17:35:49] [Worker-Main-2/INFO]: Preparing spawn area: 67%
+[17:35:50] [Worker-Main-2/INFO]: Preparing spawn area: 69%
+[17:35:50] [Worker-Main-3/INFO]: Preparing spawn area: 71%
+[17:35:51] [Worker-Main-1/INFO]: Preparing spawn area: 74%
+[17:35:51] [Worker-Main-2/INFO]: Preparing spawn area: 78%
+[17:35:52] [Worker-Main-3/INFO]: Preparing spawn area: 81%
+[17:35:52] [Worker-Main-1/INFO]: Preparing spawn area: 83%
+[17:35:53] [Worker-Main-3/INFO]: Preparing spawn area: 85%
+[17:35:53] [Worker-Main-2/INFO]: Preparing spawn area: 87%
+[17:35:54] [Worker-Main-2/INFO]: Preparing spawn area: 91%
+[17:35:54] [Worker-Main-3/INFO]: Preparing spawn area: 94%
+[17:35:55] [Worker-Main-2/INFO]: Preparing spawn area: 97%
+[17:35:55] [Server thread/INFO]: Time elapsed: 27312 ms
+[17:35:55] [Server thread/INFO]: Done (33.051s)! For help, type "help"
+[17:35:55] [Server thread/INFO]: Starting remote control listener
+[17:35:55] [Server thread/INFO]: Thread RCON Listener started
+[17:35:55] [Server thread/INFO]: RCON running on 0.0.0.0:25575
+[17:36:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:01] [Server thread/INFO]: Started flight recorder profiling id(1):name(server-1.20.1-2026-09-05-173600) - will dump to debug/server-2026-09-05-173600.jfr on exit or stop command
+[17:36:01] [RCON Client /0:0:0:0:0:0:0:1 #2/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:02] [Server thread/INFO]: Bench01[/127.0.0.1:44258] logged in with entity id 275 at (-24.5, 81.0, 24.5)
+[17:36:02] [Server thread/INFO]: Bench01 joined the game
+[17:36:03] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 300.000000, 0.500000]
+[17:36:03] [Server thread/WARN]: Bench01 moved too quickly! 25.0,219.0,-24.0
+[17:36:04] [Server thread/INFO]: Bench02[/127.0.0.1:44266] logged in with entity id 306 at (-24.5, 81.0, 11.5)
+[17:36:04] [Server thread/INFO]: Bench02 joined the game
+[17:36:05] [Server thread/INFO]: [Bench02: Teleported Bench02 to 256.500000, 300.000000, 0.500000]
+[17:36:05] [Server thread/WARN]: Bench02 moved too quickly! 281.0,219.0,-11.0
+[17:36:06] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:09] [RCON Client /0:0:0:0:0:0:0:1 #3/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:09] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 3899ms or 77 ticks behind
+[17:36:14] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:14] [RCON Client /0:0:0:0:0:0:0:1 #4/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:19] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:19] [RCON Client /0:0:0:0:0:0:0:1 #5/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:24] [RCON Client /0:0:0:0:0:0:0:1 #6/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:29] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:29] [RCON Client /0:0:0:0:0:0:0:1 #7/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:34] [RCON Client /0:0:0:0:0:0:0:1 #8/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:40] [RCON Client /0:0:0:0:0:0:0:1 #9/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:45] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:45] [RCON Client /0:0:0:0:0:0:0:1 #10/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:50] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:50] [RCON Client /0:0:0:0:0:0:0:1 #11/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:55] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:36:55] [RCON Client /0:0:0:0:0:0:0:1 #12/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:36:57] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_out_Bench01
+[17:36:58] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_out_Bench02
+[17:37:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:00] [RCON Client /0:0:0:0:0:0:0:1 #13/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:05] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:05] [RCON Client /0:0:0:0:0:0:0:1 #14/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:10] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:10] [RCON Client /0:0:0:0:0:0:0:1 #15/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:15] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:15] [RCON Client /0:0:0:0:0:0:0:1 #16/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:20] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:20] [RCON Client /0:0:0:0:0:0:0:1 #17/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:26] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:26] [RCON Client /0:0:0:0:0:0:0:1 #18/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:31] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:31] [RCON Client /0:0:0:0:0:0:0:1 #19/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:36] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:36] [RCON Client /0:0:0:0:0:0:0:1 #20/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:41] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:41] [RCON Client /0:0:0:0:0:0:0:1 #21/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:46] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:46] [RCON Client /0:0:0:0:0:0:0:1 #22/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:46] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_back_Bench02
+[17:37:46] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_back_Bench01
+[17:37:46] [Server thread/INFO]: [Bench01: Successfully filled 121 block(s)]
+[17:37:46] [Server thread/INFO]: [Bench02: Successfully filled 121 block(s)]
+[17:37:47] [Server thread/INFO]: [Bench02: Teleported Bench02 to 256.500000, 200.000000, 0.500000]
+[17:37:47] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench02 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench02 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench02 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench02 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench02 moved too quickly! 0.0,-100.0,0.0
+[17:37:47] [Server thread/WARN]: Bench01 moved too quickly! 0.0,-100.0,0.0
+[17:37:48] [Server thread/INFO]: [Bench01: Gave 1 [Diamond Sword] to Bench01]
+[17:37:48] [Server thread/INFO]: [Bench02: Gave 1 [Diamond Sword] to Bench02]
+[17:37:49] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:37:49] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:37:51] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:51] [RCON Client /0:0:0:0:0:0:0:1 #23/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:51] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:37:51] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:37:53] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:37:53] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:37:55] [Server thread/INFO]: Bench01 has made the advancement [Monster Hunter]
+[17:37:56] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:37:56] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:37:56] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:37:56] [RCON Client /0:0:0:0:0:0:0:1 #24/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:37:57] [Server thread/INFO]: Bench02 has made the advancement [Monster Hunter]
+[17:37:58] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:37:58] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:00] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:00] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:01] [RCON Client /0:0:0:0:0:0:0:1 #25/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:02] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:02] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:04] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:04] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:06] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:06] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:06] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:06] [RCON Client /0:0:0:0:0:0:0:1 #26/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:08] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:08] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:10] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:10] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:11] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:11] [RCON Client /0:0:0:0:0:0:0:1 #27/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:13] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:13] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:15] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:15] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:16] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:16] [RCON Client /0:0:0:0:0:0:0:1 #28/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:17] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:17] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:19] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:19] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:21] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:21] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:21] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:21] [RCON Client /0:0:0:0:0:0:0:1 #29/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:23] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:23] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:25] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:25] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:27] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:27] [RCON Client /0:0:0:0:0:0:0:1 #30/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:27] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:30] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:30] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:32] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:32] [RCON Client /0:0:0:0:0:0:0:1 #31/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:32] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:32] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:34] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:34] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:36] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:36] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:37] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:37] [RCON Client /0:0:0:0:0:0:0:1 #32/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:38] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:39] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:40] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:41] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:42] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:42] [RCON Client /0:0:0:0:0:0:0:1 #33/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:42] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:43] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:44] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:45] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:47] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[17:38:47] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:47] [RCON Client /0:0:0:0:0:0:0:1 #34/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:47] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[17:38:49] [Server thread/INFO]: Bench01 lost connection: Disconnected
+[17:38:49] [Server thread/INFO]: Bench01 left the game
+[17:38:49] [Server thread/INFO]: Bench02 lost connection: Disconnected
+[17:38:49] [Server thread/INFO]: Bench02 left the game
+[17:38:51] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:52] [Server thread/INFO]: Dumped flight recorder profiling to debug/server-2026-09-05-173600.jfr
+[17:38:52] [Server thread/INFO]: {
+  "startedEpoch": 1788629761059,
+  "endedEpoch": 1788629932044,
+  "durationMs": 170985,
+  "heap": {
+    "allocationRateBytesPerSecond": 1.820204574117647E8,
+    "gcCount": 23,
+    "gcOverHeadPercent": 0.00789543,
+    "gcTotalDurationMs": 1350
+  },
+  "cpuPercent": {
+    "jvm": {
+      "min": 0.0,
+      "average": 0.012150349969263462,
+      "max": 0.030226700007915497
+    },
+    "userJvm": {
+      "min": 0.0,
+      "average": 0.2908536549219314,
+      "max": 0.748110830783844
+    },
+    "system": {
+      "min": 0.0,
+      "average": 0.3190478902529268,
+      "max": 0.9077306985855103
+    }
+  },
+  "network": {
+    "sent": {
+      "totalBytes": 83684417,
+      "count": 43979,
+      "bytesPerSecond": 492261.27647058823,
+      "countPerSecond": 258.7,
+      "topContributors": [
+        {
+          "protocolId": 0,
+          "packetId": 36,
+          "packetName": "wd",
+          "totalBytes": 81233604,
+          "count": 2331
+        },
+        {
+          "protocolId": 0,
+          "packetId": 39,
+          "packetName": "wg",
+          "totalBytes": 1428320,
+          "count": 499
+        },
+        {
+          "protocolId": 0,
+          "packetId": 109,
+          "packetName": "yx",
+          "totalBytes": 272112,
+          "count": 2
+        },
+        {
+          "protocolId": 0,
+          "packetId": 43,
+          "packetName": "a",
+          "totalBytes": 94313,
+          "count": 10525
+        },
+        {
+          "protocolId": 0,
+          "packetId": 67,
+          "packetName": "xh",
+          "totalBytes": 87615,
+          "count": 2928
+        },
+        {
+          "protocolId": 0,
+          "packetId": 84,
+          "packetName": "xy",
+          "totalBytes": 81912,
+          "count": 10244
+        },
+        {
+          "protocolId": 0,
+          "packetId": 40,
+          "packetName": "wi",
+          "totalBytes": 78576,
+          "count": 2
+        },
+        {
+          "protocolId": 0,
+          "packetId": 100,
+          "packetName": "yo",
+          "totalBytes": 61354,
+          "count": 130
+        },
+        {
+          "protocolId": 0,
+          "packetId": 105,
+          "packetName": "yt",
+          "totalBytes": 47946,
+          "count": 4
+        },
+        {
+          "protocolId": 0,
+          "packetId": 16,
+          "packetName": "vi",
+          "totalBytes": 41358,
+          "count": 2
+        }
+      ]
+    },
+    "received": {
+      "totalBytes": 111511,
+      "count": 4477,
+      "bytesPerSecond": 655.9470588235295,
+      "countPerSecond": 26.33529411764706,
+      "topContributors": [
+        {
+          "protocolId": 0,
+          "packetId": 20,
+          "packetName": "a",
+          "totalBytes": 102882,
+          "count": 3957
+        },
+        {
+          "protocolId": 0,
+          "packetId": 4,
+          "packetName": "zh",
+          "totalBytes": 5108,
+          "count": 67
+        },
+        {
+          "protocolId": 0,
+          "packetId": 22,
+          "packetName": "c",
+          "totalBytes": 1380,
+          "count": 138
+        },
+        {
+          "protocolId": 0,
+          "packetId": 21,
+          "packetName": "b",
+          "totalBytes": 850,
+          "count": 25
+        },
+        {
+          "protocolId": 0,
+          "packetId": 16,
+          "packetName": "zt",
+          "totalBytes": 560,
+          "count": 112
+        },
+        {
+          "protocolId": 0,
+          "packetId": 47,
+          "packetName": "aav",
+          "totalBytes": 224,
+          "count": 112
+        },
+        {
+          "protocolId": 0,
+          "packetId": 18,
+          "packetName": "zv",
+          "totalBytes": 189,
+          "count": 21
+        },
+        {
+          "protocolId": -1,
+          "packetId": 0,
+          "packetName": "abb",
+          "totalBytes": 127,
+          "count": 7
+        },
+        {
+          "protocolId": 2,
+          "packetId": 0,
+          "packetName": "abm",
+          "totalBytes": 52,
+          "count": 2
+        },
+        {
+          "protocolId": 0,
+          "packetId": 13,
+          "packetName": "zq",
+          "totalBytes": 50,
+          "count": 2
+        }
+      ]
+    }
+  },
+  "fileIO": {
+    "write": {
+      "totalBytes": 72713098,
+      "count": 11547,
+      "bytesPerSecond": 427724.1058823529,
+      "countPerSecond": 67.9235294117647,
+      "topContributors": [
+        {
+          "path": "./world/region/r.0.0.mca",
+          "totalBytes": 31047993
+        },
+        {
+          "path": "./world/region/r.-1.0.mca",
+          "totalBytes": 10662063
+        },
+        {
+          "path": "./world/region/r.0.1.mca",
+          "totalBytes": 9236354
+        },
+        {
+          "path": "./world/region/r.0.-1.mca",
+          "totalBytes": 8203361
+        },
+        {
+          "path": "./world/region/r.-1.-1.mca",
+          "totalBytes": 4867597
+        },
+        {
+          "path": "./world/region/r.-1.1.mca",
+          "totalBytes": 4313564
+        },
+        {
+          "path": "./world/region/r.1.0.mca",
+          "totalBytes": 1440583
+        },
+        {
+          "path": "./world/entities/r.0.0.mca",
+          "totalBytes": 963089
+        },
+        {
+          "path": "./world/region/r.1.-1.mca",
+          "totalBytes": 960185
+        },
+        {
+          "path": "./world/region/r.1.1.mca",
+          "totalBytes": 598884
+        }
+      ]
+    },
+    "read": {
+      "totalBytes": 2130573,
+      "count": 1177,
+      "bytesPerSecond": 12532.782352941176,
+      "countPerSecond": 6.923529411764706,
+      "topContributors": [
+        {
+          "path": "./world/region/r.0.-1.mca",
+          "totalBytes": 524288
+        },
+        {
+          "path": "/data/versions/1.20.1/server-1.20.1.jar",
+          "totalBytes": 519826
+        },
+        {
+          "path": "./world/region/r.0.0.mca",
+          "totalBytes": 483328
+        },
+        {
+          "path": "./world/entities/r.0.0.mca",
+          "totalBytes": 181103
+        },
+        {
+          "path": "./world/region/r.1.0.mca",
+          "totalBytes": 160107
+        },
+        {
+          "path": "./world/region/r.1.-1.mca",
+          "totalBytes": 143719
+        },
+        {
+          "path": "/data/libraries/it/unimi/dsi/fastutil/8.5.9/fastutil-8.5.9.jar",
+          "totalBytes": 45946
+        },
+        {
+          "path": "/data/libraries/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar",
+          "totalBytes": 21785
+        },
+        {
+          "path": "/data/libraries/com/google/guava/guava/31.1-jre/guava-31.1-jre.jar",
+          "totalBytes": 10709
+        },
+        {
+          "path": "/data/libraries/io/netty/netty-transport/4.1.82.Final/netty-transport-4.1.82.Final.jar",
+          "totalBytes": 10683
+        }
+      ]
+    }
+  },
+  "serverTick": {
+    "minMs": 3.181663,
+    "averageMs": 14.267929329411764,
+    "maxMs": 118.573688,
+    "p99": 58.92886596,
+    "p90": 27.690064,
+    "p75": 14.5299635,
+    "p50": 9.6493255
+  },
+  "threadAllocation": [
+    {
+      "thread": "Attach Listener",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "C1 CompilerThread0",
+      "bytesPerSecond": 26.666666666666668
+    },
+    {
+      "thread": "C2 CompilerThread0",
+      "bytesPerSecond": 4.848484848484849
+    },
+    {
+      "thread": "C2 CompilerThread1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Common-Cleaner",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "DestroyJavaVM",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Finalizer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-4",
+      "bytesPerSecond": 243550.20606060605
+    },
+    {
+      "thread": "IO-Worker-5",
+      "bytesPerSecond": 255817.11515151514
+    },
+    {
+      "thread": "IO-Worker-6",
+      "bytesPerSecond": 150426.81212121213
+    },
+    {
+      "thread": "IO-Worker-7",
+      "bytesPerSecond": 171931.65
+    },
+    {
+      "thread": "IO-Worker-8",
+      "bytesPerSecond": 112493.06666666667
+    },
+    {
+      "thread": "JFR Periodic Tasks",
+      "bytesPerSecond": 152.5818181818182
+    },
+    {
+      "thread": "JFR Recorder Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JNA Cleaner",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Monitor Deflation Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Epoll Server IO #0",
+      "bytesPerSecond": 163.83030303030304
+    },
+    {
+      "thread": "Netty Epoll Server IO #1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Epoll Server IO #2",
+      "bytesPerSecond": 253372.65454545454
+    },
+    {
+      "thread": "Netty Epoll Server IO #3",
+      "bytesPerSecond": 327985.3090909091
+    },
+    {
+      "thread": "Netty Epoll Server IO #4",
+      "bytesPerSecond": 444.8
+    },
+    {
+      "thread": "Netty Epoll Server IO #5",
+      "bytesPerSecond": 125.72121212121212
+    },
+    {
+      "thread": "Netty Epoll Server IO #6",
+      "bytesPerSecond": 125.72121212121212
+    },
+    {
+      "thread": "Netty Epoll Server IO #7",
+      "bytesPerSecond": 125.72121212121212
+    },
+    {
+      "thread": "Notification Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "RCON Listener #1",
+      "bytesPerSecond": 3036.9454545454546
+    },
+    {
+      "thread": "Reference Handler",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server Watchdog",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server thread",
+      "bytesPerSecond": 7.290583238787879E7
+    },
+    {
+      "thread": "Service Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Signal Dispatcher",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Sweeper thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Timer hack thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-1",
+      "bytesPerSecond": 3.82247615030303E7
+    },
+    {
+      "thread": "Worker-Main-2",
+      "bytesPerSecond": 3.586490652121212E7
+    },
+    {
+      "thread": "Worker-Main-3",
+      "bytesPerSecond": 3.720332518787879E7
+    },
+    {
+      "thread": "Yggdrasil Key Fetcher",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "process reaper",
+      "bytesPerSecond": 0.0
+    }
+  ],
+  "chunkGen": {
+    "durationNanosTotal": 1.63365279842E11,
+    "status": [
+      {
+        "state": "minecraft:noise",
+        "count": 1310,
+        "durationNanosTotal": 73861435998,
+        "durationNanosAvg": 56382775,
+        "durationNanosPercentiles": {
+          "p99": 1.4367971335E8,
+          "p90": 9.49702401E7,
+          "p75": 6.533711125E7,
+          "p50": 4.5715276E7
+        },
+        "fastest": {
+          "durationNanos": 27863837,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 21,
+          "chunkPosZ": 21,
+          "worldPosX": 336,
+          "worldPosZ": 560
+        },
+        "slowest": {
+          "durationNanos": 567329483,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 13,
+          "chunkPosZ": 13,
+          "worldPosX": 208,
+          "worldPosZ": 0
+        },
+        "secondSlowest": {
+          "durationNanos": 467852922,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 16,
+          "chunkPosZ": 16,
+          "worldPosX": 256,
+          "worldPosZ": 0
+        }
+      },
+      {
+        "state": "minecraft:surface",
+        "count": 1310,
+        "durationNanosTotal": 18360511570,
+        "durationNanosAvg": 14015657,
+        "durationNanosPercentiles": {
+          "p99": 4.720581634E7,
+          "p90": 2.0409765E7,
+          "p75": 1.3754014E7,
+          "p50": 1.1938167E7
+        },
+        "fastest": {
+          "durationNanos": 4779403,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 5,
+          "chunkPosZ": 5,
+          "worldPosX": 80,
+          "worldPosZ": 384
+        },
+        "slowest": {
+          "durationNanos": 79146917,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 15,
+          "chunkPosZ": 15,
+          "worldPosX": 240,
+          "worldPosZ": 0
+        },
+        "secondSlowest": {
+          "durationNanos": 65383243,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 14,
+          "chunkPosZ": 14,
+          "worldPosX": 224,
+          "worldPosZ": 0
+        }
+      },
+      {
+        "state": "minecraft:full",
+        "count": 1149,
+        "durationNanosTotal": 16897878788,
+        "durationNanosAvg": 14706595,
+        "durationNanosPercentiles": {
+          "p99": 1.3230563564E8,
+          "p90": 4.24863496E7,
+          "p75": 1.7444929E7,
+          "p50": 2394942.0
+        },
+        "fastest": {
+          "durationNanos": 34041,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 18,
+          "chunkPosZ": 18,
+          "worldPosX": 288,
+          "worldPosZ": 608
+        },
+        "slowest": {
+          "durationNanos": 208877936,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 19,
+          "chunkPosZ": 19,
+          "worldPosX": 304,
+          "worldPosZ": 96
+        },
+        "secondSlowest": {
+          "durationNanos": 200498681,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 11,
+          "chunkPosZ": 11,
+          "worldPosX": 176,
+          "worldPosZ": 80
+        }
+      },
+      {
+        "state": "minecraft:light",
+        "count": 1149,
+        "durationNanosTotal": 14934227823,
+        "durationNanosAvg": 12997587,
+        "durationNanosPercentiles": {
+          "p99": 1.1173418644E8,
+          "p90": 3.7892095E7,
+          "p75": 1.2941133E7,
+          "p50": 4810163.0
+        },
+        "fastest": {
+          "durationNanos": 172165,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 24,
+          "chunkPosZ": 24,
+          "worldPosX": 384,
+          "worldPosZ": 0
+        },
+        "slowest": {
+          "durationNanos": 151415336,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": -2,
+          "chunkPosZ": -2,
+          "worldPosX": -32,
+          "worldPosZ": 304
+        },
+        "secondSlowest": {
+          "durationNanos": 151342535,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": -1,
+          "chunkPosZ": -1,
+          "worldPosX": -16,
+          "worldPosZ": 304
+        }
+      },
+      {
+        "state": "minecraft:initialize_light",
+        "count": 1230,
+        "durationNanosTotal": 14058834185,
+        "durationNanosAvg": 11429946,
+        "durationNanosPercentiles": {
+          "p99": 1.1506485075E8,
+          "p90": 3.36060892E7,
+          "p75": 1.10333245E7,
+          "p50": 3011177.5
+        },
+        "fastest": {
+          "durationNanos": 157244,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 8,
+          "chunkPosZ": 8,
+          "worldPosX": 128,
+          "worldPosZ": 240
+        },
+        "slowest": {
+          "durationNanos": 183050431,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 19,
+          "chunkPosZ": 19,
+          "worldPosX": 304,
+          "worldPosZ": -16
+        },
+        "secondSlowest": {
+          "durationNanos": 182562579,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 19,
+          "chunkPosZ": 19,
+          "worldPosX": 304,
+          "worldPosZ": 0
+        }
+      },
+      {
+        "state": "minecraft:biomes",
+        "count": 1390,
+        "durationNanosTotal": 13107370091,
+        "durationNanosAvg": 9429762,
+        "durationNanosPercentiles": {
+          "p99": 3.88636795E7,
+          "p90": 1.46708301E7,
+          "p75": 9974256.5,
+          "p50": 6529848.0
+        },
+        "fastest": {
+          "durationNanos": 4615879,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 5,
+          "chunkPosZ": 5,
+          "worldPosX": 80,
+          "worldPosZ": 592
+        },
+        "slowest": {
+          "durationNanos": 199079804,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 25,
+          "chunkPosZ": 25,
+          "worldPosX": 400,
+          "worldPosZ": -64
+        },
+        "secondSlowest": {
+          "durationNanos": 152286279,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 3,
+          "chunkPosZ": 3,
+          "worldPosX": 48,
+          "worldPosZ": 400
+        }
+      },
+      {
+        "state": "minecraft:features",
+        "count": 1230,
+        "durationNanosTotal": 7089261585,
+        "durationNanosAvg": 5763627,
+        "durationNanosPercentiles": {
+          "p99": 3.258034124E7,
+          "p90": 9567374.2,
+          "p75": 5643155.0,
+          "p50": 4085965.0
+        },
+        "fastest": {
+          "durationNanos": 2756431,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 23,
+          "chunkPosZ": 23,
+          "worldPosX": 368,
+          "worldPosZ": 448
+        },
+        "slowest": {
+          "durationNanos": 119879325,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 17,
+          "chunkPosZ": 17,
+          "worldPosX": 272,
+          "worldPosZ": 256
+        },
+        "secondSlowest": {
+          "durationNanos": 64642544,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 16,
+          "chunkPosZ": 16,
+          "worldPosX": 256,
+          "worldPosZ": 0
+        }
+      },
+      {
+        "state": "minecraft:carvers",
+        "count": 1310,
+        "durationNanosTotal": 2694832907,
+        "durationNanosAvg": 2057124,
+        "durationNanosPercentiles": {
+          "p99": 1.268738992E7,
+          "p90": 3265432.0,
+          "p75": 2287539.0,
+          "p50": 1612461.5
+        },
+        "fastest": {
+          "durationNanos": 328609,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": -7,
+          "chunkPosZ": -7,
+          "worldPosX": -112,
+          "worldPosZ": 400
+        },
+        "slowest": {
+          "durationNanos": 24579192,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 17,
+          "chunkPosZ": 17,
+          "worldPosX": 272,
+          "worldPosZ": 208
+        },
+        "secondSlowest": {
+          "durationNanos": 23918415,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 15,
+          "chunkPosZ": 15,
+          "worldPosX": 240,
+          "worldPosZ": 144
+        }
+      },
+      {
+        "state": "minecraft:structure_starts",
+        "count": 2030,
+        "durationNanosTotal": 2056674224,
+        "durationNanosAvg": 1013140,
+        "durationNanosPercentiles": {
+          "p99": 1.192415563E7,
+          "p90": 41081.0,
+          "p75": 28041.0,
+          "p50": 20100.5
+        },
+        "fastest": {
+          "durationNanos": 4720,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 23,
+          "chunkPosZ": 23,
+          "worldPosX": 368,
+          "worldPosZ": 688
+        },
+        "slowest": {
+          "durationNanos": 1309931401,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 22,
+          "chunkPosZ": 22,
+          "worldPosX": 352,
+          "worldPosZ": -304
+        },
+        "secondSlowest": {
+          "durationNanos": 86947558,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 23,
+          "chunkPosZ": 23,
+          "worldPosX": 368,
+          "worldPosZ": 0
+        }
+      },
+      {
+        "state": "minecraft:spawn",
+        "count": 1149,
+        "durationNanosTotal": 155857003,
+        "durationNanosAvg": 135645,
+        "durationNanosPercentiles": {
+          "p99": 1839820.88,
+          "p90": 97530.2,
+          "p75": 63002.0,
+          "p50": 42401.0
+        },
+        "fastest": {
+          "durationNanos": 2200,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 7,
+          "chunkPosZ": 7,
+          "worldPosX": 112,
+          "worldPosZ": 576
+        },
+        "slowest": {
+          "durationNanos": 22598021,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 20,
+          "chunkPosZ": 20,
+          "worldPosX": 320,
+          "worldPosZ": 112
+        },
+        "secondSlowest": {
+          "durationNanos": 11866785,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 14,
+          "chunkPosZ": 14,
+          "worldPosX": 224,
+          "worldPosZ": 80
+        }
+      },
+      {
+        "state": "minecraft:structure_references",
+        "count": 1390,
+        "durationNanosTotal": 148395668,
+        "durationNanosAvg": 106759,
+        "durationNanosPercentiles": {
+          "p99": 540999.6,
+          "p90": 129431.0,
+          "p75": 100222.75,
+          "p50": 77102.0
+        },
+        "fastest": {
+          "durationNanos": 17801,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 24,
+          "chunkPosZ": 24,
+          "worldPosX": 384,
+          "worldPosZ": 544
+        },
+        "slowest": {
+          "durationNanos": 19113412,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 23,
+          "chunkPosZ": 23,
+          "worldPosX": 368,
+          "worldPosZ": 96
+        },
+        "secondSlowest": {
+          "durationNanos": 2881554,
+          "level": "ResourceKey[minecraft:dimension / minecraft:overworld]",
+          "chunkPosX": 20,
+          "chunkPosZ": 20,
+          "worldPosX": 320,
+          "worldPosZ": 0
+        }
+      }
+    ]
+  }
+}
+[17:38:52] [Server thread/INFO]: Dumped recording summary to debug/jfr-report-server-2026-09-05-173600.json
+[17:38:52] [RCON Client /0:0:0:0:0:0:0:1 #35/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:53] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:53] [Server thread/INFO]: [Rcon: Changed the block at 0, 201, 0]
+[17:38:53] [RCON Client /0:0:0:0:0:0:0:1 #36/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[17:38:53] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:53] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[17:38:53] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[17:38:53] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[17:38:53] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[17:38:53] [Server thread/INFO]: [Rcon: Saved the game]
+[17:38:53] [RCON Client /0:0:0:0:0:0:0:1 #37/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-05T17:38:53.808Z	INFO	mc-server-runner	gracefully stopping server...
+[17:38:53] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[17:38:53] [Server thread/INFO]: [Rcon: Stopping the server]
+[17:38:53] [RCON Client /0:0:0:0:0:0:0:1 #38/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-05T17:38:53.814Z	INFO	mc-server-runner	Waiting for completion...
+[17:38:53] [Server thread/INFO]: Stopping server
+[17:38:53] [Server thread/INFO]: Saving players
+[17:38:53] [Server thread/INFO]: Saving worlds
+[17:38:54] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[17:38:56] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[17:38:56] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[17:38:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[17:38:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[17:38:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[17:38:56] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[17:38:56] [Server thread/INFO]: Thread RCON Listener stopped
+2026-09-05T17:38:57.459Z	INFO	mc-server-runner	Done
+2026/09/05 17:38:53 Stopping with rcon-cli

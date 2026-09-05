@@ -1,0 +1,453 @@
+{
+  "cases": [
+    {
+      "case": "r1-n1",
+      "players": 1,
+      "cold_ready_seconds": 52.914807816001485,
+      "warm_ready_seconds": 22.402314090999425,
+      "save_seconds": 0.2165780219984299,
+      "stop_seconds": 4.6930261429988605,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.986239167233542,
+      "mean_cpu_cores": 0.6564811166837135,
+      "peak_cpu_cores": 2.99765247030437,
+      "peak_container_gib": 2.5295944213867188,
+      "peak_java_rss_gib": 2.4295501708984375,
+      "peak_sampled_heap_gib": 1.5546951293945312,
+      "world_growth_mib": 7.259476661682129,
+      "mib_per_player_hour": 120.20645864380316,
+      "confirmed_hits": 56,
+      "performance_pass": true,
+      "p95_jfr_mean_mspt": 12.784246000000001,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 61.032947063446045,
+        "maximum": 61.39651083946228
+      },
+      "maximum_tick_query_seconds": 0.11690998077392578,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 48.26300001144409,
+          "samples": 9,
+          "minimum_tps_1m": null,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 40.98183250427246,
+          "p95_jfr_mean_mspt": 20.810935999999998
+        },
+        "existing_chunks": {
+          "seconds": 48.140000104904175,
+          "samples": 10,
+          "minimum_tps_1m": 19.986239167233542,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 45.79255437850952,
+          "p95_jfr_mean_mspt": 7.675099
+        },
+        "combat": {
+          "seconds": 62.96300005912781,
+          "samples": 12,
+          "minimum_tps_1m": 19.98753176338568,
+          "observed_mean_tps": 19.998500210329496,
+          "observed_tps_seconds": 55.954195976257324,
+          "p95_jfr_mean_mspt": 5.826324
+        }
+      },
+      "action_chunk_wait_player_seconds": 0,
+      "longest_action_chunk_wait_seconds": 0
+    },
+    {
+      "case": "r1-n2",
+      "players": 2,
+      "cold_ready_seconds": 52.897061916000894,
+      "warm_ready_seconds": 22.39191049800138,
+      "save_seconds": 0.22278044399899954,
+      "stop_seconds": 3.793225748000623,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.502171716498555,
+      "mean_cpu_cores": 1.099395599278806,
+      "peak_cpu_cores": 2.9965440352404813,
+      "peak_container_gib": 2.5231590270996094,
+      "peak_java_rss_gib": 2.3993186950683594,
+      "peak_sampled_heap_gib": 1.6793441772460938,
+      "world_growth_mib": 16.12857723236084,
+      "mib_per_player_hour": 122.38036246853663,
+      "confirmed_hits": 111,
+      "performance_pass": true,
+      "p95_jfr_mean_mspt": 28.702636000000002,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 61.02214956283569,
+        "maximum": 63.018622636795044
+      },
+      "maximum_tick_query_seconds": 3.145869731903076,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 49.16699981689453,
+          "samples": 9,
+          "minimum_tps_1m": null,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 40.94963002204895,
+          "p95_jfr_mean_mspt": 44.696712
+        },
+        "existing_chunks": {
+          "seconds": 48.1800000667572,
+          "samples": 10,
+          "minimum_tps_1m": 19.502171716498555,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 45.835017681121826,
+          "p95_jfr_mean_mspt": 13.729988
+        },
+        "combat": {
+          "seconds": 62.78999996185303,
+          "samples": 12,
+          "minimum_tps_1m": 19.987061387088268,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 55.94018244743347,
+          "p95_jfr_mean_mspt": 9.389203
+        }
+      },
+      "action_chunk_wait_player_seconds": 3.5140000000000002,
+      "longest_action_chunk_wait_seconds": 2.611
+    },
+    {
+      "case": "r1-n4",
+      "players": 4,
+      "cold_ready_seconds": 52.90485697999975,
+      "warm_ready_seconds": 26.449694592000014,
+      "save_seconds": 0.19661816200095927,
+      "stop_seconds": 3.5004158960000495,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.154226676539942,
+      "mean_cpu_cores": 1.721514428985362,
+      "peak_cpu_cores": 2.8105773985258713,
+      "peak_container_gib": 2.927875518798828,
+      "peak_java_rss_gib": 2.7884674072265625,
+      "peak_sampled_heap_gib": 1.8193206787109375,
+      "world_growth_mib": 30.05460834503174,
+      "mib_per_player_hour": 101.8416408674988,
+      "confirmed_hits": 226,
+      "performance_pass": true,
+      "p95_jfr_mean_mspt": 29.443962,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 60.48571276664734,
+        "maximum": 65.58518075942993
+      },
+      "maximum_tick_query_seconds": 2.6453020572662354,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 49.870999813079834,
+          "samples": 10,
+          "minimum_tps_1m": 19.154226676539942,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 46.13778305053711,
+          "p95_jfr_mean_mspt": 29.609707999999998
+        },
+        "existing_chunks": {
+          "seconds": 48.51100015640259,
+          "samples": 9,
+          "minimum_tps_1m": 19.897787653994765,
+          "observed_mean_tps": 19.990361604213415,
+          "observed_tps_seconds": 41.01976823806763,
+          "p95_jfr_mean_mspt": 40.967836
+        },
+        "combat": {
+          "seconds": 62.912999868392944,
+          "samples": 12,
+          "minimum_tps_1m": 19.988009502526015,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 55.993510484695435,
+          "p95_jfr_mean_mspt": 17.777344
+        }
+      },
+      "action_chunk_wait_player_seconds": 9.222,
+      "longest_action_chunk_wait_seconds": 5.713
+    },
+    {
+      "case": "r1-n8",
+      "players": 8,
+      "cold_ready_seconds": 52.914798138999686,
+      "warm_ready_seconds": 22.413961436001046,
+      "save_seconds": 1.44601664000038,
+      "stop_seconds": 3.835508767000647,
+      "action_samples": 38,
+      "minimum_tps_1m": 15.195612332952658,
+      "mean_cpu_cores": 2.378795795976018,
+      "peak_cpu_cores": 2.8704207242078636,
+      "peak_container_gib": 3.085094451904297,
+      "peak_java_rss_gib": 2.9199295043945312,
+      "peak_sampled_heap_gib": 2.14890193939209,
+      "world_growth_mib": 55.974066734313965,
+      "mib_per_player_hour": 70.13172776240577,
+      "confirmed_hits": 446,
+      "performance_pass": false,
+      "p95_jfr_mean_mspt": 40.553236,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 60.120368003845215,
+        "maximum": 65.25763082504272
+      },
+      "maximum_tick_query_seconds": 3.292660713195801,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 81.37299990653992,
+          "samples": 16,
+          "minimum_tps_1m": 15.195612332952658,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 76.89782094955444,
+          "p95_jfr_mean_mspt": 17.868968
+        },
+        "existing_chunks": {
+          "seconds": 48.64199995994568,
+          "samples": 10,
+          "minimum_tps_1m": 19.991621024729387,
+          "observed_mean_tps": 19.989041828431905,
+          "observed_tps_seconds": 46.225327253341675,
+          "p95_jfr_mean_mspt": 35.517920000000004
+        },
+        "combat": {
+          "seconds": 62.973999977111816,
+          "samples": 12,
+          "minimum_tps_1m": 19.7834481660478,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 56.345518827438354,
+          "p95_jfr_mean_mspt": 43.089596
+        }
+      },
+      "action_chunk_wait_player_seconds": 258.917,
+      "longest_action_chunk_wait_seconds": 2.004
+    },
+    {
+      "case": "r2-n1",
+      "players": 1,
+      "cold_ready_seconds": 52.850235772000815,
+      "warm_ready_seconds": 22.475972719999845,
+      "save_seconds": 0.19210811899938562,
+      "stop_seconds": 4.489270531001239,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.98676457935401,
+      "mean_cpu_cores": 0.6682755538251922,
+      "peak_cpu_cores": 3.0013830466651594,
+      "peak_container_gib": 2.68731689453125,
+      "peak_java_rss_gib": 2.539470672607422,
+      "peak_sampled_heap_gib": 1.4460248947143555,
+      "world_growth_mib": 7.255606651306152,
+      "mib_per_player_hour": 120.05332718126728,
+      "confirmed_hits": 56,
+      "performance_pass": true,
+      "p95_jfr_mean_mspt": 13.315356000000001,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 61.05205535888672,
+        "maximum": 61.392125368118286
+      },
+      "maximum_tick_query_seconds": 0.0831594467163086,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 48.15899991989136,
+          "samples": 9,
+          "minimum_tps_1m": null,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 40.969629764556885,
+          "p95_jfr_mean_mspt": 21.026429999999998
+        },
+        "existing_chunks": {
+          "seconds": 48.14200019836426,
+          "samples": 10,
+          "minimum_tps_1m": 19.989060846528734,
+          "observed_mean_tps": 19.981372667370078,
+          "observed_tps_seconds": 45.79264974594116,
+          "p95_jfr_mean_mspt": 7.452858
+        },
+        "combat": {
+          "seconds": 62.55999994277954,
+          "samples": 12,
+          "minimum_tps_1m": 19.98676457935401,
+          "observed_mean_tps": 19.99349887324734,
+          "observed_tps_seconds": 55.96819281578064,
+          "p95_jfr_mean_mspt": 6.3039380000000005
+        }
+      },
+      "action_chunk_wait_player_seconds": 0,
+      "longest_action_chunk_wait_seconds": 0
+    },
+    {
+      "case": "r2-n2",
+      "players": 2,
+      "cold_ready_seconds": 52.898058857999786,
+      "warm_ready_seconds": 26.43181056799949,
+      "save_seconds": 0.19998959800068405,
+      "stop_seconds": 3.576301246001094,
+      "action_samples": 31,
+      "minimum_tps_1m": 19.085255661694692,
+      "mean_cpu_cores": 1.106144489488234,
+      "peak_cpu_cores": 3.0019250403937763,
+      "peak_container_gib": 2.639354705810547,
+      "peak_java_rss_gib": 2.515636444091797,
+      "peak_sampled_heap_gib": 1.7079010009765625,
+      "world_growth_mib": 16.14454460144043,
+      "mib_per_player_hour": 121.64130951216607,
+      "confirmed_hits": 112,
+      "performance_pass": true,
+      "p95_jfr_mean_mspt": 25.890248,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 61.04965281486511,
+        "maximum": 63.55691647529602
+      },
+      "maximum_tick_query_seconds": 2.051748752593994,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 49.129000186920166,
+          "samples": 9,
+          "minimum_tps_1m": null,
+          "observed_mean_tps": 19.978660907184782,
+          "observed_tps_seconds": 40.94368505477905,
+          "p95_jfr_mean_mspt": 43.224184
+        },
+        "existing_chunks": {
+          "seconds": 48.121999979019165,
+          "samples": 10,
+          "minimum_tps_1m": 19.085255661694692,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 45.8910014629364,
+          "p95_jfr_mean_mspt": 13.228439
+        },
+        "combat": {
+          "seconds": 62.835999965667725,
+          "samples": 12,
+          "minimum_tps_1m": 19.993321293305215,
+          "observed_mean_tps": 19.99520693696806,
+          "observed_tps_seconds": 55.963411808013916,
+          "p95_jfr_mean_mspt": 9.777320000000001
+        }
+      },
+      "action_chunk_wait_player_seconds": 3.715,
+      "longest_action_chunk_wait_seconds": 2.808
+    },
+    {
+      "case": "r2-n4",
+      "players": 4,
+      "cold_ready_seconds": 52.92219472499892,
+      "warm_ready_seconds": 26.444373422000353,
+      "save_seconds": 0.1721176020000712,
+      "stop_seconds": 3.4783023669988324,
+      "action_samples": 32,
+      "minimum_tps_1m": 19.373613738212825,
+      "mean_cpu_cores": 1.7030660584086468,
+      "peak_cpu_cores": 2.8131942562019896,
+      "peak_container_gib": 2.94805908203125,
+      "peak_java_rss_gib": 2.808460235595703,
+      "peak_sampled_heap_gib": 1.708425521850586,
+      "world_growth_mib": 30.128046989440918,
+      "mib_per_player_hour": 102.02483232683481,
+      "confirmed_hits": 225,
+      "performance_pass": true,
+      "p95_jfr_mean_mspt": 29.791804000000003,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 61.407286643981934,
+        "maximum": 63.43679690361023
+      },
+      "maximum_tick_query_seconds": 1.391890525817871,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 48.96300005912781,
+          "samples": 10,
+          "minimum_tps_1m": 19.373613738212825,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 46.133704662323,
+          "p95_jfr_mean_mspt": 22.154848
+        },
+        "existing_chunks": {
+          "seconds": 48.49000000953674,
+          "samples": 9,
+          "minimum_tps_1m": 19.987021495731128,
+          "observed_mean_tps": 19.992445102246656,
+          "observed_tps_seconds": 41.015493392944336,
+          "p95_jfr_mean_mspt": 31.598014
+        },
+        "combat": {
+          "seconds": 62.859999895095825,
+          "samples": 13,
+          "minimum_tps_1m": 19.921701181102783,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 61.88339948654175,
+          "p95_jfr_mean_mspt": 23.215116000000002
+        }
+      },
+      "action_chunk_wait_player_seconds": 0.8029999999999999,
+      "longest_action_chunk_wait_seconds": 0.702
+    },
+    {
+      "case": "r2-n8",
+      "players": 8,
+      "cold_ready_seconds": 52.89146439899923,
+      "warm_ready_seconds": 22.420622800000274,
+      "save_seconds": 2.1949074219992326,
+      "stop_seconds": 4.208938777002913,
+      "action_samples": 38,
+      "minimum_tps_1m": 18.43846538723844,
+      "mean_cpu_cores": 2.5142760976382506,
+      "peak_cpu_cores": 2.9132124687705816,
+      "peak_container_gib": 3.0815277099609375,
+      "peak_java_rss_gib": 2.9317893981933594,
+      "peak_sampled_heap_gib": 1.676626205444336,
+      "world_growth_mib": 55.74632167816162,
+      "mib_per_player_hour": 70.37229165997675,
+      "confirmed_hits": 447,
+      "performance_pass": false,
+      "p95_jfr_mean_mspt": 41.40912,
+      "tps_measurement": "Vanilla gametime deltas over at least 60 seconds, using query midpoint timestamps",
+      "tps_window_seconds": {
+        "minimum": 60.0103325843811,
+        "maximum": 65.16718101501465
+      },
+      "maximum_tick_query_seconds": 4.1031577587127686,
+      "tick_time_measurement": "minecraft.ServerTickTime averageTickDuration, reported once per second; not individual ticks",
+      "phases": {
+        "new_chunks": {
+          "seconds": 83.80200004577637,
+          "samples": 16,
+          "minimum_tps_1m": 18.43846538723844,
+          "observed_mean_tps": 19.99067555425472,
+          "observed_tps_seconds": 76.93586921691895,
+          "p95_jfr_mean_mspt": 20.887804
+        },
+        "existing_chunks": {
+          "seconds": 48.55399990081787,
+          "samples": 9,
+          "minimum_tps_1m": 19.66601076328056,
+          "observed_mean_tps": 20,
+          "observed_tps_seconds": 41.20501685142517,
+          "p95_jfr_mean_mspt": 37.112484
+        },
+        "combat": {
+          "seconds": 62.902000188827515,
+          "samples": 13,
+          "minimum_tps_1m": 19.928559640028077,
+          "observed_mean_tps": 19.995881114724185,
+          "observed_tps_seconds": 61.61268877983093,
+          "p95_jfr_mean_mspt": 44.506464
+        }
+      },
+      "action_chunk_wait_player_seconds": 278.088,
+      "longest_action_chunk_wait_seconds": 2.305
+    }
+  ],
+  "qualified_player_counts": [
+    1,
+    2,
+    4
+  ],
+  "app_samples": 0,
+  "maximum_app_seconds": null,
+  "minimum_available_gib": 19.50478744506836,
+  "elapsed_minutes": 37.081937889258064
+}

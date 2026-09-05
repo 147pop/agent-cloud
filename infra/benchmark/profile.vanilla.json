@@ -1,0 +1,46 @@
+{
+  "name": "vanilla-aternos-reference-oracle",
+  "selected_at": "2026-09-05",
+  "evidence": "evidence/vanilla-acceptance/summary.json",
+  "measurements": "evidence/vanilla-measurements.json",
+  "reference": {
+    "software": "Vanilla",
+    "version": "1.20.1",
+    "ram_label": "2400 MB",
+    "source": "https://support.aternos.org/hc/en-us/articles/12046003680157-Server-RAM",
+    "full_aternos_configuration_verified": false,
+    "heap_interpretation": "Local Java 2400M means 2400 MiB; Aternos does not publish the byte unit or heap/native split"
+  },
+  "host": "game-host",
+  "role": "game-1",
+  "architecture": "aarch64",
+  "image": "itzg/minecraft-server@sha256:310c2c5c473d93183085985394c39f7df9cfaccb0f9d35c008206e87a06f5119",
+  "minecraft_version": "1.20.1",
+  "server_jar_sha256": "3af73a9dc5a102e38147946360dd27d4d70bae7055bf91cf2151cd5d121b79e0",
+  "cpu_cores": 3,
+  "java_heap_mib": 2400,
+  "container_memory_mib": 3200,
+  "container_additional_swap_mib": 0,
+  "view_distance": 6,
+  "simulation_distance": 4,
+  "uid": 1000,
+  "gid": 1000,
+  "world_storage_soft_limit_gb": 4,
+  "world_storage_limit_enforcement_tested": false,
+  "host_reserve_cpu_cores": 1,
+  "host_reserve_memory_gib": 2,
+  "minimum_host_free_disk_gib": 20,
+  "maximum_simultaneous_minecraft_instances": 1,
+  "max_players": 4,
+  "qualification": {
+    "repetitions": 2,
+    "minimum_measured_tps_1m": 19,
+    "maximum_p95_jfr_mean_mspt": 50,
+    "qualified_player_counts": [
+      1,
+      2,
+      4
+    ],
+    "scope": "E0 synthetic local clients. Early minute windows include connection work. Apply and verify this profile in E1."
+  }
+}

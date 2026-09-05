@@ -2,6 +2,8 @@
 
 The owner requested this comparison on 2026-09-05. The target is the public Aternos example, **Vanilla 1.20.1 with 2400 MB RAM**. The earlier Paper 26.2 benchmark remains evidence for that different recipe. Its one-player qualification does not establish a capacity limit for Vanilla.
 
+The [completed Vanilla battery](evidence/vanilla-report.md) qualifies four players under the measured rule. Eight completed actions and persistence twice but failed the early one-minute TPS windows. The [selected profile](profile.vanilla.json) keeps the explicit local memory interpretation below.
+
 [Aternos' RAM documentation](https://support.aternos.org/hc/en-us/articles/12046003680157-Server-RAM), checked on 2026-09-05, assigns RAM by software and version and gives this example. It does not publish the complete CPU allocation, JVM flags, heap/native-memory split or exact byte interpretation of its MB label. Its [view-distance documentation](https://support.aternos.org/hc/en-us/articles/360032974492-View-render-distance-and-fog) explains the limits but does not give a complete version-specific recipe. This is a reproduction of the documented reference on Oracle, not a verified copy of Aternos' private host configuration.
 
 | Setting | Test value | Source |
