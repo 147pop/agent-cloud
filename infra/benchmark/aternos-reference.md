@@ -59,4 +59,4 @@ JFR reports average tick duration about once per second. Its p95 is of reported 
 
 Full JFR can contain environment variables. Keys, `.env` and world archives are excluded from the repository export.
 
-[Results](evidence/vanilla-report.md) · [Run commands](README.md)
+[Results](https://linear.app/workspace/issue/TES-56) · [Run commands](README.md)

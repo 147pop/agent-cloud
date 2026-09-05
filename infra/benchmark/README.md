@@ -1,15 +1,14 @@
-# E0 measurements
+# E0 benchmark
 
-The current [Vanilla results](evidence/vanilla-report.md) select **four players and one instance** on Oracle. Configuration and measurement definitions belong in the [Aternos reference](aternos-reference.md).
+Run instructions and evidence index. Results, decisions and pending tests are in [Linear](https://linear.app/workspace/issue/TES-24).
 
-| Need | File |
+| Record | Files |
 | --- | --- |
-| Current results | [Vanilla report](evidence/vanilla-report.md) |
-| Selected limits | [Vanilla profile](profile.vanilla.json) |
-| Earlier Oracle Paper results | [Paper report](../e0-report-2026-09-05.md) |
-| Failed shared-host attempts | [Contabo report](evidence/paper-report.md) |
-| Disk measurements | [Disk report](evidence/disk-report.md) |
-| Network and firewall measurements | [Network report](evidence/network-report.md) |
+| Vanilla on Oracle | [Settings](aternos-reference.md), [profile](profile.vanilla.json), [summary](evidence/vanilla-acceptance/summary.json), [measurements](evidence/vanilla-measurements.json) |
+| Earlier Paper on Oracle | [Profile](profile.json), [summary](evidence/oracle-acceptance/summary.json), [measurements](evidence/oracle-measurements.json) |
+| Earlier Paper on Contabo | [Two-core attempt](evidence/acceptance3/summary.json), [three-core attempt](evidence/profile3cpu/summary.json), [measurements](evidence/paper-measurements.json) |
+| Disk | [Contabo](evidence/disk-20260905.json), [Oracle](evidence/disk-oracle-20260905.json), [results](https://linear.app/workspace/issue/TES-51) |
+| Network | [Accepted attempt](evidence/network-paced-20260905/summary.json), [earlier attempt](evidence/network-20260905/summary.json), [measurements](evidence/network-measurements.json), [results](https://linear.app/workspace/issue/TES-52) |
 
 ## Prepare the host
 
@@ -37,8 +36,11 @@ From the repository benchmark directory:
 
 ```sh
 python3 summarize.py evidence/vanilla-acceptance
+python3 summarize.py evidence/oracle-acceptance
 python3 summarize.py --self-test
 ```
+
+Verify exported files with `shasum -a 256 -c SHA256SUMS` from the corresponding acceptance evidence directory.
 
 Existing labels are rejected. Every label owns fresh data and evidence directories with source hashes, `summary.json`, metrics, player events and server logs.
 
@@ -69,13 +71,40 @@ On Contabo, cleanup restores the original Paper container and checks protected c
 
 A completed run requires actions, marker recovery and cleanup. Performance qualification also requires both repetitions to meet TPS and tick-time thresholds. See the [Vanilla definitions](aternos-reference.md); Paper uses minimum sampled one-minute TPS >=19 and p95 sampled five-second mean tick time <=50 ms.
 
-## Disk and network tools
+## Disk
 
-| Tool | Use |
-| --- | --- |
-| `disk.py` | Temporary 256 MiB direct synchronous I/O test; see [commands and pacing](evidence/disk-report.md) |
-| `network.py` | Both transfer directions, pings and MTU probes; see [setup and cleanup](evidence/network-report.md) |
-| `firewall.py` | Temporary listeners and positive-local/negative-external probes |
+`disk.py` uses a temporary 256 MiB file and direct synchronous I/O, one outstanding operation at a time. Each of four phases performs 256 operations. Sequential operations use 1 MiB and a 20 ms pause; random operations use 4 KiB and a 10 ms pause. Throughput includes pauses and does not measure maximum disk capacity. The script removes its test file without dropping caches or writing to raw devices.
+
+Run from the benchmark directory with a new output name:
+
+```sh
+# Contabo
+ionice -c3 nice -n 19 python3 disk.py evidence/disk-new.json
+# Oracle, no protected application probe
+sudo ionice -c3 nice -n 19 python3 disk.py evidence/disk-new.json --host oracle
+```
+
+## Network
+
+Network tests need temporary Oracle TCP/UDP 5201 and ICMP access restricted to Contabo. Start `iperf3 -4 -s --server-bitrate-limit 60M` on Oracle. From Contabo, run:
+
+```sh
+python3 network.py 203.0.113.11 evidence/NEW_LABEL
+```
+
+The script tests both transfer directions for 20 seconds, targeting 50 Mbit/s TCP and 5 Mbit/s UDP with 1200-byte datagrams. It uses application and Linux socket pacing. These rates do not measure maximum link capacity. Keep the 60 Mbit/s server guard.
+
+Run the reverse ICMP probes from Oracle:
+
+```sh
+ping -4 -n -D -i 0.2 -c 100 -W 2 203.0.113.12
+ping -4 -n -M do -s 1472 -c 3 -W 2 203.0.113.12
+ping -4 -n -M do -s 1473 -c 3 -W 2 203.0.113.12
+```
+
+The last probe is expected to fail on the measured path. Retain its error text. Stop iperf and remove temporary ingress from the OCI NSG, runtime firewall and persistent rules afterward. Verify fresh SSH access. See the [Iperf manual](https://software.es.net/iperf/invoking.html) for pacing and reverse mode.
+
+### Firewall probes
 
 Firewall listeners use TCP 2379, 2380, 6443, 10250 and UDP 8472, 51820, 51821. They expire after 120 seconds and do not change rules.
 
@@ -89,8 +118,6 @@ While listeners are active, probe from an external machine, then repeat the loca
 ```sh
 python3 firewall.py probe --host PUBLIC_IP --expect blocked
 ```
-
-Network tests need temporary Oracle TCP/UDP 5201 and ICMP access restricted to Contabo. TCP targets 50 Mbit/s, UDP 5 Mbit/s; use application and Linux socket pacing. Stop iperf and remove temporary ingress afterward.
 
 ## Dependencies
 
