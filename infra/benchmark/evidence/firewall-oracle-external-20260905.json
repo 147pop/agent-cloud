@@ -1,0 +1,55 @@
+{
+  "observed_at": 1788615582.401686,
+  "expect": "blocked",
+  "results": [
+    {
+      "host": "203.0.113.11",
+      "protocol": "tcp",
+      "port": 2379,
+      "reachable": false,
+      "error": "timed out"
+    },
+    {
+      "host": "203.0.113.11",
+      "protocol": "tcp",
+      "port": 2380,
+      "reachable": false,
+      "error": "timed out"
+    },
+    {
+      "host": "203.0.113.11",
+      "protocol": "tcp",
+      "port": 6443,
+      "reachable": false,
+      "error": "timed out"
+    },
+    {
+      "host": "203.0.113.11",
+      "protocol": "tcp",
+      "port": 10250,
+      "reachable": false,
+      "error": "timed out"
+    },
+    {
+      "host": "203.0.113.11",
+      "protocol": "udp",
+      "port": 8472,
+      "reachable": false,
+      "error": "timed out"
+    },
+    {
+      "host": "203.0.113.11",
+      "protocol": "udp",
+      "port": 51820,
+      "reachable": false,
+      "error": "timed out"
+    },
+    {
+      "host": "203.0.113.11",
+      "protocol": "udp",
+      "port": 51821,
+      "reachable": false,
+      "error": "timed out"
+    }
+  ]
+}

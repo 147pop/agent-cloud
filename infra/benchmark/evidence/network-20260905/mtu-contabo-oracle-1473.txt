@@ -1,0 +1,8 @@
+PING 203.0.113.11 (203.0.113.11) 1473(1501) bytes of data.
+ping: local error: message too long, mtu=1500
+ping: local error: message too long, mtu=1500
+ping: local error: message too long, mtu=1500
+
+--- 203.0.113.11 ping statistics ---
+3 packets transmitted, 0 received, +3 errors, 100% packet loss, time 2062ms
+

@@ -1,0 +1,8 @@
+PING 203.0.113.11 (203.0.113.11) 1472(1500) bytes of data.
+1480 bytes from 203.0.113.11: icmp_seq=1 ttl=57 time=194 ms
+1480 bytes from 203.0.113.11: icmp_seq=2 ttl=57 time=194 ms
+1480 bytes from 203.0.113.11: icmp_seq=3 ttl=57 time=194 ms
+
+--- 203.0.113.11 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 193.595/193.735/193.995/0.183 ms

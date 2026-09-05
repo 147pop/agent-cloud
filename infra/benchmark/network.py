@@ -50,7 +50,7 @@ def main():
         for protocol, rate in [('tcp', '50M'), ('udp', '5M')]:
             for reverse in (False, True):
                 direction = 'oracle-contabo' if reverse else 'contabo-oracle'
-                command = ['iperf3', '-4', '-c', peer, '-t', '20', '-b', rate, '-J', '--get-server-output', '--connect-timeout', '5000']
+                command = ['iperf3', '-4', '-c', peer, '-t', '20', '-b', rate, '--fq-rate', rate, '-J', '--get-server-output', '--connect-timeout', '5000']
                 if protocol == 'udp':
                     command += ['-u', '-l', '1200']
                 if reverse:

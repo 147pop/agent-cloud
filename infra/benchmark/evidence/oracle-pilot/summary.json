@@ -1,0 +1,65 @@
+{
+  "label": "oracle-pilot",
+  "started_at": 1788616493.2235734,
+  "parameters": {
+    "label": "oracle-pilot",
+    "host": "oracle",
+    "players": [
+      8
+    ],
+    "seconds": 10,
+    "repeats": 1
+  },
+  "host": "game-host",
+  "original_before": null,
+  "protected_before": {},
+  "cases": [
+    {
+      "name": "r1-n8",
+      "players": 8,
+      "repeat": 1,
+      "started_at": 1788616493.224781,
+      "cold_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "cold_ready_seconds": 46.80121722900003,
+      "recipe_sha256": {
+        "paper-26.2-121.jar": "0de30efb024bc8b83c9c7d507d11802897ad8056b6110ec09fe1a91d126ccb54",
+        "bukkit.yml": "a72396bbd1b69636b63f990995ed1ce31df7183af275868b4d638071fd4c866a",
+        "spigot.yml": "85d3a58f6b2e2e6dc211ff1a298374de837bf5558776ed9712ff3d2cecf1a11e",
+        "config/paper-global.yml": "0b0262adc6772889460fd62ccbfa73aa8d088a39cd865f3aedc499615a294ff9",
+        "config/paper-world-defaults.yml": "abf93aa72a8498289b81a563f5aef57b684198efb85973f26757ab6353b4acfe"
+      },
+      "properties": {
+        "level-seed": "20260904",
+        "max-players": "8",
+        "view-distance": "6",
+        "simulation-distance": "4",
+        "online-mode": "false",
+        "gamemode": "creative",
+        "difficulty": "easy",
+        "allow-flight": "true"
+      },
+      "world_bytes_before": 6618404,
+      "marker_create": "Changed the block at 0, 201, 0",
+      "save_response": "Saving the game (this may take a moment!)Saved the game",
+      "save_seconds": 5.527108419999877,
+      "world_bytes_after": 32851066,
+      "heap_after_players": "Connected to remote JVM\nJVM response code = 0\ngarbage-first heap   total reserved 4194304K, committed 4194304K, used 1273009K [0x0000000700000000, 0x0000000800000000)\n region size 2048K, 261 young (534528K), 70 survivors (143360K)\n\n",
+      "stop_seconds": 3.6285066820000793,
+      "warm_status": "127.0.0.1:25565 : version=Paper 26.2 online=0 max=8 motd='A Minecraft Server'",
+      "warm_ready_seconds": 26.426057957000012,
+      "marker_restore": "Test passed"
+    }
+  ],
+  "app_baseline_seconds": [],
+  "source_sha256": {
+    "run.py": "66a9c7a8da78c355a70dcbe472827ce2d72f9d02fa4523de6e25f0db5b16009d",
+    "players.js": "409269a8d00988e64b8ed797df670201752f2bd084f7a9dcfc583590c3e57ca8",
+    "compose.yml": "a9f7443f731a63b563c35024b67b8fbe863a7165de694abf9e963a2b3885aabf",
+    "package-lock.json": "1d92a61a92ea73b0a8936f4b0fde9a999cdad6ba5d711de7dd839657c47d4744"
+  },
+  "scenarios_complete": true,
+  "protected_after": {},
+  "finished_at": 1788616735.503543,
+  "guard_failures": [],
+  "complete": true
+}
