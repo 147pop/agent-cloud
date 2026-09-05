@@ -1,6 +1,6 @@
 # Aternos reference and test settings
 
-The requested reference is **Vanilla 1.20.1 with 2400 MB RAM**. Aternos publishes that example, but not its full CPU/JVM configuration.
+This historical experiment used Aternos' published example of Vanilla 1.20.1 with 2400 MB RAM. Aternos does not publish its full CPU/JVM configuration.
 
 | Aternos publishes | Our local interpretation |
 | --- | --- |
@@ -25,7 +25,7 @@ Sources checked on 2026-09-05: [Aternos RAM](https://support.aternos.org/hc/en-u
 | Test admission ceiling | 8 players |
 | Clients | Offline operator bots, creative flight, loopback listener |
 
-CPU, distances, seed and client setup are local choices. The [selected profile](profile.vanilla.json) admits four players; the test ceiling stays at eight for reproduction.
+CPU, distances, seed and client setup are local choices. The [historical profile](profile.vanilla.json) records four qualified bots under this test's rules. It is not a user-facing offer. The test ceiling stays at eight for reproduction.
 
 The [Compose override](compose.vanilla.yml) pins the runtime. Mojang's [1.20.1 metadata](https://piston-meta.mojang.com/v1/packages/19f5ae58f9c31bd3b0923cb822e99e3162bd62ab/1.20.1.json) requires Java 17 and links the [server JAR](https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar).
 
@@ -59,4 +59,4 @@ JFR reports average tick duration about once per second. Its p95 is of reported 
 
 Full JFR can contain environment variables. Keys, `.env` and world archives are excluded from the repository export.
 
-[Results](https://linear.app/workspace/issue/TES-56) · [Run commands](README.md)
+[Results and run commands](README.md) · [Recorded result in Linear](https://linear.app/workspace/issue/TES-56)

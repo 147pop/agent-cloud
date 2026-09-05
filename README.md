@@ -1,24 +1,39 @@
 # Cloud
 
-Minecraft Java hosting, closed beta preparation.
+Cloud is a project for hosting game servers and curated applications on managed infrastructure. **Host** covers games. **Deploy** covers applications. The first delivery is a free Minecraft Java beta, with persistent worlds and a server configuration chosen for efficient use of shared hosts.
 
-Start with [E0 in Linear](https://linear.app/workspace/issue/TES-8) for results and pending work. [TES-24](https://linear.app/workspace/issue/TES-24) tracks the server-software comparison; [TES-56](https://linear.app/workspace/issue/TES-56) records the tested player limit.
+The project is in pre-beta development. This repository contains runnable benchmark tools, candidate Minecraft recipes, measurements and product prototypes. The account service, queue, MCP API and managed Kubernetes deployment are still planned.
 
-## Repository
+## Start here
 
-| Directory | Contents |
+| Read | Find |
 | --- | --- |
-| [infra/inventory](infra/inventory/README.md) | SSH instructions and dated host records |
-| [infra/benchmark](infra/benchmark/README.md) | Test commands, pinned recipes, profiles and raw evidence |
-| [infra/paper](infra/paper/) | Original Paper Compose recipe |
-| [analysis](analysis/) | Earlier product and technical planning |
-| [technical](technical/) | Earlier technical reference material |
-| [landing](landing/) | Landing-page prototype |
+| [Architecture](docs/architecture.md) | How the first managed service is intended to work |
+| [Decisions](docs/decisions.md) | Chosen directions, replaced assumptions and open decisions |
+| [Catalog](catalog/README.md) | Recipes, tested profiles and the requirements for offering them |
+| [Minecraft benchmarks](benchmarks/minecraft/README.md) | Recorded results, their limits and reproduction instructions |
+| [Infrastructure](infra/README.md) | Reusable infrastructure material and operator records |
+| [Contributing](CONTRIBUTING.md) | Local checks, changes and evidence for review |
 
-The planning and prototype directories predate E0. They do not describe a deployed Cloud service.
+## Delivery plan
 
-## Where updates belong
+| Delivery | Required result |
+| --- | --- |
+| [Free Minecraft beta](https://linear.app/workspace/project/cloud-free-minecraft-beta-b8f51ce201e3) | Choose an efficient profile, preserve worlds, complete the request-to-play flow, control admission, and demonstrate recovery with invited users |
+| [Paid game catalog](https://linear.app/workspace/project/cloud-paid-game-catalog-7f20b95b4b7f) | Qualify more engines, configurations and games; measure cost and introduce billing against those profiles |
+| [Curated application hosting](https://linear.app/workspace/project/cloud-curated-application-hosting-fdd65aa7ca8c) | Qualify applications for their own persistence, networking, availability and recovery needs |
+| [Code publication](https://linear.app/workspace/project/cloud-public-source-release-02a68856fb69) | Publish a licensed repository with reproducible development instructions, contribution history and a private security reporting channel |
 
-Keep executable configuration, operational instructions and measurement files here. Keep conclusions, decisions, task status and next steps in [Linear](https://linear.app/workspace/issue/TES-8), linking the evidence used. Do not copy a results report into both places.
+The free offer prioritizes a familiar playing experience at low resource cost. Optimized server software is allowed when its gameplay differences are documented. Official Vanilla is planned as a later paid option. The [recorded benchmarks](benchmarks/minecraft/README.md) are references; they have not qualified an offer for shared hosting.
 
-Private keys, environment files and world archives stay outside Git.
+Deploy starts with applications maintained in the catalog. Arbitrary user images and repositories need a later isolation design. Agent hosting, previously called Continue, is outside the current scope.
+
+## Project records
+
+GitHub holds the design, runnable configuration and published evidence. [Linear](https://linear.app/workspace/document/cloud-organization-and-catalog-plan-c0e6db580d08) holds delivery planning, responsibility and work in progress. A public result must remain understandable without Linear access.
+
+Git history preserves earlier designs. The [landing](prototypes/landing/index.html) and [technical brief](prototypes/technical-brief/index.html) are historical prototypes.
+
+Cloud is a project by Pablo Cardozo and Agustín Pedernera. The [Git history](https://github.com/pjcdz/cloud/graphs/contributors) records code contributions. The plan is to publish the code first and support installation by third parties later. License selection remains open; this repository does not yet contain an open source license.
+
+For security concerns, read [SECURITY.md](SECURITY.md).
