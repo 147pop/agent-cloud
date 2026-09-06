@@ -6,7 +6,7 @@ This is the selected design for Cloud's first managed service. It describes work
 
 Host runs game servers. Deploy will run a curated application catalog. Both need accounts, permissions, resource admission, persistent data and an activity record. They do not necessarily need the same runtime or stopping policy.
 
-Minecraft Java is the first Host workload. Its free offer will use an optimized configuration selected for playing quality and the number of concurrent servers a host can sustain. Paid variants and other games follow their own qualification. Deploy starts with maintained application recipes; arbitrary user code remains a later stage. Continue, the agent-hosting product explored in earlier documents, is excluded.
+Minecraft Java is the first Host workload. Its selected free profile is Paper 26.2 build 121, accepted for E1 with one active instance and two players on the tested Oracle A1 host. The [profile and evidence](../benchmarks/minecraft/free-profile-results.md) record the resources, bot activities and local recovery checks. Paid variants and other games follow their own qualification. Deploy starts with maintained application recipes; arbitrary user code remains a later stage. Continue, the agent-hosting product explored in earlier documents, is excluded.
 
 The [catalog](../catalog/README.md) separates the product, its executable recipe, the tested resource profile, the evidence and the commercial offer. A recipe describes how to run a workload. A profile identifies exactly what was tested. An offer applies access, limits and pricing to a qualified profile. Adding an offer does not make an untested configuration supported.
 
@@ -37,7 +37,7 @@ The first topology has two roles:
 
 Games stay off the control host. A temporary second game worker is required for the recovery exercise. Two hosts alone cannot prove recovery after losing the only game worker.
 
-The HTTP path and game traffic have different requirements. The Worker and Tunnel design covers the control API. [Cloudflare's proxy documentation](https://developers.cloudflare.com/fundamentals/reference/network-ports/) distinguishes its HTTP ports from other TCP services, which is why game traffic uses a separate Spectrum application: a TCP application bound to the game DNS hostname, origin port 25565, proxying to the active worker's Minecraft port. The worker's own IP is not published; only Cloudflare's anycast IP is (see [D5](decisions.md#d5-public-game-tcp-and-worker-ip-exposure--resolved-2026-09-06)). Validating this path from a real external client requires an E1 worker to act as the origin and remains open.
+The diagram shows the intended public path. The Worker and Tunnel design covers the control API. [Cloudflare's proxy documentation](https://developers.cloudflare.com/fundamentals/reference/network-ports/) distinguishes its HTTP ports from other TCP services. Public Minecraft traffic will use a separate Spectrum application connected to the active worker's game port. [D5](decisions.md#d5-public-game-tcp-and-worker-ip-exposure-updated-2026-09-06) places Spectrum implementation and authenticated external-client validation after the functional invited beta, before public opening. E1 through E5 can use a controlled test path with its actual exposure recorded. Stable game addresses and HTTP protection remain part of E2.
 
 If `control-1` fails, existing games can continue on healthy workers. New operations, queue processing and AutoStop wait for control recovery. This is the intended beta availability limit, subject to a restore drill.
 
@@ -102,6 +102,6 @@ Local PVC capacity requests are not a substitute for an enforced filesystem quot
 
 Each [qualification](../catalog/README.md) identifies software versions, image digest, CPU architecture, host class, memory, CPU limits, disk, configuration and workload. It tests real actions and persistence as well as process health. A software version, loader or modpack can change both compatibility and cost.
 
-Minecraft qualification compares candidates under equal conditions, then measures several simultaneous instances with host overhead and spare capacity. TPS alone does not establish playing quality. Chunk waits, disconnects, action delays and a human play session belong in the evidence. The [historical Minecraft results](../benchmarks/minecraft/README.md) do not establish shared-host density or select the free offer.
+Minecraft qualification compares candidates under equal conditions, then measures simultaneous instances with host overhead and spare capacity. TPS, chunk waits, disconnects, action delays and recovery each provide separate evidence. The owner accepted the repeated bot workload for E1 profile selection on 2026-09-06. Human play and the Spectrum route remain public-opening checks. The [results](../benchmarks/minecraft/free-profile-results.md) preserve the failed two-instance level and distinguish profile acceptance from a working managed service.
 
 Code publication comes before support for installation by other operators. This document covers the planned managed deployment.

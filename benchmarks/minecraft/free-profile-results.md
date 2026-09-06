@@ -1,6 +1,8 @@
 # Free-profile results
 
-Status: `Experimental`. [TES-140](https://linear.app/workspace/issue/TES-140) requires the controlled comparison, concurrent instances, persistence and external human play. The public player route and human session remain pending. The [method](free-profile.md), [pinned profile](free-profile.json) and [retained attempts](evidence/free/README.md) define the evidence boundary.
+Status: `Qualified` for E1, accepted by Pablo on 2026-09-06. The selected profile is Paper 26.2 build 121, one active instance with two players on the tested Oracle A1 host. Pablo accepted the repeated bot activity and local recovery evidence for [TES-144](https://linear.app/workspace/issue/TES-144) and [TES-140](https://linear.app/workspace/issue/TES-140). This replaces the earlier requirement for a human session before selecting the profile.
+
+The accepted recipe uses two CPU quota units, a 2 GiB heap, a 3 GiB container limit, `ActiveProcessorCount=2`, view distance 6, simulation distance 4 and seed 20260904. It adds no gameplay plugins. The [method](free-profile.md), [pinned profile](free-profile.json) and [retained attempts](evidence/free/README.md) define the tested conditions. K3s lifecycle acceptance remains separate. Authenticated external play and Cloudflare Spectrum are untested; Spectrum implementation and route validation move to the final gate before public opening in [TES-18](https://linear.app/workspace/issue/TES-18).
 
 ## Controlled comparison
 
@@ -52,7 +54,24 @@ The [operator stop record](evidence/free/density-paper-2/operator-stop.json) pre
 
 Peak game-container memory summed to 5552 MiB, peak observed host busy CPU was 3.93 cores, and minimum available host memory was 17.37 GiB. Samples captured another instance starting during play, a save during play and a background save while another instance was playing. No memory or disk safety reserve was crossed.
 
-The [profile](free-profile.json) records Paper as the candidate and one instance with two players as the repeated synthetic result. The qualified player and instance fields remain unset until external acceptance. C2ME remains untested; the two-instance failure concerned a control response during a save.
+The [profile](free-profile.json) records the accepted E1 limit of one instance with two players and identifies its synthetic evidence. Two instances remain a failed level. C2ME remains untested; the two-instance failure concerned a control response during a save.
+
+## TPS by player activity
+
+These values come from the passing `density-paper-1` run, with two active bots in each world. Each bot flew 960 blocks out and 960 blocks back at height 300, in parallel lanes 256 blocks apart. Server responses confirmed both endpoints. Both bots fought mobs, then dug, placed a block and walked 12.7 to 12.9 blocks in Survival. Every completed scenario recorded at least 113 attributed combat hits per bot. The clients were active throughout the exploration and combat phases.
+
+| World | Activity | Minimum minute TPS, repetition 1 | Minimum minute TPS, repetition 2 |
+| --- | --- | --- | --- |
+| Fresh | New terrain | 19.39 | 19.32 |
+| Fresh | Return over loaded terrain | 19.99 | 19.99 |
+| Fresh | Combat | 19.99 | 19.99 |
+| Restored and populated | Outward route | 19.17 | 19.18 |
+| Restored and populated | Return route | 19.99 | 19.99 |
+| Restored and populated | Combat | 19.99 | 19.99 |
+
+The populated world reuses the saved routes and adds 32 persistent entities and 16 hoppers. Its outward trip is not a second fresh-terrain test. Survival checks lasted about 5.5 seconds, so they have no separate one-minute TPS result. Four or eight players in one instance were not tested with this recipe.
+
+The table uses native gametime deltas from [metrics.jsonl](evidence/free/density-paper-1/metrics.jsonl) and phase boundaries from the four `r*-i1-*-players.jsonl` files in [the same run](evidence/free/density-paper-1/). Select each case, world stage and activity by its query midpoint timestamp, then use [tick_windows](summarize.py) on those samples. Each window must fit entirely inside the activity. The retained windows span 61.26 to 62.01 seconds, with 6 to 8 windows per route and 12 per combat phase. TPS is capped at 20 and rounded only for display. The raw files and their checksums are unchanged.
 
 ## Provenance and recovery
 
@@ -62,4 +81,4 @@ Fabric generates a small launcher JAR at startup. Its two repetitions produced d
 
 Every formal attempt archives its runtime sources and records their SHA-256 values. The derived measurements identify the reporting code separately. Export checksums cover the retained logs, metrics, configuration, source archives and generated launcher snapshots. World files and backup archives remain on the authorized host.
 
-The recovery checks cover a local clean backup and restoration of these generated worlds. They do not close the platform's future R2 storage or recovery on another worker. Ordinary play, client authentication and the proposed Internet route belong to [TES-144](https://linear.app/workspace/issue/TES-144).
+The recovery checks cover a local clean backup and restoration of these generated worlds. They do not close the platform's future R2 storage or recovery on another worker. The owner accepted this bounded bot workload for profile selection. Long human sessions, technical farms, client authentication and the Internet route remain outside the measured result. External connection, play and reconnect through Spectrum must be recorded before public opening in [TES-18](https://linear.app/workspace/issue/TES-18).

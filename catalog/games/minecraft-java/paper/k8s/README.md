@@ -1,16 +1,15 @@
-# E1: Paper on K3s as Spectrum origin
+# E1, Paper on K3s
 
-Operator runbook for the qualified `paper-e0-oracle` profile ([profile.json](../../../../benchmarks/minecraft/profile.json))
-running as a K3s Deployment + PVC, reachable through Cloudflare Spectrum. Companion to the
-Compose recipes in this catalog entry, which stay for local dev/smoke testing — this is the
-real-host path.
+Operator runbook for the accepted [free Paper profile](../../../../../benchmarks/minecraft/free-profile.json), running as a K3s Deployment with a retained PVC. The resource names retain `paper-e0-oracle`; the game settings now match the accepted 26.2 build 121 profile with two players, two CPU quota units, a 2 GiB heap and a 3 GiB container limit.
+
+The benchmark used Docker with CPU affinity, loopback clients, offline operator identities and private RCON. This manifest uses Kubernetes scheduling and disables RCON. E1 must validate the deployed limits and lifecycle; accepting the benchmark does not prove those Kubernetes checks. Spectrum is a final public-opening gate and is not a prerequisite for this runbook.
 
 ## Prerequisites (not done by this runbook)
 
-- K3s installed on `control-1` (server) and `game-1` (agent), via [../../../../infra/k3s/](../../../../infra/k3s/).
+- K3s installed on `control-1` (server) and `game-1` (agent), via [the installer](../../../../../infra/k3s/).
 - `game-1` labeled to match `nodeSelector` in [deployment.yaml](deployment.yaml)
   (`cloud.example/role: game` — update both if the operator picks a different label).
-- Cloudflare Spectrum application created, origin pointed at `game-1`'s host IP, port 25565.
+- A controlled operator or test-player connection to the Minecraft port. Record the path used for the lifecycle checks.
 
 ## Apply order
 
@@ -53,7 +52,7 @@ The scenarios below exercise interrupted stops and replacement to confirm these 
 | 3 | Immediate scale race | `--replicas=0` then `--replicas=1` back-to-back, no wait | Replacement forced to the same node (PVC affinity); if the old process hasn't released the lock, the new container fails to acquire it and CrashLoopBackOffs — must not write |
 | 4 | Forced delete | `kubectl delete pod <pod> -n cloud-minecraft-paper --grace-period=0 --force` | Replacement still can't dual-write (`session.lock` backstop) |
 | 5 | Delete mid-startup | Delete the Pod before the world fully loads | Clean replacement once the prior Pod is confirmed gone |
-| 6 | Node-loss/recovery drill | Isolate `game-1`; restore latest R2 backup onto a new PVC on a temporary second worker | Exercises the recovery flow in [architecture.md](../../../../docs/architecture.md) (the D8 exercise) |
+| 6 | Node-loss/recovery drill | Isolate `game-1`; restore latest R2 backup onto a new PVC on a temporary second worker | Exercises the recovery flow in [architecture.md](../../../../../docs/architecture.md) (the D8 exercise) |
 
 ## Verification per scenario
 
@@ -67,8 +66,4 @@ The scenarios below exercise interrupted stops and replacement to confirm these 
 
 ## Out of scope here
 
-Bootstrapping K3s, labeling `game-1`, applying these manifests, creating the Spectrum origin
-binding, and running the six scenarios against real hosts all need operator hands-on access and
-happen outside this repo change. Once evidence exists, update
-[architecture.md](../../../../docs/architecture.md) and
-[decisions.md](../../../../docs/decisions.md) (D5) per their pending-validation notes.
+Applying these manifests and running the lifecycle scenarios require evidence from the authorized hosts. Record that evidence in the E1 tasks. [TES-18](https://linear.app/workspace/issue/TES-18) tracks Spectrum configuration, authenticated external play and reconnect after the functional invited beta, before public opening. See [the decision](../../../../../docs/decisions.md#d5-public-game-tcp-and-worker-ip-exposure-updated-2026-09-06).

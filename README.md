@@ -24,7 +24,7 @@ The project is in pre-beta development. This repository contains runnable benchm
 | [Curated application hosting](https://linear.app/workspace/project/cloud-curated-application-hosting-fdd65aa7ca8c) | Qualify applications for their own persistence, networking, availability and recovery needs |
 | [Code publication](https://linear.app/workspace/project/cloud-public-source-release-02a68856fb69) | Publish a licensed repository with reproducible development instructions, contribution history and a private security reporting channel |
 
-The free offer prioritizes a familiar playing experience at low resource cost. Optimized server software is allowed when its gameplay differences are documented. Official Vanilla is planned as a later paid option. The [recorded benchmarks](benchmarks/minecraft/README.md) are references; they have not qualified an offer for shared hosting.
+The free profile uses Paper 26.2 build 121 with two CPU quota units, a 2 GiB heap and a 3 GiB container limit. The owner accepted the [repeated two-player bot and recovery results](benchmarks/minecraft/free-profile-results.md) for E1, with one active instance on the tested Oracle A1 host. Platform lifecycle and recovery still need their own acceptance. Cloudflare Spectrum and authenticated external play are final checks before opening the product publicly. Official Vanilla is planned as a later paid option.
 
 Deploy starts with applications maintained in the catalog. Arbitrary user images and repositories need a later isolation design. Agent hosting, previously called Continue, is outside the current scope.
 
