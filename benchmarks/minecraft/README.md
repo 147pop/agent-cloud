@@ -41,7 +41,7 @@ Profiles and raw files retain their original names and historical decisions. The
 
 The free tier prioritizes acceptable simultaneous sessions per host. Optimized engines are candidates; the historical Vanilla profile does not select the default.
 
-Before comparing candidates, freeze one Minecraft version, hardware, CPU and memory limits, distances, world seed, client workload and measurement method. Start with Paper and Purpur. Evaluate another server or server-side optimization only when it answers a stated compatibility or performance need. Record gameplay differences and required client changes.
+The [public research and fixed comparison](free-profile.md) narrow the candidates to Paper and Fabric with Lithium and FerriteCore. C2ME is the only conditional variant, for a measured generation bottleneck. The plan pins one Minecraft and Java version, hardware, CPU and memory limits, distances, seed, client workload and measurement method. Record gameplay differences and required client changes.
 
 Qualification still needs these tests:
 

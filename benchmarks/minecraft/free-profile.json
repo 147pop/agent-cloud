@@ -1,0 +1,56 @@
+{
+  "status": "Experimental",
+  "recorded_at": "2026-09-06",
+  "minecraft_version": "26.2",
+  "java_version": "Temurin 25.0.4+7-LTS",
+  "image": "itzg/minecraft-server@sha256:efa878ddb49cf5251b2e5f2ad71b08fd2f7236c1f7907433f6697258b31d2ce4",
+  "paper_build": 121,
+  "fabric_loader": "0.19.5",
+  "fabric_launcher": "1.1.2",
+  "cpu_limit": 2,
+  "game_cpu_set": "0-2",
+  "client_cpu_set": "3",
+  "java_heap_mib": 2048,
+  "container_memory_mib": 3072,
+  "swap_mib": 0,
+  "view_distance": 6,
+  "simulation_distance": 4,
+  "seed": "20260904",
+  "host_min_available_gib": 2,
+  "host_min_free_disk_gib": 20,
+  "world_soft_limit_gb": 4,
+  "thresholds": {
+    "minimum_tps_60s": 19,
+    "maximum_sampled_p95_tick_ms": 50,
+    "maximum_sampled_p99_tick_ms": 1000,
+    "p95_chunk_wait_seconds": 2,
+    "maximum_chunk_wait_seconds": 10,
+    "p95_command_seconds": 0.5,
+    "maximum_command_seconds": 2,
+    "maximum_ready_seconds": 180
+  },
+  "mods": {
+    "lithium": {
+      "version": "0.25.3+mc26.2",
+      "modrinth_id": "f7vZ0VWU",
+      "filename": "lithium-fabric-0.25.3+mc26.2.jar",
+      "sha512": "148b638f3c6229fbaf487120a2344a0af5e411a5aa6533d5db9d75da0a8c0d8304f63eb4cca13f4d03b2c9b4c23d559dd74c1d832422ef8a3087bd005e62a8bd"
+    },
+    "ferrite-core": {
+      "version": "9.0.0-fabric",
+      "modrinth_id": "d5ddUdiB",
+      "filename": "ferritecore-9.0.0-fabric.jar",
+      "sha512": "d81fa97e11784c19d42f89c2f433831d007603dd7193cee45fa177e4a6a9c52b384b198586e04a0f7f63cd996fed713322578bde9a8db57e1188854ae5cbe584"
+    },
+    "c2me-fabric": {
+      "version": "0.4.2-alpha.0.43+26.2",
+      "modrinth_id": "jSMMstCy",
+      "filename": "c2me-fabric-mc26.2-0.4.2-alpha.0.43.jar",
+      "sha512": "c9c9c9babe4d94e06abf72c92e453aaa39c82634a7ae646d1041f673e12eff3d99e77e205a686ea53d0a5ae143e9e1e6ed595b3ccfcaeafe64cbfb6327e2f375"
+    }
+  },
+  "selected_engine": null,
+  "qualified_players_per_instance": null,
+  "qualified_concurrent_instances": null,
+  "external_human_play": "pending"
+}
