@@ -1,6 +1,6 @@
 # Contributing
 
-Cloud is in pre-beta development. Start with the [repository overview](README.md), [architecture](docs/architecture.md) and [catalog requirements](catalog/README.md). The current executable work is the benchmark tooling and Minecraft recipes. There is no complete platform installer yet.
+Cloud is in pre-beta development. Start with the [repository overview](README.md), [architecture](docs/architecture.md) and [catalog requirements](catalog/README.md). The current executable work is the benchmark tooling and Minecraft recipes. The next delivery is a complete local product; the root application and one-command development stack do not exist yet.
 
 ## Choose a change
 
@@ -10,7 +10,7 @@ A change should name the result it produces and the evidence that will demonstra
 
 ## Work locally
 
-Create a branch from the current `main`. Preserve other contributors' commits and unfinished work. Follow the commands in the component README rather than assuming a shared VPS or local credential is available.
+Create a branch from the current `main`. Preserve other contributors' commits and unfinished work. Follow the commands in the component README rather than assuming a shared VPS or private credential is available. New product work must remain runnable without Cloudflare, R2 or maintainer infrastructure unless the change explicitly belongs to the managed-service adapter.
 
 The benchmark summary includes a local check that does not contact a host:
 
@@ -21,6 +21,8 @@ python3 benchmarks/minecraft/summarize.py --self-test
 For actual Minecraft runs, use the [benchmark guide](benchmarks/minecraft/README.md). Provisioning, network probes and load tests require an explicitly selected test environment. A parser check cannot establish a server's playing quality or capacity.
 
 There is no root application build to run. Documentation changes need working links and instructions checked against the files they describe. Runtime changes need the smallest check that fails when the intended behavior breaks.
+
+The planned local stack uses `docker compose up --build`, loopback-only ports and a containerized `cloud-control` with read-write access to `/var/run/docker.sock`. Treat that mount as control of the local Docker Engine. `CLOUD_DEV_TOKEN` is a development identity only; managed configuration must reject its default value.
 
 ## Submit evidence with the change
 
@@ -34,6 +36,6 @@ Preserve commit authorship when integrating work. Describe contributions in the 
 
 ## Code publication
 
-The repository is licensed under [MIT](LICENSE). The maintainers must still review third-party code and assets, and sanitize operational identifiers retained in Git history, before flipping the repository to public. Third-party installation and a supported deployment release are separate later work.
+The repository is licensed under [MIT](LICENSE). The maintainers must still complete clean-clone local acceptance, review third-party code and assets, and sanitize operational identifiers retained in Git history before flipping the repository to public. Production installation on third-party infrastructure and a supported managed deployment are separate later work.
 
 Follow [SECURITY.md](SECURITY.md) for sensitive reports.

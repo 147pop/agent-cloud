@@ -1,6 +1,6 @@
 # Architecture
 
-This is the selected design for Cloud's first managed service. It describes work to implement and verify. The [repository overview](../README.md) distinguishes the available tools and evidence from the planned service; [decisions](decisions.md) records changes to the design.
+This is the selected design for Cloud's local product and the managed service built from it. It describes work to implement and verify. The [repository overview](../README.md) distinguishes the available tools and evidence from the planned product; [decisions](decisions.md) records changes to the design.
 
 ## Product boundaries
 
@@ -10,7 +10,26 @@ Minecraft Java is the first Host workload. Its selected free profile is Paper 26
 
 The [catalog](../catalog/README.md) separates the product, its executable recipe, the tested resource profile, the evidence and the commercial offer. A recipe describes how to run a workload. A profile identifies exactly what was tested. An offer applies access, limits and pricing to a qualified profile. Adding an offer does not make an untested configuration supported.
 
-## First managed path
+## Delivery sequence and shared core
+
+The first product gate is local. From a clean clone, `docker compose up --build` must start PostgreSQL and `cloud-control`; the control service then creates one persistent Minecraft server through Docker and completes `create → start → status → connect → stop` without VPS, Cloudflare, R2 or private credentials.
+
+`cloud-control` starts as one TypeScript process in a Compose-managed container. Its durable model, REST operations, MCP tools, web flow and reconciler do not depend on Docker or Kubernetes types. A runtime contract owns `create`, `observe`, `start` and `stop` effects. After that contract is accepted, the Docker adapter and local interfaces can be developed in parallel.
+
+The local container mounts `/var/run/docker.sock` read-write and creates the pinned Minecraft image as a sibling container with deterministic names, a project-owned named volume and host ports bound only to `127.0.0.1`. Socket access gives `cloud-control` control over the local Docker Engine. This is an explicit development-only trust boundary and is forbidden in the managed deployment. Kubernetes later implements the same runtime contract without this mount.
+
+```mermaid
+flowchart LR
+    Client[Codex, REST or local web] --> Control[cloud-control]
+    Control --> DB[(PostgreSQL)]
+    Control -->|runtime contract| Docker[Docker adapter]
+    Docker --> Game[Local Minecraft]
+    Game --> Data[(Persistent local data)]
+```
+
+Local acceptance proves product behavior, persistence, idempotency and process recovery. The automated suite is a continuous Linux CI gate and the same suite is recorded from a clean clone with Docker Desktop on macOS. It does not promise multi-account isolation, remote backup, public availability or a supported production installation on third-party infrastructure.
+
+## Managed path after local acceptance
 
 ```mermaid
 flowchart TD
@@ -26,7 +45,7 @@ flowchart TD
     Spectrum --> Game
 ```
 
-`cloud-control` starts as one TypeScript process for REST, MCP, the account and status pages, admission, reconciliation and AutoStop. PostgreSQL stores the requested state, queue and pending work so a restart can resume an operation.
+The managed deployment reuses `cloud-control` and replaces the Docker adapter with a Kubernetes adapter. It adds public identity, admission, queueing, AutoStop and remote recovery around the accepted local behavior. PostgreSQL stores the requested state, queue and pending work so a restart can resume an operation.
 
 The first topology has two roles:
 
@@ -45,15 +64,17 @@ If `control-1` fails, existing games can continue on healthy workers. New operat
 
 A logical server keeps its owner, hostname, recipe, profile and data while offline. A run is one admitted execution of that server. A stopped process does not delete the logical server or its world.
 
-The first acceptance flow is `create → start → status → connect → stop` through Codex and the Cloud status page. The model sends typed Cloud operations. It receives no Kubernetes, Docker or VPS credentials.
+The first acceptance flow is `create → start → status → connect → stop` through the local REST, MCP and web interfaces. `CLOUD_MODE=local` bootstraps one development principal and reads `CLOUD_DEV_TOKEN`, defaulting to the non-secret `local-dev-token`. That default is valid only on loopback in local mode; managed configuration must reject it and must not bootstrap the local principal. The flow returns a loopback Minecraft address. Managed acceptance repeats the same contract with a beta account and stable public address. Clients receive no Kubernetes, Docker or VPS credentials.
 
-For each mutation, `cloud-control` validates the token, ownership, arguments and quota, then commits the intended state in PostgreSQL. A reconciler applies the corresponding resources using stable identifiers and records what actually happened. External calls do not hold an open database transaction.
+For each mutation, the shared core validates the principal and arguments, then commits the intended state in PostgreSQL. The managed layer additionally validates ownership and quota. A reconciler applies the corresponding resources using stable identifiers and records what actually happened. External calls do not hold an open database transaction.
 
 REST and MCP share a durable `client_request_id`. The same account, operation, key and body return the recorded result. Reusing the key with a different body returns a conflict. Transport request IDs do not substitute for this key. State constraints also enforce at most one active start request and one active run per logical server.
 
 ## Process and data lifecycle
 
-The selected Kubernetes design uses a `Deployment` with `Recreate` and zero or one replicas, plus an explicit PVC for `/data`. The PVC lives independently of the Deployment. The earlier StatefulSet design is superseded.
+The local Docker adapter and the managed Kubernetes adapter share lifecycle semantics: readiness means Minecraft accepts a protocol connection, and stop is complete only after the normal save-and-exit path finishes. Local data must survive both game and control-process restarts.
+
+The selected managed Kubernetes design uses a `Deployment` with `Recreate` and zero or one replicas, plus an explicit PVC for `/data`. The PVC lives independently of the Deployment. The earlier StatefulSet design is superseded.
 
 The first admitted start creates the PVC, then starts the pinned recipe. Readiness must mean that Minecraft accepts a connection. Normal starts reuse the local volume on its worker. Storage and compute limits come from the selected profile.
 
@@ -104,4 +125,4 @@ Each [qualification](../catalog/README.md) identifies software versions, image d
 
 Minecraft qualification compares candidates under equal conditions, then measures simultaneous instances with host overhead and spare capacity. TPS, chunk waits, disconnects, action delays and recovery each provide separate evidence. The owner accepted the repeated bot workload for E1 profile selection on 2026-09-06. Human play and the Spectrum route remain public-opening checks. The [results](../benchmarks/minecraft/free-profile-results.md) preserve the failed two-instance level and distinguish profile acceptance from a working managed service.
 
-Code publication comes before support for installation by other operators. This document covers the planned managed deployment.
+Clean-clone local acceptance comes before code publication and managed-service adaptation. A supported production installation by other operators remains a separate later delivery.

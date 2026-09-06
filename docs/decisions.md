@@ -2,6 +2,21 @@
 
 This file records the current direction without requiring access to the planning system. Implementation evidence belongs with the component or benchmark that produced it. Work assignments and discussion belong in Linear.
 
+## Local-first delivery, 2026-09-06
+
+The owners changed the delivery sequence after reviewing the gap between the runnable repository and the managed-service roadmap.
+
+| Decision | Reason and consequence |
+| --- | --- |
+| Accept a complete local product first | A clean clone must run PostgreSQL, `cloud-control` and one persistent Minecraft server, then complete `create → start → status → connect → stop` without cloud credentials. |
+| Keep the control plane runtime-neutral | Core state, operations, idempotency and reconciliation must not depend on Docker or Kubernetes types. Docker is the first adapter; Kubernetes follows for the managed service. |
+| Run the local stack through Compose and the Docker socket | `docker compose up --build` starts PostgreSQL and a containerized `cloud-control`; the control container manages sibling Minecraft containers through `/var/run/docker.sock`. Every exposed port stays on loopback, and this development-only privilege is forbidden in managed mode. |
+| Use an explicit local development identity | `CLOUD_MODE=local` bootstraps one principal. `CLOUD_DEV_TOKEN` defaults to the non-secret `local-dev-token` only on loopback; managed mode rejects that default and never bootstraps the local account. |
+| Develop Docker and interfaces in parallel after the core | L2 and L3 both depend on L1. L4 integrates and accepts them together instead of serializing all interface work behind the Docker adapter. |
+| Use one cross-platform acceptance suite | Linux CI is the continuous gate. The same automated suite is run and recorded on Docker Desktop for macOS until a maintained macOS Docker runner exists. |
+| Gate publication and managed adaptation on local acceptance | Source publication must include a reproducible local journey. The managed beta reuses that accepted core instead of creating a parallel implementation. |
+| Keep production self-hosting separate | Local development is not a promise to operate Cloud safely on arbitrary third-party infrastructure. Packaging and support for that use remain later work. |
+
 ## Product direction, 2026-09-05
 
 The product owner settled these choices while revising the Cloud organization plan.
@@ -13,7 +28,7 @@ The product owner settled these choices while revising the Cloud organization pl
 | Optimize the free Minecraft offer for efficiency | A familiar game experience with documented differences is acceptable. Compare optimized engines and measure concurrent server density before choosing the default. |
 | Place official Vanilla in the later paid catalog | Strict Vanilla behavior may require a different resource profile. Payment does not remove its qualification requirements. |
 | Start Deploy with a curated catalog | The team can define and test how each application starts, persists and recovers. Arbitrary images and repositories require a later isolation design. |
-| Publish the code before supporting third-party installation | Public readers must be able to inspect the design, contribution history and evidence. A complete installer is a later delivery. |
+| Publish after the repository works locally, before supporting third-party production installation | Public readers must be able to inspect and run the accepted local journey. A production installer and operating support remain later deliveries. This sequence supersedes publication of a documentation-only repository. |
 | Make GitHub understandable without Linear | Technical decisions and published results have a public home. Linear links to those records and tracks execution. |
 
 ## Selected beta design
@@ -22,6 +37,7 @@ The 2026-09-03 design narrowed the original plan. The [architecture](architectur
 
 | Selected | Previous design | Why |
 | --- | --- | --- |
+| Runtime-neutral `cloud-control` core with parallel Docker and interface work, followed by a Kubernetes adapter | Kubernetes embedded directly in reconciliation | The complete product flow can be developed and accepted locally before managed infrastructure is required without serializing interface development behind Docker. |
 | One TypeScript `cloud-control` process with PostgreSQL | Retained from the original plan | The first account, queue and lifecycle flow can share one process and durable database state. |
 | Deployment with zero or one replicas and an explicit PVC | StatefulSet wording in the original plan | The first workload needs one process and a persistent directory. Stop and recovery tests must still establish one active writer. |
 | Local PVC plus R2 backup and operated recovery | Longhorn required before a second worker | Measure restore time and lost progress before adding replicated storage. |

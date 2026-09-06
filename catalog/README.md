@@ -34,6 +34,8 @@ A version update or configuration change needs a recorded check before inheritin
 
 ## Planned offers
 
+Before any profile becomes an offer, the local product must complete the documented create, start, status, connect and stop journey through the shared control plane and Docker runtime. Local execution proves the product contract; it does not by itself qualify managed capacity, tenant isolation or public availability.
+
 The free Minecraft tier uses the Paper profile accepted on 2026-09-06 for E1, with one active instance and two players on the tested Oracle A1 host. [The qualification results](../benchmarks/minecraft/free-profile-results.md) include repeated exploration on separate routes, combat, local recovery and the failed two-instance level. The owner accepted this evidence for profile selection. K3s lifecycle and platform recovery still require their own acceptance. Human play and the live Spectrum route remain pending before public opening. Gameplay differences from Mojang Vanilla are recorded in the Paper entry.
 
 Vanilla and additional game configurations belong to the future paid catalog. The historical Vanilla result is a reference, not a free-tier commitment. Pricing and capacity remain undecided.
