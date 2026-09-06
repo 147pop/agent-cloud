@@ -93,7 +93,7 @@ def main():
               'host': os.uname().nodename, 'original_before': original,
               'protected_before': protected, 'cases': [], 'app_baseline_seconds': [app_probe() for _ in range(5)] if protected else [],
               'source_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ['run.py', 'players.js', 'compose.yml', 'package-lock.json']
+                                for name in ['run.py', 'players.js', 'protocol26.js', 'compose.yml', 'package-lock.json']
                                 + (['compose.vanilla.yml'] if args.vanilla else [])}}
     abort = threading.Event()
     finished = threading.Event()

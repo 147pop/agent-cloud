@@ -1,0 +1,69 @@
+{
+  "recorded_at": 1788663000.3473864,
+  "reason": "Stopped after both first fresh-world scenarios completed. One RCON observation exceeded the predeclared 2-second maximum. Retain this failed level and repeat one instance with the same longer workload.",
+  "signal": "SIGINT",
+  "first_completed_rows": [
+    {
+      "case": "r1-i1",
+      "phase": "fresh",
+      "started_at": 1788662498.829,
+      "finished_at": 1788662827.912,
+      "active_seconds": 329.0829999446869,
+      "samples": 62,
+      "tps_windows": 51,
+      "minimum_tps_60s": 19.182460645360745,
+      "maximum_sampled_p95_tick_ms": 20.9,
+      "maximum_sampled_p99_tick_ms": 292.6,
+      "p95_chunk_wait_seconds": 0.099,
+      "maximum_chunk_wait_seconds": 3.609,
+      "total_chunk_wait_player_seconds": 14.239,
+      "p95_client_command_seconds": 0.022,
+      "maximum_client_command_seconds": 0.022,
+      "p95_rcon_seconds": 0.10341119766235352,
+      "maximum_rcon_seconds": 2.1739578247070312,
+      "mean_cpu_cores": 0.6545967434189088,
+      "peak_cpu_cores": 1.5994138193221041,
+      "peak_container_mib": 2775.33984375,
+      "confirmed_hits": 225,
+      "client_bytes": 15206845,
+      "phases": {
+        "new_chunks": 104.29800009727478,
+        "existing_chunks": 96.61099982261658,
+        "combat": 122.67000007629395,
+        "survival": 5.503999948501587
+      },
+      "performance_pass": false
+    },
+    {
+      "case": "r1-i2",
+      "phase": "fresh",
+      "started_at": 1788662530.884,
+      "finished_at": 1788662859.154,
+      "active_seconds": 328.2699999809265,
+      "samples": 62,
+      "tps_windows": 50,
+      "minimum_tps_60s": 19.276501024475152,
+      "maximum_sampled_p95_tick_ms": 49.4,
+      "maximum_sampled_p99_tick_ms": 436.9,
+      "p95_chunk_wait_seconds": 0.001,
+      "maximum_chunk_wait_seconds": 4.512,
+      "total_chunk_wait_player_seconds": 12.834999999999999,
+      "p95_client_command_seconds": 0.022,
+      "maximum_client_command_seconds": 0.022,
+      "p95_rcon_seconds": 0.09755921363830566,
+      "maximum_rcon_seconds": 0.30095863342285156,
+      "mean_cpu_cores": 0.6453861474760526,
+      "peak_cpu_cores": 1.664495793903721,
+      "peak_container_mib": 2777.70703125,
+      "confirmed_hits": 228,
+      "client_bytes": 15632819,
+      "phases": {
+        "new_chunks": 103.26699995994568,
+        "existing_chunks": 96.65599989891052,
+        "combat": 122.81500005722046,
+        "survival": 5.5320000648498535
+      },
+      "performance_pass": true
+    }
+  ]
+}

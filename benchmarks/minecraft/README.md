@@ -1,6 +1,6 @@
 # Minecraft benchmarks
 
-This directory contains the historical E0 recipes, runner and exported evidence. [Catalog entries](../../catalog/README.md) describe their status. [Linear](https://linear.app/workspace/issue/TES-140) tracks qualification of the optimized free profile.
+This directory contains the historical E0 study and the optimized free-profile qualification. [Catalog entries](../../catalog/README.md) describe their status. [Linear](https://linear.app/workspace/issue/TES-140) tracks qualification of the optimized free profile.
 
 ## Results
 
@@ -41,9 +41,11 @@ Profiles and raw files retain their original names and historical decisions. The
 
 The free tier prioritizes acceptable simultaneous sessions per host. Optimized engines are candidates; the historical Vanilla profile does not select the default.
 
-Before comparing candidates, freeze one Minecraft version, hardware, CPU and memory limits, distances, world seed, client workload and measurement method. Start with Paper and Purpur. Evaluate another server or server-side optimization only when it answers a stated compatibility or performance need. Record gameplay differences and required client changes.
+The [public research and fixed comparison](free-profile.md) narrow the candidates to Paper and Fabric with Lithium and FerriteCore. C2ME is the only conditional variant, for a measured generation bottleneck. The plan pins one Minecraft and Java version, hardware, CPU and memory limits, distances, seed, client workload and measurement method. Record gameplay differences and required client changes.
 
-Qualification still needs these tests:
+The [recorded comparison](free-profile-results.md) passed for both nearby-player candidates. Paper also passed the repeated separate-terrain check and the longer density workload with one instance and two players. Two instances exceeded the RCON response limit during a save. External human play and the live Spectrum route remain pending, so the profile is still Experimental.
+
+Qualification covers these checks:
 
 1. Compare candidates at the same resource limits with fresh and populated worlds. Include normal survival play and human observations alongside bots. Record TPS, tick-time distributions, terrain waits, connection and command latency, memory, CPU and network use.
 2. Select a profile only after repeated runs meet written experience thresholds. Explain whether a slow phase reflects world generation, host contention, network delay or the server itself. A 19 TPS rule alone does not define playability.
@@ -51,7 +53,7 @@ Qualification still needs these tests:
 4. Test save, stop, restart, backup and restore with that profile. Record compatibility and retest requirements for version updates.
 5. Use those measurements to define admission limits and an offer. Report cost per concurrent session when the deployment cost is known.
 
-These tests have not run as part of the reorganization. The current runner supports one benchmark server at a time and does not implement the concurrency study.
+Use [qualify.py](qualify.py) and [compose.free.yml](compose.free.yml) for the new study. The historical [run.py](run.py) runs one E0 benchmark server at a time. Source archives identify the exact runner used by each formal attempt.
 
 ## Prepare the host
 

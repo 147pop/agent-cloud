@@ -1,0 +1,980 @@
+[init] Changing ownership of /data to 1000 ...
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 2 1000 1000 4096 Sep  6 02:07 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given FABRIC
+[39m[mc-image-helper] 02:07:44.007 INFO  : Downloaded ./fabric-server-mc.26.2-loader.0.19.5-launcher.1.1.2.jar
+[0;39m[39m[mc-image-helper] 02:07:47.313 INFO  : Downloaded /data/mods/ferritecore-9.0.0-fabric.jar
+[0;39m[39m[mc-image-helper] 02:07:47.802 INFO  : Downloaded /data/mods/lithium-fabric-0.25.3+mc26.2.jar
+[0;39m[init] Copying any mods from /mods to /data/mods
+[init] Copying any configs from /config to /data/config
+[init] Creating server properties in /data/server.properties
+[init] Disabling whitelist functionality
+[init] Setting mode
+[39m[mc-image-helper] 02:07:51.849 INFO  : Created/updated 15 properties in /data/server.properties
+[0;39m[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Downloading Minecraft server
+Installing Fabric Loader 0.19.5(26.2) on the server
+Downloading required files
+Downloading library org.ow2.asm:asm:9.10.1
+Downloading library org.ow2.asm:asm-analysis:9.10.1
+Downloading library org.ow2.asm:asm-commons:9.10.1
+Downloading library org.ow2.asm:asm-tree:9.10.1
+Downloading library org.ow2.asm:asm-util:9.10.1
+Downloading library net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7
+Downloading library net.fabricmc:fabric-loader:0.19.5
+Generating server launch JAR
+Unpacking 26.2/server-26.2.jar (versions:26.2) to versions/26.2/server-26.2.jar
+Unpacking at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1.jar (libraries:at.yawk.lz4:lz4-java:1.10.1) to libraries/at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1.jar
+Unpacking com/azure/azure-json/1.4.0/azure-json-1.4.0.jar (libraries:com.azure:azure-json:1.4.0) to libraries/com/azure/azure-json/1.4.0/azure-json-1.4.0.jar
+Unpacking com/github/oshi/oshi-core/6.9.0/oshi-core-6.9.0.jar (libraries:com.github.oshi:oshi-core:6.9.0) to libraries/com/github/oshi/oshi-core/6.9.0/oshi-core-6.9.0.jar
+Unpacking com/google/code/gson/gson/2.14.0/gson-2.14.0.jar (libraries:com.google.code.gson:gson:2.14.0) to libraries/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar
+Unpacking com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar (libraries:com.google.guava:failureaccess:1.0.3) to libraries/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar
+Unpacking com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar (libraries:com.google.guava:guava:33.6.0-jre) to libraries/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar
+Unpacking com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar (libraries:com.microsoft.azure:msal4j:1.24.1) to libraries/com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar
+Unpacking com/mojang/authlib/9.0.75/authlib-9.0.75.jar (libraries:com.mojang:authlib:9.0.75) to libraries/com/mojang/authlib/9.0.75/authlib-9.0.75.jar
+Unpacking com/mojang/brigadier/1.3.10/brigadier-1.3.10.jar (libraries:com.mojang:brigadier:1.3.10) to libraries/com/mojang/brigadier/1.3.10/brigadier-1.3.10.jar
+Unpacking com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar (libraries:com.mojang:datafixerupper:10.0.21) to libraries/com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar
+Unpacking com/mojang/jtracy/1.0.37/jtracy-1.0.37.jar (libraries:com.mojang:jtracy:1.0.37) to libraries/com/mojang/jtracy/1.0.37/jtracy-1.0.37.jar
+Unpacking com/mojang/logging/1.7.12/logging-1.7.12.jar (libraries:com.mojang:logging:1.7.12) to libraries/com/mojang/logging/1.7.12/logging-1.7.12.jar
+Unpacking commons-io/commons-io/2.20.0/commons-io-2.20.0.jar (libraries:commons-io:commons-io:2.20.0) to libraries/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar
+Unpacking io/netty/netty-buffer/4.2.15.Final/netty-buffer-4.2.15.Final.jar (libraries:io.netty:netty-buffer:4.2.15.Final) to libraries/io/netty/netty-buffer/4.2.15.Final/netty-buffer-4.2.15.Final.jar
+Unpacking io/netty/netty-codec-base/4.2.15.Final/netty-codec-base-4.2.15.Final.jar (libraries:io.netty:netty-codec-base:4.2.15.Final) to libraries/io/netty/netty-codec-base/4.2.15.Final/netty-codec-base-4.2.15.Final.jar
+Unpacking io/netty/netty-codec-compression/4.2.15.Final/netty-codec-compression-4.2.15.Final.jar (libraries:io.netty:netty-codec-compression:4.2.15.Final) to libraries/io/netty/netty-codec-compression/4.2.15.Final/netty-codec-compression-4.2.15.Final.jar
+Unpacking io/netty/netty-codec-http/4.2.15.Final/netty-codec-http-4.2.15.Final.jar (libraries:io.netty:netty-codec-http:4.2.15.Final) to libraries/io/netty/netty-codec-http/4.2.15.Final/netty-codec-http-4.2.15.Final.jar
+Unpacking io/netty/netty-common/4.2.15.Final/netty-common-4.2.15.Final.jar (libraries:io.netty:netty-common:4.2.15.Final) to libraries/io/netty/netty-common/4.2.15.Final/netty-common-4.2.15.Final.jar
+Unpacking io/netty/netty-handler/4.2.15.Final/netty-handler-4.2.15.Final.jar (libraries:io.netty:netty-handler:4.2.15.Final) to libraries/io/netty/netty-handler/4.2.15.Final/netty-handler-4.2.15.Final.jar
+Unpacking io/netty/netty-resolver/4.2.15.Final/netty-resolver-4.2.15.Final.jar (libraries:io.netty:netty-resolver:4.2.15.Final) to libraries/io/netty/netty-resolver/4.2.15.Final/netty-resolver-4.2.15.Final.jar
+Unpacking io/netty/netty-transport/4.2.15.Final/netty-transport-4.2.15.Final.jar (libraries:io.netty:netty-transport:4.2.15.Final) to libraries/io/netty/netty-transport/4.2.15.Final/netty-transport-4.2.15.Final.jar
+Unpacking io/netty/netty-transport-classes-epoll/4.2.15.Final/netty-transport-classes-epoll-4.2.15.Final.jar (libraries:io.netty:netty-transport-classes-epoll:4.2.15.Final) to libraries/io/netty/netty-transport-classes-epoll/4.2.15.Final/netty-transport-classes-epoll-4.2.15.Final.jar
+Unpacking io/netty/netty-transport-classes-kqueue/4.2.15.Final/netty-transport-classes-kqueue-4.2.15.Final.jar (libraries:io.netty:netty-transport-classes-kqueue:4.2.15.Final) to libraries/io/netty/netty-transport-classes-kqueue/4.2.15.Final/netty-transport-classes-kqueue-4.2.15.Final.jar
+Unpacking io/netty/netty-transport-native-epoll/4.2.15.Final/netty-transport-native-epoll-4.2.15.Final-linux-x86_64.jar (libraries:io.netty:netty-transport-native-epoll:4.2.15.Final:linux-x86_64) to libraries/io/netty/netty-transport-native-epoll/4.2.15.Final/netty-transport-native-epoll-4.2.15.Final-linux-x86_64.jar
+Unpacking io/netty/netty-transport-native-epoll/4.2.15.Final/netty-transport-native-epoll-4.2.15.Final-linux-aarch_64.jar (libraries:io.netty:netty-transport-native-epoll:4.2.15.Final:linux-aarch_64) to libraries/io/netty/netty-transport-native-epoll/4.2.15.Final/netty-transport-native-epoll-4.2.15.Final-linux-aarch_64.jar
+Unpacking io/netty/netty-transport-native-kqueue/4.2.15.Final/netty-transport-native-kqueue-4.2.15.Final-osx-x86_64.jar (libraries:io.netty:netty-transport-native-kqueue:4.2.15.Final:osx-x86_64) to libraries/io/netty/netty-transport-native-kqueue/4.2.15.Final/netty-transport-native-kqueue-4.2.15.Final-osx-x86_64.jar
+Unpacking io/netty/netty-transport-native-kqueue/4.2.15.Final/netty-transport-native-kqueue-4.2.15.Final-osx-aarch_64.jar (libraries:io.netty:netty-transport-native-kqueue:4.2.15.Final:osx-aarch_64) to libraries/io/netty/netty-transport-native-kqueue/4.2.15.Final/netty-transport-native-kqueue-4.2.15.Final-osx-aarch_64.jar
+Unpacking io/netty/netty-transport-native-unix-common/4.2.15.Final/netty-transport-native-unix-common-4.2.15.Final.jar (libraries:io.netty:netty-transport-native-unix-common:4.2.15.Final) to libraries/io/netty/netty-transport-native-unix-common/4.2.15.Final/netty-transport-native-unix-common-4.2.15.Final.jar
+Unpacking it/unimi/dsi/fastutil/8.5.18/fastutil-8.5.18.jar (libraries:it.unimi.dsi:fastutil:8.5.18) to libraries/it/unimi/dsi/fastutil/8.5.18/fastutil-8.5.18.jar
+Unpacking net/java/dev/jna/jna/5.17.0/jna-5.17.0.jar (libraries:net.java.dev.jna:jna:5.17.0) to libraries/net/java/dev/jna/jna/5.17.0/jna-5.17.0.jar
+Unpacking net/java/dev/jna/jna-platform/5.17.0/jna-platform-5.17.0.jar (libraries:net.java.dev.jna:jna-platform:5.17.0) to libraries/net/java/dev/jna/jna-platform/5.17.0/jna-platform-5.17.0.jar
+Unpacking net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar (libraries:net.sf.jopt-simple:jopt-simple:5.0.4) to libraries/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar
+Unpacking org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar (libraries:org.apache.commons:commons-lang3:3.20.0) to libraries/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar
+Unpacking org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar (libraries:org.apache.logging.log4j:log4j-api:2.26.0) to libraries/org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar
+Unpacking org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar (libraries:org.apache.logging.log4j:log4j-core:2.26.0) to libraries/org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar
+Unpacking org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar (libraries:org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0) to libraries/org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar
+Unpacking org/joml/joml/1.10.8/joml-1.10.8.jar (libraries:org.joml:joml:1.10.8) to libraries/org/joml/joml/1.10.8/joml-1.10.8.jar
+Unpacking org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar (libraries:org.jspecify:jspecify:1.0.0) to libraries/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar
+Unpacking org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar (libraries:org.slf4j:slf4j-api:2.0.17) to libraries/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar
+Starting net.fabricmc.loader.impl.game.minecraft.BundlerClassPathCapture
+[02:07:56] [main/INFO]: Loading Minecraft 26.2 with Fabric Loader 0.19.5
+[02:07:56] [main/INFO]: Mappings not present!
+[02:07:56] [main/INFO]: Loading 6 mods:
+	- fabricloader 0.19.5
+	   \-- mixinextras 0.5.5
+	- ferritecore 9.0.0
+	- java 25
+	- lithium 0.25.3+mc26.2
+	- minecraft 26.2
+[02:07:56] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/data/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[02:07:56] [main/INFO]: Loaded configuration file for Lithium: 171 options available, 0 override(s) found.
+[02:07:57] [main/INFO]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[02:08:05] [main/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[02:08:06] [Worker-Main-1/INFO]: No existing world data, creating new world
+[02:08:07] [main/INFO]: Loaded 1585 recipes
+[02:08:07] [main/INFO]: Loaded 1688 advancements
+[02:08:07] [Server thread/INFO]: Starting minecraft server version 26.2
+[02:08:07] [Server thread/INFO]: Loading properties
+[02:08:07] [Server thread/INFO]: Default game type: SURVIVAL
+[02:08:07] [Server thread/INFO]: Generating keypair
+[02:08:07] [Server thread/INFO]: Starting Minecraft server on *:25565
+[02:08:07] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[02:08:07] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[02:08:07] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[02:08:07] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[02:08:08] [Server thread/INFO]: Preparing level "world"
+[02:08:08] [Server thread/INFO]: Selecting global world spawn...
+[02:08:18] [Server thread/INFO]: Loading 0 persistent chunks...
+[02:08:18] [Server thread/INFO]: Preparing spawn area: 100%
+[02:08:18] [Server thread/INFO]: Time elapsed: 10139 ms
+[02:08:18] [Server thread/INFO]: Done (10.566s)! For help, type "help"
+[02:08:18] [Server thread/INFO]: Starting remote control listener
+[02:08:18] [Server thread/INFO]: Thread RCON Listener started
+[02:08:18] [Server thread/INFO]: RCON running on 0.0.0.0:25575
+[02:08:18] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[02:08:18] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[02:08:18] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[02:08:18] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:08:18] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:08:18] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:08:18] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:08:23] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:23] [RCON Client /0:0:0:0:0:0:0:1 #2/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:26] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:26] [RCON Client /0:0:0:0:0:0:0:1 #3/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:26] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:26] [RCON Client /0:0:0:0:0:0:0:1 #4/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:31] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:31] [RCON Client /0:0:0:0:0:0:0:1 #5/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:31] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:31] [RCON Client /0:0:0:0:0:0:0:1 #6/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:31] [Server thread/INFO]: Bench01[IP hidden] logged in with entity id 12 at (-10.5, 80.0, 19.5)
+[02:08:31] [Server thread/INFO]: Bench01 joined the game
+[02:08:32] [Server thread/INFO]: [Bench01: Set own game mode to Creative Mode]
+[02:08:32] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 300.000000, 0.500000]
+[02:08:34] [Server thread/INFO]: Bench02[IP hidden] logged in with entity id 32 at (-8.5, 81.0, 23.5)
+[02:08:34] [Server thread/INFO]: Bench02 joined the game
+[02:08:34] [Server thread/INFO]: [Bench02: Set own game mode to Creative Mode]
+[02:08:35] [Server thread/INFO]: [Bench02: Teleported Bench02 to 32.500000, 300.000000, 0.500000]
+[02:08:36] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:36] [RCON Client /0:0:0:0:0:0:0:1 #7/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:36] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:36] [RCON Client /0:0:0:0:0:0:0:1 #8/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:41] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:41] [RCON Client /0:0:0:0:0:0:0:1 #9/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:41] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:41] [RCON Client /0:0:0:0:0:0:0:1 #10/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:46] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:46] [RCON Client /0:0:0:0:0:0:0:1 #11/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:46] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:46] [RCON Client /0:0:0:0:0:0:0:1 #12/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:51] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:51] [RCON Client /0:0:0:0:0:0:0:1 #13/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:52] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:52] [RCON Client /0:0:0:0:0:0:0:1 #14/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:57] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:57] [RCON Client /0:0:0:0:0:0:0:1 #15/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:08:57] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:08:57] [RCON Client /0:0:0:0:0:0:0:1 #16/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:02] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:02] [RCON Client /0:0:0:0:0:0:0:1 #17/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:02] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:02] [RCON Client /0:0:0:0:0:0:0:1 #18/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:07] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:07] [RCON Client /0:0:0:0:0:0:0:1 #19/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:07] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:07] [RCON Client /0:0:0:0:0:0:0:1 #20/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:09] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:09:09] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:09:09] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:09:09] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:09:09] [Server thread/INFO]: [Rcon: Saved the game]
+[02:09:09] [RCON Client /0:0:0:0:0:0:0:1 #21/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:12] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:12] [RCON Client /0:0:0:0:0:0:0:1 #22/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:12] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:12] [RCON Client /0:0:0:0:0:0:0:1 #23/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:17] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:17] [RCON Client /0:0:0:0:0:0:0:1 #24/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:17] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:17] [RCON Client /0:0:0:0:0:0:0:1 #25/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:22] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:22] [RCON Client /0:0:0:0:0:0:0:1 #26/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:22] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:22] [RCON Client /0:0:0:0:0:0:0:1 #27/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:25] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_out_Bench02
+[02:09:25] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_out_Bench01
+[02:09:28] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:28] [RCON Client /0:0:0:0:0:0:0:1 #28/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:28] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:28] [RCON Client /0:0:0:0:0:0:0:1 #29/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:33] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:33] [RCON Client /0:0:0:0:0:0:0:1 #30/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:33] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:33] [RCON Client /0:0:0:0:0:0:0:1 #31/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:38] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:38] [RCON Client /0:0:0:0:0:0:0:1 #32/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:38] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:38] [RCON Client /0:0:0:0:0:0:0:1 #33/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:43] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:43] [RCON Client /0:0:0:0:0:0:0:1 #34/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:43] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:43] [RCON Client /0:0:0:0:0:0:0:1 #35/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:48] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:48] [RCON Client /0:0:0:0:0:0:0:1 #36/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:48] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:48] [RCON Client /0:0:0:0:0:0:0:1 #37/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:53] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:53] [RCON Client /0:0:0:0:0:0:0:1 #38/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:53] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:53] [RCON Client /0:0:0:0:0:0:0:1 #39/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:58] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:58] [RCON Client /0:0:0:0:0:0:0:1 #40/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:09:58] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:09:58] [RCON Client /0:0:0:0:0:0:0:1 #41/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:04] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:04] [RCON Client /0:0:0:0:0:0:0:1 #42/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:04] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:04] [RCON Client /0:0:0:0:0:0:0:1 #43/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:09] [RCON Client /0:0:0:0:0:0:0:1 #44/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:09] [RCON Client /0:0:0:0:0:0:0:1 #45/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:13] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_back_Bench01
+[02:10:13] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_back_Bench02
+[02:10:13] [Server thread/INFO]: [Bench01: Successfully filled 451 block(s)]
+[02:10:13] [Server thread/INFO]: [Bench02: Successfully filled 451 block(s)]
+[02:10:14] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[02:10:14] [Server thread/INFO]: [Bench02: Teleported Bench02 to 32.500000, 200.000000, 0.500000]
+[02:10:14] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:14] [RCON Client /0:0:0:0:0:0:0:1 #46/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:14] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:14] [RCON Client /0:0:0:0:0:0:0:1 #47/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:15] [Server thread/INFO]: [Bench01: Gave 1 [Diamond Sword] to Bench01]
+[02:10:15] [Server thread/INFO]: [Bench02: Gave 1 [Diamond Sword] to Bench02]
+[02:10:16] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:16] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:18] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:18] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:19] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:19] [RCON Client /0:0:0:0:0:0:0:1 #48/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:19] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:19] [RCON Client /0:0:0:0:0:0:0:1 #49/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:20] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:20] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:22] [Server thread/INFO]: Bench01 has made the advancement [Monster Hunter]
+[02:10:22] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:22] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:24] [RCON Client /0:0:0:0:0:0:0:1 #50/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:24] [RCON Client /0:0:0:0:0:0:0:1 #51/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:25] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:25] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:27] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:27] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:29] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:29] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:29] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:29] [RCON Client /0:0:0:0:0:0:0:1 #52/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:29] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:29] [RCON Client /0:0:0:0:0:0:0:1 #53/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:31] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:31] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:33] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:33] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:34] [RCON Client /0:0:0:0:0:0:0:1 #54/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:34] [RCON Client /0:0:0:0:0:0:0:1 #55/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:35] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:35] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:37] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:37] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:39] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:39] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:40] [RCON Client /0:0:0:0:0:0:0:1 #56/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:40] [RCON Client /0:0:0:0:0:0:0:1 #57/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:41] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:42] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:44] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:44] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:45] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:45] [RCON Client /0:0:0:0:0:0:0:1 #58/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:45] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:45] [RCON Client /0:0:0:0:0:0:0:1 #59/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:46] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:46] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:48] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:48] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:50] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:50] [RCON Client /0:0:0:0:0:0:0:1 #60/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:50] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:50] [RCON Client /0:0:0:0:0:0:0:1 #61/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:50] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:50] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:52] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:52] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:54] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:54] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:55] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:55] [RCON Client /0:0:0:0:0:0:0:1 #62/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:55] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:10:55] [RCON Client /0:0:0:0:0:0:0:1 #63/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:10:56] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:56] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:10:58] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:10:58] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:00] [RCON Client /0:0:0:0:0:0:0:1 #64/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:00] [RCON Client /0:0:0:0:0:0:0:1 #65/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:00] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:01] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:03] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:03] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:05] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:05] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:05] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:05] [RCON Client /0:0:0:0:0:0:0:1 #66/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:05] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:05] [RCON Client /0:0:0:0:0:0:0:1 #67/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:07] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:07] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:09] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:09] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:10] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:10] [RCON Client /0:0:0:0:0:0:0:1 #68/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:10] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:10] [RCON Client /0:0:0:0:0:0:0:1 #69/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:11] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:11] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:13] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:13] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:15] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:11:15] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:11:15] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:15] [RCON Client /0:0:0:0:0:0:0:1 #70/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:16] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:16] [RCON Client /0:0:0:0:0:0:0:1 #71/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:16] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[02:11:16] [Server thread/INFO]: [Bench01: Killed Husk]
+[02:11:16] [Server thread/INFO]: [Bench01: Set own game mode to Survival Mode]
+[02:11:16] [Server thread/INFO]: Bench01 has made the advancement [Isn't It Iron Pick]
+[02:11:16] [Server thread/INFO]: [Bench01: Gave 1 [Iron Pickaxe] to Bench01]
+[02:11:16] [Server thread/INFO]: [Bench01: Gave 16 [Stone] to Bench01]
+[02:11:16] [Server thread/INFO]: [Bench01: Changed the block at 1, 200, 0]
+[02:11:16] [Server thread/INFO]: [Bench02: Teleported Bench02 to 32.500000, 200.000000, 0.500000]
+[02:11:16] [Server thread/INFO]: [Bench02: Killed Husk]
+[02:11:16] [Server thread/INFO]: [Bench02: Set own game mode to Survival Mode]
+[02:11:16] [Server thread/INFO]: Bench02 has made the advancement [Isn't It Iron Pick]
+[02:11:16] [Server thread/INFO]: [Bench02: Gave 1 [Iron Pickaxe] to Bench02]
+[02:11:16] [Server thread/INFO]: [Bench02: Gave 16 [Stone] to Bench02]
+[02:11:16] [Server thread/INFO]: [Bench02: Changed the block at 33, 200, 0]
+[02:11:18] [Server thread/INFO]: [Not Secure] [Bench02] FREE_BLOCK_air_Bench02
+[02:11:18] [Server thread/INFO]: [Not Secure] [Bench01] FREE_BLOCK_air_Bench01
+[02:11:18] [Server thread/INFO]: [Not Secure] [Bench02] FREE_BLOCK_stone_Bench02
+[02:11:18] [Server thread/INFO]: [Not Secure] [Bench01] FREE_BLOCK_stone_Bench01
+[02:11:21] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:21] [RCON Client /0:0:0:0:0:0:0:1 #72/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:21] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:21] [RCON Client /0:0:0:0:0:0:0:1 #73/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:22] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_survival_Bench02
+[02:11:22] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_survival_Bench01
+[02:11:22] [Server thread/INFO]: Bench01 lost connection: Disconnected
+[02:11:22] [Server thread/INFO]: Bench01 left the game
+[02:11:22] [Server thread/INFO]: Bench02 lost connection: Disconnected
+[02:11:22] [Server thread/INFO]: Bench02 left the game
+[02:11:23] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:23] [Server thread/INFO]: [Rcon: Marked 4 chunks in minecraft:overworld from [0, 0] to [1, 1] to be force loaded]
+[02:11:23] [RCON Client /0:0:0:0:0:0:0:1 #74/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:23] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:23] [RCON Client /0:0:0:0:0:0:0:1 #75/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:24] [Server thread/INFO]: [Rcon: Changed the block at 0, 201, 0]
+[02:11:24] [RCON Client /0:0:0:0:0:0:0:1 #76/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:24] [Server thread/INFO]: [Rcon: Unmarked 4 chunks in minecraft:overworld from [0, 0] to [1, 1] for force loading]
+[02:11:24] [RCON Client /0:0:0:0:0:0:0:1 #77/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:11:24] [Server thread/INFO]: [Rcon: Saved the game]
+[02:11:24] [RCON Client /0:0:0:0:0:0:0:1 #78/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T02:11:24.804Z	INFO	mc-server-runner	gracefully stopping server...
+[02:11:24] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:24] [Server thread/INFO]: [Rcon: Stopping the server]
+2026-09-06T02:11:24.809Z	INFO	mc-server-runner	Waiting for completion...
+[02:11:24] [RCON Client /0:0:0:0:0:0:0:1 #79/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:24] [Server thread/INFO]: Stopping server
+[02:11:24] [Server thread/INFO]: Saving players
+[02:11:24] [Server thread/INFO]: Saving worlds
+[02:11:24] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[02:11:24] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[02:11:24] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:11:24] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:11:24] [Server thread/INFO]: Thread RCON Listener stopped
+2026-09-06T02:11:25.301Z	INFO	mc-server-runner	Done
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 10 1000 1000 4096 Sep  6 02:11 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given FABRIC
+[39m[mc-image-helper] 02:11:28.691 INFO  : Fabric launcher for minecraft 26.2 loader 0.19.5 is already available
+[0;39m[init] Copying any mods from /mods to /data/mods
+[init] Copying any configs from /config to /data/config
+[init] Setting mode
+[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Starting net.fabricmc.loader.impl.game.minecraft.BundlerClassPathCapture
+[02:11:36] [main/INFO]: Loading Minecraft 26.2 with Fabric Loader 0.19.5
+[02:11:36] [main/INFO]: Mappings not present!
+[02:11:36] [main/INFO]: Loading 6 mods:
+	- fabricloader 0.19.5
+	   \-- mixinextras 0.5.5
+	- ferritecore 9.0.0
+	- java 25
+	- lithium 0.25.3+mc26.2
+	- minecraft 26.2
+[02:11:36] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/data/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[02:11:36] [main/INFO]: Loaded configuration file for Lithium: 171 options available, 0 override(s) found.
+[02:11:37] [main/INFO]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[02:11:45] [main/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[02:11:48] [main/INFO]: Loaded 1585 recipes
+[02:11:48] [main/INFO]: Loaded 1688 advancements
+[02:11:48] [Server thread/INFO]: Starting minecraft server version 26.2
+[02:11:48] [Server thread/INFO]: Loading properties
+[02:11:48] [Server thread/INFO]: Default game type: SURVIVAL
+[02:11:48] [Server thread/INFO]: Generating keypair
+[02:11:48] [Server thread/INFO]: Starting Minecraft server on *:25565
+[02:11:48] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[02:11:48] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[02:11:48] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[02:11:48] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[02:11:48] [Server thread/INFO]: Preparing level "world"
+[02:11:49] [Server thread/INFO]: Loading 0 persistent chunks...
+[02:11:49] [Server thread/INFO]: Preparing spawn area: 100%
+[02:11:49] [Server thread/INFO]: Time elapsed: 11 ms
+[02:11:49] [Server thread/INFO]: Done (0.477s)! For help, type "help"
+[02:11:49] [Server thread/INFO]: Starting remote control listener
+[02:11:49] [Server thread/INFO]: Thread RCON Listener started
+[02:11:49] [Server thread/INFO]: RCON running on 0.0.0.0:25575
+[02:11:49] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[02:11:49] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[02:11:49] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[02:11:49] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:11:49] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:11:49] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:11:49] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:11:52] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:58] [Server thread/INFO]: [Rcon: Marked 4 chunks in minecraft:overworld from [0, 0] to [1, 1] to be force loaded]
+[02:11:58] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 6226ms or 124 ticks behind
+[02:11:58] [RCON Client /0:0:0:0:0:0:0:1 #2/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:58] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:58] [RCON Client /0:0:0:0:0:0:0:1 #3/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:58] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:58] [RCON Client /0:0:0:0:0:0:0:1 #4/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #5/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #6/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Successfully filled 231 block(s)]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #7/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Successfully filled 16 block(s)]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #8/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Successfully filled 16 block(s)]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #9/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Successfully filled 14 block(s)]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #10/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Successfully filled 14 block(s)]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #11/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #12/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #13/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #14/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #15/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #16/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #17/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #18/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #19/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #20/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #21/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:11:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:11:59] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:11:59] [RCON Client /0:0:0:0:0:0:0:1 #22/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #23/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #24/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #25/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #26/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #27/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #28/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #29/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #30/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #31/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #32/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #33/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #34/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Cow]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #35/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #36/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #37/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #38/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:00] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:00] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:00] [RCON Client /0:0:0:0:0:0:0:1 #39/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #40/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #41/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #42/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Summoned new Villager]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #43/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 0, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #44/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 1, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #45/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 2, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #46/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 3, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #47/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 4, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #48/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 5, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #49/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 6, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #50/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 7, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #51/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 8, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #52/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 9, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #53/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 10, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #54/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 11, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #55/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 12, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #56/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 13, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #57/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:01] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:01] [Server thread/INFO]: [Rcon: Changed the block at 14, 199, 24]
+[02:12:01] [RCON Client /0:0:0:0:0:0:0:1 #58/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:02] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:02] [Server thread/INFO]: [Rcon: Changed the block at 15, 199, 24]
+[02:12:02] [RCON Client /0:0:0:0:0:0:0:1 #59/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:02] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:02] [RCON Client /0:0:0:0:0:0:0:1 #60/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:03] [Server thread/INFO]: Bench01[IP hidden] logged in with entity id 141 at (0.4999999999965561, 200.0, -12.447791547124808)
+[02:12:04] [Server thread/INFO]: Bench01 joined the game
+[02:12:04] [Server thread/INFO]: [Bench01: Set own game mode to Creative Mode]
+[02:12:05] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 300.000000, 0.500000]
+[02:12:06] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:06] [RCON Client /0:0:0:0:0:0:0:1 #61/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:06] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:06] [RCON Client /0:0:0:0:0:0:0:1 #62/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:06] [Server thread/INFO]: Bench02[IP hidden] logged in with entity id 180 at (32.49999999999659, 200.0, -12.447791547124808)
+[02:12:07] [Server thread/INFO]: Bench02 joined the game
+[02:12:07] [Server thread/INFO]: [Bench02: Set own game mode to Creative Mode]
+[02:12:08] [Server thread/INFO]: [Bench02: Teleported Bench02 to 32.500000, 300.000000, 0.500000]
+[02:12:11] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:11] [RCON Client /0:0:0:0:0:0:0:1 #63/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:11] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:11] [RCON Client /0:0:0:0:0:0:0:1 #64/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:16] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:16] [RCON Client /0:0:0:0:0:0:0:1 #65/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:16] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:16] [RCON Client /0:0:0:0:0:0:0:1 #66/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:22] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:22] [RCON Client /0:0:0:0:0:0:0:1 #67/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:22] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:22] [RCON Client /0:0:0:0:0:0:0:1 #68/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:27] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:27] [RCON Client /0:0:0:0:0:0:0:1 #69/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:27] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:27] [RCON Client /0:0:0:0:0:0:0:1 #70/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:32] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:32] [RCON Client /0:0:0:0:0:0:0:1 #71/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:32] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:32] [RCON Client /0:0:0:0:0:0:0:1 #72/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:37] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:37] [RCON Client /0:0:0:0:0:0:0:1 #73/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:37] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:37] [RCON Client /0:0:0:0:0:0:0:1 #74/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:42] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:42] [RCON Client /0:0:0:0:0:0:0:1 #75/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:42] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:42] [RCON Client /0:0:0:0:0:0:0:1 #76/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:47] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:47] [RCON Client /0:0:0:0:0:0:0:1 #77/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:47] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:47] [RCON Client /0:0:0:0:0:0:0:1 #78/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:48] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:48] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:12:48] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:12:48] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:12:48] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:12:48] [Server thread/INFO]: [Rcon: Saved the game]
+[02:12:48] [RCON Client /0:0:0:0:0:0:0:1 #79/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:52] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:52] [RCON Client /0:0:0:0:0:0:0:1 #80/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:52] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:52] [RCON Client /0:0:0:0:0:0:0:1 #81/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:57] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_out_Bench01
+[02:12:57] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_out_Bench02
+[02:12:58] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:58] [RCON Client /0:0:0:0:0:0:0:1 #82/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:12:58] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:12:58] [RCON Client /0:0:0:0:0:0:0:1 #83/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:03] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:03] [RCON Client /0:0:0:0:0:0:0:1 #84/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:03] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:03] [RCON Client /0:0:0:0:0:0:0:1 #85/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:08] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:08] [RCON Client /0:0:0:0:0:0:0:1 #86/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:08] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:08] [RCON Client /0:0:0:0:0:0:0:1 #87/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:13] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:13] [RCON Client /0:0:0:0:0:0:0:1 #88/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:13] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:13] [RCON Client /0:0:0:0:0:0:0:1 #89/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:18] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:18] [RCON Client /0:0:0:0:0:0:0:1 #90/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:18] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:18] [RCON Client /0:0:0:0:0:0:0:1 #91/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:23] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:23] [RCON Client /0:0:0:0:0:0:0:1 #92/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:23] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:23] [RCON Client /0:0:0:0:0:0:0:1 #93/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:28] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:28] [RCON Client /0:0:0:0:0:0:0:1 #94/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:28] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:28] [RCON Client /0:0:0:0:0:0:0:1 #95/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:34] [RCON Client /0:0:0:0:0:0:0:1 #96/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:34] [RCON Client /0:0:0:0:0:0:0:1 #97/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:39] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:39] [RCON Client /0:0:0:0:0:0:0:1 #98/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:39] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:39] [RCON Client /0:0:0:0:0:0:0:1 #99/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:44] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:44] [RCON Client /0:0:0:0:0:0:0:1 #100/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:44] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:44] [RCON Client /0:0:0:0:0:0:0:1 #101/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:46] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_back_Bench01
+[02:13:46] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_back_Bench02
+[02:13:46] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[02:13:46] [Server thread/INFO]: [Bench02: Teleported Bench02 to 32.500000, 200.000000, 0.500000]
+[02:13:47] [Server thread/INFO]: [Bench01: Gave 1 [Diamond Sword] to Bench01]
+[02:13:47] [Server thread/INFO]: [Bench02: Gave 1 [Diamond Sword] to Bench02]
+[02:13:48] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:13:48] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:13:49] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:49] [RCON Client /0:0:0:0:0:0:0:1 #102/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:49] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:49] [RCON Client /0:0:0:0:0:0:0:1 #103/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:51] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:13:51] [Server thread/INFO]: Bench02 has made the advancement [Monster Hunter]
+[02:13:52] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:13:53] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:13:54] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:13:54] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:54] [RCON Client /0:0:0:0:0:0:0:1 #104/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:54] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:54] [RCON Client /0:0:0:0:0:0:0:1 #105/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:55] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:13:57] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:13:58] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:13:59] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:13:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:59] [RCON Client /0:0:0:0:0:0:0:1 #106/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:13:59] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:13:59] [RCON Client /0:0:0:0:0:0:0:1 #107/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:00] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:01] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:02] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:03] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:04] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:04] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:04] [RCON Client /0:0:0:0:0:0:0:1 #108/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:04] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:04] [RCON Client /0:0:0:0:0:0:0:1 #109/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:06] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:06] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:08] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:09] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:09] [RCON Client /0:0:0:0:0:0:0:1 #110/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:09] [RCON Client /0:0:0:0:0:0:0:1 #111/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:10] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:12] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:12] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:14] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:14] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:15] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:15] [RCON Client /0:0:0:0:0:0:0:1 #112/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:15] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:15] [RCON Client /0:0:0:0:0:0:0:1 #113/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:16] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:16] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:18] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:18] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:20] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:20] [RCON Client /0:0:0:0:0:0:0:1 #114/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:20] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:20] [RCON Client /0:0:0:0:0:0:0:1 #115/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:20] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:20] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:22] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:22] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:24] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:25] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:25] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:25] [RCON Client /0:0:0:0:0:0:0:1 #116/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:25] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:25] [RCON Client /0:0:0:0:0:0:0:1 #117/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:26] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:27] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:28] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:29] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:30] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:30] [RCON Client /0:0:0:0:0:0:0:1 #118/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:30] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:30] [RCON Client /0:0:0:0:0:0:0:1 #119/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:31] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:31] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:33] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:33] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:35] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:35] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:35] [RCON Client /0:0:0:0:0:0:0:1 #120/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:35] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:35] [RCON Client /0:0:0:0:0:0:0:1 #121/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:35] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:37] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:38] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:39] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:40] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:40] [RCON Client /0:0:0:0:0:0:0:1 #122/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:40] [RCON Client /0:0:0:0:0:0:0:1 #123/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:41] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:42] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:43] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:44] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:45] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:45] [RCON Client /0:0:0:0:0:0:0:1 #124/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:45] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:45] [RCON Client /0:0:0:0:0:0:0:1 #125/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:46] [Server thread/INFO]: [Bench01: Summoned new Husk]
+[02:14:47] [Server thread/INFO]: [Bench02: Summoned new Husk]
+[02:14:49] [Server thread/INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[02:14:49] [Server thread/INFO]: [Bench01: Set own game mode to Survival Mode]
+[02:14:49] [Server thread/INFO]: [Bench01: Gave 1 [Iron Pickaxe] to Bench01]
+[02:14:49] [Server thread/INFO]: [Bench01: Gave 16 [Stone] to Bench01]
+[02:14:49] [Server thread/INFO]: [Bench02: Teleported Bench02 to 32.500000, 200.000000, 0.500000]
+[02:14:49] [Server thread/INFO]: [Bench02: Killed Husk]
+[02:14:49] [Server thread/INFO]: [Bench02: Set own game mode to Survival Mode]
+[02:14:49] [Server thread/INFO]: [Bench02: Gave 1 [Iron Pickaxe] to Bench02]
+[02:14:49] [Server thread/INFO]: [Bench02: Gave 16 [Stone] to Bench02]
+[02:14:50] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:50] [RCON Client /0:0:0:0:0:0:0:1 #126/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:50] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:50] [RCON Client /0:0:0:0:0:0:0:1 #127/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:51] [Server thread/INFO]: [Not Secure] [Bench01] FREE_BLOCK_air_Bench01
+[02:14:51] [Server thread/INFO]: [Not Secure] [Bench02] FREE_BLOCK_air_Bench02
+[02:14:51] [Server thread/INFO]: [Not Secure] [Bench02] FREE_BLOCK_stone_Bench02
+[02:14:51] [Server thread/INFO]: [Not Secure] [Bench01] FREE_BLOCK_stone_Bench01
+[02:14:51] [Server thread/INFO]: Bench02 has made the advancement [Stone Age]
+[02:14:54] [Server thread/INFO]: [Not Secure] [Bench02] E0_POS_survival_Bench02
+[02:14:54] [Server thread/INFO]: [Not Secure] [Bench01] E0_POS_survival_Bench01
+[02:14:54] [Server thread/INFO]: Bench01 lost connection: Disconnected
+[02:14:54] [Server thread/INFO]: Bench01 left the game
+[02:14:54] [Server thread/INFO]: Bench02 lost connection: Disconnected
+[02:14:54] [Server thread/INFO]: Bench02 left the game
+[02:14:56] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:56] [RCON Client /0:0:0:0:0:0:0:1 #128/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:56] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:56] [RCON Client /0:0:0:0:0:0:0:1 #129/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:14:56] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:14:56] [Server thread/INFO]: [Rcon: Saved the game]
+[02:14:56] [RCON Client /0:0:0:0:0:0:0:1 #130/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T02:14:56.533Z	INFO	mc-server-runner	gracefully stopping server...
+[02:14:56] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:14:56] [Server thread/INFO]: [Rcon: Stopping the server]
+[02:14:56] [RCON Client /0:0:0:0:0:0:0:1 #131/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T02:14:56.537Z	INFO	mc-server-runner	Waiting for completion...
+[02:14:56] [Server thread/INFO]: Stopping server
+[02:14:56] [Server thread/INFO]: Saving players
+[02:14:56] [Server thread/INFO]: Saving worlds
+[02:14:56] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[02:14:56] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[02:14:56] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:14:56] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:14:56] [Server thread/INFO]: Thread RCON Listener stopped
+2026-09-06T02:14:57.276Z	INFO	mc-server-runner	Done
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 10 1000 1000 4096 Sep  6 02:11 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given FABRIC
+[39m[mc-image-helper] 02:15:00.052 INFO  : Fabric launcher for minecraft 26.2 loader 0.19.5 is already available
+[0;39m[init] Copying any mods from /mods to /data/mods
+[init] Copying any configs from /config to /data/config
+[init] Setting mode
+[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Starting net.fabricmc.loader.impl.game.minecraft.BundlerClassPathCapture
+[02:15:08] [main/INFO]: Loading Minecraft 26.2 with Fabric Loader 0.19.5
+[02:15:08] [main/INFO]: Mappings not present!
+[02:15:08] [main/INFO]: Loading 6 mods:
+	- fabricloader 0.19.5
+	   \-- mixinextras 0.5.5
+	- ferritecore 9.0.0
+	- java 25
+	- lithium 0.25.3+mc26.2
+	- minecraft 26.2
+[02:15:08] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/data/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[02:15:08] [main/INFO]: Loaded configuration file for Lithium: 171 options available, 0 override(s) found.
+[02:15:09] [main/INFO]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[02:15:16] [main/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[02:15:19] [main/INFO]: Loaded 1585 recipes
+[02:15:19] [main/INFO]: Loaded 1688 advancements
+[02:15:19] [Server thread/INFO]: Starting minecraft server version 26.2
+[02:15:19] [Server thread/INFO]: Loading properties
+[02:15:19] [Server thread/INFO]: Default game type: SURVIVAL
+[02:15:19] [Server thread/INFO]: Generating keypair
+[02:15:19] [Server thread/INFO]: Starting Minecraft server on *:25565
+[02:15:20] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[02:15:20] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[02:15:20] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[02:15:20] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[02:15:20] [Server thread/INFO]: Preparing level "world"
+[02:15:20] [Server thread/INFO]: Loading 36 persistent chunks...
+[02:15:20] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:21] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:21] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:22] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:22] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:23] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:23] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:24] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:24] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:25] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:25] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:26] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:26] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:27] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:27] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:28] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:28] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:29] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:29] [Server thread/INFO]: Preparing spawn area: 21%
+[02:15:30] [Server thread/INFO]: Time elapsed: 9292 ms
+[02:15:30] [Server thread/INFO]: Done (9.830s)! For help, type "help"
+[02:15:30] [Server thread/INFO]: Starting remote control listener
+[02:15:30] [Server thread/INFO]: Thread RCON Listener started
+[02:15:30] [Server thread/INFO]: RCON running on 0.0.0.0:25575
+[02:15:30] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[02:15:30] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[02:15:30] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[02:15:30] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:15:30] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:15:30] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:15:30] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:15:33] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:15:33] [RCON Client /0:0:0:0:0:0:0:1 #2/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:15:33] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:15:33] [RCON Client /0:0:0:0:0:0:0:1 #3/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:15:33] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:15:33] [RCON Client /0:0:0:0:0:0:0:1 #4/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:15:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[02:15:34] [RCON Client /0:0:0:0:0:0:0:1 #5/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T02:15:34.072Z	INFO	mc-server-runner	gracefully stopping server...
+[02:15:34] [Server thread/INFO]: [Rcon: Stopping the server]
+[02:15:34] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+2026-09-06T02:15:34.078Z	INFO	mc-server-runner	Waiting for completion...
+[02:15:34] [RCON Client /0:0:0:0:0:0:0:1 #6/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[02:15:34] [Server thread/INFO]: Stopping server
+[02:15:34] [Server thread/INFO]: Saving players
+[02:15:34] [Server thread/INFO]: Saving worlds
+[02:15:34] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[02:15:34] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[02:15:34] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[02:15:34] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[02:15:34] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02:15:34] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02:15:34] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[02:15:34] [Server thread/INFO]: Thread RCON Listener stopped
+2026-09-06T02:15:34.630Z	INFO	mc-server-runner	Done
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 02:11:24 Stopping with rcon-cli
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 02:14:56 Stopping with rcon-cli
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 02:15:34 Stopping with rcon-cli
