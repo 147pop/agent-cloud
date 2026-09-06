@@ -1,0 +1,29 @@
+{"time":"2026-09-06T01:05:37.908Z","event":"connecting","players":1,"phase_seconds":10,"version":"26.2","survival":true,"lane_blocks":32}
+{"time":"2026-09-06T01:05:45.557Z","event":"chunk_wait","username":"Bench01","seconds":0.101,"position":{"x":-21.5,"y":80,"z":8.5}}
+{"time":"2026-09-06T01:05:48.058Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":0.5}}
+{"time":"2026-09-06T01:05:48.058Z","event":"spawn","username":"Bench01","position":{"x":0.5,"y":300,"z":0.5}}
+{"time":"2026-09-06T01:05:48.058Z","event":"phase","name":"new_chunks","players":1}
+{"time":"2026-09-06T01:05:48.059Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":16.5}}
+{"time":"2026-09-06T01:05:49.623Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":32.5}}
+{"time":"2026-09-06T01:05:51.227Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":48.5}}
+{"time":"2026-09-06T01:05:52.831Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":64.5}}
+{"time":"2026-09-06T01:05:53.059Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":300,"z":51},"bytes_read":291959,"bytes_written":3268}]}
+{"time":"2026-09-06T01:05:54.440Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":80.5}}
+{"time":"2026-09-06T01:05:56.074Z","event":"server_position_verified","username":"Bench01","stage":"out","position":{"x":0.5,"y":300,"z":80.5},"seconds":0.03}
+{"time":"2026-09-06T01:05:56.074Z","event":"phase","name":"existing_chunks","players":1}
+{"time":"2026-09-06T01:05:56.075Z","event":"chunk_wait","username":"Bench01","seconds":0.001,"position":{"x":0.5,"y":300,"z":64.5}}
+{"time":"2026-09-06T01:05:57.643Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":48.5}}
+{"time":"2026-09-06T01:05:58.058Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":300,"z":60},"bytes_read":536575,"bytes_written":6044}]}
+{"time":"2026-09-06T01:05:59.256Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":32.5}}
+{"time":"2026-09-06T01:06:00.861Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":16.5}}
+{"time":"2026-09-06T01:06:02.473Z","event":"chunk_wait","username":"Bench01","seconds":0,"position":{"x":0.5,"y":300,"z":0.5}}
+{"time":"2026-09-06T01:06:03.058Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":300,"z":10.5},"bytes_read":826180,"bytes_written":8871}]}
+{"time":"2026-09-06T01:06:04.094Z","event":"server_position_verified","username":"Bench01","stage":"back","position":{"x":0.5,"y":300,"z":0.5},"seconds":0.006}
+{"time":"2026-09-06T01:06:04.094Z","event":"phase","name":"combat","players":1}
+{"time":"2026-09-06T01:06:08.058Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":200,"z":0.5},"bytes_read":1216858,"bytes_written":10021}]}
+{"time":"2026-09-06T01:06:13.058Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":200,"z":0.5},"bytes_read":1240667,"bytes_written":10437}]}
+{"time":"2026-09-06T01:06:16.758Z","event":"phase","name":"survival","players":1}
+{"time":"2026-09-06T01:06:18.058Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":200,"z":0.5},"bytes_read":1262531,"bytes_written":10994}]}
+{"time":"2026-09-06T01:06:18.704Z","event":"bot_kicked","username":"Bench01","reason":{"type":"compound","value":{"with":{"type":"list","value":{"type":"string","value":["Internal Exception: io.netty.handler.codec.DecoderException: java.io.IOException: Packet play/serverbound/minecraft:test_instance_block_action (ServerboundTestInstanceBlockActionPacket) was larger than I expected, found 5 bytes extra whilst reading packet serverbound/minecraft:test_instance_block_action"]}},"translate":{"type":"string","value":"disconnect.genericReason"}}}}
+{"time":"2026-09-06T01:06:23.063Z","event":"sample","players":[{"username":"Bench01","position":{"x":0.5,"y":200,"z":0.5},"bytes_read":1264553,"bytes_written":11171}]}
+{"time":"2026-09-06T01:06:23.677Z","event":"failed","error":"Error: Event blockUpdate:(1, 200, 0) did not fire within timeout of 5000ms","observations":[{"username":"Bench01","chunks":218,"attacks":9,"confirmed_hits":9,"hurt_events":12,"kills":3,"spawned_at":1788656745456,"start_position":{"x":0.5,"y":300,"z":0.5},"explored_blocks":80,"revisited_blocks":80}]}

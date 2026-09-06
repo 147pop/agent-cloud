@@ -128,12 +128,14 @@ def report(directory):
                 completed = [event for event in events if event['event'] == 'complete']
                 assert len(completed) == 1
                 players = completed[0]['observations']
+                setup = [event for event in events if event['event'] == 'connecting']
+                assert len(setup) == 1 and setup[0]['lane_blocks'] == (256 if summary['parameters'].get('spread') else 32)
                 assert len(players) == summary['parameters']['players']
                 assert all(player['explored_blocks'] >= summary['parameters']['seconds'] * 8 - 2 and
                            player['revisited_blocks'] >= summary['parameters']['seconds'] * 8 - 2 for player in players)
                 selected = [sample for sample in samples if sample.get('case') == case['name'] and sample.get('stage') == phase]
                 row = measurements(selected, events, summary['profile']['thresholds'])
-                rows.append({'case': case['name'], 'phase': phase, **row})
+                rows.append({'case': case['name'], 'phase': phase, 'lane_blocks': setup[0]['lane_blocks'], **row})
             except (AssertionError, KeyError, FileNotFoundError) as error:
                 errors.append({'case': case['name'], 'phase': phase, 'error': str(error)})
     overlap = simultaneous_play(rows, summary['cases'], summary['parameters']['instances'], summary['parameters']['repeats'])
@@ -188,6 +190,7 @@ def main():
     parser.add_argument('--instances', type=int, default=1)
     parser.add_argument('--repeats', type=int, default=2)
     parser.add_argument('--seconds', type=int, default=60)
+    parser.add_argument('--spread', action='store_true', help='Use player lanes 256 blocks apart instead of 32')
     args = parser.parse_args()
     assert re.fullmatch(r'[a-z0-9-]{1,32}', args.label)
     assert 1 <= args.instances <= 7 and 1 <= args.repeats <= 2 and 10 <= args.seconds <= 180
@@ -349,7 +352,7 @@ def main():
                         '--cpuset-cpus', '3', '--cpus', '1', '--memory', '1g', '--memory-swap', '1g', '--pids-limit', '128',
                         '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges', '--read-only', '--tmpfs', '/tmp',
                         '--user', '1001:1001', '-v', f'{ROOT}:/work:ro', '-w', '/work', NODE,
-                        'node', 'players.js', str(args.players), str(args.seconds), '26.2', '--survival'],
+                        'node', 'players.js', str(args.players), str(args.seconds), '26.2', '--survival', *(['--spread'] if args.spread else [])],
                         stdout=stream, stderr=subprocess.STDOUT)
                     deadline = time.monotonic() + args.seconds * 6 + args.players * 100 + 120
                     saved = False

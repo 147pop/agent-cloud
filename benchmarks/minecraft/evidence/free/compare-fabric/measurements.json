@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "label": "compare-fabric",
+    "engine": "fabric",
+    "players": 2,
+    "instances": 1,
+    "repeats": 2,
+    "seconds": 60
+  },
+  "report_source_sha256": "8e37545fe387e0333aea72c449e6ba6b69f8339405e906c656cc61d7e2a344ff",
+  "operational_complete": false,
+  "errors": [
+    {
+      "case": "r1-i1",
+      "phase": "populated",
+      "error": "[Errno 2] No such file or directory: 'benchmarks/minecraft/evidence/free/compare-fabric/r1-i1-populated-players.jsonl'"
+    }
+  ],
+  "mixed_activity": {
+    "startup_with_play_samples": 0,
+    "save_with_play_samples": 0,
+    "background_saves_with_other_instances_playing": 0
+  },
+  "guard_failures": [
+    ""
+  ],
+  "recipes_match": true,
+  "startup_pass": false,
+  "rows": [
+    {
+      "case": "r1-i1",
+      "phase": "fresh",
+      "lane_blocks": 32,
+      "started_at": 1788659275.619,
+      "finished_at": 1788659440.779,
+      "active_seconds": 165.1600000858307,
+      "samples": 32,
+      "tps_windows": 20,
+      "minimum_tps_60s": 19.988553821247656,
+      "maximum_sampled_p95_tick_ms": 14.1,
+      "maximum_sampled_p99_tick_ms": 327.7,
+      "p95_chunk_wait_seconds": 0,
+      "maximum_chunk_wait_seconds": 0.001,
+      "total_chunk_wait_player_seconds": 0.006,
+      "p95_client_command_seconds": 0.014,
+      "maximum_client_command_seconds": 0.014,
+      "p95_rcon_seconds": 0.055060386657714844,
+      "maximum_rcon_seconds": 0.0599665641784668,
+      "mean_cpu_cores": 0.6400031738656743,
+      "peak_cpu_cores": 1.7823320655538428,
+      "peak_container_mib": 1963.41796875,
+      "confirmed_hits": 112,
+      "client_bytes": 11482364,
+      "phases": {
+        "new_chunks": 48.63100004196167,
+        "existing_chunks": 48.295000076293945,
+        "combat": 62.722999811172485,
+        "survival": 5.511000156402588
+      },
+      "performance_pass": true
+    }
+  ],
+  "simultaneous_play": [
+    {
+      "repeat": 1,
+      "phase": "fresh",
+      "seconds": 165.1600000858307
+    },
+    {
+      "repeat": 1,
+      "phase": "populated",
+      "seconds": 0
+    },
+    {
+      "repeat": 2,
+      "phase": "fresh",
+      "seconds": 0
+    },
+    {
+      "repeat": 2,
+      "phase": "populated",
+      "seconds": 0
+    }
+  ],
+  "seconds_with_all_instances_playing": 165.1600000858307,
+  "peak_host_busy_cpu_cores": 2.0944958597174868,
+  "peak_total_game_memory_mib": 1987.5390625,
+  "minimum_available_gib": 20.68918228149414,
+  "minimum_free_disk_gib": 35.4330940246582,
+  "elapsed_minutes": 3.838693380355835,
+  "repeated_synthetic_pass": false,
+  "external_human_play": "not measured by this runner"
+}

@@ -1,0 +1,208 @@
+[init] Changing ownership of /data to 1000 ...
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 2 1000 1000 4096 Sep  6 01:04 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given PAPER
+[39m[mc-image-helper] 01:04:52.405 INFO  : Downloaded /data/paper-26.2-121.jar
+[0;39m[init] Copying any plugins from /plugins to /data/plugins
+[init] Copying any configs from /config to /data/config
+[init] Creating server properties in /data/server.properties
+[init] Disabling whitelist functionality
+[init] Setting mode
+[39m[mc-image-helper] 01:04:57.313 INFO  : Created/updated 15 properties in /data/server.properties
+[0;39m[39m[mc-image-helper] 01:04:59.492 INFO  : Downloaded /data/config/paper-global.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/paper-global.yml
+[0;39m[39m[mc-image-helper] 01:04:59.514 INFO  : Downloaded /data/config/paper-world-defaults.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/paper-world-defaults.yml
+[0;39m[39m[mc-image-helper] 01:05:01.952 INFO  : Downloaded /data/spigot.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/spigot.yml
+[0;39m[39m[mc-image-helper] 01:05:01.953 INFO  : Downloaded /data/bukkit.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/bukkit.yml
+[0;39m[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Downloading mojang_26.2.jar
+Applying patches
+Starting org.bukkit.craftbukkit.Main
+[01:05:09 INFO]: [bootstrap] Running Java 25 (OpenJDK 64-Bit Server VM 25.0.4+7-LTS; Eclipse Adoptium Temurin-25.0.4+7) on Linux 6.17.0-1020-oracle (aarch64)
+[01:05:09 INFO]: [bootstrap] Loading Paper 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) for Minecraft 26.2
+[01:05:09 INFO]: [PluginInitializerManager] Initializing plugins...
+[01:05:09 INFO]: [PluginInitializerManager] Initialized 0 plugins
+[01:05:14 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[01:05:14 INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[01:05:15 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 858.6ms
+[01:05:15 INFO]: Found new data pack paper, loading it automatically
+[01:05:16 INFO]: No existing world data, creating new world
+[01:05:18 INFO]: Loaded 1585 recipes
+[01:05:18 INFO]: Loaded 1688 advancements
+[01:05:18 INFO]: Starting minecraft server version 26.2
+[01:05:18 INFO]: Loading properties
+[01:05:18 INFO]: This server is running Paper version 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) (Implementing API version 26.2.build.121-stable)
+[01:05:18 INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[01:05:18 INFO]: Server Ping Player Sample Count: 12
+[01:05:18 INFO]: Using 4 threads for Netty based IO
+[01:05:19 INFO]: [MoonriseCommon] Paper is using 1 worker threads, 1 I/O threads
+[01:05:19 INFO]: Default game type: SURVIVAL
+[01:05:19 INFO]: Generating keypair
+[01:05:19 INFO]: Starting Minecraft server on *:25565
+[01:05:19 INFO]: Paper: Using libdeflate (Linux aarch64) compression from Velocity.
+[01:05:19 INFO]: Paper: Using OpenSSL 3.x.x (Linux aarch64) cipher from Velocity.
+[01:05:19 WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[01:05:19 WARN]: The server will make no attempt to authenticate usernames. Beware.
+[01:05:19 WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[01:05:19 WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[01:05:19 INFO]: Preparing level "world"
+[01:05:20 INFO]: Selecting spawn point for level 'minecraft:overworld'...
+[01:05:29 INFO]: Selecting spawn point for level 'minecraft:the_nether'...
+[01:05:30 INFO]: Selecting spawn point for level 'minecraft:the_end'...
+[01:05:31 INFO]: Loading 0 persistent chunks for level 'minecraft:overworld'...
+[01:05:31 INFO]: Preparing spawn area: 100%
+[01:05:31 INFO]: Prepared spawn area in 11204 ms
+[01:05:31 INFO]: Loading 0 persistent chunks for level 'minecraft:the_nether'...
+[01:05:31 INFO]: Preparing spawn area: 100%
+[01:05:31 INFO]: Prepared spawn area in 1539 ms
+[01:05:31 INFO]: Loading 0 persistent chunks for level 'minecraft:the_end'...
+[01:05:31 INFO]: Preparing spawn area: 100%
+[01:05:31 INFO]: Prepared spawn area in 389 ms
+[01:05:31 INFO]: Done preparing level "world" (11.570s)
+[01:05:31 INFO]: [spark] Starting background profiler...
+[01:05:31 INFO]: Starting remote control listener
+[01:05:31 INFO]: Thread RCON Listener started
+[01:05:31 INFO]: RCON running on 0.0.0.0:25575
+[01:05:31 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[01:05:31 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[01:05:31 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[01:05:31 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:05:31 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[01:05:31 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[01:05:31 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[01:05:31 INFO]: Running delayed init tasks
+[01:05:31 INFO]: Done (23.503s)! For help, type "help"
+[01:05:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:38 INFO]: UUID of player Bench01 is 43f83340-24e5-346a-8e0c-cf6bfccead28
+[01:05:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:43 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:43 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:43 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:43 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:45 INFO]: Bench01 joined the game
+[01:05:45 INFO]: Bench01[IP hidden] logged in with entity id 6 at ([minecraft:overworld]-21.5, 80.0, 8.5)
+[01:05:45 INFO]: Bench01 issued server command: /gamemode creative
+[01:05:45 INFO]: [Bench01: Set own game mode to Creative Mode]
+[01:05:46 INFO]: Bench01 issued server command: /tp @s 0 300 0
+[01:05:46 INFO]: [Bench01: Teleported Bench01 to 0.500000, 300.000000, 0.500000]
+[01:05:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:53 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:53 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:56 INFO]: Bench01 issued server command: /execute positioned 0.5 300 80.5 if entity @s[distance=..2] run say E0_POS_out_Bench01
+[01:05:56 INFO]: [Not Secure] [Bench01] E0_POS_out_Bench01
+[01:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:04 INFO]: Bench01 issued server command: /execute positioned 0.5 300 0.5 if entity @s[distance=..2] run say E0_POS_back_Bench01
+[01:06:04 INFO]: [Not Secure] [Bench01] E0_POS_back_Bench01
+[01:06:04 INFO]: Bench01 issued server command: /fill -5 199 -5 5 199 20 minecraft:stone
+[01:06:04 INFO]: [Bench01: Successfully filled 286 block(s)]
+[01:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:04 INFO]: Bench01 issued server command: /tp @s 0 200 0
+[01:06:04 INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[01:06:05 INFO]: Bench01 issued server command: /give @s minecraft:diamond_sword
+[01:06:05 INFO]: [Bench01: Gave 1 [Diamond Sword] to Bench01]
+[01:06:06 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[01:06:06 INFO]: [Bench01: Summoned new Husk]
+[01:06:09 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[01:06:09 INFO]: [Bench01: Summoned new Husk]
+[01:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:11 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[01:06:11 INFO]: [Bench01: Summoned new Husk]
+[01:06:12 INFO]: Bench01 has made the advancement [Monster Hunter]
+[01:06:13 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[01:06:13 INFO]: [Bench01: Summoned new Husk]
+[01:06:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:15 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[01:06:15 INFO]: [Bench01: Summoned new Husk]
+[01:06:16 INFO]: Bench01 issued server command: /tp @s 0 200 0
+[01:06:16 INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[01:06:16 INFO]: Bench01 issued server command: /gamemode survival
+[01:06:16 INFO]: [Bench01: Set own game mode to Survival Mode]
+[01:06:16 INFO]: Bench01 issued server command: /give @s minecraft:iron_pickaxe
+[01:06:16 INFO]: Bench01 has made the advancement [Isn't It Iron Pick]
+[01:06:16 INFO]: [Bench01: Gave 1 [Iron Pickaxe] to Bench01]
+[01:06:16 INFO]: Bench01 issued server command: /give @s minecraft:stone 16
+[01:06:16 INFO]: [Bench01: Gave 16 [Stone] to Bench01]
+[01:06:16 INFO]: Bench01 issued server command: /setblock 1 200 0 minecraft:stone
+[01:06:16 INFO]: [Bench01: Changed the block at 1, 200, 0]
+[01:06:18 INFO]: Bench01 lost connection: Internal Exception: io.netty.handler.codec.DecoderException: java.io.IOException: Packet play/serverbound/minecraft:test_instance_block_action (ServerboundTestInstanceBlockActionPacket) was larger than I expected, found 5 bytes extra whilst reading packet serverbound/minecraft:test_instance_block_action
+[01:06:18 INFO]: Bench01 left the game
+[01:06:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:24 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:06:24 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[01:06:24 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[01:06:24 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[01:06:24 INFO]: [Rcon: Saved the game]
+[01:06:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[01:06:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T01:06:26.237Z	INFO	mc-server-runner	gracefully stopping server...
+[01:06:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[01:06:26 INFO]: [Rcon: Stopping the server]
+[01:06:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T01:06:26.243Z	INFO	mc-server-runner	Waiting for completion...
+[01:06:26 INFO]: Stopping server
+[01:06:26 INFO]: Saving players
+[01:06:26 INFO]: Saving worlds
+[01:06:26 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[01:06:26 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:overworld'
+[01:06:26 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:overworld'
+[01:06:26 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:overworld'
+[01:06:27 INFO]: [ChunkHolderManager] Saved 1247 block chunks, 23 entity chunks, 0 poi chunks in world 'minecraft:overworld' in 0.84s
+[01:06:27 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:overworld'
+[01:06:27 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:overworld'
+[01:06:27 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[01:06:27 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_nether'
+[01:06:27 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_nether'
+[01:06:27 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_nether'
+[01:06:27 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_nether' in 0.00s
+[01:06:27 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_nether'
+[01:06:27 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_nether'
+[01:06:27 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[01:06:27 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_end'
+[01:06:27 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_end'
+[01:06:27 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_end'
+[01:06:27 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_end' in 0.00s
+[01:06:27 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_end'
+[01:06:27 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_end'
+[01:06:27 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:06:27 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[01:06:27 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[01:06:27 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[01:06:27 INFO]: Waiting for all RegionFile I/O tasks to complete...
+[01:06:27 INFO]: All RegionFile I/O tasks to complete
+[01:06:27 INFO]: [MoonriseCommon] Awaiting termination of worker pool for up to 60s...
+[01:06:27 INFO]: [MoonriseCommon] Awaiting termination of I/O pool for up to 60s...
+2026-09-06T01:06:27.616Z	INFO	mc-server-runner	Done
+2026-09-06T01:05:08.846085990Z ServerMain WARN Advanced terminal features are not available in this environment
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 01:06:26 Stopping with rcon-cli

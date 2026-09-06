@@ -6,7 +6,7 @@ const count = Number(process.argv[2])
 const seconds = Number(process.argv[3] || 60)
 const version = process.argv[4] || '26.2'
 const qualify = process.argv.includes('--survival')
-const lane = qualify ? 32 : 256
+const lane = qualify && !process.argv.includes('--spread') ? 32 : 256
 const customPackets = version === '26.2' ? require('./protocol26') : undefined
 assert([1, 2, 4, 8].includes(count), 'Use 1, 2, 4 or 8 players')
 assert(Number.isInteger(seconds) && seconds >= 10 && seconds <= 300)
