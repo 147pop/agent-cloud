@@ -43,11 +43,11 @@ The free tier prioritizes acceptable simultaneous sessions per host. Optimized e
 
 The [public research and fixed comparison](free-profile.md) narrow the candidates to Paper and Fabric with Lithium and FerriteCore. C2ME is the only conditional variant, for a measured generation bottleneck. The plan pins one Minecraft and Java version, hardware, CPU and memory limits, distances, seed, client workload and measurement method. Record gameplay differences and required client changes.
 
-The [recorded comparison](free-profile-results.md) passed for both nearby-player candidates. Paper also passed the repeated separate-terrain check and the longer density workload with one instance and two players. Two instances exceeded the RCON response limit during a save. External human play and the live Spectrum route remain pending, so the profile is still Experimental.
+The [recorded comparison](free-profile-results.md) passed for both nearby-player candidates. Paper also passed the repeated separate-terrain check and the longer density workload with one instance and two players. Two instances exceeded the RCON response limit during a save. On 2026-09-06, Pablo accepted the bot activity and local recovery evidence for E1 profile selection. Paper is Qualified for that scope. [TPS by activity](free-profile-results.md#tps-by-player-activity) covers two repetitions. External human play and the live Spectrum route remain pending before public opening.
 
 Qualification covers these checks:
 
-1. Compare candidates at the same resource limits with fresh and populated worlds. Include normal survival play and human observations alongside bots. Record TPS, tick-time distributions, terrain waits, connection and command latency, memory, CPU and network use.
+1. Compare candidates at the same resource limits with fresh and populated worlds. Record the bot workload and keep human observations separate. Measure TPS, tick-time distributions, terrain waits, connection and command latency, memory, CPU and network use.
 2. Select a profile only after repeated runs meet written experience thresholds. Explain whether a slow phase reflects world generation, host contention, network delay or the server itself. A 19 TPS rule alone does not define playability.
 3. Run multiple independent server instances on one host, including concurrent starts, active sessions and background saves. Measure the number of acceptable sessions and resource use while preserving host reserves.
 4. Test save, stop, restart, backup and restore with that profile. Record compatibility and retest requirements for version updates.

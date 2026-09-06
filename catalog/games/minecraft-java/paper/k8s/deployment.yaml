@@ -37,7 +37,11 @@ spec:
             - name: PAPER_BUILD
               value: "121"
             - name: MEMORY
-              value: 4G
+              value: 2G
+            - name: JVM_XX_OPTS
+              value: "-XX:ActiveProcessorCount=2"
+            - name: SEED
+              value: "20260904"
             - name: UID
               value: "1000"
             - name: GID
@@ -47,7 +51,11 @@ spec:
             - name: SIMULATION_DISTANCE
               value: "4"
             - name: MAX_PLAYERS
-              value: "1"
+              value: "2"
+            - name: MODE
+              value: survival
+            - name: DIFFICULTY
+              value: normal
             - name: ENABLE_RCON
               value: "false"
             - name: STOP_SERVER_ANNOUNCE_DELAY
@@ -65,11 +73,11 @@ spec:
             failureThreshold: 12
           resources:
             requests:
-              cpu: "3"
-              memory: 5Gi
+              cpu: "2"
+              memory: 3Gi
             limits:
-              cpu: "3"
-              memory: 5Gi
+              cpu: "2"
+              memory: 3Gi
           volumeMounts:
             - name: data
               mountPath: /data

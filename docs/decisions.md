@@ -47,17 +47,27 @@ Agustín Pedernera recorded these approvals in the decision issues. The later bi
 
 These are acceptance rules, not completed test results. [D9's authorizations and incident ownership](https://linear.app/workspace/issue/TES-23) remain in the private project record.
 
-## D5, public game TCP and worker IP exposure — resolved 2026-09-06
+## Free Paper profile, accepted 2026-09-06
 
-[TES-18](https://linear.app/workspace/issue/TES-18) carried two conflicting comments: Pablo asked for "an IP that Cloudflare provides" (2026-09-04); Agustín Pedernera had separately approved direct DNS to a provider with included protection (2026-09-04), which closed the issue without settling Pablo's request. This entry replaces both and is the current policy.
+Pablo accepted the repeated bot workload and local recovery evidence for TES-144 and TES-140. This replaces the earlier requirement for a human session before E1 profile selection. The [results](../benchmarks/minecraft/free-profile-results.md#tps-by-player-activity) show active exploration in separate terrain, combat and block actions in two repetitions.
 
 | Decision | Reason and consequence |
 | --- | --- |
-| Route public Minecraft TCP through Cloudflare Spectrum | Matches Pablo's request for a Cloudflare-facing IP. The protection boundary is Cloudflare's edge L3/L4 mitigation; the worker's real IP is no longer directly reachable. Spectrum is billed per GB proxied — that cost must be measured against expected beta traffic before public registration opens, per D7's free-beta scope. |
+| Use Paper 26.2 build 121 with the tested free configuration | Two CPU quota units, 2 GiB heap, 3 GiB container, `ActiveProcessorCount=2`, view 6, simulation 4, seed 20260904 and no gameplay plugins. |
+| Accept one active instance with two players on the tested Oracle A1 host | Both repetitions passed exploration, combat and local recovery. Two instances failed the control-response threshold during a save. Four or eight players in one instance were not tested with this recipe. |
 
-External validation from a real Minecraft client is still required before this decision can close TES-18 fully. It is blocked on an E1 Minecraft deployment existing to act as the Spectrum origin; tracked as the remaining acceptance criterion on TES-18, not a new decision.
+The profile is Qualified for E1. The [K3s recipe](../catalog/games/minecraft-java/paper/k8s/) uses the accepted game settings; its lifecycle checks, platform backups and recovery remain separate work. This decision does not claim human-client or public-route evidence.
 
-**Pending real-host validation:** E1's repo-side artifacts (K3s manifests and test runbook at [catalog/games/minecraft-java/paper/k8s/](../catalog/games/minecraft-java/paper/k8s/)) are written, but K3s is not yet installed on `control-1`/`game-1` and no host has run the six interrupted-stop/replacement scenarios or connected a real external client through Spectrum. This paragraph gets replaced with a dated confirmation, an evidence link, and any observed Spectrum GB-billing (feeds D7) once that happens — not before.
+## D5, public game TCP and worker IP exposure, updated 2026-09-06
+
+The earlier comments in [TES-18](https://linear.app/workspace/issue/TES-18) differed between direct DNS and a Cloudflare-facing IP. The owners selected Cloudflare Spectrum in PR 4. Pablo then placed Spectrum implementation and validation at the end of the functional product work, before public opening. This is the current sequence.
+
+| Stage | Required path and evidence |
+| --- | --- |
+| E1 through the functional invited beta | Use a controlled operator or test-player path and record the actual access and exposure. Spectrum does not block profile selection, lifecycle, API, queue or recovery work. |
+| Final gate before public opening | Configure Spectrum for Minecraft TCP, validate the edge address and origin restriction, and measure traffic and cost. An authenticated external client must connect, explore, interact, save, restart and reconnect through the stable hostname. Record latency, stalls and gameplay observations. |
+
+TES-18 stays open for that final gate after invited-beta acceptance. Synthetic clients and operator access establish no Spectrum result. HTTP Worker, Access and Tunnel work retains its own E2 scope.
 
 ## Open source license — resolved 2026-09-06
 
@@ -69,7 +79,6 @@ External validation from a real Minecraft client is still required before this d
 
 | Decision | What must be recorded before proceeding |
 | --- | --- |
-| Free Minecraft profile | Comparable engine results, a human play review, concurrent instance measurements and the chosen margin for the host. The older single-instance reference is insufficient. |
 | First curated Deploy workload and runtime | A specific application, operating policy, isolation requirements and qualification plan. No sandbox technology is selected in advance. |
 
 A decision changes when its owner records the replacement and why. Update this file and the affected configuration or architecture in the same change. Preserve the earlier evidence and date; do not rewrite a failed experiment as a passing result.

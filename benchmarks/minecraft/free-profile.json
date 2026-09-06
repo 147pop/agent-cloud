@@ -1,5 +1,5 @@
 {
-  "status": "Experimental",
+  "status": "Qualified",
   "recorded_at": "2026-09-06",
   "minecraft_version": "26.2",
   "java_version": "Temurin 25.0.4+7-LTS",
@@ -55,7 +55,16 @@
     "concurrent_instances": 1,
     "evidence": "evidence/free/density-paper-1/measurements.json"
   },
-  "qualified_players_per_instance": null,
-  "qualified_concurrent_instances": null,
-  "external_human_play": "pending"
+  "qualified_players_per_instance": 2,
+  "qualified_concurrent_instances": 1,
+  "acceptance": {
+    "scope": "E1 profile selection on the tested Oracle A1 host",
+    "basis": "Owner accepted repeated synthetic activity and local recovery checks",
+    "accepted_by": "Pablo",
+    "accepted_at": "2026-09-06",
+    "evidence": "free-profile-results.md#tps-by-player-activity",
+    "public_launch_gate": "TES-18"
+  },
+  "external_human_play": "pending before public opening",
+  "spectrum_route": "pending before public opening"
 }
