@@ -1,0 +1,177 @@
+{
+  "parameters": {
+    "label": "compare-paper",
+    "engine": "paper",
+    "players": 2,
+    "instances": 1,
+    "repeats": 2,
+    "seconds": 60
+  },
+  "report_source_sha256": "0974e8ff6d057fdf06c1e0d5ba1402321c80d74375a7e20e404eda1baa6d17e4",
+  "operational_complete": true,
+  "errors": [],
+  "mixed_activity": {
+    "startup_with_play_samples": 0,
+    "save_with_play_samples": 0,
+    "background_saves_with_other_instances_playing": 0
+  },
+  "guard_failures": [],
+  "recipes_match": true,
+  "startup_pass": true,
+  "rows": [
+    {
+      "case": "r1-i1",
+      "phase": "fresh",
+      "started_at": 1788658284.628,
+      "finished_at": 1788658449.713,
+      "active_seconds": 165.08500003814697,
+      "samples": 32,
+      "tps_windows": 20,
+      "minimum_tps_60s": 19.52101376319254,
+      "maximum_sampled_p95_tick_ms": 23.1,
+      "maximum_sampled_p99_tick_ms": 57.4,
+      "p95_chunk_wait_seconds": 0,
+      "maximum_chunk_wait_seconds": 0.101,
+      "total_chunk_wait_player_seconds": 0.10400000000000001,
+      "p95_client_command_seconds": 0.015,
+      "maximum_client_command_seconds": 0.015,
+      "p95_rcon_seconds": 0.05799293518066406,
+      "maximum_rcon_seconds": 0.08098864555358887,
+      "mean_cpu_cores": 0.5806455423792559,
+      "peak_cpu_cores": 1.6910938906175887,
+      "peak_container_mib": 2719.6875,
+      "confirmed_hits": 110,
+      "client_bytes": 11868434,
+      "phases": {
+        "new_chunks": 48.378000020980835,
+        "existing_chunks": 48.394999980926514,
+        "combat": 62.80299997329712,
+        "survival": 5.509000062942505
+      },
+      "performance_pass": true
+    },
+    {
+      "case": "r1-i1",
+      "phase": "populated",
+      "started_at": 1788658497.94,
+      "finished_at": 1788658663.416,
+      "active_seconds": 165.47599983215332,
+      "samples": 32,
+      "tps_windows": 20,
+      "minimum_tps_60s": 19.419259597812047,
+      "maximum_sampled_p95_tick_ms": 18.3,
+      "maximum_sampled_p99_tick_ms": 58.9,
+      "p95_chunk_wait_seconds": 0,
+      "maximum_chunk_wait_seconds": 0.001,
+      "total_chunk_wait_player_seconds": 0.006,
+      "p95_client_command_seconds": 0.017,
+      "maximum_client_command_seconds": 0.017,
+      "p95_rcon_seconds": 0.0494384765625,
+      "maximum_rcon_seconds": 0.050058841705322266,
+      "mean_cpu_cores": 0.276543482535854,
+      "peak_cpu_cores": 0.9030341326596582,
+      "peak_container_mib": 2348.9921875,
+      "confirmed_hits": 113,
+      "client_bytes": 13814764,
+      "phases": {
+        "new_chunks": 48.5699999332428,
+        "existing_chunks": 48.39300012588501,
+        "combat": 62.98199987411499,
+        "survival": 5.5309998989105225
+      },
+      "performance_pass": true
+    },
+    {
+      "case": "r2-i1",
+      "phase": "fresh",
+      "started_at": 1788658765.682,
+      "finished_at": 1788658930.836,
+      "active_seconds": 165.15400004386902,
+      "samples": 32,
+      "tps_windows": 20,
+      "minimum_tps_60s": 19.598015991666514,
+      "maximum_sampled_p95_tick_ms": 19.4,
+      "maximum_sampled_p99_tick_ms": 59.7,
+      "p95_chunk_wait_seconds": 0.001,
+      "maximum_chunk_wait_seconds": 0.305,
+      "total_chunk_wait_player_seconds": 0.313,
+      "p95_client_command_seconds": 0.016,
+      "maximum_client_command_seconds": 0.016,
+      "p95_rcon_seconds": 0.07138299942016602,
+      "maximum_rcon_seconds": 0.07403874397277832,
+      "mean_cpu_cores": 0.5729478767717239,
+      "peak_cpu_cores": 1.6784227685389106,
+      "peak_container_mib": 2725.234375,
+      "confirmed_hits": 112,
+      "client_bytes": 11841883,
+      "phases": {
+        "new_chunks": 48.43400001525879,
+        "existing_chunks": 48.194000005722046,
+        "combat": 62.95900011062622,
+        "survival": 5.566999912261963
+      },
+      "performance_pass": true
+    },
+    {
+      "case": "r2-i1",
+      "phase": "populated",
+      "started_at": 1788658980.315,
+      "finished_at": 1788659145.506,
+      "active_seconds": 165.1909999847412,
+      "samples": 32,
+      "tps_windows": 20,
+      "minimum_tps_60s": 19.43437448113871,
+      "maximum_sampled_p95_tick_ms": 10.3,
+      "maximum_sampled_p99_tick_ms": 56.7,
+      "p95_chunk_wait_seconds": 0,
+      "maximum_chunk_wait_seconds": 0.001,
+      "total_chunk_wait_player_seconds": 0.004,
+      "p95_client_command_seconds": 0.019,
+      "maximum_client_command_seconds": 0.019,
+      "p95_rcon_seconds": 0.049642324447631836,
+      "maximum_rcon_seconds": 0.049956560134887695,
+      "mean_cpu_cores": 0.26530347996655157,
+      "peak_cpu_cores": 0.7827608658214712,
+      "peak_container_mib": 2256.6171875,
+      "confirmed_hits": 112,
+      "client_bytes": 14009738,
+      "phases": {
+        "new_chunks": 48.46300005912781,
+        "existing_chunks": 48.32599997520447,
+        "combat": 62.907999992370605,
+        "survival": 5.49399995803833
+      },
+      "performance_pass": true
+    }
+  ],
+  "simultaneous_play": [
+    {
+      "repeat": 1,
+      "phase": "fresh",
+      "seconds": 165.08500003814697
+    },
+    {
+      "repeat": 1,
+      "phase": "populated",
+      "seconds": 165.47599983215332
+    },
+    {
+      "repeat": 2,
+      "phase": "fresh",
+      "seconds": 165.15400004386902
+    },
+    {
+      "repeat": 2,
+      "phase": "populated",
+      "seconds": 165.1909999847412
+    }
+  ],
+  "seconds_with_all_instances_playing": 660.9059998989105,
+  "peak_host_busy_cpu_cores": 2.8311562651185294,
+  "peak_total_game_memory_mib": 2728.9296875,
+  "minimum_available_gib": 20.029998779296875,
+  "minimum_free_disk_gib": 35.573768615722656,
+  "elapsed_minutes": 16.043900350729626,
+  "repeated_synthetic_pass": true,
+  "external_human_play": "not measured by this runner"
+}

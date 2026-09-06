@@ -97,10 +97,21 @@ def measurements(samples, events, thresholds=None):
     return row
 
 
+def simultaneous_play(rows, cases, count, repeats):
+    result = []
+    for repeat in range(1, repeats + 1):
+        names = {case['name'] for case in cases if case['repeat'] == repeat}
+        for phase in ('fresh', 'populated'):
+            active = [row for row in rows if row['case'] in names and row['phase'] == phase]
+            seconds = max(0, min(row['finished_at'] for row in active) - max(row['started_at'] for row in active)) if len(active) == count else 0
+            result.append({'repeat': repeat, 'phase': phase, 'seconds': seconds})
+    return result
+
+
 def report(directory):
     summary = json.loads((directory / 'summary.json').read_text())
     samples = [json.loads(line) for line in (directory / 'metrics.jsonl').read_text().splitlines()]
-    rows, errors, intervals = [], [], []
+    rows, errors = [], []
     for case in sorted(summary['cases'], key=lambda entry: entry['name']):
         for phase in ('fresh', 'populated'):
             try:
@@ -114,14 +125,28 @@ def report(directory):
                 selected = [sample for sample in samples if sample.get('case') == case['name'] and sample.get('stage') == phase]
                 row = measurements(selected, events, summary['profile']['thresholds'])
                 rows.append({'case': case['name'], 'phase': phase, **row})
-                intervals.append((row['started_at'], row['finished_at']))
             except (AssertionError, KeyError, FileNotFoundError) as error:
                 errors.append({'case': case['name'], 'phase': phase, 'error': str(error)})
-    edges = sorted({timestamp for interval in intervals for timestamp in interval})
-    count = summary['parameters']['instances']
-    full_overlap = sum(stop - start for start, stop in zip(edges, edges[1:])
-                       if sum(left <= start < right for left, right in intervals) == count)
+    overlap = simultaneous_play(rows, summary['cases'], summary['parameters']['instances'], summary['parameters']['repeats'])
     host = [sample for sample in samples if 'container' not in sample and 'available_bytes' in sample]
+    host_cpu = [list(map(int, sample['host_cpu_stat'].split()[1:9])) for sample in host]
+    cpu_intervals = []
+    for before, after in zip(host_cpu, host_cpu[1:]):
+        delta = [b - a for a, b in zip(before, after)]
+        if sum(delta) > 0:
+            cpu_intervals.append(summary['host']['cores'] * sum(delta[index] for index in (0, 1, 2, 5, 6)) / sum(delta))
+    mixed = {'startup_with_play_samples': 0, 'save_with_play_samples': 0}
+    snapshots = {}
+    for sample in samples:
+        if 'container' in sample:
+            snapshots.setdefault(sample['time'], []).append(sample)
+    for timestamp, snapshot in snapshots.items():
+        if any(row['started_at'] <= timestamp <= row['finished_at'] for row in rows):
+            mixed['startup_with_play_samples'] += any(sample['stage'] in ('cold_start', 'warm_start', 'verify_restart') for sample in snapshot)
+            mixed['save_with_play_samples'] += any(sample['stage'] == 'save' for sample in snapshot)
+    mixed['background_saves_with_other_instances_playing'] = sum(
+        any(row['case'] != case['name'] and row['started_at'] <= phase.get('background_save_started_at', 0) <= row['finished_at'] for row in rows)
+        for case in summary['cases'] for phase in case.get('phases', {}).values())
     totals = {}
     for sample in samples:
         if 'container' in sample:
@@ -131,15 +156,18 @@ def report(directory):
     startup_pass = all(max(case.get(key, float('inf')) for key in ['cold_ready_seconds', 'warm_ready_seconds', 'populated_ready_seconds'])
                        <= summary['profile']['thresholds']['maximum_ready_seconds'] for case in summary['cases'])
     repeated = summary['parameters']['repeats'] == 2 and summary['parameters']['seconds'] >= 60
-    return {'parameters': summary['parameters'], 'operational_complete': summary['complete'], 'errors': errors,
+    return {'parameters': summary['parameters'], 'report_source_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'operational_complete': summary['complete'], 'errors': errors, 'mixed_activity': mixed,
             'guard_failures': summary['guard_failures'], 'recipes_match': recipes_match, 'startup_pass': startup_pass,
-            'rows': rows, 'seconds_with_all_instances_playing': full_overlap,
+            'rows': rows, 'simultaneous_play': overlap,
+            'seconds_with_all_instances_playing': sum(row['seconds'] for row in overlap),
+            'peak_host_busy_cpu_cores': max(cpu_intervals, default=None),
             'peak_total_game_memory_mib': max(totals.values(), default=0) / 1024**2,
             'minimum_available_gib': min((sample['available_bytes'] for sample in host), default=0) / 1024**3,
             'minimum_free_disk_gib': min((sample['free_disk_bytes'] for sample in host), default=0) / 1024**3,
             'elapsed_minutes': (summary['finished_at'] - summary['started_at']) / 60,
             'repeated_synthetic_pass': bool(repeated and summary['complete'] and not errors and recipes_match and startup_pass
-                                             and rows and all(row['performance_pass'] for row in rows) and full_overlap >= 60 * summary['parameters']['repeats']),
+                                             and rows and all(row['performance_pass'] for row in rows) and all(row['seconds'] >= 60 for row in overlap)),
             'external_human_play': 'not measured by this runner'}
 
 
@@ -321,6 +349,7 @@ def main():
                             guard()
                             assert time.monotonic() < deadline, 'Player scenario deadline exceeded'
                             if not saved and time.time() - phase_result['started_at'] > 45:
+                                phase_result['background_save_started_at'] = time.time()
                                 start = time.monotonic()
                                 phase_result['background_save_response'] = rcon(name, 'save-all flush')
                                 phase_result['background_save_seconds'] = time.monotonic() - start

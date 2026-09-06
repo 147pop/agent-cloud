@@ -31,7 +31,7 @@ Paper uses build 121. Fabric pins loader 0.19.5, launcher 1.1.2, Lithium 0.25.3 
 ## Workload and predeclared screening rules
 
 1. Validate startup and measurement with a short pilot. Pilot results cannot qualify a profile.
-2. Run each candidate with two synthetic players, twice, in a fresh world and then the saved, populated world. Reuse the existing movement and combat driver, adding Survival movement, digging and placement checks. Keep the actions and population identical between engines. Retain failures.
+2. Run each candidate with two synthetic players, twice, in a fresh world and then the saved, populated world. Reuse the existing movement and combat driver, adding Survival movement, digging and placement checks. Keep the actions and population identical between engines. Retain failures. The two clients travel in parallel lanes 32 blocks apart, flying 480 blocks out and back in the 60-second scenario. They share much of the loaded terrain. Combat uses creative mode; the final Survival checks cover digging, placement and a short walk. This bounded script does not represent distant players, long sessions or large farms.
 3. Compare tick distributions, native gametime, client waits and resource use. If generation dominates a failed or materially slower Fabric run, test the single C2ME variant under the same budget. Repeat a passing variant before selection.
 4. Test the selected candidate with independent instances sharing the same host. Stagger player phases so active sessions overlap saves and restarts. Increase instance count until the first failed level; repeat the last passing level. Report the tested boundary instead of extrapolating from RAM.
 5. Verify clean save/stop, backup, restoration into empty world directories, restart and recovery of markers and population. This local recipe recovery test does not qualify the platform's future R2 or cross-worker recovery.
@@ -62,7 +62,7 @@ python3 qualify.py --report evidence/free/comparison-paper
 python3 qualify.py --report evidence/free/comparison-fabric
 ```
 
-For the selected engine, use a new label and `--instances N --seconds 120` for the density study. Run only one battery on the dedicated host at a time. Two repetitions and sufficient simultaneous active time are required for a repeated synthetic pass. The runner retains test directories and backups, stops its containers, and rejects reused labels. Remote execution paths and credentials belong in the private operator record.
+For the selected engine, use a new label and `--instances N --seconds 120` for the density study. Run only one battery on the dedicated host at a time. A repeated synthetic pass requires at least 60 continuous seconds with every instance playing in each fresh and populated phase, in both repetitions. Separate short overlaps cannot add up to that minute. Host CPU is sampled from `/proc/stat` and includes the synthetic clients; reported busy CPU excludes idle, I/O wait and steal time. The runner retains test directories and backups, stops its containers, and rejects reused labels. Each formal run archives its exact inputs in `sources.tar.gz` and verifies their hashes after completion. `report_source_sha256` records the separate reporting code used to derive measurements. Remote execution paths and credentials belong in the private operator record.
 
 ### Bot protocol correction
 

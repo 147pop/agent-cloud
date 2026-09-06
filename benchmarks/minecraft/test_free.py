@@ -1,6 +1,6 @@
 """Check the native metric contract and prevent incomplete evidence from passing."""
 from datetime import datetime, timezone
-from qualify import game_ticks, measurements, native_ticks
+from qualify import game_ticks, measurements, native_ticks, simultaneous_play
 
 response = ('The game is running normallyTarget tick rate: 20.0 per second.\n'
             '\x1b[0mAverage time per tick: 0.1ms (Target: 50.0ms)'
@@ -39,4 +39,14 @@ except AssertionError:
     pass
 else:
     raise AssertionError('Missing action completion must fail')
+
+# Separate short overlaps must not add up to a passing minute.
+cases = [{'name': f'r{repeat}-i{index}', 'repeat': repeat} for repeat in (1, 2) for index in (1, 2)]
+rows = [{'case': case['name'], 'phase': phase, 'started_at': 0, 'finished_at': 30}
+        for case in cases for phase in ('fresh', 'populated')]
+overlap = simultaneous_play(rows, cases, 2, 2)
+assert sum(row['seconds'] for row in overlap) == 120
+assert not all(row['seconds'] >= 60 for row in overlap)
+assert all(row['seconds'] == 120 for row in simultaneous_play([{**row, 'finished_at': 120} for row in rows], cases, 2, 2))
+assert simultaneous_play(rows[:-1], cases, 2, 2)[-1]['seconds'] == 0
 print('Free-profile metric and acceptance checks passed')
