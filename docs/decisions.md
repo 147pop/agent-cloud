@@ -55,7 +55,7 @@ These are acceptance rules, not completed test results. [D9's authorizations and
 | --- | --- |
 | Route public Minecraft TCP through Cloudflare Spectrum | Matches Pablo's request for a Cloudflare-facing IP. The protection boundary is Cloudflare's edge L3/L4 mitigation; the worker's real IP is no longer directly reachable. Spectrum is billed per GB proxied — that cost must be measured against expected beta traffic before public registration opens, per D7's free-beta scope. |
 
-External validation from a real Minecraft client is still required before this decision can close TES-18 fully. It is blocked on an E1 Minecraft deployment existing to act as the Spectrum origin (E1's tasks are unstarted as of this revision); tracked as the remaining acceptance criterion on TES-18, not a new decision.
+External validation from a real Minecraft client is still required before this decision can close TES-18 fully. It is blocked on an E1 Minecraft deployment existing to act as the Spectrum origin; tracked as the remaining acceptance criterion on TES-18, not a new decision.
 
 **Pending real-host validation:** E1's repo-side artifacts (K3s manifests and test runbook at [catalog/games/minecraft-java/paper/k8s/](../catalog/games/minecraft-java/paper/k8s/)) are written, but K3s is not yet installed on `control-1`/`game-1` and no host has run the six interrupted-stop/replacement scenarios or connected a real external client through Spectrum. This paragraph gets replaced with a dated confirmation, an evidence link, and any observed Spectrum GB-billing (feeds D7) once that happens — not before.
 

@@ -1,0 +1,40 @@
+services:
+  game:
+    image: itzg/minecraft-server@sha256:efa878ddb49cf5251b2e5f2ad71b08fd2f7236c1f7907433f6697258b31d2ce4
+    container_name: ${FREE_CONTAINER:?Set the test container name}
+    cpus: 2
+    cpuset: "0-2"
+    mem_limit: 3g
+    memswap_limit: 3g
+    environment:
+      EULA: "TRUE"
+      TYPE: ${FREE_ENGINE:?Set PAPER or FABRIC}
+      VERSION: "26.2"
+      PAPER_BUILD: "121"
+      FABRIC_LOADER_VERSION: "0.19.5"
+      FABRIC_LAUNCHER_VERSION: "1.1.2"
+      MODRINTH_PROJECTS: ${FREE_MODS:-}
+      MODRINTH_DOWNLOAD_DEPENDENCIES: none
+      UID: "1000"
+      GID: "1000"
+      MEMORY: 2G
+      JVM_XX_OPTS: "-XX:ActiveProcessorCount=2"
+      SEED: "20260904"
+      VIEW_DISTANCE: "6"
+      SIMULATION_DISTANCE: "4"
+      MAX_PLAYERS: ${FREE_MAX_PLAYERS:?Set the tested player limit}
+      MODE: survival
+      DIFFICULTY: normal
+      ALLOW_FLIGHT: "true"
+      ONLINE_MODE: "false"
+      ENFORCE_SECURE_PROFILE: "false"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: ${RCON_PASSWORD:?Set a private benchmark password}
+      LOG_IPS: "false"
+      PAUSE_WHEN_EMPTY_SECONDS: "-1"
+    ports:
+      - "127.0.0.1:${FREE_PORT:?Set a test port}:25565"
+    volumes:
+      - ${FREE_DATA:?Set a fresh test directory}:/data
+    stop_grace_period: 120s
+    restart: "no"

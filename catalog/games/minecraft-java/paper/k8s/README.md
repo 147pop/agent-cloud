@@ -7,7 +7,7 @@ real-host path.
 
 ## Prerequisites (not done by this runbook)
 
-- K3s installed on `control-1` (server) and `game-1` (agent). No installer exists in this repo yet.
+- K3s installed on `control-1` (server) and `game-1` (agent), via [../../../../infra/k3s/](../../../../infra/k3s/).
 - `game-1` labeled to match `nodeSelector` in [deployment.yaml](deployment.yaml)
   (`cloud.example/role: game` — update both if the operator picks a different label).
 - Cloudflare Spectrum application created, origin pointed at `game-1`'s host IP, port 25565.
