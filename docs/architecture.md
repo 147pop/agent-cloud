@@ -22,7 +22,8 @@ flowchart TD
     Game --> Data[(Local PVC)]
     Data -->|Backup after clean stop| Backup[(R2)]
     Control --> DNS[Game DNS]
-    Player[Minecraft client] -->|TCP route pending D5| Game
+    Player[Minecraft client] -->|TCP :25565| Spectrum[Cloudflare Spectrum]
+    Spectrum --> Game
 ```
 
 `cloud-control` starts as one TypeScript process for REST, MCP, the account and status pages, admission, reconciliation and AutoStop. PostgreSQL stores the requested state, queue and pending work so a restart can resume an operation.
@@ -36,7 +37,7 @@ The first topology has two roles:
 
 Games stay off the control host. A temporary second game worker is required for the recovery exercise. Two hosts alone cannot prove recovery after losing the only game worker.
 
-The HTTP path and game traffic have different requirements. The Worker and Tunnel design covers the control API. It does not select a public Minecraft TCP route. [Cloudflare's proxy documentation](https://developers.cloudflare.com/fundamentals/reference/network-ports/) distinguishes its HTTP ports from other TCP services. D5 must settle worker IP exposure and the tested TCP protection path before external beta access.
+The HTTP path and game traffic have different requirements. The Worker and Tunnel design covers the control API. [Cloudflare's proxy documentation](https://developers.cloudflare.com/fundamentals/reference/network-ports/) distinguishes its HTTP ports from other TCP services, which is why game traffic uses a separate Spectrum application: a TCP application bound to the game DNS hostname, origin port 25565, proxying to the active worker's Minecraft port. The worker's own IP is not published; only Cloudflare's anycast IP is (see [D5](decisions.md#d5-public-game-tcp-and-worker-ip-exposure--resolved-2026-09-06)). Validating this path from a real external client requires an E1 worker to act as the origin and remains open.
 
 If `control-1` fails, existing games can continue on healthy workers. New operations, queue processing and AutoStop wait for control recovery. This is the intended beta availability limit, subject to a restore drill.
 

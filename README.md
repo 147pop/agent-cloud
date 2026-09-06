@@ -34,6 +34,6 @@ GitHub holds the design, runnable configuration and published evidence. [Linear]
 
 Git history preserves earlier designs. The [landing](prototypes/landing/index.html) and [technical brief](prototypes/technical-brief/index.html) are historical prototypes.
 
-Cloud is a project by Pablo Cardozo and Agustín Pedernera. The [Git history](https://github.com/pjcdz/cloud/graphs/contributors) records code contributions. The plan is to publish the code first and support installation by third parties later. License selection remains open; this repository does not yet contain an open source license.
+Cloud is a project by Pablo Cardozo and Agustín Pedernera. The [Git history](https://github.com/pjcdz/cloud/graphs/contributors) records code contributions. The plan is to publish the code first and support installation by third parties later. The code is licensed under [MIT](LICENSE); third-party code and asset review still gates the actual publication (see [Contributing](CONTRIBUTING.md)).
 
 For security concerns, read [SECURITY.md](SECURITY.md).
