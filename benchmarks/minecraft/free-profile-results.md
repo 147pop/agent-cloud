@@ -31,6 +31,18 @@ Paper passed [two repetitions with lanes 256 blocks apart](evidence/free/candida
 
 The minimum TPS was close to the 19 TPS screening cut. Each player flew 480 blocks out and back, fought mobs and completed the short Survival checks. This result covers one instance. The density study uses the same separated lanes with `--seconds 120`, doubling the route length, before recording a concurrent-instance boundary.
 
+## Concurrent instances
+
+The [two-instance attempt](evidence/free/density-paper-2/measurements.json) did not pass. Both fresh-world scenarios completed, with two players per instance and 297 continuous seconds of simultaneous play. The minimum minute TPS was 19.18, the worst sampled tick p95 was 49.4 ms, and the largest client command wait was 22 ms. Those measurements passed their limits.
+
+One RCON gametime observation took 2.174 seconds, exceeding the predeclared two-second maximum. That duration includes launching `docker exec` and running the query. It does not isolate a game-thread stall, so this failure alone cannot establish poor player experience or the host's physical capacity.
+
+The [operator stop record](evidence/free/density-paper-2/operator-stop.json) preserves the completed measurements and reason for stopping. The runner stopped during the populated phases after the fresh-world failure was confirmed. It did not finish those phases or the second repetition. Both fresh backups had been restored and checked, but the full populated restart cycle was not completed at this level.
+
+Peak game-container memory summed to 5552 MiB, peak observed host busy CPU was 3.93 cores, and minimum available host memory was 17.37 GiB. Samples captured another instance starting during play, a save during play and a background save while another instance was playing. No memory or disk safety reserve was crossed.
+
+One instance is now being repeated with the same longer workload. The earlier short-route pass cannot substitute for that check. No concurrent-instance count from this density study is accepted yet.
+
 ## Provenance and recovery
 
 The Paper comparison used the first committed runner. Fabric used the same player script, versions, resource limits and game configuration, with the later persistence preparation check for chunks unloaded after client disconnect. The [method](free-profile.md#bot-protocol-correction) records the correction and the retained failed attempt.
