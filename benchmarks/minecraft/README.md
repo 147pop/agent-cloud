@@ -43,7 +43,7 @@ The free tier prioritizes acceptable simultaneous sessions per host. Optimized e
 
 The [public research and fixed comparison](free-profile.md) narrow the candidates to Paper and Fabric with Lithium and FerriteCore. C2ME is the only conditional variant, for a measured generation bottleneck. The plan pins one Minecraft and Java version, hardware, CPU and memory limits, distances, seed, client workload and measurement method. Record gameplay differences and required client changes.
 
-The [recorded comparison](free-profile-results.md) passed for both nearby-player candidates. Paper also passed the repeated separate-terrain check and proceeds to the concurrent-instance study. External human play remains pending.
+The [recorded comparison](free-profile-results.md) passed for both nearby-player candidates. Paper also passed the repeated separate-terrain check and the longer density workload with one instance and two players. Two instances exceeded the RCON response limit during a save. External human play and the live Spectrum route remain pending, so the profile is still Experimental.
 
 Qualification covers these checks:
 

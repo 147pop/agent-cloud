@@ -29,19 +29,30 @@ Paper passed [two repetitions with lanes 256 blocks apart](evidence/free/candida
 | Maximum readiness time | 50.79 s |
 | Largest populated world | 28.49 MB |
 
-The minimum TPS was close to the 19 TPS screening cut. Each player flew 480 blocks out and back, fought mobs and completed the short Survival checks. This result covers one instance. The density study uses the same separated lanes with `--seconds 120`, doubling the route length, before recording a concurrent-instance boundary.
+The minimum TPS was close to the 19 TPS screening cut. Each player flew 480 blocks out and back, fought mobs and completed the short Survival checks. This result covers one instance. The density study below uses the same separated lanes with `--seconds 120`, doubling the route length.
 
 ## Concurrent instances
 
-The [two-instance attempt](evidence/free/density-paper-2/measurements.json) did not pass. Both fresh-world scenarios completed, with two players per instance and 297 continuous seconds of simultaneous play. The minimum minute TPS was 19.18, the worst sampled tick p95 was 49.4 ms, and the largest client command wait was 22 ms. Those measurements passed their limits.
+The repeated screening pass is one Paper instance with two synthetic players. Each player travelled 960 blocks out and back on lanes 256 blocks apart. Two instances did not pass the control-response rule. These are the tested outcomes; they do not establish the host's physical maximum or a public offer.
 
-One RCON gametime observation took 2.174 seconds, exceeding the predeclared two-second maximum. That duration includes launching `docker exec` and running the query. It does not isolate a game-thread stall, so this failure alone cannot establish poor player experience or the host's physical capacity.
+| Instances x players | Minimum minute TPS | Worst sampled tick p95 / p99 | Maximum RCON observation | Peak game memory | Result |
+| --- | --- | --- | --- | --- | --- |
+| [1 x 2](evidence/free/density-paper-1/measurements.json) | 19.17 | 42.6 / 160.4 ms | 0.722 s | 2785 MiB | Both repetitions and all recovery checks passed |
+| [2 x 2](evidence/free/density-paper-2/measurements.json) | 19.18 | 49.4 / 436.9 ms | 2.174 s | 5552 MiB, summed | Failed the RCON cut; stopped during the first repetition |
+
+Performance values cover completed player phases. Memory covers all recorded samples, including startup. The passing level completed four active phases totalling 21.66 minutes. Both fresh backups restored into empty world paths with 84 matching files each, and both populated restarts recovered the marker and all 32 persistent entities.
+
+At the passing level, mean active game CPU was 0.486 cores, peak observed host busy CPU was 2.94 cores, and available host memory stayed above 19.98 GiB. Free disk stayed above 33.11 GiB. The largest world reached 40.40 MB and the slowest readiness check took 50.75 seconds.
+
+The [two-instance attempt](evidence/free/density-paper-2/measurements.json) completed both fresh-world scenarios, with two players per instance and 297 continuous seconds of simultaneous play. The largest client command wait was 22 ms. Tick and client-command measurements passed their limits.
+
+One RCON gametime observation took 2.174 seconds, exceeding the predeclared two-second maximum. It began during that instance's `save-all flush` and returned as the save completed. The save took 2.725 seconds. The RCON timing includes launching `docker exec` and running the query. It does not isolate a game-thread stall, so this failure alone cannot establish poor player experience or the host's physical capacity.
 
 The [operator stop record](evidence/free/density-paper-2/operator-stop.json) preserves the completed measurements and reason for stopping. The runner stopped during the populated phases after the fresh-world failure was confirmed. It did not finish those phases or the second repetition. Both fresh backups had been restored and checked, but the full populated restart cycle was not completed at this level.
 
 Peak game-container memory summed to 5552 MiB, peak observed host busy CPU was 3.93 cores, and minimum available host memory was 17.37 GiB. Samples captured another instance starting during play, a save during play and a background save while another instance was playing. No memory or disk safety reserve was crossed.
 
-One instance is now being repeated with the same longer workload. The earlier short-route pass cannot substitute for that check. No concurrent-instance count from this density study is accepted yet.
+The [profile](free-profile.json) records Paper as the candidate and one instance with two players as the repeated synthetic result. The qualified player and instance fields remain unset until external acceptance. C2ME remains untested; the two-instance failure concerned a control response during a save.
 
 ## Provenance and recovery
 

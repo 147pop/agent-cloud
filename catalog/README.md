@@ -4,7 +4,7 @@ Cloud starts with Minecraft and will add other games and curated applications. T
 
 | Workload | Entry | Current state |
 | --- | --- | --- |
-| Minecraft Java | [Paper](games/minecraft-java/paper/README.md) | Historical recipes and controlled free comparison |
+| Minecraft Java | [Paper](games/minecraft-java/paper/README.md) | Repeated synthetic pass for one instance with two players; external acceptance pending |
 | Minecraft Java | [Fabric](games/minecraft-java/fabric/README.md) | Controlled comparison with Lithium and FerriteCore |
 | Minecraft Java | [Vanilla](games/minecraft-java/vanilla/README.md) | Historical reference for the low-resource study |
 
@@ -34,7 +34,7 @@ A version update or configuration change needs a recorded check before inheritin
 
 ## Planned offers
 
-The free Minecraft tier will prioritize the number of acceptable simultaneous sessions per host. An optimized engine may differ from Mojang Vanilla; document those differences and test ordinary play before selecting it. [The qualification results](../benchmarks/minecraft/free-profile-results.md) record the controlled comparison, Paper's repeated separate-terrain pass and the remaining capacity and human checks.
+The free Minecraft tier will prioritize the number of acceptable simultaneous sessions per host. An optimized engine may differ from Mojang Vanilla; document those differences and test ordinary play before selecting it. [The qualification results](../benchmarks/minecraft/free-profile-results.md) record Paper's repeated synthetic pass for one instance with two players and the failed two-instance level. Human play and the live Spectrum route remain pending. These results have not qualified a public offer.
 
 Vanilla and additional game configurations belong to the future paid catalog. The historical Vanilla result is a reference, not a free-tier commitment. Pricing and capacity remain undecided.
 

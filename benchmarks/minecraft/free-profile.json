@@ -49,7 +49,12 @@
       "sha512": "c9c9c9babe4d94e06abf72c92e453aaa39c82634a7ae646d1041f673e12eff3d99e77e205a686ea53d0a5ae143e9e1e6ed595b3ccfcaeafe64cbfb6327e2f375"
     }
   },
-  "selected_engine": null,
+  "selected_engine": "paper",
+  "synthetic_screening": {
+    "players_per_instance": 2,
+    "concurrent_instances": 1,
+    "evidence": "evidence/free/density-paper-1/measurements.json"
+  },
   "qualified_players_per_instance": null,
   "qualified_concurrent_instances": null,
   "external_human_play": "pending"

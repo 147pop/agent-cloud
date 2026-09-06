@@ -14,6 +14,7 @@
 | [compare-fabric](compare-fabric/summary.json) | Fresh-world actions completed; marker preparation failed after Fabric unloaded the disconnected clients' chunk | Incomplete; no accepted capacity |
 | [candidate-paper-spread](candidate-paper-spread/measurements.json) | Paper passed two repetitions with two players on routes 256 blocks apart, including fresh and populated worlds and recovery | Repeated evidence for one instance with separate terrain |
 | [density-paper-2](density-paper-2/measurements.json) | Both fresh scenarios completed; one RCON query exceeded the two-second cut. The operator stopped during the populated phases and retained the reason | Failed screening level; no two-instance acceptance or completed repeat |
+| [density-paper-1](density-paper-1/measurements.json) | One Paper instance with two players passed both repetitions of the longer separated routes, including all recovery checks | Repeated synthetic result for one instance; external acceptance remains pending |
 
 The early Paper pilots retain logs, metrics and source hashes, but their exact intermediate source files were not archived. Do not describe those debugging attempts as fully reconstructible. Formal attempts beginning with `compare-paper` include `sources.tar.gz`, whose members match the recorded `source_sha256` values.
 

@@ -1,0 +1,1674 @@
+[init] Changing ownership of /data to 1000 ...
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 2 1000 1000 4096 Sep  6 03:04 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given PAPER
+[39m[mc-image-helper] 03:04:13.057 INFO  : Downloaded /data/paper-26.2-121.jar
+[0;39m[init] Copying any plugins from /plugins to /data/plugins
+[init] Copying any configs from /config to /data/config
+[init] Creating server properties in /data/server.properties
+[init] Disabling whitelist functionality
+[init] Setting mode
+[39m[mc-image-helper] 03:04:18.070 INFO  : Created/updated 15 properties in /data/server.properties
+[0;39m[39m[mc-image-helper] 03:04:20.196 INFO  : Downloaded /data/config/paper-global.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/paper-global.yml
+[0;39m[39m[mc-image-helper] 03:04:20.198 INFO  : Downloaded /data/config/paper-world-defaults.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/paper-world-defaults.yml
+[0;39m[39m[mc-image-helper] 03:04:22.595 INFO  : Downloaded /data/bukkit.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/bukkit.yml
+[0;39m[39m[mc-image-helper] 03:04:22.593 INFO  : Downloaded /data/spigot.yml from https://raw.githubusercontent.com/Shonz1/minecraft-default-configs/main/26.2/spigot.yml
+[0;39m[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Downloading mojang_26.2.jar
+Applying patches
+Starting org.bukkit.craftbukkit.Main
+[03:04:31 INFO]: [bootstrap] Running Java 25 (OpenJDK 64-Bit Server VM 25.0.4+7-LTS; Eclipse Adoptium Temurin-25.0.4+7) on Linux 6.17.0-1020-oracle (aarch64)
+[03:04:31 INFO]: [bootstrap] Loading Paper 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) for Minecraft 26.2
+[03:04:31 INFO]: [PluginInitializerManager] Initializing plugins...
+[03:04:31 INFO]: [PluginInitializerManager] Initialized 0 plugins
+[03:04:36 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[03:04:36 INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[03:04:37 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 901.4ms
+[03:04:37 INFO]: Found new data pack paper, loading it automatically
+[03:04:38 INFO]: No existing world data, creating new world
+[03:04:40 INFO]: Loaded 1585 recipes
+[03:04:40 INFO]: Loaded 1688 advancements
+[03:04:40 INFO]: Starting minecraft server version 26.2
+[03:04:40 INFO]: Loading properties
+[03:04:40 INFO]: This server is running Paper version 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) (Implementing API version 26.2.build.121-stable)
+[03:04:40 INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[03:04:40 INFO]: Server Ping Player Sample Count: 12
+[03:04:40 INFO]: Using 4 threads for Netty based IO
+[03:04:41 INFO]: [MoonriseCommon] Paper is using 1 worker threads, 1 I/O threads
+[03:04:41 INFO]: Default game type: SURVIVAL
+[03:04:41 INFO]: Generating keypair
+[03:04:41 INFO]: Starting Minecraft server on *:25565
+[03:04:41 INFO]: Paper: Using libdeflate (Linux aarch64) compression from Velocity.
+[03:04:41 INFO]: Paper: Using OpenSSL 3.x.x (Linux aarch64) cipher from Velocity.
+[03:04:41 WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[03:04:41 WARN]: The server will make no attempt to authenticate usernames. Beware.
+[03:04:41 WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[03:04:41 WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[03:04:41 INFO]: Preparing level "world"
+[03:04:42 INFO]: Selecting spawn point for level 'minecraft:overworld'...
+[03:04:52 INFO]: Selecting spawn point for level 'minecraft:the_nether'...
+[03:04:53 INFO]: Selecting spawn point for level 'minecraft:the_end'...
+[03:04:53 INFO]: Loading 0 persistent chunks for level 'minecraft:overworld'...
+[03:04:53 INFO]: Preparing spawn area: 100%
+[03:04:53 INFO]: Prepared spawn area in 11192 ms
+[03:04:53 INFO]: Loading 0 persistent chunks for level 'minecraft:the_nether'...
+[03:04:53 INFO]: Preparing spawn area: 100%
+[03:04:53 INFO]: Prepared spawn area in 1415 ms
+[03:04:53 INFO]: Loading 0 persistent chunks for level 'minecraft:the_end'...
+[03:04:53 INFO]: Preparing spawn area: 100%
+[03:04:53 INFO]: Prepared spawn area in 380 ms
+[03:04:53 INFO]: Done preparing level "world" (11.546s)
+[03:04:53 INFO]: [spark] Starting background profiler...
+[03:04:53 INFO]: Starting remote control listener
+[03:04:53 INFO]: Thread RCON Listener started
+[03:04:53 INFO]: RCON running on 0.0.0.0:25575
+[03:04:53 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:04:53 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:04:53 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:04:53 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:04:53 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:04:53 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:04:53 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:04:53 INFO]: Running delayed init tasks
+[03:04:53 INFO]: Done (23.817s)! For help, type "help"
+[03:05:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:00 INFO]: UUID of player Bench01 is 43f83340-24e5-346a-8e0c-cf6bfccead28
+[03:05:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:07 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:07 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:07 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:07 INFO]: Bench01 joined the game
+[03:05:07 INFO]: Bench01[IP hidden] logged in with entity id 18 at ([minecraft:overworld]-11.5, 80.0, 23.5)
+[03:05:07 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:07 INFO]: Bench01 issued server command: /gamemode creative
+[03:05:07 INFO]: [Bench01: Set own game mode to Creative Mode]
+[03:05:08 INFO]: Bench01 issued server command: /tp @s 0 300 0
+[03:05:08 INFO]: [Bench01: Teleported Bench01 to 0.500000, 300.000000, 0.500000]
+[03:05:10 INFO]: UUID of player Bench02 is 193bd4cc-7799-3c22-95ea-eb018b0180af
+[03:05:10 INFO]: Bench02 joined the game
+[03:05:10 INFO]: Bench02[IP hidden] logged in with entity id 70 at ([minecraft:overworld]-12.5, 80.0, 8.5)
+[03:05:10 INFO]: Bench02 issued server command: /gamemode creative
+[03:05:10 INFO]: [Bench02: Set own game mode to Creative Mode]
+[03:05:11 INFO]: Bench02 issued server command: /tp @s 256 300 0
+[03:05:11 INFO]: [Bench02: Teleported Bench02 to 256.500000, 300.000000, 0.500000]
+[03:05:12 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:48 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:05:48 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:05:48 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:05:48 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:05:48 INFO]: [Rcon: Saved the game]
+[03:05:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:48 WARN]: Bench02 moved too quickly! 0.0,0.0,19.0
+[03:05:48 WARN]: Bench01 moved too quickly! 0.0,0.0,20.5
+[03:05:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:05:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:53 INFO]: Bench01 issued server command: /execute positioned 0.5 300 960.5 if entity @s[distance=..2] run say E0_POS_out_Bench01
+[03:06:53 INFO]: [Not Secure] [Bench01] E0_POS_out_Bench01
+[03:06:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:06:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:06:58 INFO]: Bench02 issued server command: /execute positioned 256.5 300 960.5 if entity @s[distance=..2] run say E0_POS_out_Bench02
+[03:06:58 INFO]: [Not Secure] [Bench02] E0_POS_out_Bench02
+[03:07:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:07:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:07:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:35 INFO]: Bench01 issued server command: /execute positioned 0.5 300 0.5 if entity @s[distance=..2] run say E0_POS_back_Bench01
+[03:08:35 INFO]: [Not Secure] [Bench01] E0_POS_back_Bench01
+[03:08:35 INFO]: Bench02 issued server command: /execute positioned 256.5 300 0.5 if entity @s[distance=..2] run say E0_POS_back_Bench02
+[03:08:35 INFO]: [Not Secure] [Bench02] E0_POS_back_Bench02
+[03:08:35 INFO]: Bench01 issued server command: /fill -5 199 -20 5 199 20 minecraft:stone
+[03:08:35 INFO]: [Bench01: Successfully filled 451 block(s)]
+[03:08:35 INFO]: Bench02 issued server command: /fill 251 199 -20 261 199 20 minecraft:stone
+[03:08:35 INFO]: [Bench02: Successfully filled 451 block(s)]
+[03:08:35 INFO]: Bench01 issued server command: /tp @s 0 200 0
+[03:08:35 INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[03:08:35 INFO]: Bench02 issued server command: /tp @s 256 200 0
+[03:08:35 INFO]: [Bench02: Teleported Bench02 to 256.500000, 200.000000, 0.500000]
+[03:08:36 INFO]: Bench01 issued server command: /give @s minecraft:diamond_sword
+[03:08:36 INFO]: [Bench01: Gave 1 [Diamond Sword] to Bench01]
+[03:08:36 INFO]: Bench02 issued server command: /give @s minecraft:diamond_sword
+[03:08:36 INFO]: [Bench02: Gave 1 [Diamond Sword] to Bench02]
+[03:08:37 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:37 INFO]: [Bench01: Summoned new Husk]
+[03:08:37 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:37 INFO]: [Bench02: Summoned new Husk]
+[03:08:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:40 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:40 INFO]: [Bench02: Summoned new Husk]
+[03:08:40 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:40 INFO]: [Bench01: Summoned new Husk]
+[03:08:42 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:42 INFO]: [Bench02: Summoned new Husk]
+[03:08:42 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:42 INFO]: [Bench01: Summoned new Husk]
+[03:08:43 INFO]: Bench01 has made the advancement [Monster Hunter]
+[03:08:43 INFO]: Bench02 has made the advancement [Monster Hunter]
+[03:08:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:44 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:44 INFO]: [Bench02: Summoned new Husk]
+[03:08:44 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:44 INFO]: [Bench01: Summoned new Husk]
+[03:08:46 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:46 INFO]: [Bench02: Summoned new Husk]
+[03:08:46 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:46 INFO]: [Bench01: Summoned new Husk]
+[03:08:48 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:48 INFO]: [Bench02: Summoned new Husk]
+[03:08:48 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:48 INFO]: [Bench01: Summoned new Husk]
+[03:08:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:50 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:50 INFO]: [Bench02: Summoned new Husk]
+[03:08:51 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:51 INFO]: [Bench01: Summoned new Husk]
+[03:08:53 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:53 INFO]: [Bench02: Summoned new Husk]
+[03:08:53 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:53 INFO]: [Bench01: Summoned new Husk]
+[03:08:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:55 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:55 INFO]: [Bench02: Summoned new Husk]
+[03:08:55 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:55 INFO]: [Bench01: Summoned new Husk]
+[03:08:57 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:57 INFO]: [Bench02: Summoned new Husk]
+[03:08:57 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:57 INFO]: [Bench01: Summoned new Husk]
+[03:08:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:08:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:08:59 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:08:59 INFO]: [Bench02: Summoned new Husk]
+[03:08:59 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:08:59 INFO]: [Bench01: Summoned new Husk]
+[03:09:01 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:01 INFO]: [Bench02: Summoned new Husk]
+[03:09:01 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:01 INFO]: [Bench01: Summoned new Husk]
+[03:09:03 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:03 INFO]: [Bench02: Summoned new Husk]
+[03:09:03 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:03 INFO]: [Bench01: Summoned new Husk]
+[03:09:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:05 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:05 INFO]: [Bench02: Summoned new Husk]
+[03:09:05 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:05 INFO]: [Bench01: Summoned new Husk]
+[03:09:07 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:07 INFO]: [Bench02: Summoned new Husk]
+[03:09:07 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:07 INFO]: [Bench01: Summoned new Husk]
+[03:09:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:10 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:10 INFO]: [Bench02: Summoned new Husk]
+[03:09:10 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:10 INFO]: [Bench01: Summoned new Husk]
+[03:09:12 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:12 INFO]: [Bench02: Summoned new Husk]
+[03:09:12 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:12 INFO]: [Bench01: Summoned new Husk]
+[03:09:14 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:14 INFO]: [Bench02: Summoned new Husk]
+[03:09:14 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:14 INFO]: [Bench01: Summoned new Husk]
+[03:09:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:16 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:16 INFO]: [Bench02: Summoned new Husk]
+[03:09:16 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:16 INFO]: [Bench01: Summoned new Husk]
+[03:09:18 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:18 INFO]: [Bench02: Summoned new Husk]
+[03:09:18 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:18 INFO]: [Bench01: Summoned new Husk]
+[03:09:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:20 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:20 INFO]: [Bench01: Summoned new Husk]
+[03:09:20 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:20 INFO]: [Bench02: Summoned new Husk]
+[03:09:22 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:22 INFO]: [Bench01: Summoned new Husk]
+[03:09:22 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:22 INFO]: [Bench02: Summoned new Husk]
+[03:09:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:25 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:25 INFO]: [Bench01: Summoned new Husk]
+[03:09:25 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:25 INFO]: [Bench02: Summoned new Husk]
+[03:09:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:27 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:27 INFO]: [Bench01: Summoned new Husk]
+[03:09:27 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:27 INFO]: [Bench02: Summoned new Husk]
+[03:09:29 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:29 INFO]: [Bench02: Summoned new Husk]
+[03:09:29 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:29 INFO]: [Bench01: Summoned new Husk]
+[03:09:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:31 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:31 INFO]: [Bench02: Summoned new Husk]
+[03:09:31 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:31 INFO]: [Bench01: Summoned new Husk]
+[03:09:33 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:33 INFO]: [Bench02: Summoned new Husk]
+[03:09:33 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:33 INFO]: [Bench01: Summoned new Husk]
+[03:09:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:35 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:35 INFO]: [Bench02: Summoned new Husk]
+[03:09:35 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:35 INFO]: [Bench01: Summoned new Husk]
+[03:09:37 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:37 INFO]: [Bench02: Summoned new Husk]
+[03:09:37 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:37 INFO]: [Bench01: Summoned new Husk]
+[03:09:39 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:39 INFO]: [Bench02: Summoned new Husk]
+[03:09:39 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:39 INFO]: [Bench01: Summoned new Husk]
+[03:09:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:41 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:41 INFO]: [Bench02: Summoned new Husk]
+[03:09:41 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:41 INFO]: [Bench01: Summoned new Husk]
+[03:09:44 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:44 INFO]: [Bench02: Summoned new Husk]
+[03:09:44 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:44 INFO]: [Bench01: Summoned new Husk]
+[03:09:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:46 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:46 INFO]: [Bench02: Summoned new Husk]
+[03:09:46 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:46 INFO]: [Bench01: Summoned new Husk]
+[03:09:48 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:48 INFO]: [Bench02: Summoned new Husk]
+[03:09:48 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:48 INFO]: [Bench01: Summoned new Husk]
+[03:09:50 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:50 INFO]: [Bench02: Summoned new Husk]
+[03:09:50 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:50 INFO]: [Bench01: Summoned new Husk]
+[03:09:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:52 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:52 INFO]: [Bench02: Summoned new Husk]
+[03:09:52 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:52 INFO]: [Bench01: Summoned new Husk]
+[03:09:54 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:54 INFO]: [Bench02: Summoned new Husk]
+[03:09:54 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:54 INFO]: [Bench01: Summoned new Husk]
+[03:09:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:09:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:09:56 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:56 INFO]: [Bench02: Summoned new Husk]
+[03:09:56 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:56 INFO]: [Bench01: Summoned new Husk]
+[03:09:58 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:09:58 INFO]: [Bench02: Summoned new Husk]
+[03:09:58 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:09:58 INFO]: [Bench01: Summoned new Husk]
+[03:10:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:00 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:00 INFO]: [Bench02: Summoned new Husk]
+[03:10:00 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:00 INFO]: [Bench01: Summoned new Husk]
+[03:10:03 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:03 INFO]: [Bench02: Summoned new Husk]
+[03:10:03 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:03 INFO]: [Bench01: Summoned new Husk]
+[03:10:05 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:05 INFO]: [Bench02: Summoned new Husk]
+[03:10:05 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:05 INFO]: [Bench01: Summoned new Husk]
+[03:10:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:07 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:07 INFO]: [Bench02: Summoned new Husk]
+[03:10:07 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:07 INFO]: [Bench01: Summoned new Husk]
+[03:10:09 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:09 INFO]: [Bench02: Summoned new Husk]
+[03:10:09 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:09 INFO]: [Bench01: Summoned new Husk]
+[03:10:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:11 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:11 INFO]: [Bench02: Summoned new Husk]
+[03:10:11 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:11 INFO]: [Bench01: Summoned new Husk]
+[03:10:13 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:13 INFO]: [Bench02: Summoned new Husk]
+[03:10:13 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:13 INFO]: [Bench01: Summoned new Husk]
+[03:10:15 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:15 INFO]: [Bench02: Summoned new Husk]
+[03:10:15 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:15 INFO]: [Bench01: Summoned new Husk]
+[03:10:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:17 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:17 INFO]: [Bench02: Summoned new Husk]
+[03:10:17 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:17 INFO]: [Bench01: Summoned new Husk]
+[03:10:19 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:19 INFO]: [Bench02: Summoned new Husk]
+[03:10:19 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:19 INFO]: [Bench01: Summoned new Husk]
+[03:10:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:22 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:22 INFO]: [Bench02: Summoned new Husk]
+[03:10:22 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:22 INFO]: [Bench01: Summoned new Husk]
+[03:10:24 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:24 INFO]: [Bench01: Summoned new Husk]
+[03:10:24 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:24 INFO]: [Bench02: Summoned new Husk]
+[03:10:26 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:26 INFO]: [Bench01: Summoned new Husk]
+[03:10:26 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:26 INFO]: [Bench02: Summoned new Husk]
+[03:10:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:28 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:28 INFO]: [Bench01: Summoned new Husk]
+[03:10:28 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:28 INFO]: [Bench02: Summoned new Husk]
+[03:10:30 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:30 INFO]: [Bench01: Summoned new Husk]
+[03:10:30 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:30 INFO]: [Bench02: Summoned new Husk]
+[03:10:31 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:31 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:31 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:31 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:32 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:32 INFO]: [Bench01: Summoned new Husk]
+[03:10:32 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:32 INFO]: [Bench02: Summoned new Husk]
+[03:10:34 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:34 INFO]: [Bench02: Summoned new Husk]
+[03:10:34 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:34 INFO]: [Bench01: Summoned new Husk]
+[03:10:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:36 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:10:36 INFO]: [Bench02: Summoned new Husk]
+[03:10:36 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:10:36 INFO]: [Bench01: Summoned new Husk]
+[03:10:38 INFO]: Bench01 issued server command: /tp @s 0 200 0
+[03:10:38 INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[03:10:38 INFO]: Bench01 issued server command: /kill @e[type=minecraft:husk,distance=..8]
+[03:10:38 INFO]: [Bench01: Killed Husk]
+[03:10:38 INFO]: Bench01 issued server command: /gamemode survival
+[03:10:38 INFO]: [Bench01: Set own game mode to Survival Mode]
+[03:10:38 INFO]: Bench01 issued server command: /give @s minecraft:iron_pickaxe
+[03:10:38 INFO]: Bench01 has made the advancement [Isn't It Iron Pick]
+[03:10:38 INFO]: [Bench01: Gave 1 [Iron Pickaxe] to Bench01]
+[03:10:38 INFO]: Bench01 issued server command: /give @s minecraft:stone 16
+[03:10:38 INFO]: [Bench01: Gave 16 [Stone] to Bench01]
+[03:10:38 INFO]: Bench01 issued server command: /setblock 1 200 0 minecraft:stone
+[03:10:38 INFO]: [Bench01: Changed the block at 1, 200, 0]
+[03:10:38 INFO]: Bench02 issued server command: /tp @s 256 200 0
+[03:10:38 INFO]: [Bench02: Teleported Bench02 to 256.500000, 200.000000, 0.500000]
+[03:10:38 INFO]: Bench02 issued server command: /kill @e[type=minecraft:husk,distance=..8]
+[03:10:38 INFO]: [Bench02: Killed Husk]
+[03:10:38 INFO]: Bench02 issued server command: /gamemode survival
+[03:10:38 INFO]: [Bench02: Set own game mode to Survival Mode]
+[03:10:38 INFO]: Bench02 issued server command: /give @s minecraft:iron_pickaxe
+[03:10:38 INFO]: Bench02 has made the advancement [Isn't It Iron Pick]
+[03:10:38 INFO]: [Bench02: Gave 1 [Iron Pickaxe] to Bench02]
+[03:10:38 INFO]: Bench02 issued server command: /give @s minecraft:stone 16
+[03:10:38 INFO]: [Bench02: Gave 16 [Stone] to Bench02]
+[03:10:38 INFO]: Bench02 issued server command: /setblock 257 200 0 minecraft:stone
+[03:10:38 INFO]: [Bench02: Changed the block at 257, 200, 0]
+[03:10:40 INFO]: Bench01 issued server command: /execute if block 1 200 0 minecraft:air run say FREE_BLOCK_air_Bench01
+[03:10:40 INFO]: Bench02 issued server command: /execute if block 257 200 0 minecraft:air run say FREE_BLOCK_air_Bench02
+[03:10:40 INFO]: [Not Secure] [Bench01] FREE_BLOCK_air_Bench01
+[03:10:40 INFO]: [Not Secure] [Bench02] FREE_BLOCK_air_Bench02
+[03:10:40 INFO]: Bench01 issued server command: /execute if block 1 200 0 minecraft:stone run say FREE_BLOCK_stone_Bench01
+[03:10:40 INFO]: [Not Secure] [Bench01] FREE_BLOCK_stone_Bench01
+[03:10:40 INFO]: Bench02 issued server command: /execute if block 257 200 0 minecraft:stone run say FREE_BLOCK_stone_Bench02
+[03:10:40 INFO]: [Not Secure] [Bench02] FREE_BLOCK_stone_Bench02
+[03:10:41 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:41 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:41 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:41 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:43 INFO]: Bench01 issued server command: /execute positioned 0.4999999999965561 200 -12.447791547124808 if entity @s[distance=..2] run say E0_POS_survival_Bench01
+[03:10:43 INFO]: [Not Secure] [Bench01] E0_POS_survival_Bench01
+[03:10:43 INFO]: Bench02 issued server command: /execute positioned 256.49999999999665 200 -12.231932431414274 if entity @s[distance=..2] run say E0_POS_survival_Bench02
+[03:10:43 INFO]: [Not Secure] [Bench02] E0_POS_survival_Bench02
+[03:10:43 INFO]: Bench01 lost connection: Disconnected
+[03:10:43 INFO]: Bench01 left the game
+[03:10:43 INFO]: Bench02 lost connection: Disconnected
+[03:10:43 INFO]: Bench02 left the game
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:46 INFO]: [Rcon: Marked 4 chunks in minecraft:overworld from [0, 0] to [1, 1] to be force loaded]
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:46 INFO]: [Rcon: Changed the block at 0, 201, 0]
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:46 INFO]: [Rcon: Unmarked 4 chunks in minecraft:overworld from [0, 0] to [1, 1] for force loading]
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:10:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:48 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:10:48 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:10:48 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:10:48 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:10:48 INFO]: [Rcon: Saved the game]
+[03:10:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T03:10:48.717Z	INFO	mc-server-runner	gracefully stopping server...
+[03:10:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:10:48 INFO]: [Rcon: Stopping the server]
+[03:10:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T03:10:48.723Z	INFO	mc-server-runner	Waiting for completion...
+[03:10:48 INFO]: Stopping server
+[03:10:48 INFO]: Saving players
+[03:10:48 INFO]: Saving worlds
+[03:10:48 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:10:48 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:overworld'
+[03:10:48 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:overworld'
+[03:10:48 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:overworld'
+[03:10:49 INFO]: [ChunkHolderManager] Saved 1360 block chunks, 78 entity chunks, 0 poi chunks in world 'minecraft:overworld' in 0.94s
+[03:10:49 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:overworld'
+[03:10:49 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:overworld'
+[03:10:49 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:10:49 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_nether'
+[03:10:49 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_nether'
+[03:10:49 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_nether'
+[03:10:49 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_nether' in 0.00s
+[03:10:49 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_nether'
+[03:10:49 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_nether'
+[03:10:49 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:10:49 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_end'
+[03:10:49 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_end'
+[03:10:49 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_end'
+[03:10:49 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_end' in 0.00s
+[03:10:49 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_end'
+[03:10:49 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_end'
+[03:10:49 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:10:49 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:10:49 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:10:49 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:10:49 INFO]: Waiting for all RegionFile I/O tasks to complete...
+[03:10:49 INFO]: All RegionFile I/O tasks to complete
+[03:10:49 INFO]: [MoonriseCommon] Awaiting termination of worker pool for up to 60s...
+[03:10:49 INFO]: [MoonriseCommon] Awaiting termination of I/O pool for up to 60s...
+2026-09-06T03:10:50.242Z	INFO	mc-server-runner	Done
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 11 1000 1000 4096 Sep  6 03:10 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given PAPER
+[init] Copying any plugins from /plugins to /data/plugins
+[init] Copying any configs from /config to /data/config
+[init] Setting mode
+[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Starting org.bukkit.craftbukkit.Main
+[03:11:07 INFO]: [bootstrap] Running Java 25 (OpenJDK 64-Bit Server VM 25.0.4+7-LTS; Eclipse Adoptium Temurin-25.0.4+7) on Linux 6.17.0-1020-oracle (aarch64)
+[03:11:07 INFO]: [bootstrap] Loading Paper 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) for Minecraft 26.2
+[03:11:07 INFO]: [PluginInitializerManager] Initializing plugins...
+[03:11:07 INFO]: [PluginInitializerManager] Initialized 0 plugins
+[03:11:12 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[03:11:12 INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[03:11:14 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 1,331.7ms
+[03:11:16 INFO]: Loaded 1585 recipes
+[03:11:16 INFO]: Loaded 1688 advancements
+[03:11:16 INFO]: Starting minecraft server version 26.2
+[03:11:16 INFO]: Loading properties
+[03:11:16 INFO]: This server is running Paper version 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) (Implementing API version 26.2.build.121-stable)
+[03:11:16 INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[03:11:17 INFO]: Server Ping Player Sample Count: 12
+[03:11:17 INFO]: Using 4 threads for Netty based IO
+[03:11:17 INFO]: [MoonriseCommon] Paper is using 1 worker threads, 1 I/O threads
+[03:11:18 INFO]: Default game type: SURVIVAL
+[03:11:18 INFO]: Generating keypair
+[03:11:18 INFO]: Starting Minecraft server on *:25565
+[03:11:18 INFO]: Paper: Using libdeflate (Linux aarch64) compression from Velocity.
+[03:11:18 INFO]: Paper: Using OpenSSL 3.x.x (Linux aarch64) cipher from Velocity.
+[03:11:18 WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[03:11:18 WARN]: The server will make no attempt to authenticate usernames. Beware.
+[03:11:18 WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[03:11:18 WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[03:11:18 INFO]: Preparing level "world"
+[03:11:18 INFO]: Loading 0 persistent chunks for level 'minecraft:overworld'...
+[03:11:18 INFO]: Preparing spawn area: 100%
+[03:11:18 INFO]: Prepared spawn area in 1 ms
+[03:11:18 INFO]: Loading 0 persistent chunks for level 'minecraft:the_nether'...
+[03:11:18 INFO]: Preparing spawn area: 100%
+[03:11:18 INFO]: Prepared spawn area in 2 ms
+[03:11:18 INFO]: Loading 0 persistent chunks for level 'minecraft:the_end'...
+[03:11:18 INFO]: Prepared spawn area in 1 ms
+[03:11:18 INFO]: Done preparing level "world" (0.514s)
+[03:11:18 INFO]: [spark] Starting background profiler...
+[03:11:19 INFO]: Starting remote control listener
+[03:11:19 INFO]: Thread RCON Listener started
+[03:11:19 INFO]: RCON running on 0.0.0.0:25575
+[03:11:19 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:11:19 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:11:19 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:11:19 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:11:19 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:11:19 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:11:19 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:11:19 INFO]: Running delayed init tasks
+[03:11:19 INFO]: Done (13.149s)! For help, type "help"
+[03:11:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:25 INFO]: [Rcon: Marked 4 chunks in minecraft:overworld from [0, 0] to [1, 1] to be force loaded]
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Successfully filled 256 block(s)]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Successfully filled 16 block(s)]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Successfully filled 16 block(s)]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Successfully filled 14 block(s)]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Successfully filled 14 block(s)]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:26 INFO]: [Rcon: Summoned new Cow]
+[03:11:26 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Cow]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Villager]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Villager]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:27 INFO]: [Rcon: Summoned new Villager]
+[03:11:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Summoned new Villager]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Summoned new Villager]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Summoned new Villager]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Summoned new Villager]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Summoned new Villager]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 0, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 1, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 2, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 3, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 4, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 5, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 6, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 7, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 8, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 9, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 10, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:28 INFO]: [Rcon: Changed the block at 11, 199, 24]
+[03:11:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:29 INFO]: [Rcon: Changed the block at 12, 199, 24]
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:29 INFO]: [Rcon: Changed the block at 13, 199, 24]
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:29 INFO]: [Rcon: Changed the block at 14, 199, 24]
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:29 INFO]: [Rcon: Changed the block at 15, 199, 24]
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:30 INFO]: UUID of player Bench01 is 43f83340-24e5-346a-8e0c-cf6bfccead28
+[03:11:31 INFO]: Bench01 joined the game
+[03:11:31 INFO]: Bench01[IP hidden] logged in with entity id 170 at ([minecraft:overworld]0.4999999999965561, 200.0, -12.447791547124808)
+[03:11:31 INFO]: Bench01 issued server command: /gamemode creative
+[03:11:31 INFO]: [Bench01: Set own game mode to Creative Mode]
+[03:11:32 INFO]: Bench01 issued server command: /tp @s 0 300 0
+[03:11:32 INFO]: [Bench01: Teleported Bench01 to 0.500000, 300.000000, 0.500000]
+[03:11:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:33 INFO]: UUID of player Bench02 is 193bd4cc-7799-3c22-95ea-eb018b0180af
+[03:11:34 INFO]: Bench02 joined the game
+[03:11:34 INFO]: Bench02[IP hidden] logged in with entity id 343 at ([minecraft:overworld]256.49999999999665, 200.0, -12.231932431414274)
+[03:11:34 INFO]: Bench02 issued server command: /gamemode creative
+[03:11:34 INFO]: [Bench02: Set own game mode to Creative Mode]
+[03:11:35 INFO]: Bench02 issued server command: /tp @s 256 300 0
+[03:11:35 INFO]: [Bench02: Teleported Bench02 to 256.500000, 300.000000, 0.500000]
+[03:11:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:48 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:53 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:53 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:53 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:53 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:58 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:58 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:11:58 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:11:58 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:18 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:12:18 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:12:18 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:12:18 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:12:18 INFO]: [Rcon: Saved the game]
+[03:12:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:18 WARN]: Bench01 moved too quickly! 0.0,0.0,24.5
+[03:12:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:29 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:34 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:34 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:34 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:34 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:39 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:12:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:12:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:05 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:05 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:05 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:05 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:10 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:10 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:10 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:10 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:13 INFO]: Bench02 issued server command: /execute positioned 256.5 300 960.5 if entity @s[distance=..2] run say E0_POS_out_Bench02
+[03:13:13 INFO]: [Not Secure] [Bench02] E0_POS_out_Bench02
+[03:13:14 INFO]: Bench01 issued server command: /execute positioned 0.5 300 960.5 if entity @s[distance=..2] run say E0_POS_out_Bench01
+[03:13:14 INFO]: [Not Secure] [Bench01] E0_POS_out_Bench01
+[03:13:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:15 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:20 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:46 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:51 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:13:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:13:56 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:01 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:06 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:11 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:16 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:21 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:27 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:32 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:37 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:42 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:47 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:50 INFO]: Bench02 issued server command: /execute positioned 256.5 300 0.5 if entity @s[distance=..2] run say E0_POS_back_Bench02
+[03:14:50 INFO]: [Not Secure] [Bench02] E0_POS_back_Bench02
+[03:14:50 INFO]: Bench01 issued server command: /execute positioned 0.5 300 0.5 if entity @s[distance=..2] run say E0_POS_back_Bench01
+[03:14:50 INFO]: [Not Secure] [Bench01] E0_POS_back_Bench01
+[03:14:50 INFO]: Bench01 issued server command: /fill -5 199 -20 5 199 20 minecraft:stone
+[03:14:50 INFO]: Bench02 issued server command: /fill 251 199 -20 261 199 20 minecraft:stone
+[03:14:51 INFO]: Bench01 issued server command: /tp @s 0 200 0
+[03:14:51 INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[03:14:51 INFO]: Bench02 issued server command: /tp @s 256 200 0
+[03:14:51 INFO]: [Bench02: Teleported Bench02 to 256.500000, 200.000000, 0.500000]
+[03:14:52 INFO]: Bench01 issued server command: /give @s minecraft:diamond_sword
+[03:14:52 INFO]: [Bench01: Gave 1 [Diamond Sword] to Bench01]
+[03:14:52 INFO]: Bench02 issued server command: /give @s minecraft:diamond_sword
+[03:14:52 INFO]: [Bench02: Gave 1 [Diamond Sword] to Bench02]
+[03:14:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:52 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:53 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:14:53 INFO]: [Bench01: Summoned new Husk]
+[03:14:53 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:14:53 INFO]: [Bench02: Summoned new Husk]
+[03:14:55 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:14:55 INFO]: [Bench02: Summoned new Husk]
+[03:14:55 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:14:55 INFO]: [Bench01: Summoned new Husk]
+[03:14:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:14:57 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:14:57 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:14:57 INFO]: [Bench02: Summoned new Husk]
+[03:14:58 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:14:58 INFO]: [Bench01: Summoned new Husk]
+[03:14:59 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:14:59 INFO]: [Bench02: Summoned new Husk]
+[03:15:00 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:00 INFO]: [Bench01: Summoned new Husk]
+[03:15:02 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:02 INFO]: [Bench02: Summoned new Husk]
+[03:15:02 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:02 INFO]: [Bench01: Summoned new Husk]
+[03:15:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:04 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:04 INFO]: [Bench02: Summoned new Husk]
+[03:15:04 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:04 INFO]: [Bench01: Summoned new Husk]
+[03:15:06 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:06 INFO]: [Bench02: Summoned new Husk]
+[03:15:06 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:06 INFO]: [Bench01: Summoned new Husk]
+[03:15:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:08 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:08 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:08 INFO]: [Bench02: Summoned new Husk]
+[03:15:08 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:08 INFO]: [Bench01: Summoned new Husk]
+[03:15:10 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:10 INFO]: [Bench02: Summoned new Husk]
+[03:15:10 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:10 INFO]: [Bench01: Summoned new Husk]
+[03:15:12 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:12 INFO]: [Bench02: Summoned new Husk]
+[03:15:12 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:12 INFO]: [Bench01: Summoned new Husk]
+[03:15:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:13 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:14 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:14 INFO]: [Bench02: Summoned new Husk]
+[03:15:14 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:14 INFO]: [Bench01: Summoned new Husk]
+[03:15:16 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:16 INFO]: [Bench02: Summoned new Husk]
+[03:15:17 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:17 INFO]: [Bench01: Summoned new Husk]
+[03:15:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:18 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:19 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:19 INFO]: [Bench01: Summoned new Husk]
+[03:15:19 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:19 INFO]: [Bench02: Summoned new Husk]
+[03:15:21 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:21 INFO]: [Bench01: Summoned new Husk]
+[03:15:22 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:22 INFO]: [Bench02: Summoned new Husk]
+[03:15:23 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:23 INFO]: [Bench01: Summoned new Husk]
+[03:15:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:23 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:24 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:24 INFO]: [Bench02: Summoned new Husk]
+[03:15:25 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:25 INFO]: [Bench01: Summoned new Husk]
+[03:15:26 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:26 INFO]: [Bench02: Summoned new Husk]
+[03:15:27 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:27 INFO]: [Bench01: Summoned new Husk]
+[03:15:28 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:28 INFO]: [Bench02: Summoned new Husk]
+[03:15:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:28 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:29 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:29 INFO]: [Bench01: Summoned new Husk]
+[03:15:30 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:30 INFO]: [Bench02: Summoned new Husk]
+[03:15:31 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:31 INFO]: [Bench01: Summoned new Husk]
+[03:15:32 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:32 INFO]: [Bench02: Summoned new Husk]
+[03:15:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:33 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:34 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:34 INFO]: [Bench01: Summoned new Husk]
+[03:15:34 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:34 INFO]: [Bench02: Summoned new Husk]
+[03:15:36 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:36 INFO]: [Bench01: Summoned new Husk]
+[03:15:36 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:36 INFO]: [Bench02: Summoned new Husk]
+[03:15:38 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:38 INFO]: [Bench01: Summoned new Husk]
+[03:15:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:38 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:39 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:39 INFO]: [Bench02: Summoned new Husk]
+[03:15:40 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:40 INFO]: [Bench01: Summoned new Husk]
+[03:15:41 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:41 INFO]: [Bench02: Summoned new Husk]
+[03:15:42 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:42 INFO]: [Bench01: Summoned new Husk]
+[03:15:43 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:43 INFO]: [Bench02: Summoned new Husk]
+[03:15:43 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:43 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:44 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:44 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:44 INFO]: [Bench01: Summoned new Husk]
+[03:15:45 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:45 INFO]: [Bench02: Summoned new Husk]
+[03:15:46 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:46 INFO]: [Bench01: Summoned new Husk]
+[03:15:47 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:47 INFO]: [Bench02: Summoned new Husk]
+[03:15:48 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:48 INFO]: [Bench01: Summoned new Husk]
+[03:15:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:49 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:49 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:49 INFO]: [Bench02: Summoned new Husk]
+[03:15:50 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:50 INFO]: [Bench01: Summoned new Husk]
+[03:15:51 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:51 INFO]: [Bench02: Summoned new Husk]
+[03:15:53 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:53 INFO]: [Bench01: Summoned new Husk]
+[03:15:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:54 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:54 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:54 INFO]: [Bench02: Summoned new Husk]
+[03:15:55 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:55 INFO]: [Bench01: Summoned new Husk]
+[03:15:56 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:56 INFO]: [Bench02: Summoned new Husk]
+[03:15:57 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:57 INFO]: [Bench01: Summoned new Husk]
+[03:15:58 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:15:58 INFO]: [Bench02: Summoned new Husk]
+[03:15:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:15:59 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:15:59 INFO]: [Bench01: Summoned new Husk]
+[03:15:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:15:59 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:00 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:00 INFO]: [Bench02: Summoned new Husk]
+[03:16:01 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:01 INFO]: [Bench01: Summoned new Husk]
+[03:16:02 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:02 INFO]: [Bench02: Summoned new Husk]
+[03:16:03 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:03 INFO]: [Bench01: Summoned new Husk]
+[03:16:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:04 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:05 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:05 INFO]: [Bench02: Summoned new Husk]
+[03:16:05 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:05 INFO]: [Bench01: Summoned new Husk]
+[03:16:07 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:07 INFO]: [Bench02: Summoned new Husk]
+[03:16:07 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:07 INFO]: [Bench01: Summoned new Husk]
+[03:16:09 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:09 INFO]: [Bench02: Summoned new Husk]
+[03:16:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:09 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:09 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:09 INFO]: [Bench01: Summoned new Husk]
+[03:16:11 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:11 INFO]: [Bench02: Summoned new Husk]
+[03:16:12 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:12 INFO]: [Bench01: Summoned new Husk]
+[03:16:13 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:13 INFO]: [Bench02: Summoned new Husk]
+[03:16:14 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:14 INFO]: [Bench01: Summoned new Husk]
+[03:16:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:14 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:15 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:15 INFO]: [Bench02: Summoned new Husk]
+[03:16:16 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:16 INFO]: [Bench01: Summoned new Husk]
+[03:16:17 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:17 INFO]: [Bench02: Summoned new Husk]
+[03:16:18 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:18 INFO]: [Bench01: Summoned new Husk]
+[03:16:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:19 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:19 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:19 INFO]: [Bench02: Summoned new Husk]
+[03:16:20 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:20 INFO]: [Bench01: Summoned new Husk]
+[03:16:22 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:22 INFO]: [Bench02: Summoned new Husk]
+[03:16:22 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:22 INFO]: [Bench01: Summoned new Husk]
+[03:16:24 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:24 INFO]: [Bench02: Summoned new Husk]
+[03:16:24 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:24 INFO]: [Bench01: Summoned new Husk]
+[03:16:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:24 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:25 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:26 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:26 INFO]: [Bench02: Summoned new Husk]
+[03:16:26 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:26 INFO]: [Bench01: Summoned new Husk]
+[03:16:28 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:28 INFO]: [Bench02: Summoned new Husk]
+[03:16:29 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:29 INFO]: [Bench01: Summoned new Husk]
+[03:16:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:30 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:30 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:30 INFO]: [Bench02: Summoned new Husk]
+[03:16:31 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:31 INFO]: [Bench01: Summoned new Husk]
+[03:16:32 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:32 INFO]: [Bench02: Summoned new Husk]
+[03:16:33 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:33 INFO]: [Bench01: Summoned new Husk]
+[03:16:34 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:34 INFO]: [Bench02: Summoned new Husk]
+[03:16:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:35 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:35 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:35 INFO]: [Bench01: Summoned new Husk]
+[03:16:36 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:36 INFO]: [Bench02: Summoned new Husk]
+[03:16:37 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:37 INFO]: [Bench01: Summoned new Husk]
+[03:16:38 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:38 INFO]: [Bench02: Summoned new Husk]
+[03:16:39 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:39 INFO]: [Bench01: Summoned new Husk]
+[03:16:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:40 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:41 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:41 INFO]: [Bench02: Summoned new Husk]
+[03:16:41 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:41 INFO]: [Bench01: Summoned new Husk]
+[03:16:43 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:43 INFO]: [Bench02: Summoned new Husk]
+[03:16:43 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:43 INFO]: [Bench01: Summoned new Husk]
+[03:16:45 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:45 INFO]: [Bench02: Summoned new Husk]
+[03:16:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:45 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:45 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:45 INFO]: [Bench01: Summoned new Husk]
+[03:16:47 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:47 INFO]: [Bench02: Summoned new Husk]
+[03:16:48 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:48 INFO]: [Bench01: Summoned new Husk]
+[03:16:49 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:49 INFO]: [Bench02: Summoned new Husk]
+[03:16:50 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:50 INFO]: [Bench01: Summoned new Husk]
+[03:16:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:50 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:51 INFO]: Bench02 issued server command: /summon minecraft:husk 258 200 0 {PersistenceRequired:1b}
+[03:16:51 INFO]: [Bench02: Summoned new Husk]
+[03:16:52 INFO]: Bench01 issued server command: /summon minecraft:husk 2 200 0 {PersistenceRequired:1b}
+[03:16:52 INFO]: [Bench01: Summoned new Husk]
+[03:16:53 INFO]: Bench02 issued server command: /tp @s 256 200 0
+[03:16:53 INFO]: [Bench02: Teleported Bench02 to 256.500000, 200.000000, 0.500000]
+[03:16:53 INFO]: Bench02 issued server command: /kill @e[type=minecraft:husk,distance=..8]
+[03:16:53 INFO]: [Bench02: Killed Husk]
+[03:16:53 INFO]: Bench02 issued server command: /gamemode survival
+[03:16:53 INFO]: [Bench02: Set own game mode to Survival Mode]
+[03:16:53 INFO]: Bench02 issued server command: /give @s minecraft:iron_pickaxe
+[03:16:53 INFO]: [Bench02: Gave 1 [Iron Pickaxe] to Bench02]
+[03:16:53 INFO]: Bench02 issued server command: /give @s minecraft:stone 16
+[03:16:53 INFO]: [Bench02: Gave 16 [Stone] to Bench02]
+[03:16:53 INFO]: Bench02 issued server command: /setblock 257 200 0 minecraft:stone
+[03:16:53 INFO]: Bench01 issued server command: /tp @s 0 200 0
+[03:16:53 INFO]: [Bench01: Teleported Bench01 to 0.500000, 200.000000, 0.500000]
+[03:16:53 INFO]: Bench01 issued server command: /kill @e[type=minecraft:husk,distance=..8]
+[03:16:53 INFO]: [Bench01: Killed Husk]
+[03:16:53 INFO]: Bench01 issued server command: /gamemode survival
+[03:16:53 INFO]: [Bench01: Set own game mode to Survival Mode]
+[03:16:53 INFO]: Bench01 issued server command: /give @s minecraft:iron_pickaxe
+[03:16:53 INFO]: [Bench01: Gave 1 [Iron Pickaxe] to Bench01]
+[03:16:53 INFO]: Bench01 issued server command: /give @s minecraft:stone 16
+[03:16:53 INFO]: [Bench01: Gave 16 [Stone] to Bench01]
+[03:16:53 INFO]: Bench01 issued server command: /setblock 1 200 0 minecraft:stone
+[03:16:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:16:55 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:16:55 INFO]: Bench01 issued server command: /execute if block 1 200 0 minecraft:air run say FREE_BLOCK_air_Bench01
+[03:16:55 INFO]: Bench02 issued server command: /execute if block 257 200 0 minecraft:air run say FREE_BLOCK_air_Bench02
+[03:16:55 INFO]: [Not Secure] [Bench01] FREE_BLOCK_air_Bench01
+[03:16:55 INFO]: [Not Secure] [Bench02] FREE_BLOCK_air_Bench02
+[03:16:55 INFO]: Bench02 issued server command: /execute if block 257 200 0 minecraft:stone run say FREE_BLOCK_stone_Bench02
+[03:16:55 INFO]: [Not Secure] [Bench02] FREE_BLOCK_stone_Bench02
+[03:16:55 INFO]: Bench01 issued server command: /execute if block 1 200 0 minecraft:stone run say FREE_BLOCK_stone_Bench01
+[03:16:55 INFO]: [Not Secure] [Bench01] FREE_BLOCK_stone_Bench01
+[03:16:56 INFO]: Bench01 has made the advancement [Stone Age]
+[03:16:59 INFO]: Bench02 issued server command: /execute positioned 256.49999999999665 200 -12.231932431414274 if entity @s[distance=..2] run say E0_POS_survival_Bench02
+[03:16:59 INFO]: [Not Secure] [Bench02] E0_POS_survival_Bench02
+[03:16:59 INFO]: Bench01 issued server command: /execute positioned 0.4999999999977085 200 -12.447791547124808 if entity @s[distance=..2] run say E0_POS_survival_Bench01
+[03:16:59 INFO]: [Not Secure] [Bench01] E0_POS_survival_Bench01
+[03:16:59 INFO]: Bench01 lost connection: Disconnected
+[03:16:59 INFO]: Bench01 left the game
+[03:16:59 INFO]: Bench02 lost connection: Disconnected
+[03:16:59 INFO]: Bench02 left the game
+[03:17:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:17:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:00 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:17:02 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:03 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:17:03 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:17:03 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:17:03 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:17:03 INFO]: [Rcon: Saved the game]
+[03:17:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T03:17:03.217Z	INFO	mc-server-runner	gracefully stopping server...
+[03:17:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:03 INFO]: [Rcon: Stopping the server]
+[03:17:03 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T03:17:03.223Z	INFO	mc-server-runner	Waiting for completion...
+[03:17:03 INFO]: Stopping server
+[03:17:03 INFO]: Saving players
+[03:17:03 INFO]: Saving worlds
+[03:17:03 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:17:03 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:overworld'
+[03:17:03 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:overworld'
+[03:17:03 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:overworld'
+[03:17:03 INFO]: [ChunkHolderManager] Saved 4 block chunks, 93 entity chunks, 0 poi chunks in world 'minecraft:overworld' in 0.04s
+[03:17:03 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:overworld'
+[03:17:03 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:overworld'
+[03:17:03 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:17:03 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_nether'
+[03:17:03 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_nether'
+[03:17:03 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_nether'
+[03:17:03 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_nether' in 0.00s
+[03:17:03 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_nether'
+[03:17:03 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_nether'
+[03:17:03 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:17:03 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_end'
+[03:17:03 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_end'
+[03:17:03 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_end'
+[03:17:03 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_end' in 0.00s
+[03:17:03 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_end'
+[03:17:03 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_end'
+[03:17:03 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:17:03 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:17:03 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:17:03 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:17:03 INFO]: Waiting for all RegionFile I/O tasks to complete...
+[03:17:03 INFO]: All RegionFile I/O tasks to complete
+[03:17:03 INFO]: [MoonriseCommon] Awaiting termination of worker pool for up to 60s...
+[03:17:03 INFO]: [MoonriseCommon] Awaiting termination of I/O pool for up to 60s...
+2026-09-06T03:17:03.805Z	INFO	mc-server-runner	Done
+[init] Running as uid=1000 gid=1000 with /data as 'drwxr-xr-x 11 1000 1000 4096 Sep  6 03:10 /data'
+[init] Image info: buildtime=2026-08-23T14:04:22.056Z,version=2026.8.2,revision=f61f72196b54523271a7763a92f4298152b67528
+[init] Resolving type given PAPER
+[init] Copying any plugins from /plugins to /data/plugins
+[init] Copying any configs from /config to /data/config
+[init] Setting mode
+[init] Setting initial memory to 2G and max to 2G
+[init] Starting the Minecraft server...
+Starting org.bukkit.craftbukkit.Main
+[03:17:19 INFO]: [bootstrap] Running Java 25 (OpenJDK 64-Bit Server VM 25.0.4+7-LTS; Eclipse Adoptium Temurin-25.0.4+7) on Linux 6.17.0-1020-oracle (aarch64)
+[03:17:19 INFO]: [bootstrap] Loading Paper 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) for Minecraft 26.2
+[03:17:19 INFO]: [PluginInitializerManager] Initializing plugins...
+[03:17:19 INFO]: [PluginInitializerManager] Initialized 0 plugins
+[03:17:25 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[03:17:25 INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[03:17:26 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 1,090.3ms
+[03:17:28 INFO]: Loaded 1585 recipes
+[03:17:28 INFO]: Loaded 1688 advancements
+[03:17:29 INFO]: Starting minecraft server version 26.2
+[03:17:29 INFO]: Loading properties
+[03:17:29 INFO]: This server is running Paper version 26.2-121-main@a2a42c5 (2026-08-29T11:32:25Z) (Implementing API version 26.2.build.121-stable)
+[03:17:29 INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[03:17:29 INFO]: Server Ping Player Sample Count: 12
+[03:17:29 INFO]: Using 4 threads for Netty based IO
+[03:17:30 INFO]: [MoonriseCommon] Paper is using 1 worker threads, 1 I/O threads
+[03:17:30 INFO]: Default game type: SURVIVAL
+[03:17:30 INFO]: Generating keypair
+[03:17:30 INFO]: Starting Minecraft server on *:25565
+[03:17:30 INFO]: Paper: Using libdeflate (Linux aarch64) compression from Velocity.
+[03:17:30 INFO]: Paper: Using OpenSSL 3.x.x (Linux aarch64) cipher from Velocity.
+[03:17:30 WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[03:17:30 WARN]: The server will make no attempt to authenticate usernames. Beware.
+[03:17:30 WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[03:17:30 WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[03:17:30 INFO]: Preparing level "world"
+[03:17:31 INFO]: Loading 36 persistent chunks for level 'minecraft:overworld'...
+[03:17:31 INFO]: Preparing spawn area: 21%
+[03:17:31 INFO]: Preparing spawn area: 21%
+[03:17:32 INFO]: Prepared spawn area in 1497 ms
+[03:17:32 INFO]: Loading 0 persistent chunks for level 'minecraft:the_nether'...
+[03:17:32 INFO]: Preparing spawn area: 100%
+[03:17:32 INFO]: Prepared spawn area in 1 ms
+[03:17:32 INFO]: Loading 0 persistent chunks for level 'minecraft:the_end'...
+[03:17:32 INFO]: Prepared spawn area in 0 ms
+[03:17:32 INFO]: Done preparing level "world" (2.200s)
+[03:17:33 INFO]: [spark] Starting background profiler...
+[03:17:33 INFO]: Starting remote control listener
+[03:17:33 INFO]: Thread RCON Listener started
+[03:17:33 INFO]: RCON running on 0.0.0.0:25575
+[03:17:33 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:17:33 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:17:33 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:17:33 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:17:33 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:17:33 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:17:33 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:17:33 INFO]: Running delayed init tasks
+[03:17:33 INFO]: Done (15.448s)! For help, type "help"
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T03:17:36.619Z	INFO	mc-server-runner	gracefully stopping server...
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started
+[03:17:36 INFO]: [Rcon: Stopping the server]
+[03:17:36 INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
+2026-09-06T03:17:36.638Z	INFO	mc-server-runner	Waiting for completion...
+[03:17:36 INFO]: Stopping server
+[03:17:36 INFO]: Saving players
+[03:17:36 INFO]: Saving worlds
+[03:17:36 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:17:36 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:overworld'
+[03:17:36 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:overworld'
+[03:17:36 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:overworld'
+[03:17:36 INFO]: [ChunkHolderManager] Saved 0 block chunks, 8 entity chunks, 0 poi chunks in world 'minecraft:overworld' in 0.04s
+[03:17:36 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:overworld'
+[03:17:36 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:overworld'
+[03:17:36 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:17:36 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_nether'
+[03:17:36 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_nether'
+[03:17:36 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_nether'
+[03:17:36 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_nether' in 0.00s
+[03:17:36 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_nether'
+[03:17:36 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_nether'
+[03:17:36 INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:17:36 INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'minecraft:the_end'
+[03:17:36 INFO]: [ChunkHolderManager] Halted chunk system for world 'minecraft:the_end'
+[03:17:36 INFO]: [ChunkHolderManager] Saving all chunkholders for world 'minecraft:the_end'
+[03:17:36 INFO]: [ChunkHolderManager] Saved 0 block chunks, 0 entity chunks, 0 poi chunks in world 'minecraft:the_end' in 0.00s
+[03:17:36 INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'minecraft:the_end'
+[03:17:36 INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'minecraft:the_end'
+[03:17:36 INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:17:36 INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:17:36 INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:17:36 INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[03:17:36 INFO]: Waiting for all RegionFile I/O tasks to complete...
+[03:17:36 INFO]: All RegionFile I/O tasks to complete
+[03:17:36 INFO]: [MoonriseCommon] Awaiting termination of worker pool for up to 60s...
+[03:17:36 INFO]: [MoonriseCommon] Awaiting termination of I/O pool for up to 60s...
+2026-09-06T03:17:39.246Z	INFO	mc-server-runner	Done
+2026-09-06T03:04:30.736772681Z ServerMain WARN Advanced terminal features are not available in this environment
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 03:10:48 Stopping with rcon-cli
+2026-09-06T03:11:06.748421930Z ServerMain WARN Advanced terminal features are not available in this environment
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 03:17:03 Stopping with rcon-cli
+2026-09-06T03:17:18.979355519Z ServerMain WARN Advanced terminal features are not available in this environment
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/data/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026/09/06 03:17:36 Stopping with rcon-cli
