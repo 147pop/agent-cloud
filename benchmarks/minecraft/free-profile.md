@@ -81,3 +81,5 @@ The correction was checked against `net.minecraft.network.protocol.game.GameProt
 | Custom click action | `0x44` |
 
 The server versions and resource limits did not change to work around the client failure. Recheck this correction when changing the pinned dependency.
+
+The first formal Fabric attempt, `compare-fabric`, completed its fresh-world player actions but stopped before backup. Fabric had unloaded the marker chunk after the clients disconnected and returned `That position is not loaded`. The runner now temporarily loads the four chunks containing the marker and population area, waits for the server to confirm they are loaded, writes the marker and removes the forced load before backup. The same loaded-chunk check precedes population setup and restart verification. This changes the persistence preparation after players exit. It does not change the active workload, engine configuration or resource limits. The incomplete attempt remains in the evidence export.

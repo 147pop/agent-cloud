@@ -42,6 +42,15 @@ def rcon(name, text):
     return command('docker', 'exec', name, 'rcon-cli', text, timeout=20).stdout.strip()
 
 
+def load_population_area(name):
+    rcon(name, 'forceload add 0 0 31 31')
+    checks = ' '.join(f'if loaded {x} 201 {z}' for x in (0, 31) for z in (0, 31))
+    deadline = time.monotonic() + 20
+    while 'Test passed' not in rcon(name, 'execute ' + checks):
+        assert time.monotonic() < deadline, 'Persistence area did not load'
+        time.sleep(0.1)
+
+
 def world_hashes(data):
     return {str(path.relative_to(data)): hashlib.sha256(path.read_bytes()).hexdigest()
             for world in sorted(data.glob('world*')) if world.is_dir()
@@ -363,7 +372,12 @@ def main():
                 phase_result['world_bytes_after'] = world_bytes(data)
                 mark(name, 'save')
                 if phase == 'fresh':
-                    assert 'Changed the block' in rcon(name, 'setblock 0 201 0 minecraft:diamond_block')
+                    load_population_area(name)
+                    try:
+                        response = rcon(name, 'setblock 0 201 0 minecraft:diamond_block')
+                        assert 'Changed the block' in response, response
+                    finally:
+                        rcon(name, 'forceload remove 0 0 31 31')
                 assert 'Saved the game' in rcon(name, 'save-all flush')
                 mark(name, 'stop')
                 command('docker', 'stop', '-t', '120', name, timeout=150)
@@ -391,7 +405,7 @@ def main():
                     command('docker', 'start', name)
                     ready(name)
                     case['warm_ready_seconds'] = time.monotonic() - start
-                    rcon(name, 'forceload add 0 0 31 31')
+                    load_population_area(name)
                     assert 'Test passed' in rcon(name, 'execute if block 0 201 0 minecraft:diamond_block')
                     for text in ['fill 16 199 16 31 199 31 minecraft:stone',
                                  'fill 16 200 16 31 200 16 minecraft:oak_fence', 'fill 16 200 31 31 200 31 minecraft:oak_fence',
@@ -411,6 +425,7 @@ def main():
                     command('docker', 'start', name)
                     ready(name)
                     case['populated_ready_seconds'] = time.monotonic() - start
+                    load_population_area(name)
                     assert 'Test passed' in rcon(name, 'execute if block 0 201 0 minecraft:diamond_block')
                     case['population_after_restart'] = rcon(name, 'execute if entity @e[tag=FreePopulation]')
                     assert '32' in case['population_after_restart'], case['population_after_restart']
