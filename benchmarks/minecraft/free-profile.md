@@ -45,7 +45,7 @@ Stop on an OOM, less than 2 GiB available host RAM, less than 20 GiB free disk, 
 
 ## External acceptance
 
-[TES-142](https://linear.app/workspace/issue/TES-142) owns the controlled comparison and [TES-143](https://linear.app/workspace/issue/TES-143) the concurrent-instance boundary. [TES-144](https://linear.app/workspace/issue/TES-144) requires an authenticated external client, ordinary play, network measurements and human observations on the proposed player route. The public TCP decision remains a separate prerequisite for that route.
+[TES-142](https://linear.app/workspace/issue/TES-142) owns the controlled comparison and [TES-143](https://linear.app/workspace/issue/TES-143) the concurrent-instance boundary. [TES-144](https://linear.app/workspace/issue/TES-144) requires an authenticated external client, ordinary play, network measurements and human observations on the proposed player route. [D5](https://linear.app/workspace/issue/TES-18) selected Cloudflare Spectrum in [PR 4](https://github.com/pjcdz/cloud/pull/4). The origin deployment and live route validation remain pending.
 
 Record the client version, approximate location, network context, visible stalls, gameplay differences and reconnect result without publishing identities or credentials. Keep the catalog experimental until this evidence and the automated gates support an explicit capacity decision.
 
