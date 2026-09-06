@@ -1,6 +1,8 @@
 # Infrastructure
 
-Cloud's selected beta design uses one control host, one game worker and a temporary second game worker for recovery tests. The control service is planned. [k3s/](k3s/) installs the cluster itself (TES-59, TES-25).
+The first reproducible foundation uses `control-1` for cloud-control, PostgreSQL and the K3s server, and `game-1` for the K3s agent, Paper and persistent worlds. The control service and complete agent-to-play flow remain to be implemented. [k3s/](k3s/) contains the existing cluster installer.
+
+Foundation acceptance uses a direct game IP and port or DNS-only address. A temporary second game worker for disaster recovery and Cloudflare routing belong to the later managed service. Spectrum is the final gate before public opening.
 
 Read the [architecture](../docs/architecture.md) before adding reusable infrastructure configuration. Put server recipes in the [catalog](../catalog/README.md) and measurement code with the [benchmarks](../benchmarks/README.md).
 
