@@ -10,8 +10,8 @@ passed as an argument or environment variable at run time, per
 
 1. On `control-1` (sudo): `./install-control.sh`
    Installs the K3s server with the `wireguard-native` flannel backend,
-   disables the bundled Traefik and ServiceLB (unused — Minecraft uses
-   `hostPort` and Cloudflare Spectrum, not a K8s LoadBalancer), tags the node
+   disables the bundled Traefik and ServiceLB. The current Paper manifest
+   exposes `hostPort` for direct test connections; Spectrum is a later public-opening gate. It tags the node
    `cloud.example/role=control:NoSchedule` so no game workload can land there,
    and prints the join token. Copy the token out-of-band (e.g. into the
    private TES-53 archive) — do not paste it into a commit, issue, or PR.
