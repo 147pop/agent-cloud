@@ -34,6 +34,6 @@ Preserve commit authorship when integrating work. Describe contributions in the 
 
 ## Code publication
 
-The repository does not yet contain an open source license. The maintainers must settle licensing and review third-party code and assets before publishing the code. Third-party installation and a supported deployment release are separate later work.
+The repository is licensed under [MIT](LICENSE). The maintainers must still review third-party code and assets, and sanitize operational identifiers retained in Git history, before flipping the repository to public. Third-party installation and a supported deployment release are separate later work.
 
 Follow [SECURITY.md](SECURITY.md) for sensitive reports.

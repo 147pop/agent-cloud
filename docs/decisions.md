@@ -45,15 +45,29 @@ Agustín Pedernera recorded these approvals in the decision issues. The later bi
 | [D7, billing](https://linear.app/workspace/issue/TES-21) | The first beta is free. Billing follows 100 real runs, proven recovery between workers and measured costs. |
 | [D8, availability](https://linear.app/workspace/issue/TES-22) | Accept one control host for the invited beta, conditional on restoring it on a clean host and assigning an incident owner before opening the beta. |
 
-These are acceptance rules, not completed test results. [D9's authorizations and incident ownership](https://linear.app/workspace/issue/TES-23) remain in the private project record. D5 is still open below.
+These are acceptance rules, not completed test results. [D9's authorizations and incident ownership](https://linear.app/workspace/issue/TES-23) remain in the private project record.
+
+## D5, public game TCP and worker IP exposure — resolved 2026-09-06
+
+[TES-18](https://linear.app/workspace/issue/TES-18) carried two conflicting comments: Pablo asked for "an IP that Cloudflare provides" (2026-09-04); Agustín Pedernera had separately approved direct DNS to a provider with included protection (2026-09-04), which closed the issue without settling Pablo's request. This entry replaces both and is the current policy.
+
+| Decision | Reason and consequence |
+| --- | --- |
+| Route public Minecraft TCP through Cloudflare Spectrum | Matches Pablo's request for a Cloudflare-facing IP. The protection boundary is Cloudflare's edge L3/L4 mitigation; the worker's real IP is no longer directly reachable. Spectrum is billed per GB proxied — that cost must be measured against expected beta traffic before public registration opens, per D7's free-beta scope. |
+
+External validation from a real Minecraft client is still required before this decision can close TES-18 fully. It is blocked on an E1 Minecraft deployment existing to act as the Spectrum origin (E1's tasks are unstarted as of this revision); tracked as the remaining acceptance criterion on TES-18, not a new decision.
+
+## Open source license — resolved 2026-09-06
+
+| Decision | Reason and consequence |
+| --- | --- |
+| License the repository under MIT | Pablo and Agustín Pedernera agreed a permissive license favoring reuse and third-party installation over restricting competing hosting offers. See [LICENSE](../LICENSE). This does not by itself authorize flipping the repository to public: [TES-138](https://linear.app/workspace/issue/TES-138) (third-party code/asset review and sanitizing operational identifiers in Git history) remains open and gates that. |
 
 ## Open decisions
 
 | Decision | What must be recorded before proceeding |
 | --- | --- |
-| D5, public game TCP and worker IP exposure | One accepted routing policy, tested from an external Minecraft client, with the protection boundary and cost identified. Earlier comments conflict; a closed issue alone does not resolve them. |
 | Free Minecraft profile | Comparable engine results, a human play review, concurrent instance measurements and the chosen margin for the host. The older single-instance reference is insufficient. |
-| Open source license | The maintainers' chosen license and any required treatment of third-party code or assets. No license is selected in this revision. |
 | First curated Deploy workload and runtime | A specific application, operating policy, isolation requirements and qualification plan. No sandbox technology is selected in advance. |
 
 A decision changes when its owner records the replacement and why. Update this file and the affected configuration or architecture in the same change. Preserve the earlier evidence and date; do not rewrite a failed experiment as a passing result.
