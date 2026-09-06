@@ -1,6 +1,6 @@
 # Infrastructure
 
-Cloud's selected beta design uses one control host, one game worker and a temporary second game worker for recovery tests. The cluster and control service are planned. This directory does not contain a platform installer.
+Cloud's selected beta design uses one control host, one game worker and a temporary second game worker for recovery tests. The control service is planned. [k3s/](k3s/) installs the cluster itself (TES-59, TES-25).
 
 Read the [architecture](../docs/architecture.md) before adding reusable infrastructure configuration. Put server recipes in the [catalog](../catalog/README.md) and measurement code with the [benchmarks](../benchmarks/README.md).
 

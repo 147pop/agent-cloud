@@ -57,6 +57,8 @@ These are acceptance rules, not completed test results. [D9's authorizations and
 
 External validation from a real Minecraft client is still required before this decision can close TES-18 fully. It is blocked on an E1 Minecraft deployment existing to act as the Spectrum origin; tracked as the remaining acceptance criterion on TES-18, not a new decision.
 
+**Pending real-host validation:** E1's repo-side artifacts (K3s manifests and test runbook at [catalog/games/minecraft-java/paper/k8s/](../catalog/games/minecraft-java/paper/k8s/)) are written, but K3s is not yet installed on `control-1`/`game-1` and no host has run the six interrupted-stop/replacement scenarios or connected a real external client through Spectrum. This paragraph gets replaced with a dated confirmation, an evidence link, and any observed Spectrum GB-billing (feeds D7) once that happens — not before.
+
 ## Open source license — resolved 2026-09-06
 
 | Decision | Reason and consequence |
