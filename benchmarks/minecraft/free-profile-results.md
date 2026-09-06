@@ -13,9 +13,23 @@ Both engines passed two repetitions with two nearby synthetic players, using lan
 
 Tick percentiles are the worst native 100-tick windows sampled during the active phases. They are not percentiles over the entire run. Memory is the highest container sample across the battery. CPU is the duration-weighted mean of the four active phase measurements. These two repetitions do not establish a general engine ranking.
 
-Paper proceeds to the separate-terrain check. It had the lower tick tail, comparable CPU use and a memory peak within the fixed 3 GiB container budget. Fabric remains an alternative; its lower observed memory use does not by itself increase the tested host capacity. C2ME has not been enabled because the nearby-player comparison did not show generation waits requiring it.
+Paper was selected for the separate-terrain and density checks. It had the lower tick tail, comparable CPU use and a memory peak within the fixed 3 GiB container budget. Fabric remains an alternative; its lower observed memory use does not by itself increase the tested host capacity. C2ME has not been enabled because the nearby-player comparison did not show generation waits requiring it.
 
-The next check uses two players travelling 256 blocks apart. A passing nearby-player result cannot establish capacity for independent exploration. The density study will use that separated route and longer phases before recording a concurrent-instance limit.
+## Separate player routes
+
+Paper passed [two repetitions with lanes 256 blocks apart](evidence/free/candidate-paper-spread/measurements.json). Both fresh and populated phases passed, including backup, restoration, restart and recovery of the marker and all 32 persistent entities.
+
+| Measurement | Observed value |
+| --- | --- |
+| Minimum minute TPS | 19.06 |
+| Worst sampled tick p95 / p99 | 26.7 / 125.9 ms |
+| Maximum chunk wait | 3.502 s |
+| Peak game memory, including startup | 2768 MiB |
+| Mean active CPU | 0.577 cores |
+| Maximum readiness time | 50.79 s |
+| Largest populated world | 28.49 MB |
+
+The minimum TPS was close to the 19 TPS screening cut. Each player flew 480 blocks out and back, fought mobs and completed the short Survival checks. This result covers one instance. The density study uses the same separated lanes with `--seconds 120`, doubling the route length, before recording a concurrent-instance boundary.
 
 ## Provenance and recovery
 
