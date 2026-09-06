@@ -1,0 +1,79 @@
+# Node label convention is TBD until the real game worker is labeled.
+# Update the nodeSelector value below to match whatever label the operator
+# applies to game-1 before first apply.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paper-e0-oracle
+  namespace: cloud-minecraft-paper
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: paper-e0-oracle
+  template:
+    metadata:
+      labels:
+        app: paper-e0-oracle
+    spec:
+      terminationGracePeriodSeconds: 120
+      serviceAccountName: paper-e0-oracle
+      automountServiceAccountToken: false
+      nodeSelector:
+        cloud.example/role: game
+      containers:
+        - name: paper
+          image: itzg/minecraft-server@sha256:efa878ddb49cf5251b2e5f2ad71b08fd2f7236c1f7907433f6697258b31d2ce4
+          env:
+            - name: EULA
+              value: "TRUE"
+            - name: TYPE
+              value: PAPER
+            - name: VERSION
+              value: "26.2"
+            - name: PAPER_BUILD
+              value: "121"
+            - name: MEMORY
+              value: 4G
+            - name: UID
+              value: "1000"
+            - name: GID
+              value: "1000"
+            - name: VIEW_DISTANCE
+              value: "6"
+            - name: SIMULATION_DISTANCE
+              value: "4"
+            - name: MAX_PLAYERS
+              value: "1"
+            - name: ENABLE_RCON
+              value: "false"
+            - name: STOP_SERVER_ANNOUNCE_DELAY
+              value: "0"
+          ports:
+            - name: minecraft
+              containerPort: 25565
+              hostPort: 25565
+              protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 12
+          resources:
+            requests:
+              cpu: "3"
+              memory: 5Gi
+            limits:
+              cpu: "3"
+              memory: 5Gi
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: paper-e0-oracle-data

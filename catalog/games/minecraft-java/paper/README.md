@@ -6,6 +6,7 @@ Status: `Experimental`.
 | --- | --- |
 | Original smoke recipe | [compose.smoke.yml](compose.smoke.yml), Paper 26.2 build 121, pinned image, 4 GiB heap |
 | Benchmark recipe | [compose.yml](../../../../benchmarks/minecraft/compose.yml), 3 CPU cores, 4 GiB heap, 5 GiB container limit |
+| K3s recipe (E1, Spectrum origin) | [k8s/](k8s/), Deployment + PVC, writer-lock and interrupted-stop test runbook |
 | Historical Oracle profile | [profile.json](../../../../benchmarks/minecraft/profile.json) |
 | Result and limits | [Minecraft benchmark](../../../../benchmarks/minecraft/README.md#results) |
 
