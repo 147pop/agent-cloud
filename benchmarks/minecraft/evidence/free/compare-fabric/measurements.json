@@ -7,7 +7,7 @@
     "repeats": 2,
     "seconds": 60
   },
-  "report_source_sha256": "8e37545fe387e0333aea72c449e6ba6b69f8339405e906c656cc61d7e2a344ff",
+  "report_source_sha256": "88fbd755eb10c41df1b941c050f5f97a9e7316d91e48b407655843fa0d7e048f",
   "operational_complete": false,
   "errors": [
     {
@@ -24,6 +24,7 @@
   "guard_failures": [
     ""
   ],
+  "raw_recipe_hashes_match": true,
   "recipes_match": true,
   "startup_pass": false,
   "rows": [

@@ -16,6 +16,7 @@ import tarfile
 import threading
 import time
 import uuid
+import zipfile
 
 from run import ROOT, NODE, command, state, world_bytes
 from summarize import p95, tick_windows
@@ -106,6 +107,12 @@ def measurements(samples, events, thresholds=None):
     return row
 
 
+def jar_contents(path):
+    with zipfile.ZipFile(path) as jar:
+        assert len(jar.namelist()) == len(set(jar.namelist())), 'Duplicate archive entries'
+        return {name: hashlib.sha256(jar.read(name)).hexdigest() for name in jar.namelist()}
+
+
 def simultaneous_play(rows, cases, count, repeats):
     result = []
     for repeat in range(1, repeats + 1):
@@ -162,14 +169,24 @@ def report(directory):
     for sample in samples:
         if 'container' in sample:
             totals[sample['time']] = totals.get(sample['time'], 0) + sample['memory_bytes']
-    recipes = {json.dumps(case.get('recipe_sha256'), sort_keys=True) for case in summary['cases']}
+    raw_recipes = {json.dumps(case.get('recipe_sha256'), sort_keys=True) for case in summary['cases']}
+    recipes = set()
+    for case in summary['cases']:
+        hashes = case.get('recipe_sha256', {}).copy()
+        launcher = directory / f"{case['name']}-generated-launcher.jar"
+        if launcher.exists():
+            names = [name for name in hashes if name.startswith('.fabric/server/fabric-loader-server-')]
+            assert len(names) == 1 and hashlib.sha256(launcher.read_bytes()).hexdigest() == hashes[names[0]], 'Archived launcher differs from the recorded runtime'
+            hashes[names[0]] = jar_contents(launcher)
+        recipes.add(json.dumps(hashes, sort_keys=True))
     recipes_match = len(recipes) == 1 and all(case.get('recipe_sha256') for case in summary['cases'])
     startup_pass = all(max(case.get(key, float('inf')) for key in ['cold_ready_seconds', 'warm_ready_seconds', 'populated_ready_seconds'])
                        <= summary['profile']['thresholds']['maximum_ready_seconds'] for case in summary['cases'])
     repeated = summary['parameters']['repeats'] == 2 and summary['parameters']['seconds'] >= 60
     return {'parameters': summary['parameters'], 'report_source_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             'operational_complete': summary['complete'], 'errors': errors, 'mixed_activity': mixed,
-            'guard_failures': summary['guard_failures'], 'recipes_match': recipes_match, 'startup_pass': startup_pass,
+            'guard_failures': summary['guard_failures'], 'raw_recipe_hashes_match': len(raw_recipes) == 1,
+            'recipes_match': recipes_match, 'startup_pass': startup_pass,
             'rows': rows, 'simultaneous_play': overlap,
             'seconds_with_all_instances_playing': sum(row['seconds'] for row in overlap),
             'peak_host_busy_cpu_cores': max(cpu_intervals, default=None),
@@ -326,6 +343,10 @@ def main():
             assert '-XX:ActiveProcessorCount=2' in case['jvm_flags'] and '-XX:MaxHeapSize=2147483648' in case['jvm_flags']
             case['recipe_sha256'] = {str(path.relative_to(data)): hashlib.sha256(path.read_bytes()).hexdigest()
                                      for path in sorted(data.rglob('*.jar'))}
+            if args.engine != 'paper':
+                launchers = list((data / '.fabric/server').glob('fabric-loader-server-*.jar'))
+                assert len(launchers) == 1, 'Unexpected Fabric launcher layout'
+                shutil.copy2(launchers[0], output / f'{case_id}-generated-launcher.jar')
             config_dir = output / f'{case_id}-config'
             config_dir.mkdir()
             for path in sorted(data.glob('config/*')) + [data / 'bukkit.yml', data / 'spigot.yml']:

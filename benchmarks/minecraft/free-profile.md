@@ -1,6 +1,6 @@
 # Optimized free profile
 
-Status: `Experimental`. [TES-140](https://linear.app/workspace/issue/TES-140) tracks acceptance. The recipe and limits are pinned in [free-profile.json](free-profile.json) and [compose.free.yml](compose.free.yml). No player or host capacity is offered yet.
+Status: `Experimental`. [TES-140](https://linear.app/workspace/issue/TES-140) tracks acceptance. The recipe and limits are pinned in [free-profile.json](free-profile.json) and [compose.free.yml](compose.free.yml). No player or host capacity is offered yet. [Recorded results](free-profile-results.md) track the completed comparison and the remaining checks.
 
 ## Candidate selection, 2026-09-06
 
@@ -84,3 +84,5 @@ The correction was checked against `net.minecraft.network.protocol.game.GameProt
 The server versions and resource limits did not change to work around the client failure. Recheck this correction when changing the pinned dependency.
 
 The first formal Fabric attempt, `compare-fabric`, completed its fresh-world player actions but stopped before backup. Fabric had unloaded the marker chunk after the clients disconnected and returned `That position is not loaded`. The runner now temporarily loads the four chunks containing the marker and population area, waits for the server to confirm they are loaded, writes the marker and removes the forced load before backup. The same loaded-chunk check precedes population setup and restart verification. This changes the persistence preparation after players exit. It does not change the active workload, engine configuration or resource limits. The incomplete attempt remains in the evidence export.
+
+The Fabric launcher JAR contains generated ZIP timestamps. The runner retains its exact bytes and raw SHA-256; the report verifies that hash, then compares every entry's contents separately. All other JAR and configuration hashes are compared directly. See the [comparison provenance](free-profile-results.md#provenance-and-recovery).

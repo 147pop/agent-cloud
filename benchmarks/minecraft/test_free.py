@@ -1,6 +1,9 @@
 """Check the native metric contract and prevent incomplete evidence from passing."""
 from datetime import datetime, timezone
-from qualify import game_ticks, measurements, native_ticks, simultaneous_play
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import zipfile
+from qualify import game_ticks, measurements, native_ticks, simultaneous_play, jar_contents
 
 response = ('The game is running normallyTarget tick rate: 20.0 per second.\n'
             '\x1b[0mAverage time per tick: 0.1ms (Target: 50.0ms)'
@@ -49,4 +52,14 @@ assert sum(row['seconds'] for row in overlap) == 120
 assert not all(row['seconds'] >= 60 for row in overlap)
 assert all(row['seconds'] == 120 for row in simultaneous_play([{**row, 'finished_at': 120} for row in rows], cases, 2, 2))
 assert simultaneous_play(rows[:-1], cases, 2, 2)[-1]['seconds'] == 0
+
+with TemporaryDirectory() as temporary:
+    a, b = [Path(temporary) / name for name in ('a.jar', 'b.jar')]
+    for path, year in ((a, 2025), (b, 2026)):
+        with zipfile.ZipFile(path, 'w') as jar:
+            jar.writestr(zipfile.ZipInfo('META-INF/MANIFEST.MF', (year, 1, 1, 0, 0, 0)), 'same classpath')
+    assert a.read_bytes() != b.read_bytes() and jar_contents(a) == jar_contents(b)
+    with zipfile.ZipFile(b, 'w') as jar:
+        jar.writestr('META-INF/MANIFEST.MF', 'different classpath')
+    assert jar_contents(a) != jar_contents(b)
 print('Free-profile metric and acceptance checks passed')
