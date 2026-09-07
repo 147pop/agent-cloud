@@ -17,6 +17,7 @@ CONTROL_NODE_NAME=control-1
 GAME_NODE_NAME=game-1
 CONTROL_PRIVATE_ADDRESS=192.0.2.10
 GAME_PRIVATE_ADDRESS=192.0.2.20
+GAME_DIRECT_ADDRESS=198.51.100.20
 CONTROL_API_CLIENT_CIDR=192.0.2.30/32
 CONTROL_API_PORT=3000
 GAME_PORT=25565
@@ -155,5 +156,36 @@ fi
 
 touch "$rendered_dir/not-empty"
 expect_failure "non-empty render directory" "$SCRIPT_DIR/render.sh" "$valid_config" "$rendered_dir"
+
+RESET_SCRIPT="$SCRIPT_DIR/reset-host.sh"
+PREPARE_SCRIPT="$SCRIPT_DIR/prepare-host.sh"
+DEPLOY_SCRIPT="$SCRIPT_DIR/deploy.sh"
+VERIFY_SCRIPT="$SCRIPT_DIR/verify.sh"
+
+expect_file_contains "$RESET_SCRIPT" 'k3s-uninstall\.sh'
+expect_file_contains "$RESET_SCRIPT" 'k3s-agent-uninstall\.sh'
+expect_file_contains "$RESET_SCRIPT" 'unrelated'
+expect_file_contains "$RESET_SCRIPT" 'find .* -mindepth 1'
+expect_file_excludes "$RESET_SCRIPT" 'rm -rf[[:space:]]+[/~]'
+expect_failure "invalid reset role" "$RESET_SCRIPT" invalid "$valid_config"
+
+expect_file_contains "$PREPARE_SCRIPT" 'install -d'
+expect_file_contains "$PREPARE_SCRIPT" 'GAME_HOST_RESERVED_CPU'
+expect_file_contains "$PREPARE_SCRIPT" 'GAME_HOST_RESERVED_MEMORY_GIB'
+expect_file_contains "$PREPARE_SCRIPT" 'GAME_HOST_RESERVED_DISK_GIB'
+
+expect_file_contains "$DEPLOY_SCRIPT" 'mktemp -d'
+expect_file_contains "$DEPLOY_SCRIPT" 'kubectl create secret generic'
+expect_file_contains "$DEPLOY_SCRIPT" '--from-env-file='
+expect_file_excludes "$DEPLOY_SCRIPT" '--from-literal='
+expect_file_contains "$DEPLOY_SCRIPT" 'docker build'
+expect_file_contains "$DEPLOY_SCRIPT" 'k3s ctr images import'
+expect_file_contains "$DEPLOY_SCRIPT" 'rollout status'
+
+expect_file_contains "$VERIFY_SCRIPT" 'CLOUD_MACHINE_TOKEN'
+expect_file_contains "$VERIFY_SCRIPT" 'cloud-postgres.*ClusterIP'
+expect_file_contains "$VERIFY_SCRIPT" 'GAME_HOST_RESERVED_CPU'
+expect_file_contains "$VERIFY_SCRIPT" 'GAME_DIRECT_ADDRESS'
+expect_file_excludes "$VERIFY_SCRIPT" 'POSTGRES_PASSWORD.*echo|echo.*POSTGRES_PASSWORD'
 
 echo "two-host tests passed"

@@ -113,7 +113,8 @@ validate_data_path() {
 validate_secret() {
   local name="$1"
   local value="${!name}"
-  if ((${#value} < 20)) || [[ "$value" == 'replace-me' ]]; then
+  if ((${#value} < 20)) || [[ "$value" == 'replace-me' ]] ||
+    ! [[ "$value" =~ ^[A-Za-z0-9._~+/=-]+$ ]]; then
     two_host_error "$name must be replaced with an operator-owned value of at least 20 bytes"
   fi
 }
@@ -127,6 +128,7 @@ load_two_host_config() {
     GAME_NODE_NAME
     CONTROL_PRIVATE_ADDRESS
     GAME_PRIVATE_ADDRESS
+    GAME_DIRECT_ADDRESS
     CONTROL_API_CLIENT_CIDR
     CONTROL_API_PORT
     GAME_PORT
@@ -173,6 +175,7 @@ load_two_host_config() {
   validate_node_name GAME_NODE_NAME || return
   validate_ipv4 CONTROL_PRIVATE_ADDRESS || return
   validate_ipv4 GAME_PRIVATE_ADDRESS || return
+  validate_ipv4 GAME_DIRECT_ADDRESS || return
   validate_ipv4_cidr CONTROL_API_CLIENT_CIDR || return
   validate_port CONTROL_API_PORT || return
   validate_port GAME_PORT || return
