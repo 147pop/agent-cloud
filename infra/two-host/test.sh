@@ -45,6 +45,24 @@ expect_failure() {
   fi
 }
 
+expect_file_contains() {
+  local file="$1"
+  local pattern="$2"
+  if ! grep -Eq -- "$pattern" "$file"; then
+    echo "FAIL: $file does not contain expected pattern: $pattern" >&2
+    exit 1
+  fi
+}
+
+expect_file_excludes() {
+  local file="$1"
+  local pattern="$2"
+  if grep -Eq -- "$pattern" "$file"; then
+    echo "FAIL: $file contains forbidden pattern: $pattern" >&2
+    exit 1
+  fi
+}
+
 valid_config="$TEST_ROOT/valid.env"
 write_valid_config "$valid_config"
 load_two_host_config "$valid_config"
@@ -77,5 +95,26 @@ for invalid_assignment in \
   sed "s#^${variable}=.*#${invalid_assignment}#" "$valid_config" >"$invalid_config"
   expect_failure "invalid $variable" load_two_host_config "$invalid_config"
 done
+
+K3S_DIR="$SCRIPT_DIR/../k3s"
+expect_file_contains "$K3S_DIR/install-control.sh" 'v1\.36\.4\+k3s1'
+expect_file_contains "$K3S_DIR/install-control.sh" 'INSTALL_K3S_VERSION'
+expect_file_contains "$K3S_DIR/install-control.sh" '--node-name='
+expect_file_contains "$K3S_DIR/install-control.sh" '--node-ip='
+expect_file_contains "$K3S_DIR/install-control.sh" 'NODE_LABEL=.*cloud\.example/role=control'
+expect_file_contains "$K3S_DIR/install-control.sh" '--node-label='
+expect_file_excludes "$K3S_DIR/install-control.sh" 'cat /var/lib/rancher/k3s/server/node-token'
+
+expect_file_contains "$K3S_DIR/install-game.sh" 'v1\.36\.4\+k3s1'
+expect_file_contains "$K3S_DIR/install-game.sh" 'INSTALL_K3S_VERSION'
+expect_file_contains "$K3S_DIR/install-game.sh" '--node-name='
+expect_file_contains "$K3S_DIR/install-game.sh" '--node-ip='
+
+expect_file_contains "$K3S_DIR/firewall-control.sh" 'API_CLIENT_CIDR'
+expect_file_contains "$K3S_DIR/firewall-control.sh" 'CONTROL_API_PORT'
+expect_file_contains "$K3S_DIR/firewall-game.sh" 'GAME_PORT'
+expect_file_contains "$K3S_DIR/verify.sh" 'kubectl wait'
+expect_file_contains "$K3S_DIR/verify.sh" 'CONTROL_NODE_NAME'
+expect_file_contains "$K3S_DIR/verify.sh" 'GAME_NODE_NAME'
 
 echo "two-host tests passed"
