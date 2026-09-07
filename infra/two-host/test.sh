@@ -99,6 +99,13 @@ for invalid_assignment in \
 done
 
 K3S_DIR="$SCRIPT_DIR/../k3s"
+for script in "$K3S_DIR"/*.sh "$SCRIPT_DIR"/*.sh; do
+  if ! bash -n "$script"; then
+    echo "FAIL: shell syntax check failed for $script" >&2
+    exit 1
+  fi
+done
+
 expect_file_contains "$K3S_DIR/install-control.sh" 'v1\.36\.4\+k3s1'
 expect_file_contains "$K3S_DIR/install-control.sh" 'INSTALL_K3S_VERSION'
 expect_file_contains "$K3S_DIR/install-control.sh" '--node-name='

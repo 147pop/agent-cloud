@@ -10,7 +10,7 @@ source "$SCRIPT_DIR/../two-host/lib.sh"
 
 K3S_VERSION="${K3S_VERSION:-v1.36.4+k3s1}"
 NODE_NAME="${NODE_NAME:-control-1}"
-CONTROL_PRIVATE_ADDRESS="${CONTROL_PRIVATE_ADDRESS:?Set CONTROL_PRIVATE_ADDRESS to control-1's private IPv4 address}"
+CONTROL_PRIVATE_ADDRESS="${CONTROL_PRIVATE_ADDRESS:?Set CONTROL_PRIVATE_ADDRESS to the private IPv4 address for control-1}"
 NODE_TAINT="${NODE_TAINT:-cloud.example/role=control:NoSchedule}"
 NODE_LABEL="${NODE_LABEL:-cloud.example/role=control}"
 

@@ -16,7 +16,7 @@ source "$SCRIPT_DIR/../two-host/lib.sh"
 
 : "${K3S_URL:?Set K3S_URL=https://<control-1-ip>:6443}"
 : "${K3S_TOKEN:?Set K3S_TOKEN=<token from install-control.sh>}"
-: "${GAME_PRIVATE_ADDRESS:?Set GAME_PRIVATE_ADDRESS to game-1's private IPv4 address}"
+: "${GAME_PRIVATE_ADDRESS:?Set GAME_PRIVATE_ADDRESS to the private IPv4 address for game-1}"
 
 K3S_VERSION="${K3S_VERSION:-v1.36.4+k3s1}"
 NODE_NAME="${NODE_NAME:-game-1}"
