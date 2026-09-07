@@ -71,6 +71,7 @@ load_two_host_config "$valid_config"
 missing_secret="$TEST_ROOT/missing-secret.env"
 grep -v '^CLOUD_MACHINE_TOKEN=' "$valid_config" >"$missing_secret"
 expect_failure "missing machine token" load_two_host_config "$missing_secret"
+load_two_host_config "$missing_secret" public
 if grep -q 'test-postgres-password-151' "$TEST_ROOT/stdout" "$TEST_ROOT/stderr"; then
   echo "FAIL: configuration error disclosed a secret" >&2
   exit 1
@@ -187,5 +188,34 @@ expect_file_contains "$VERIFY_SCRIPT" 'cloud-postgres.*ClusterIP'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_HOST_RESERVED_CPU'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_DIRECT_ADDRESS'
 expect_file_excludes "$VERIFY_SCRIPT" 'POSTGRES_PASSWORD.*echo|echo.*POSTGRES_PASSWORD'
+
+RUNBOOK="$SCRIPT_DIR/README.md"
+expect_file_contains "$RUNBOOK" 'Ubuntu 24\.04'
+expect_file_contains "$RUNBOOK" 'clean (clone|checkout)'
+expect_file_contains "$RUNBOOK" 'operator-owned'
+expect_file_contains "$RUNBOOK" 'MINECRAFT_EULA=TRUE'
+expect_file_contains "$RUNBOOK" 'reset-host\.sh'
+expect_file_contains "$RUNBOOK" 'deploy\.sh'
+expect_file_contains "$RUNBOOK" 'verify\.sh'
+expect_file_contains "$RUNBOOK" 'reapply|second pass'
+expect_file_contains "$RUNBOOK" '2 GiB.*heap'
+expect_file_contains "$RUNBOOK" '3 GiB.*container'
+expect_file_contains "$RUNBOOK" '10 GiB.*(storage|PVC)'
+expect_file_contains "$RUNBOOK" 'reserve'
+expect_file_contains "$RUNBOOK" 'direct.*TCP'
+expect_file_contains "$RUNBOOK" 'Troubleshooting'
+expect_file_contains "$RUNBOOK" 'TES-152'
+expect_file_contains "$RUNBOOK" 'F2/F3'
+
+for linked_file in \
+  "$SCRIPT_DIR/../../README.md" \
+  "$SCRIPT_DIR/../README.md" \
+  "$SCRIPT_DIR/../k3s/README.md" \
+  "$SCRIPT_DIR/config.example.env"; do
+  if [ ! -f "$linked_file" ]; then
+    echo "FAIL: documented relative target is missing: $linked_file" >&2
+    exit 1
+  fi
+done
 
 echo "two-host tests passed"

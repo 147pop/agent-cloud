@@ -2,7 +2,7 @@
 
 Cloud is a project for hosting game servers and curated applications on managed infrastructure. **Host** covers games. **Deploy** covers applications. The first delivery is a reproducible Minecraft Java foundation on two real hosts. It must turn one complete agent request into a playable server, preserve its world, and expose the same lifecycle through API, MCP and a CLI client.
 
-The project is in pre-beta development. This repository contains benchmark tools and evidence, the selected Paper profile, a K3s installer and runtime manifests, a minimal TypeScript `cloud-control` application, design records and product prototypes. It does not yet contain a working request-to-play platform.
+The project is in pre-beta development. This repository contains benchmark tools and evidence, the selected Paper profile, a pinned two-host K3s installation, a packaged minimal TypeScript `cloud-control` application, design records and product prototypes. It does not yet contain a working request-to-play platform.
 
 ## Start here
 
