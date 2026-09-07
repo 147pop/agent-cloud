@@ -16,7 +16,7 @@ fi
 
 config_file="$1"
 output_dir="$2"
-load_two_host_config "$config_file"
+load_two_host_config "$config_file" public
 
 if [ ! -d "$output_dir" ]; then
   two_host_error "output directory must already exist"

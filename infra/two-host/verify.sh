@@ -10,7 +10,7 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
-load_two_host_config "$1"
+load_two_host_config "$1" public
 
 if [ "$(id -u)" -ne 0 ]; then
   two_host_error "run verify.sh as root on control-1"

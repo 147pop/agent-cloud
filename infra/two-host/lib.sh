@@ -121,6 +121,7 @@ validate_secret() {
 
 load_two_host_config() {
   local config_file="${1:-}"
+  local mode="${2:-full}"
   local name
   local -a required=(
     K3S_VERSION
@@ -143,9 +144,16 @@ load_two_host_config() {
     GAME_HOST_RESERVED_MEMORY_GIB
     GAME_HOST_RESERVED_DISK_GIB
     MINECRAFT_EULA
-    POSTGRES_PASSWORD
-    CLOUD_MACHINE_TOKEN
   )
+
+  case "$mode" in
+    full) required+=(POSTGRES_PASSWORD CLOUD_MACHINE_TOKEN) ;;
+    public) ;;
+    *)
+      two_host_error "configuration mode must be full or public"
+      return
+      ;;
+  esac
 
   if [ -z "$config_file" ] || [ ! -f "$config_file" ]; then
     two_host_error "configuration file does not exist"
@@ -195,6 +203,8 @@ load_two_host_config() {
     return
   fi
 
-  validate_secret POSTGRES_PASSWORD || return
-  validate_secret CLOUD_MACHINE_TOKEN || return
+  if [ "$mode" = full ]; then
+    validate_secret POSTGRES_PASSWORD || return
+    validate_secret CLOUD_MACHINE_TOKEN || return
+  fi
 }

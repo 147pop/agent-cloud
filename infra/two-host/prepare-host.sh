@@ -19,7 +19,7 @@ case "$role" in
     ;;
 esac
 
-load_two_host_config "$2"
+load_two_host_config "$2" public
 
 if [ "$(id -u)" -ne 0 ]; then
   two_host_error "run prepare-host.sh as root"
