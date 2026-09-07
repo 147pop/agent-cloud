@@ -1,6 +1,7 @@
 .vercel
 .env*
 .DS_Store
+infra/.local/
 catalog/games/minecraft-java/paper/data/
 node_modules/
 dist/
