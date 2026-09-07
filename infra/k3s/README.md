@@ -8,27 +8,32 @@ passed as an argument or environment variable at run time, per
 
 ## Order of operations
 
-1. On `control-1` (sudo): `./install-control.sh`
-   Installs the K3s server with the `wireguard-native` flannel backend,
+1. On `control-1` (sudo), set `CONTROL_PRIVATE_ADDRESS`, and optionally
+   `NODE_NAME` and the exact `K3S_VERSION`, then run `./install-control.sh`.
+   It installs the K3s server with the `wireguard-native` flannel backend,
    disables the bundled Traefik and ServiceLB. The current Paper manifest
    exposes `hostPort` for direct test connections; Spectrum is a later public-opening gate. It tags the node
    `cloud.example/role=control:NoSchedule` so no game workload can land there,
-   and prints the join token. Copy the token out-of-band (e.g. into the
-   private TES-53 archive) — do not paste it into a commit, issue, or PR.
+   and records the token path without printing the token. Read the token
+   out-of-band — do not paste it into a commit, issue, PR, or captured log.
 
 2. On `game-1` (sudo):
    ```sh
-   K3S_URL=https://<control-1-ip>:6443 K3S_TOKEN=<token from step 1> ./install-game.sh
+   K3S_URL=https://<control-1-ip>:6443 K3S_TOKEN=<token from step 1> \
+     GAME_NODE_ADDRESS=<game-1-interface-ip> ./install-game.sh
    ```
    Installs the K3s agent and labels the node `cloud.example/role=game` —
    the same label [../../catalog/games/minecraft-java/paper/k8s/deployment.yaml](../../catalog/games/minecraft-java/paper/k8s/deployment.yaml)'s
    `nodeSelector` targets.
 
-3. On `control-1`: `./firewall-control.sh <game-1-ip>`
-   On `game-1`: `./firewall-game.sh <control-1-ip>`
+3. On `control-1`: `./firewall-control.sh <game-1-source-ip> <api-client-cidr> <api-port>`
+   On `game-1`: `./firewall-game.sh <control-1-ip> <game-port>`
    Restricts the K3s API (6443/tcp) and the flannel wireguard tunnel
-   (51820/udp) to the other node's IP only, via `ufw`. Leaves existing SSH
-   rules and game-1's public Minecraft `hostPort` (25565) untouched.
+   (51820/udp) to the other node's routable or NAT source IP only, via `ufw`.
+   The game agent's `GAME_NODE_ADDRESS` is separately the IPv4 address assigned
+   to its local interface. The firewall also restricts the
+   control API to the configured client CIDR and opens the configured direct
+   Minecraft port. Existing SSH rules remain untouched.
 
    Both hosts also sit behind provider-level firewalls (OCI security
    list/NSG for `game-1`, per TES-53) — this repo has no credentials to

@@ -1,0 +1,250 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cloud-local-static
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cloud-system
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cloud-postgres-data
+spec:
+  capacity:
+    storage: @POSTGRES_STORAGE_GIB@Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: cloud-local-static
+  local:
+    path: @POSTGRES_DATA_PATH@
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - @CONTROL_NODE_NAME@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cloud-postgres-data
+  namespace: cloud-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: cloud-local-static
+  volumeName: cloud-postgres-data
+  resources:
+    requests:
+      storage: @POSTGRES_STORAGE_GIB@Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cloud-postgres
+  namespace: cloud-system
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloud-postgres
+  namespace: cloud-system
+spec:
+  type: ClusterIP
+  selector:
+    app: cloud-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: postgres
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cloud-postgres
+  namespace: cloud-system
+spec:
+  serviceName: cloud-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-postgres
+  template:
+    metadata:
+      labels:
+        app: cloud-postgres
+    spec:
+      serviceAccountName: cloud-postgres
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      nodeSelector:
+        cloud.example/role: control
+        kubernetes.io/hostname: @CONTROL_NODE_NAME@
+      tolerations:
+        - key: cloud.example/role
+          operator: Equal
+          value: control
+          effect: NoSchedule
+      securityContext:
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: postgres
+          image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+            runAsGroup: 999
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: POSTGRES_DB
+              value: cloud
+            - name: POSTGRES_USER
+              value: cloud
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloud-control-secrets
+                  key: postgres-password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - name: postgres
+              containerPort: 5432
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - cloud
+                - -d
+                - cloud
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 12
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: cloud-postgres-data
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cloud-control
+  namespace: cloud-system
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-control
+  namespace: cloud-system
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cloud-control
+  template:
+    metadata:
+      labels:
+        app: cloud-control
+    spec:
+      serviceAccountName: cloud-control
+      automountServiceAccountToken: false
+      nodeSelector:
+        cloud.example/role: control
+        kubernetes.io/hostname: @CONTROL_NODE_NAME@
+      tolerations:
+        - key: cloud.example/role
+          operator: Equal
+          value: control
+          effect: NoSchedule
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: cloud-control
+          image: cloud-control:tes-151
+          imagePullPolicy: Never
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          env:
+            - name: HOST
+              value: 0.0.0.0
+            - name: PORT
+              value: "3000"
+            - name: CLOUD_MACHINE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloud-control-secrets
+                  key: machine-token
+            - name: DATABASE_HOST
+              value: cloud-postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: cloud
+            - name: DATABASE_USER
+              value: cloud
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloud-control-secrets
+                  key: postgres-password
+          ports:
+            - name: http
+              containerPort: 3000
+              hostPort: @CONTROL_API_PORT@
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            failureThreshold: 12
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
