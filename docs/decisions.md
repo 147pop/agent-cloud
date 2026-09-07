@@ -2,21 +2,6 @@
 
 This file records the current direction without requiring access to the planning system. Implementation evidence belongs with the component or benchmark that produced it. Work assignments and discussion belong in Linear.
 
-## Local-first delivery, 2026-09-06
-
-The owners changed the delivery sequence after reviewing the gap between the runnable repository and the managed-service roadmap.
-
-| Decision | Reason and consequence |
-| --- | --- |
-| Accept a complete local product first | A clean clone must run PostgreSQL, `cloud-control` and one persistent Minecraft server, then complete `create → start → status → connect → stop` without cloud credentials. |
-| Keep the control plane runtime-neutral | Core state, operations, idempotency and reconciliation must not depend on Docker or Kubernetes types. Docker is the first adapter; Kubernetes follows for the managed service. |
-| Run the local stack through Compose and the Docker socket | `docker compose up --build` starts PostgreSQL and a containerized `cloud-control`; the control container manages sibling Minecraft containers through `/var/run/docker.sock`. Every exposed port stays on loopback, and this development-only privilege is forbidden in managed mode. |
-| Use an explicit local development identity | `CLOUD_MODE=local` bootstraps one principal. `CLOUD_DEV_TOKEN` defaults to the non-secret `local-dev-token` only on loopback; managed mode rejects that default and never bootstraps the local account. |
-| Develop Docker and interfaces in parallel after the core | L2 and L3 both depend on L1. L4 integrates and accepts them together instead of serializing all interface work behind the Docker adapter. |
-| Use one cross-platform acceptance suite | Linux CI is the continuous gate. The same automated suite is run and recorded on Docker Desktop for macOS until a maintained macOS Docker runner exists. |
-| Gate publication and managed adaptation on local acceptance | Source publication must include a reproducible local journey. The managed beta reuses that accepted core instead of creating a parallel implementation. |
-| Keep production self-hosting separate | Local development is not a promise to operate Cloud safely on arbitrary third-party infrastructure. Packaging and support for that use remain later work. |
-
 ## Product direction, 2026-09-05
 
 The product owner settled these choices while revising the Cloud organization plan.
@@ -28,36 +13,53 @@ The product owner settled these choices while revising the Cloud organization pl
 | Optimize the free Minecraft offer for efficiency | A familiar game experience with documented differences is acceptable. Compare optimized engines and measure concurrent server density before choosing the default. |
 | Place official Vanilla in the later paid catalog | Strict Vanilla behavior may require a different resource profile. Payment does not remove its qualification requirements. |
 | Start Deploy with a curated catalog | The team can define and test how each application starts, persists and recovers. Arbitrary images and repositories require a later isolation design. |
-| Publish after the repository works locally, before supporting third-party production installation | Public readers must be able to inspect and run the accepted local journey. A production installer and operating support remain later deliveries. This sequence supersedes publication of a documentation-only repository. |
+| Earlier publication sequence, superseded 2026-09-06 | The earlier plan published inspectable code before supporting installation. The current foundation gate below requires reproducible two-host instructions and evidence before publication. |
 | Make GitHub understandable without Linear | Technical decisions and published results have a public home. Linear links to those records and tracks execution. |
 
-## Selected beta design
+## Reproducible foundation scope, 2026-09-06
+
+The first delivery is a reproducible Minecraft foundation on `control-1` and `game-1`. This replaces the earlier Docker-local MVP and code-first publication sequence. It does not replace the accepted Paper profile or the later managed-service decisions.
+
+| Decision | Reason and consequence |
+| --- | --- |
+| Use K3s as the first actual runtime | `control-1` runs the K3s server, PostgreSQL and the TypeScript `cloud-control` process. `game-1` runs the K3s agent, Paper and the persistent world. Local tools may support development but do not prove or gate two-host acceptance. |
+| Qualify one lifecycle contract | An agent must complete `create`, `start`, `status` and `stop` through API or MCP and receive a playable endpoint after protocol readiness. The CLI calls the same API. A separate CLI architecture and a web interface are not prerequisites. |
+| Prove cold start and warm assignment | A ready warm instance must be unowned and clean before assignment. Assignment binds it and its world to one owner. Existing servers restart with their own data. The current profile lets cold and warm paths pass in separate trials because the running warm instance consumes the one qualified slot. |
+| Keep the direct path small | The reachable API uses machine-token authentication and scoped Kubernetes RBAC. RCON, PostgreSQL and cluster administration stay private. Player TCP goes directly to a reachable worker IP and port or a DNS-only address. |
+| Bound accepted capacity | Current evidence covers one running Paper instance with two players. The platform must reject or defer work instead of oversubscribing. It cannot refill a warm spare beside an owned active instance without new capacity and latency evidence. The failed two-active run does not prove that active-plus-idle-warm is impossible. |
+| Publish a reproducible bounded result | A clean clone, two compatible hosts and operator-owned credentials must reproduce the foundation using the published code and instructions. The release includes the evidence. It does not promise the managed public service. |
+| Defer managed public-service gates | Cloudflare Worker, Tunnel, Access and Spectrum, public registration, billing, public operating scale and remote disaster recovery follow the foundation. Spectrum remains the final gate before public opening. |
+
+Ownership, requested state and idempotency survive a `cloud-control` restart. REST and MCP use the same durable `client_request_id` semantics. Warm capacity never reuses another owner's world.
+
+The selected profile has a 4 GB world soft limit and the K3s manifest requests a 10 GiB PVC. These values do not enforce or prove a storage quota. Storage admission must protect the host until a per-server quota mechanism is qualified.
+
+## Selected technical design
 
 The 2026-09-03 design narrowed the original plan. The [architecture](architecture.md) carries forward these choices.
 
 | Selected | Previous design | Why |
 | --- | --- | --- |
-| Runtime-neutral `cloud-control` core with parallel Docker and interface work, followed by a Kubernetes adapter | Kubernetes embedded directly in reconciliation | The complete product flow can be developed and accepted locally before managed infrastructure is required without serializing interface development behind Docker. |
-| One TypeScript `cloud-control` process with PostgreSQL | Retained from the original plan | The first account, queue and lifecycle flow can share one process and durable database state. |
-| Deployment with zero or one replicas and an explicit PVC | StatefulSet wording in the original plan | The first workload needs one process and a persistent directory. Stop and recovery tests must still establish one active writer. |
-| Local PVC plus R2 backup and operated recovery | Longhorn required before a second worker | Measure restore time and lost progress before adding replicated storage. |
-| Polling for queue and status | Server-Sent Events in the original plan | The beta needs durable state and a usable status page; its traffic has not justified another transport. |
-| Codex as the first acceptance client | Simultaneous support claims for several clients | Each client needs its own verified create-to-play flow. |
-| A free invited beta before billing | Payment behavior included in the first product path | Establish persistence, recovery, usage and costs before charging for them. |
+| One TypeScript `cloud-control` process with PostgreSQL | Retained from the original plan | Ownership, lifecycle and request state can share one process and durable database state. |
+| Deployment with zero or one replicas and an explicit PVC | StatefulSet wording in the original plan | The first workload needs one process and a persistent directory. Stop and replacement tests must still establish one active writer. |
+| Local PVC in the foundation; R2 backup and operated recovery later | Longhorn required before a second worker | First prove persistence on `game-1`. Measure remote restore time and lost progress before adding replicated storage or making recovery claims. |
+| Polling for later queue and status clients | Server-Sent Events in the original plan | Durable state matters first. The traffic has not justified another transport. A web status page does not gate the foundation. |
+| Agent API and MCP as the first acceptance client; CLI on the same API | Simultaneous support claims for several clients | The first proof covers one complete request-to-play flow without adding a separate client architecture. |
+| A free invited beta before billing, retained for the managed service | Payment behavior included in the first product path | Establish persistence, recovery, usage and costs before charging for them. |
 
 Git history preserves earlier designs. In particular, the previous Docker Sandboxes and Continue plan does not prescribe Deploy's runtime.
 
-## Invited beta rules, 2026-09-04
+## Managed invited-beta rules, 2026-09-04
 
-Agustín Pedernera recorded these approvals in the decision issues. The later bilingual update replaces the original Spanish-only audience description.
+Agustín Pedernera recorded these approvals in the decision issues. The later bilingual update replaces the original Spanish-only audience description. The rules remain valid for the managed invited beta, but they no longer define acceptance for the earlier two-host foundation.
 
 | Decision | Accepted rule |
 | --- | --- |
 | [D1, scope](https://linear.app/workspace/issue/TES-15) | Account, EULA, MCP token, create, start, status, stop, stable address, queue, confirmation, AutoStop, persistence, automatic backup and operator-run restore. User-selected versions, plugins, console, world import and self-service restore follow later. |
 | [D2, audience](https://linear.app/workspace/issue/TES-16) | Known users, English and Spanish, at most 20 accounts, two weeks. |
 | [D3, free rules](https://linear.app/workspace/issue/TES-17) | One logical server and one active server per account, 4 GB soft storage threshold, five-minute AutoStop, five-minute turn confirmation and operator-confirmed deletion before replacement. |
-| [D4, recovery](https://linear.app/workspace/issue/TES-19) | The protection target is the last clean stop. E4 must measure recovery before any duration is promised. The target does not guarantee preservation of an unfinished session. |
-| [D6, client](https://linear.app/workspace/issue/TES-20) | Codex with a revocable bearer token is the first client to qualify through the complete E2 journey. |
+| [D4, recovery](https://linear.app/workspace/issue/TES-19) | The protection target is the last clean stop. Managed recovery acceptance must measure recovery before any duration is promised. The target does not guarantee preservation of an unfinished session. |
+| [D6, client](https://linear.app/workspace/issue/TES-20) | Codex with a revocable bearer token is the first client to qualify through the complete managed request-to-play journey. |
 | [D7, billing](https://linear.app/workspace/issue/TES-21) | The first beta is free. Billing follows 100 real runs, proven recovery between workers and measured costs. |
 | [D8, availability](https://linear.app/workspace/issue/TES-22) | Accept one control host for the invited beta, conditional on restoring it on a clean host and assigning an incident owner before opening the beta. |
 
@@ -65,14 +67,14 @@ These are acceptance rules, not completed test results. [D9's authorizations and
 
 ## Free Paper profile, accepted 2026-09-06
 
-Pablo accepted the repeated bot workload and local recovery evidence for TES-144 and TES-140. This replaces the earlier requirement for a human session before E1 profile selection. The [results](../benchmarks/minecraft/free-profile-results.md#tps-by-player-activity) show active exploration in separate terrain, combat and block actions in two repetitions.
+Pablo accepted the repeated bot workload and local recovery evidence for TES-144 and TES-140. This replaces the earlier requirement for a human session before profile selection. The [results](../benchmarks/minecraft/free-profile-results.md#tps-by-player-activity) show active exploration in separate terrain, combat and block actions in two repetitions.
 
 | Decision | Reason and consequence |
 | --- | --- |
-| Use Paper 26.2 build 121 with the tested free configuration | Two CPU quota units, 2 GiB heap, 3 GiB container, `ActiveProcessorCount=2`, view 6, simulation 4, seed 20260904 and no gameplay plugins. |
-| Accept one active instance with two players on the tested Oracle A1 host | Both repetitions passed exploration, combat and local recovery. Two instances failed the control-response threshold during a save. Four or eight players in one instance were not tested with this recipe. |
+| Use Paper 26.2 build 121 with the tested free configuration | Two CPU quota units, 2 GiB heap, 3 GiB total container RAM, `ActiveProcessorCount=2`, view 6, simulation 4, seed 20260904 and no gameplay plugins. The 3 GiB value is not a disk limit. |
+| Accept one running instance with two players on the tested Oracle A1 host | Both repetitions passed exploration, combat and local recovery. Two instances failed the control-response threshold during a save. Four or eight players in one instance were not tested with this recipe. |
 
-The profile is Qualified for E1. The [K3s recipe](../catalog/games/minecraft-java/paper/k8s/) uses the accepted game settings; its lifecycle checks, platform backups and recovery remain separate work. This decision does not claim human-client or public-route evidence.
+The profile is selected for the foundation. The [K3s recipe](../catalog/games/minecraft-java/paper/k8s/) uses the accepted game settings; its lifecycle checks, platform backups and recovery remain separate work. This decision does not claim human-client, warm-plus-active capacity or public-route evidence.
 
 ## D5, public game TCP and worker IP exposure, updated 2026-09-06
 
@@ -80,16 +82,16 @@ The earlier comments in [TES-18](https://linear.app/workspace/issue/TES-18) diff
 
 | Stage | Required path and evidence |
 | --- | --- |
-| E1 through the functional invited beta | Use a controlled operator or test-player path and record the actual access and exposure. Spectrum does not block profile selection, lifecycle, API, queue or recovery work. |
+| Foundation and functional invited beta | Use a controlled operator or test-player path and record the actual access and exposure. Spectrum does not block profile selection, lifecycle, API, queue or recovery work. |
 | Final gate before public opening | Configure Spectrum for Minecraft TCP, validate the edge address and origin restriction, and measure traffic and cost. An authenticated external client must connect, explore, interact, save, restart and reconnect through the stable hostname. Record latency, stalls and gameplay observations. |
 
-TES-18 stays open for that final gate after invited-beta acceptance. Synthetic clients and operator access establish no Spectrum result. HTTP Worker, Access and Tunnel work retains its own E2 scope.
+TES-18 stays open for that final gate after invited-beta acceptance. Synthetic clients and operator access establish no Spectrum result. HTTP Worker, Access and Tunnel work retains its own managed-service scope.
 
-## Open source license — resolved 2026-09-06
+## Open source license, resolved 2026-09-06
 
 | Decision | Reason and consequence |
 | --- | --- |
-| License the repository under MIT | Pablo and Agustín Pedernera agreed a permissive license favoring reuse and third-party installation over restricting competing hosting offers. See [LICENSE](../LICENSE). This does not by itself authorize flipping the repository to public: [TES-138](https://linear.app/workspace/issue/TES-138) (third-party code/asset review and sanitizing operational identifiers in Git history) remains open and gates that. |
+| License the repository under MIT | Pablo and Agustín Pedernera agreed a permissive license favoring reuse and third-party installation over restricting competing hosting offers. See [LICENSE](../LICENSE). Publication still requires a reproducible two-host foundation, its instructions and evidence, plus the third-party code and asset review and operational-identifier sanitization tracked in [TES-138](https://linear.app/workspace/issue/TES-138). |
 
 ## Open decisions
 

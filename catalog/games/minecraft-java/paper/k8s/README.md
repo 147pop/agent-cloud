@@ -1,8 +1,10 @@
-# E1, Paper on K3s
+# Paper lifecycle on K3s
 
-Operator runbook for the accepted [free Paper profile](../../../../../benchmarks/minecraft/free-profile.json), running as a K3s Deployment with a retained PVC. The resource names retain `paper-e0-oracle`; the game settings now match the accepted 26.2 build 121 profile with two players, two CPU quota units, a 2 GiB heap and a 3 GiB container limit.
+Operator runbook for the accepted [free Paper profile](../../../../../benchmarks/minecraft/free-profile.json), running as a K3s Deployment with a retained PVC. The resource names retain `paper-e0-oracle`; the game settings now match the accepted 26.2 build 121 profile with two players, two CPU quota units, a 2 GiB heap and a 3 GiB total container RAM limit.
 
-The benchmark used Docker with CPU affinity, loopback clients, offline operator identities and private RCON. This manifest uses Kubernetes scheduling and disables RCON. E1 must validate the deployed limits and lifecycle; accepting the benchmark does not prove those Kubernetes checks. Spectrum is a final public-opening gate and is not a prerequisite for this runbook.
+The benchmark used Docker with CPU affinity, loopback clients, offline operator identities and private RCON. This manifest uses Kubernetes scheduling and disables RCON. Foundation acceptance must validate the deployed limits and lifecycle; accepting the benchmark does not prove those Kubernetes checks. Spectrum is a final public-opening gate and is not a prerequisite for this runbook.
+
+Scenarios 1 through 5 below cover lifecycle checks on the two-host foundation. Scenario 6 belongs to the later managed recovery stage and requires a temporary second game worker and R2. These manifests are inputs to the foundation; they do not implement its control API or warm-instance allocation.
 
 ## Prerequisites (not done by this runbook)
 
@@ -66,4 +68,4 @@ The scenarios below exercise interrupted stops and replacement to confirm these 
 
 ## Out of scope here
 
-Applying these manifests and running the lifecycle scenarios require evidence from the authorized hosts. Record that evidence in the E1 tasks. [TES-18](https://linear.app/workspace/issue/TES-18) tracks Spectrum configuration, authenticated external play and reconnect after the functional invited beta, before public opening. See [the decision](../../../../../docs/decisions.md#d5-public-game-tcp-and-worker-ip-exposure-updated-2026-09-06).
+Applying these manifests and running the lifecycle scenarios require evidence from the authorized hosts. Record the two-host lifecycle evidence in [TES-28](https://linear.app/workspace/issue/TES-28) and [TES-7](https://linear.app/workspace/issue/TES-7). [TES-18](https://linear.app/workspace/issue/TES-18) tracks Spectrum configuration, authenticated external play and reconnect after the functional invited beta, before public opening. See [the decision](../../../../../docs/decisions.md#d5-public-game-tcp-and-worker-ip-exposure-updated-2026-09-06).
