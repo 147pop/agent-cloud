@@ -117,4 +117,10 @@ expect_file_contains "$K3S_DIR/verify.sh" 'kubectl wait'
 expect_file_contains "$K3S_DIR/verify.sh" 'CONTROL_NODE_NAME'
 expect_file_contains "$K3S_DIR/verify.sh" 'GAME_NODE_NAME'
 
+DOCKERFILE="$SCRIPT_DIR/../../apps/cloud-control/Dockerfile"
+expect_file_contains "$DOCKERFILE" '^FROM node:22\.20\.0-bookworm-slim@sha256:[a-f0-9]{64} AS build$'
+expect_file_contains "$DOCKERFILE" '^RUN npm ci$'
+expect_file_contains "$DOCKERFILE" '^USER node$'
+expect_file_contains "$DOCKERFILE" 'dist/src'
+
 echo "two-host tests passed"

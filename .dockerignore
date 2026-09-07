@@ -1,0 +1,13 @@
+.git
+.github
+.env*
+infra/.local
+node_modules
+**/node_modules
+dist
+**/dist
+*.tsbuildinfo
+benchmarks
+catalog
+docs
+prototypes
