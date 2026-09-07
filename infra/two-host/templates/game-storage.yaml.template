@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cloud-paper-data
+spec:
+  capacity:
+    storage: @GAME_STORAGE_GIB@Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: cloud-local-static
+  local:
+    path: @GAME_DATA_PATH@
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - @GAME_NODE_NAME@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paper-e0-oracle-data
+  namespace: cloud-minecraft-paper
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: cloud-local-static
+  volumeName: cloud-paper-data
+  resources:
+    requests:
+      storage: @GAME_STORAGE_GIB@Gi

@@ -123,4 +123,37 @@ expect_file_contains "$DOCKERFILE" '^RUN npm ci$'
 expect_file_contains "$DOCKERFILE" '^USER node$'
 expect_file_contains "$DOCKERFILE" 'dist/src'
 
+rendered_dir="$TEST_ROOT/rendered"
+mkdir "$rendered_dir"
+"$SCRIPT_DIR/render.sh" "$valid_config" "$rendered_dir"
+
+control_manifest="$rendered_dir/10-control.yaml"
+game_storage_manifest="$rendered_dir/20-game-storage.yaml"
+game_manifest="$rendered_dir/30-game.yaml"
+
+expect_file_contains "$control_manifest" 'image: postgres:17\.6-bookworm@sha256:[a-f0-9]{64}'
+expect_file_contains "$control_manifest" 'type: ClusterIP'
+expect_file_excludes "$control_manifest" 'type: (NodePort|LoadBalancer)'
+expect_file_excludes "$control_manifest" 'hostPort: 5432'
+expect_file_contains "$control_manifest" 'hostPort: 3000'
+expect_file_contains "$control_manifest" 'cloud\.example/role: control'
+expect_file_contains "$control_manifest" 'automountServiceAccountToken: false'
+expect_file_contains "$game_storage_manifest" 'path: /var/lib/cloud/tes-151/minecraft'
+expect_file_contains "$game_storage_manifest" 'storage: 10Gi'
+expect_file_contains "$game_manifest" 'cloud\.example/role: game'
+expect_file_contains "$game_manifest" 'hostPort: 25565'
+expect_file_contains "$game_manifest" 'memory: 3Gi'
+expect_file_contains "$game_manifest" 'cpu: "2"'
+expect_file_contains "$game_manifest" 'image: itzg/minecraft-server@sha256:efa878d'
+expect_file_excludes "$rendered_dir/10-control.yaml" 'test-(postgres-password|machine-token)-151'
+expect_file_excludes "$rendered_dir/20-game-storage.yaml" 'test-(postgres-password|machine-token)-151'
+expect_file_excludes "$rendered_dir/30-game.yaml" 'test-(postgres-password|machine-token)-151'
+if grep -R '@[A-Z_][A-Z_]*@' "$rendered_dir" >/dev/null; then
+  echo "FAIL: rendered manifests contain unresolved placeholders" >&2
+  exit 1
+fi
+
+touch "$rendered_dir/not-empty"
+expect_failure "non-empty render directory" "$SCRIPT_DIR/render.sh" "$valid_config" "$rendered_dir"
+
 echo "two-host tests passed"
