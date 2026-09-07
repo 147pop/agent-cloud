@@ -1,0 +1,22 @@
+{
+  "name": "cloud",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @cloud/cloud-control",
+    "test": "npm run test --workspace @cloud/cloud-control",
+    "check": "npm run build && npm run test:compiled --workspace @cloud/cloud-control"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "typescript": "7.0.2"
+  }
+}

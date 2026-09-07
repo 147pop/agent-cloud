@@ -1,6 +1,6 @@
 # Contributing
 
-Cloud is in pre-beta development. Start with the [repository overview](README.md), [architecture](docs/architecture.md) and [catalog requirements](catalog/README.md). The current executable work is the benchmark tooling, K3s installer and Minecraft runtime manifests. There is no root `cloud-control` application or complete two-host deployment yet.
+Cloud is in pre-beta development. Start with the [repository overview](README.md), [architecture](docs/architecture.md) and [catalog requirements](catalog/README.md). The current executable work is the benchmark tooling, K3s installer, Minecraft runtime manifests and the minimal root `cloud-control` application. There is no complete two-host deployment yet.
 
 ## Choose a change
 
@@ -20,7 +20,7 @@ python3 benchmarks/minecraft/summarize.py --self-test
 
 For actual Minecraft runs, use the [benchmark guide](benchmarks/minecraft/README.md). Provisioning, network probes and load tests require an explicitly selected test environment. A parser check cannot establish a server's playing quality or capacity.
 
-There is no root application build to run yet. Documentation changes need working links and instructions checked against the files they describe. Runtime changes need the smallest check that fails when the intended behavior breaks.
+Install the pinned root toolchain with `npm install` and run the TypeScript application checks with `npm run check`. Documentation changes need working links and instructions checked against the files they describe. Runtime changes need the smallest check that fails when the intended behavior breaks.
 
 The first runtime target is K3s on two compatible hosts. Local containers, mocks and other development tools may shorten feedback, but they do not establish the two-host acceptance result or gate publication when the real deployment passes.
 
