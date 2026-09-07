@@ -207,6 +207,7 @@ expect_file_contains "$VERIFY_SCRIPT" 'cloud-postgres.*ClusterIP'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_HOST_RESERVED_CPU'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_NODE_ADDRESS'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_DIRECT_ADDRESS'
+expect_file_contains "$VERIFY_SCRIPT" 'auth can-i.*\|\| true'
 expect_file_excludes "$VERIFY_SCRIPT" 'POSTGRES_PASSWORD.*echo|echo.*POSTGRES_PASSWORD'
 
 RUNBOOK="$SCRIPT_DIR/README.md"

@@ -55,7 +55,7 @@ if ss -ltnH '( sport = :5432 )' | grep -q .; then
 fi
 
 for service_account in cloud-control cloud-postgres; do
-  can_admin="$(k3s kubectl auth can-i '*' '*' --as="system:serviceaccount:cloud-system:$service_account")"
+  can_admin="$(k3s kubectl auth can-i '*' '*' --as="system:serviceaccount:cloud-system:$service_account" || true)"
   if [ "$can_admin" != no ]; then
     two_host_error "$service_account has unexpected cluster-wide access"
     exit 1
