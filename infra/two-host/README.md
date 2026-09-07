@@ -452,6 +452,10 @@ sudo k3s kubectl exec -n cloud-system statefulset/cloud-postgres -- \
   -U cloud -d cloud -AtF '|' -c \
   'SELECT id, value FROM tes_146_reapply_probe WHERE id = :probe_id;' \
   > infra/.local/tes-151-persistence/after/postgres-probe.tsv
+cut -d '|' -f 1 infra/.local/tes-151-persistence/after/postgres-probe.tsv \
+  > infra/.local/tes-151-persistence/after/postgres-probe.id
+cut -d '|' -f 2- infra/.local/tes-151-persistence/after/postgres-probe.tsv \
+  > infra/.local/tes-151-persistence/after/postgres-probe.value
 cmp infra/.local/tes-151-persistence/before/postgres-probe.tsv \
   infra/.local/tes-151-persistence/after/postgres-probe.tsv
 diff -ru infra/.local/tes-151-persistence/before/ \
