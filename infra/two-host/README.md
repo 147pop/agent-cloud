@@ -288,13 +288,20 @@ Do not use `reset-host.sh` for this gate. It is a destructive dedicated-host
 reset that invokes K3s uninstallers and clears only selected data paths; it is
 not part of an ordinary reapply.
 
-After the first successful pass, record private probes in an ignored local
-directory. Record identifiers and hashes rather than raw private logs.
+After the first successful pass, record private probes in the ignored
+`infra/.local/tes-151-persistence/` directory. Record identifiers and hashes,
+not raw private logs. The SQL below creates a small probe table because the
+current F1 application does not own a persistent application schema; it does
+not add runtime behavior.
 
-On `control-1`, record the PVC/PV identities and the result of the same
-operator-defined PostgreSQL probe query before and after reapply:
+### 6.1 Capture the baseline on `control-1`
+
+Run this on `control-1` from the repository root. It records both PVC/PV UIDs,
+creates one uniquely identified PostgreSQL row, and captures its `id|value`
+pair:
 
 ```sh
+cd cloud
 mkdir -p infra/.local/tes-151-persistence/before
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -307,36 +314,70 @@ for volume in cloud-postgres-data cloud-paper-data; do
     > "infra/.local/tes-151-persistence/before/${volume}.pv.uid"
 done
 
-# Set this only in the protected local shell to identify the row created by
-# your private probe; use the same query and output shape after reapply.
-read -r POSTGRES_PROBE_QUERY
 sudo k3s kubectl exec -n cloud-system statefulset/cloud-postgres -- \
-  psql -U cloud -d cloud -Atc "$POSTGRES_PROBE_QUERY" \
-  > infra/.local/tes-151-persistence/before/postgres-probe.txt
-unset POSTGRES_PROBE_QUERY
+  psql -v ON_ERROR_STOP=1 -U cloud -d cloud -c \
+  'CREATE TABLE IF NOT EXISTS tes_146_reapply_probe (
+     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+     value text NOT NULL
+   );'
+sudo k3s kubectl exec -n cloud-system statefulset/cloud-postgres -- \
+  psql -v ON_ERROR_STOP=1 -U cloud -d cloud -AtF '|' -c \
+  "INSERT INTO tes_146_reapply_probe (value)
+   VALUES ('tes-146-' || md5(random()::text || clock_timestamp()::text))
+   RETURNING id, value;" \
+  | tee infra/.local/tes-151-persistence/before/postgres-probe.tsv
+test "$(wc -l < infra/.local/tes-151-persistence/before/postgres-probe.tsv | tr -d ' ')" = 1
+cut -d '|' -f 1 infra/.local/tes-151-persistence/before/postgres-probe.tsv \
+  > infra/.local/tes-151-persistence/before/postgres-probe.id
+cut -d '|' -f 2- infra/.local/tes-151-persistence/before/postgres-probe.tsv \
+  > infra/.local/tes-151-persistence/before/postgres-probe.value
 ```
 
-On `game-1`, stop the Paper workload through the installation operator path,
-write a unique marker below `GAME_DATA_PATH`, and retain only its hash:
+The generated row is not a password or machine token. Keep the captured ID
+and value in the ignored directory; the `id` is the identity used for the
+after-reapply query.
+
+### 6.2 Stop Paper from `control-1`
+
+Run this on `control-1`. K3s administration remains private to the control
+host. Scaling the Deployment to zero and waiting for the existing Pod to
+terminate ensures the marker can be written while Paper is not using the data
+path:
 
 ```sh
+cd cloud
+PAPER_POD="$(sudo k3s kubectl get pod -n cloud-minecraft-paper \
+  -l app=paper-e0-oracle -o jsonpath='{.items[0].metadata.name}')"
+test -n "$PAPER_POD"
+sudo k3s kubectl scale deployment/paper-e0-oracle \
+  -n cloud-minecraft-paper --replicas=0
+sudo k3s kubectl wait --for=delete "pod/$PAPER_POD" \
+  -n cloud-minecraft-paper --timeout=180s
+```
+
+Now run this marker block on `game-1`:
+
+```sh
+cd cloud
 mkdir -p infra/.local/tes-151-persistence/before
 set -a
 . infra/.local/tes-151.env
 set +a
 MARKER_PATH="$GAME_DATA_PATH/.tes-151-reapply-marker"
-printf '%s\n' "$(openssl rand -hex 16)" | sudo tee "$MARKER_PATH" >/dev/null
+MARKER_VALUE="$(openssl rand -hex 16)"
+printf '%s\n' "$MARKER_VALUE" | sudo tee "$MARKER_PATH" >/dev/null
 sudo sha256sum "$MARKER_PATH" \
   > infra/.local/tes-151-persistence/before/world-marker.sha256
+unset MARKER_VALUE
 ```
 
-Repeat the non-destructive installation sequence in the same order. Run the
-control commands on `control-1`; run the game commands on `game-1`. Use the
-same verified commit and configuration values. Transfer the current join
-token through the protected prompt again; never put it in the commands below
-or in a file.
+The marker remains below the configured game data path. The private hash is
+the durable-world probe; do not commit the marker value or any host output.
 
-On `control-1`:
+### 6.3 Repeat installation without `reset-host.sh`
+
+Use the same verified commit and configuration values, and run the commands in
+this order. Run the first block on `control-1`:
 
 ```sh
 cd cloud
@@ -355,14 +396,16 @@ sudo infra/k3s/firewall-control.sh \
 sudo infra/two-host/prepare-host.sh control infra/.local/tes-151.env
 ```
 
-On `game-1`:
+Run the next block on `game-1`. Transfer the current join token through the
+same protected prompt used for the first installation; never put it in the
+commands below, a file or a log:
 
 ```sh
 cd cloud
 set -a
 . infra/.local/tes-151.env
 set +a
-read -r -s K3S_TOKEN
+read -r -s -p 'K3S join token: ' K3S_TOKEN
 printf '\n'
 sudo env \
   K3S_VERSION="$K3S_VERSION" \
@@ -376,26 +419,67 @@ sudo infra/k3s/firewall-game.sh "$CONTROL_PRIVATE_ADDRESS" "$GAME_PORT"
 sudo infra/two-host/prepare-host.sh game infra/.local/tes-151.env
 ```
 
-Finish on `control-1`:
+Finish on `control-1` so the Deployment recreates Paper and all three
+workloads return to Ready:
 
 ```sh
+cd cloud
 sudo infra/two-host/deploy.sh infra/.local/tes-151.env
 sudo infra/two-host/verify.sh infra/.local/tes-151.env
 ```
 
-Record the same PVC/PV UIDs, PostgreSQL probe output and world marker hash in
-`infra/.local/tes-151-persistence/after/`, then compare the private records:
+### 6.4 Capture and compare the after state
+
+On `control-1`, create `after/`, capture the same PVC/PV identities, query the
+same PostgreSQL row by its saved ID, and compare the exact `id|value` pair:
 
 ```sh
+cd cloud
+mkdir -p infra/.local/tes-151-persistence/after
+for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
+  namespace="${claim%/*}"
+  name="${claim#*/}"
+  sudo k3s kubectl get pvc "$name" -n "$namespace" -o jsonpath='{.metadata.uid}{"\n"}' \
+    > "infra/.local/tes-151-persistence/after/${namespace}-${name}.pvc.uid"
+done
+for volume in cloud-postgres-data cloud-paper-data; do
+  sudo k3s kubectl get pv "$volume" -o jsonpath='{.metadata.uid}{"\n"}' \
+    > "infra/.local/tes-151-persistence/after/${volume}.pv.uid"
+done
+POSTGRES_PROBE_ID="$(cat infra/.local/tes-151-persistence/before/postgres-probe.id)"
+sudo k3s kubectl exec -n cloud-system statefulset/cloud-postgres -- \
+  psql -v ON_ERROR_STOP=1 -v probe_id="$POSTGRES_PROBE_ID" \
+  -U cloud -d cloud -AtF '|' -c \
+  'SELECT id, value FROM tes_146_reapply_probe WHERE id = :probe_id;' \
+  > infra/.local/tes-151-persistence/after/postgres-probe.tsv
+cmp infra/.local/tes-151-persistence/before/postgres-probe.tsv \
+  infra/.local/tes-151-persistence/after/postgres-probe.tsv
 diff -ru infra/.local/tes-151-persistence/before/ \
   infra/.local/tes-151-persistence/after/
 ```
 
-The reapply gate passes only when the PVC/PV identities are unchanged, the
-PostgreSQL probe row still exists, the world marker hash is unchanged, and
-the PostgreSQL, `cloud-control` and Paper workloads return to Ready. A second
-`deploy.sh` applies resources and restarts the stateless control process; it
-does not delete durable PVCs or host data paths.
+On `game-1`, create the matching `after/` directory, capture the marker hash,
+and compare it with the baseline:
+
+```sh
+cd cloud
+mkdir -p infra/.local/tes-151-persistence/after
+set -a
+. infra/.local/tes-151.env
+set +a
+MARKER_PATH="$GAME_DATA_PATH/.tes-151-reapply-marker"
+sudo sha256sum "$MARKER_PATH" \
+  > infra/.local/tes-151-persistence/after/world-marker.sha256
+diff -ru infra/.local/tes-151-persistence/before/ \
+  infra/.local/tes-151-persistence/after/
+```
+
+The reapply gate passes only when both directory comparisons and the
+PostgreSQL `cmp` succeed, the saved PVC/PV identities are unchanged, the
+PostgreSQL probe row still has the same ID and value, the world marker hash is
+unchanged, and `verify.sh` reports the PostgreSQL, `cloud-control` and Paper
+workloads Ready. A second `deploy.sh` applies resources and restarts the
+stateless control process; it does not delete durable PVCs or host data paths.
 
 The [TES-151 live installation evidence](../evidence/tes-151-two-host-installation.md)
 records an existing two-host result with the same persistence checks. It is a
