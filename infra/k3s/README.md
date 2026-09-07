@@ -20,16 +20,18 @@ passed as an argument or environment variable at run time, per
 2. On `game-1` (sudo):
    ```sh
    K3S_URL=https://<control-1-ip>:6443 K3S_TOKEN=<token from step 1> \
-     GAME_PRIVATE_ADDRESS=<game-1-ip> ./install-game.sh
+     GAME_NODE_ADDRESS=<game-1-interface-ip> ./install-game.sh
    ```
    Installs the K3s agent and labels the node `cloud.example/role=game` —
    the same label [../../catalog/games/minecraft-java/paper/k8s/deployment.yaml](../../catalog/games/minecraft-java/paper/k8s/deployment.yaml)'s
    `nodeSelector` targets.
 
-3. On `control-1`: `./firewall-control.sh <game-1-ip> <api-client-cidr> <api-port>`
+3. On `control-1`: `./firewall-control.sh <game-1-source-ip> <api-client-cidr> <api-port>`
    On `game-1`: `./firewall-game.sh <control-1-ip> <game-port>`
    Restricts the K3s API (6443/tcp) and the flannel wireguard tunnel
-   (51820/udp) to the other node's IP only, via `ufw`. It also restricts the
+   (51820/udp) to the other node's routable or NAT source IP only, via `ufw`.
+   The game agent's `GAME_NODE_ADDRESS` is separately the IPv4 address assigned
+   to its local interface. The firewall also restricts the
    control API to the configured client CIDR and opens the configured direct
    Minecraft port. Existing SSH rules remain untouched.
 

@@ -26,6 +26,13 @@ provider configuration, passwords, the K3s join token and raw evidence outside
 Git. `game-1` needs only the non-secret deployment values; the PostgreSQL
 password and machine token stay on `control-1`.
 
+Keep the game host's three address roles distinct. `GAME_NODE_ADDRESS` is
+assigned to a local interface and becomes the Kubernetes InternalIP.
+`GAME_CLUSTER_SOURCE_ADDRESS` is the routable or NAT source address seen by
+the control firewall. `GAME_DIRECT_ADDRESS` is the player-facing Minecraft
+endpoint; the last two may coincide, but neither may be forced as a node IP
+unless it is actually assigned to the host.
+
 ## Start from a clean clone
 
 Clone the repository into a new directory on each host and check out the same
@@ -92,7 +99,7 @@ sudo env \
   CONTROL_PRIVATE_ADDRESS="$CONTROL_PRIVATE_ADDRESS" \
   infra/k3s/install-control.sh
 sudo infra/k3s/firewall-control.sh \
-  "$GAME_PRIVATE_ADDRESS" "$CONTROL_API_CLIENT_CIDR" "$CONTROL_API_PORT"
+  "$GAME_CLUSTER_SOURCE_ADDRESS" "$CONTROL_API_CLIENT_CIDR" "$CONTROL_API_PORT"
 ```
 
 Read `/var/lib/rancher/k3s/server/node-token` through the authorized channel
@@ -106,7 +113,7 @@ set +a
 sudo env \
   K3S_VERSION="$K3S_VERSION" \
   NODE_NAME="$GAME_NODE_NAME" \
-  GAME_PRIVATE_ADDRESS="$GAME_PRIVATE_ADDRESS" \
+  GAME_NODE_ADDRESS="$GAME_NODE_ADDRESS" \
   K3S_URL="https://$CONTROL_PRIVATE_ADDRESS:6443" \
   K3S_TOKEN='<join-token-from-control-1>' \
   infra/k3s/install-game.sh
@@ -165,7 +172,9 @@ volume, and the renderer never places credentials in a manifest.
 
 ## Troubleshooting
 
-- If the agent cannot join, verify the current addresses, provider allowlists,
+- If the agent cannot join, verify `GAME_NODE_ADDRESS` exists on a local
+  interface, `GAME_CLUSTER_SOURCE_ADDRESS` matches the source seen by control,
+  and the current provider allowlists,
   the `6443/tcp` and `51820/udp` rules and the out-of-band join token.
 - If a local PV remains Pending, confirm the configured node name exactly
   matches `kubectl get nodes` and the selected data path exists with the owner

@@ -16,7 +16,8 @@ K3S_VERSION=v1.36.4+k3s1
 CONTROL_NODE_NAME=control-1
 GAME_NODE_NAME=game-1
 CONTROL_PRIVATE_ADDRESS=192.0.2.10
-GAME_PRIVATE_ADDRESS=192.0.2.20
+GAME_NODE_ADDRESS=10.0.0.20
+GAME_CLUSTER_SOURCE_ADDRESS=192.0.2.20
 GAME_DIRECT_ADDRESS=198.51.100.20
 CONTROL_API_CLIENT_CIDR=192.0.2.30/32
 CONTROL_API_PORT=3000
@@ -77,6 +78,12 @@ if grep -q 'test-postgres-password-151' "$TEST_ROOT/stdout" "$TEST_ROOT/stderr";
   exit 1
 fi
 
+for missing_address_name in GAME_NODE_ADDRESS GAME_CLUSTER_SOURCE_ADDRESS GAME_DIRECT_ADDRESS; do
+  missing_address="$TEST_ROOT/missing-${missing_address_name}.env"
+  grep -v "^${missing_address_name}=" "$valid_config" >"$missing_address"
+  expect_failure "missing $missing_address_name" load_two_host_config "$missing_address"
+done
+
 for unsafe_path in / /var/lib /home/operator/data; do
   unsafe_config="$TEST_ROOT/unsafe.env"
   sed "s#^GAME_DATA_PATH=.*#GAME_DATA_PATH=$unsafe_path#" "$valid_config" >"$unsafe_config"
@@ -85,6 +92,8 @@ done
 
 for invalid_assignment in \
   'CONTROL_PRIVATE_ADDRESS=999.0.2.10' \
+  'GAME_NODE_ADDRESS=999.0.2.20' \
+  'GAME_CLUSTER_SOURCE_ADDRESS=999.0.2.21' \
   'CONTROL_API_CLIENT_CIDR=192.0.2.30/99' \
   'CONTROL_API_PORT=0' \
   'GAME_PORT=65536' \
@@ -118,6 +127,9 @@ expect_file_contains "$K3S_DIR/install-game.sh" 'v1\.36\.4\+k3s1'
 expect_file_contains "$K3S_DIR/install-game.sh" 'INSTALL_K3S_VERSION'
 expect_file_contains "$K3S_DIR/install-game.sh" '--node-name='
 expect_file_contains "$K3S_DIR/install-game.sh" '--node-ip='
+expect_file_contains "$K3S_DIR/install-game.sh" 'GAME_NODE_ADDRESS'
+expect_file_contains "$K3S_DIR/install-game.sh" '--node-ip=\$\{GAME_NODE_ADDRESS\}'
+expect_file_excludes "$K3S_DIR/install-game.sh" '--node-ip=\$\{GAME_CLUSTER_SOURCE_ADDRESS\}'
 
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'API_CLIENT_CIDR'
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'CONTROL_API_PORT'
@@ -193,6 +205,7 @@ expect_file_contains "$DEPLOY_SCRIPT" 'rollout status'
 expect_file_contains "$VERIFY_SCRIPT" 'CLOUD_MACHINE_TOKEN'
 expect_file_contains "$VERIFY_SCRIPT" 'cloud-postgres.*ClusterIP'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_HOST_RESERVED_CPU'
+expect_file_contains "$VERIFY_SCRIPT" 'GAME_NODE_ADDRESS'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_DIRECT_ADDRESS'
 expect_file_excludes "$VERIFY_SCRIPT" 'POSTGRES_PASSWORD.*echo|echo.*POSTGRES_PASSWORD'
 
@@ -210,6 +223,9 @@ expect_file_contains "$RUNBOOK" '3 GiB.*container'
 expect_file_contains "$RUNBOOK" '10 GiB.*(storage|PVC)'
 expect_file_contains "$RUNBOOK" 'reserve'
 expect_file_contains "$RUNBOOK" 'direct.*TCP'
+expect_file_contains "$RUNBOOK" 'GAME_NODE_ADDRESS'
+expect_file_contains "$RUNBOOK" 'GAME_CLUSTER_SOURCE_ADDRESS'
+expect_file_contains "$RUNBOOK" 'GAME_DIRECT_ADDRESS'
 expect_file_contains "$RUNBOOK" 'Troubleshooting'
 expect_file_contains "$RUNBOOK" 'TES-152'
 expect_file_contains "$RUNBOOK" 'F2/F3'

@@ -128,7 +128,8 @@ load_two_host_config() {
     CONTROL_NODE_NAME
     GAME_NODE_NAME
     CONTROL_PRIVATE_ADDRESS
-    GAME_PRIVATE_ADDRESS
+    GAME_NODE_ADDRESS
+    GAME_CLUSTER_SOURCE_ADDRESS
     GAME_DIRECT_ADDRESS
     CONTROL_API_CLIENT_CIDR
     CONTROL_API_PORT
@@ -182,7 +183,8 @@ load_two_host_config() {
   validate_node_name CONTROL_NODE_NAME || return
   validate_node_name GAME_NODE_NAME || return
   validate_ipv4 CONTROL_PRIVATE_ADDRESS || return
-  validate_ipv4 GAME_PRIVATE_ADDRESS || return
+  validate_ipv4 GAME_NODE_ADDRESS || return
+  validate_ipv4 GAME_CLUSTER_SOURCE_ADDRESS || return
   validate_ipv4 GAME_DIRECT_ADDRESS || return
   validate_ipv4_cidr CONTROL_API_CLIENT_CIDR || return
   validate_port CONTROL_API_PORT || return

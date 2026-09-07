@@ -34,6 +34,12 @@ if [ "$control_pod_node" != "$CONTROL_NODE_NAME" ] ||
   exit 1
 fi
 
+game_node_address="$(k3s kubectl get "node/$GAME_NODE_NAME" -o jsonpath="{.status.addresses[?(@.type=='InternalIP')].address}")"
+if [ "$game_node_address" != "$GAME_NODE_ADDRESS" ]; then
+  two_host_error "game node InternalIP differs from GAME_NODE_ADDRESS"
+  exit 1
+fi
+
 service_type="$(k3s kubectl get service/cloud-postgres -n cloud-system -o jsonpath='{.spec.type}')"
 if [ "$service_type" != ClusterIP ]; then
   two_host_error "cloud-postgres must remain ClusterIP-only"
@@ -94,6 +100,7 @@ timeout 5 bash -c "</dev/tcp/$GAME_DIRECT_ADDRESS/$GAME_PORT"
 
 printf '%s\n' \
   "workload placement verified: control services=control game=game" \
+  "game node address verified against the configured local interface" \
   "cloud-postgres exposure verified: ClusterIP only" \
   "machine-token input verified without reading its value" \
   "Paper runtime: cpu=$GAME_CPU heap=$GAME_JAVA_HEAP memory=$GAME_MEMORY" \
