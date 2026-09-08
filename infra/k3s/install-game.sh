@@ -2,12 +2,20 @@
 # Installs the K3s agent on game-1 and labels it as the game worker (TES-59).
 # Run directly on game-1 with sudo.
 #
-# Required env vars (pass at invocation, never commit them):
+# Required env vars (K3S_TOKEN may be supplied for existing automation):
 #   K3S_URL   = https://<control-1-ip>:6443
 #   K3S_TOKEN = token printed by install-control.sh
+# If K3S_TOKEN is not set, this script prompts on /dev/tty after sudo has
+# started. A non-interactive caller must provide K3S_TOKEN through its env.
 #
-# Example:
-#   K3S_URL=https://<control-ip>:6443 K3S_TOKEN=<token> ./install-game.sh
+# Interactive example (prompts for the token on /dev/tty after sudo starts):
+#   sudo env \
+#     K3S_URL=https://<control-ip>:6443 \
+#     GAME_NODE_ADDRESS=<game-node-ip> \
+#     ./install-game.sh
+# Non-interactive automation may supply K3S_TOKEN in the root process
+# environment through its secret-injection mechanism. Do not put the token on
+# a command line or in shell history.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -15,7 +23,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../two-host/lib.sh"
 
 : "${K3S_URL:?Set K3S_URL=https://<control-1-ip>:6443}"
-: "${K3S_TOKEN:?Set K3S_TOKEN=<token from install-control.sh>}"
 : "${GAME_NODE_ADDRESS:?Set GAME_NODE_ADDRESS to an IPv4 address assigned to game-1}"
 
 K3S_VERSION="${K3S_VERSION:-v1.36.4+k3s1}"
@@ -26,6 +33,22 @@ if [ "$(id -u)" -ne 0 ]; then
   echo "Run as root (sudo)." >&2
   exit 1
 fi
+
+if [ -z "${K3S_TOKEN:-}" ]; then
+  if ! { [ -c /dev/tty ] && : </dev/tty; }; then
+    echo "K3S_TOKEN is unset and no controlling TTY is available at /dev/tty; set K3S_TOKEN for non-interactive automation or run sudo from a terminal." >&2
+    exit 1
+  fi
+  printf 'K3s join token: ' >/dev/tty
+  if ! IFS= read -r -s K3S_TOKEN </dev/tty; then
+    printf '\n' >/dev/tty
+    echo "Unable to read K3S_TOKEN from /dev/tty; set K3S_TOKEN for non-interactive automation." >&2
+    exit 1
+  fi
+  printf '\n' >/dev/tty
+fi
+
+: "${K3S_TOKEN:?Set K3S_TOKEN or run sudo from a terminal so the script can prompt on /dev/tty}"
 
 validate_node_name NODE_NAME
 validate_ipv4 GAME_NODE_ADDRESS

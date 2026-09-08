@@ -8,6 +8,7 @@ The project is in pre-beta development. This repository contains benchmark tools
 
 | Read | Find |
 | --- | --- |
+| [Two-host clean-clone quickstart](infra/two-host/README.md) | Canonical F1 guide for installing and safely reapplying `control-1` and `game-1`; F2/F3 operations and TES-148 acceptance remain separate |
 | [Architecture](docs/architecture.md) | How the two-host foundation and later managed service are intended to work |
 | [Decisions](docs/decisions.md) | Chosen directions, replaced assumptions and open decisions |
 | [Catalog](catalog/README.md) | Recipes, tested profiles and the requirements for offering them |
