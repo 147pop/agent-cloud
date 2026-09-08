@@ -249,6 +249,7 @@ run the repository's pinned installer:
 
 ```sh
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -284,6 +285,7 @@ CIDR to reach the control API port:
 
 ```sh
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -314,6 +316,7 @@ argv:
 
 ```bash
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -341,6 +344,7 @@ Minecraft TCP port:
 
 ```sh
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -370,6 +374,7 @@ second on `game-1`; each host must be at the repository root:
 
 ```bash
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -380,6 +385,7 @@ grep -F "$K3S_VERSION" infra/.local/tes-151-versions/control-1-k3s-version.txt >
 
 ```bash
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -462,6 +468,8 @@ or infra/.local/tes-151.env; do not source a repository config from a third
 host. The operator must provide these non-secret endpoint values privately:
 
 ```bash
+(
+set -euo pipefail
 read -r -p 'Game direct address: ' GAME_DIRECT_ADDRESS
 read -r -p 'Game TCP port: ' GAME_PORT
 read -r -p 'Control API port: ' CONTROL_API_PORT
@@ -490,6 +498,7 @@ if nc -vz -w 3 "$CONTROL_ADDRESS" 6443; then
   exit 1
 fi
 unset GAME_DIRECT_ADDRESS GAME_PORT CONTROL_API_PORT CONTROL_ADDRESS
+)
 ```
 
 The first probe is the direct player-facing game path. PostgreSQL and K3s
@@ -517,6 +526,7 @@ pair:
 
 ```sh
 (
+set -euo pipefail
 mkdir -p infra/.local/tes-151-persistence/before
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -574,6 +584,7 @@ Now run this marker block on `game-1`:
 
 ```sh
 (
+set -euo pipefail
 mkdir -p infra/.local/tes-151-persistence/before
 set -a
 . infra/.local/tes-151.env
@@ -597,6 +608,7 @@ this order. Run the first block on `control-1`:
 
 ```bash
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -619,6 +631,7 @@ commands below, a file or a log:
 
 ```bash
 (
+set -euo pipefail
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -648,6 +661,7 @@ same PostgreSQL row by its saved ID, and compare the exact `id|value` pair:
 
 ```sh
 (
+set -euo pipefail
 mkdir -p infra/.local/tes-151-persistence/after
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -687,6 +701,7 @@ and compare it with the baseline:
 
 ```sh
 (
+set -euo pipefail
 mkdir -p infra/.local/tes-151-persistence/after
 set -a
 . infra/.local/tes-151.env

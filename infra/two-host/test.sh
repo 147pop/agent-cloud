@@ -96,6 +96,7 @@ expect_markdown_fences_valid() {
   local fence_file=""
   local fence_number=0
   local first_line=""
+  local second_line=""
   local last_line=""
   local line
   local trimmed_line
@@ -116,8 +117,15 @@ expect_markdown_fences_valid() {
           echo "FAIL: shell syntax is invalid in Markdown fence $fence_number of $markdown" >&2
           exit 1
         fi
+        first_line="$(awk 'NF { gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print; exit }' "$fence_file")"
+        if [ "$first_line" = '(' ]; then
+          second_line="$(awk 'NF { count++; if (count == 2) { gsub(/[[:space:]]+/, " "); print; exit } }' "$fence_file")"
+          if [ "$second_line" != 'set -euo pipefail' ]; then
+            echo "FAIL: subshell in Markdown fence $fence_number is not strict" >&2
+            exit 1
+          fi
+        fi
         if grep -Fq '. infra/.local/tes-151.env' "$fence_file"; then
-          first_line="$(awk 'NF { gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print; exit }' "$fence_file")"
           last_line="$(awk 'NF { line = $0 } END { gsub(/^[[:space:]]+|[[:space:]]+$/, "", line); print line }' "$fence_file")"
           if [ "$first_line" != '(' ] || [ "$last_line" != ')' ]; then
             echo "FAIL: config-loading fence $fence_number is not contained in a subshell" >&2
@@ -137,6 +145,19 @@ expect_markdown_fences_valid() {
     echo "FAIL: unclosed Markdown fence $fence_number in $markdown" >&2
     exit 1
   fi
+}
+
+find_markdown_fence() {
+  local pattern="$1"
+  local fence_file
+  for fence_file in "$TEST_ROOT"/markdown-fence-*; do
+    [ -f "$fence_file" ] || continue
+    if grep -Fq -- "$pattern" "$fence_file"; then
+      printf '%s\n' "$fence_file"
+      return 0
+    fi
+  done
+  return 1
 }
 
 expect_markdown_relative_links_exist() {
@@ -230,6 +251,7 @@ expect_file_contains "$K3S_DIR/install-game.sh" 'read[[:space:]]+-r[[:space:]]+-
 expect_file_contains "$K3S_DIR/install-game.sh" 'no controlling TTY is available'
 expect_file_contains "$K3S_DIR/install-game.sh" 'K3S_TOKEN may be supplied for existing automation'
 expect_file_contains "$K3S_DIR/install-game.sh" 'if[[:space:]]+\[[[:space:]]+-z[[:space:]]+"\$\{K3S_TOKEN:-\}"[[:space:]]+\];[[:space:]]*then'
+expect_file_excludes "$K3S_DIR/install-game.sh" 'K3S_TOKEN=<token>'
 
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'API_CLIENT_CIDR'
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'CONTROL_API_PORT'
@@ -351,5 +373,42 @@ expect_if_block_contains "$RUNBOOK" "${negative_probe_prefix}5432;[[:space:]]*th
 expect_if_block_contains "$RUNBOOK" "${negative_probe_prefix}6443;[[:space:]]*then" 'exit[[:space:]]+1'
 expect_markdown_fences_valid "$RUNBOOK"
 expect_markdown_relative_links_exist "$RUNBOOK"
+
+operator_probe_fence="$(find_markdown_fence "Game direct address:")" || {
+  echo "FAIL: operator probe fence not found" >&2
+  exit 1
+}
+probe_bin="$TEST_ROOT/probe-bin"
+mkdir "$probe_bin"
+cat >"$probe_bin/nc" <<'EOF'
+#!/usr/bin/env bash
+port="${!#}"
+case ",${NC_OPEN_PORTS:-}," in
+  *",$port,"*) exit 0 ;;
+  *) exit 1 ;;
+esac
+EOF
+cat >"$probe_bin/curl" <<'EOF'
+#!/usr/bin/env bash
+exit "${CURL_STATUS:-0}"
+EOF
+chmod +x "$probe_bin/nc" "$probe_bin/curl"
+printf '%s\n' 198.51.100.20 25565 3000 192.0.2.10 >"$TEST_ROOT/probe-input"
+
+expect_failure "failed direct game probe" \
+  env PATH="$probe_bin:$PATH" NC_OPEN_PORTS= CURL_STATUS=0 \
+  bash "$operator_probe_fence" <"$TEST_ROOT/probe-input"
+expect_failure "failed control health probe" \
+  env PATH="$probe_bin:$PATH" NC_OPEN_PORTS=25565 CURL_STATUS=1 \
+  bash "$operator_probe_fence" <"$TEST_ROOT/probe-input"
+expect_failure "exposed PostgreSQL probe" \
+  env PATH="$probe_bin:$PATH" NC_OPEN_PORTS=25565,5432 CURL_STATUS=0 \
+  bash "$operator_probe_fence" <"$TEST_ROOT/probe-input"
+if ! env PATH="$probe_bin:$PATH" NC_OPEN_PORTS=25565 CURL_STATUS=0 \
+  bash "$operator_probe_fence" <"$TEST_ROOT/probe-input" \
+  >"$TEST_ROOT/probe.stdout" 2>"$TEST_ROOT/probe.stderr"; then
+  echo "FAIL: valid operator probes failed" >&2
+  exit 1
+fi
 
 echo "two-host tests passed"

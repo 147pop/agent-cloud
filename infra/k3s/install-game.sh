@@ -8,8 +8,14 @@
 # If K3S_TOKEN is not set, this script prompts on /dev/tty after sudo has
 # started. A non-interactive caller must provide K3S_TOKEN through its env.
 #
-# Example:
-#   K3S_URL=https://<control-ip>:6443 K3S_TOKEN=<token> ./install-game.sh
+# Interactive example (prompts for the token on /dev/tty after sudo starts):
+#   sudo env \
+#     K3S_URL=https://<control-ip>:6443 \
+#     GAME_NODE_ADDRESS=<game-node-ip> \
+#     ./install-game.sh
+# Non-interactive automation may supply K3S_TOKEN in the root process
+# environment through its secret-injection mechanism. Do not put the token on
+# a command line or in shell history.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
