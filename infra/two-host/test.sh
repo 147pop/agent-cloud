@@ -392,7 +392,15 @@ cat >"$probe_bin/curl" <<'EOF'
 #!/usr/bin/env bash
 exit "${CURL_STATUS:-0}"
 EOF
-chmod +x "$probe_bin/nc" "$probe_bin/curl"
+cat >"$probe_bin/sudo" <<'EOF'
+#!/usr/bin/env bash
+case "${1:-}" in
+  infra/two-host/deploy.sh) exit "${DEPLOY_STATUS:-0}" ;;
+  infra/two-host/verify.sh) exit "${VERIFY_STATUS:-0}" ;;
+  *) exit 64 ;;
+esac
+EOF
+chmod +x "$probe_bin/nc" "$probe_bin/curl" "$probe_bin/sudo"
 printf '%s\n' 198.51.100.20 25565 3000 192.0.2.10 >"$TEST_ROOT/probe-input"
 
 expect_failure "failed direct game probe" \
@@ -408,6 +416,21 @@ if ! env PATH="$probe_bin:$PATH" NC_OPEN_PORTS=25565 CURL_STATUS=0 \
   bash "$operator_probe_fence" <"$TEST_ROOT/probe-input" \
   >"$TEST_ROOT/probe.stdout" 2>"$TEST_ROOT/probe.stderr"; then
   echo "FAIL: valid operator probes failed" >&2
+  exit 1
+fi
+
+deploy_fence_count=0
+for fence_file in "$TEST_ROOT"/markdown-fence-*; do
+  if grep -Fq 'sudo infra/two-host/deploy.sh' "$fence_file" &&
+    grep -Fq 'sudo infra/two-host/verify.sh' "$fence_file"; then
+    deploy_fence_count=$((deploy_fence_count + 1))
+    expect_failure "deploy failure hidden by successful verify in fence $deploy_fence_count" \
+      env PATH="$probe_bin:$PATH" DEPLOY_STATUS=1 VERIFY_STATUS=0 \
+      bash "$fence_file"
+  fi
+done
+if [ "$deploy_fence_count" -ne 2 ]; then
+  echo "FAIL: expected two deploy/verify fences, found $deploy_fence_count" >&2
   exit 1
 fi
 

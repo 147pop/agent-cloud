@@ -414,8 +414,11 @@ builds and imports the pinned local `cloud-control` image, and applies the
 control, storage and Paper resources:
 
 ```sh
+(
+set -euo pipefail
 sudo infra/two-host/deploy.sh infra/.local/tes-151.env
 sudo infra/two-host/verify.sh infra/.local/tes-151.env
+)
 ```
 
 `verify.sh` proves, without printing secret values:
@@ -650,8 +653,11 @@ Finish on `control-1` so the Deployment recreates Paper and all three
 workloads return to Ready:
 
 ```sh
+(
+set -euo pipefail
 sudo infra/two-host/deploy.sh infra/.local/tes-151.env
 sudo infra/two-host/verify.sh infra/.local/tes-151.env
+)
 ```
 
 ### 6.4 Capture and compare the after state
