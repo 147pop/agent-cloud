@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # shellcheck source=lib.sh
 source "$SCRIPT_DIR/lib.sh"
@@ -70,6 +71,14 @@ expect_file_contains_fixed() {
   local text="$2"
   if ! grep -Fq -- "$text" "$file"; then
     echo "FAIL: $file does not contain expected text: $text" >&2
+    exit 1
+  fi
+}
+
+expect_file_exists() {
+  local file="$1"
+  if [ ! -f "$file" ]; then
+    echo "FAIL: expected file does not exist: $file" >&2
     exit 1
   fi
 }
@@ -339,18 +348,34 @@ expect_file_contains "$VERIFY_SCRIPT" 'auth can-i.*\|\| true'
 expect_file_excludes "$VERIFY_SCRIPT" 'POSTGRES_PASSWORD.*echo|echo.*POSTGRES_PASSWORD'
 
 RUNBOOK="$SCRIPT_DIR/README.md"
+EVIDENCE="$REPO_ROOT/infra/evidence/tes-152-clean-clone-quickstart.md"
+ROOT_README="$REPO_ROOT/README.md"
+INFRA_README="$REPO_ROOT/infra/README.md"
+
+expect_file_exists "$RUNBOOK"
+expect_file_exists "$EVIDENCE"
+expect_file_exists "$ROOT_README"
+expect_file_exists "$INFRA_README"
+
 expect_file_contains "$RUNBOOK" 'Ubuntu 24\.04'
 expect_file_contains "$RUNBOOK" 'clean (clone|checkout)'
+expect_file_contains "$RUNBOOK" 'commit'
 expect_file_contains "$RUNBOOK" 'operator-owned'
 expect_file_contains "$RUNBOOK" 'MINECRAFT_EULA=TRUE'
+expect_file_contains "$RUNBOOK" 'control-1.*(K3s server|cloud-control|PostgreSQL)'
+expect_file_contains "$RUNBOOK" 'game-1.*K3s agent.*pinned Paper'
+expect_file_contains "$RUNBOOK" 'pinned K3s'
 expect_file_contains "$RUNBOOK" 'reset-host\.sh'
+expect_file_contains "$RUNBOOK" 'prepare-host\.sh'
 expect_file_contains "$RUNBOOK" 'deploy\.sh'
 expect_file_contains "$RUNBOOK" 'verify\.sh'
 expect_file_contains "$RUNBOOK" 'reapply|second pass'
+expect_file_contains "$RUNBOOK" 'non-destructive reapply|reapply.*(without deleting|preserv|unchanged)'
 expect_file_contains "$RUNBOOK" '2 GiB.*heap'
 expect_file_contains "$RUNBOOK" '3 GiB.*container'
 expect_file_contains "$RUNBOOK" '10 GiB.*(storage|PVC)'
 expect_file_contains "$RUNBOOK" 'reserve'
+expect_file_contains "$RUNBOOK" 'host reserve|GAME_HOST_RESERVED'
 expect_file_contains "$RUNBOOK" 'direct.*TCP'
 expect_file_contains "$RUNBOOK" 'GAME_NODE_ADDRESS'
 expect_file_contains "$RUNBOOK" 'GAME_CLUSTER_SOURCE_ADDRESS'
@@ -358,6 +383,7 @@ expect_file_contains "$RUNBOOK" 'GAME_DIRECT_ADDRESS'
 expect_file_contains "$RUNBOOK" 'Troubleshooting'
 expect_file_contains "$RUNBOOK" 'TES-152'
 expect_file_contains "$RUNBOOK" 'F2/F3'
+expect_file_contains "$RUNBOOK" 'TES-148'
 expect_file_contains_fixed "$RUNBOOK" 'git rev-parse --verify --quiet "$VERIFIED_COMMIT^{commit}"'
 expect_file_contains_fixed "$RUNBOOK" 'git checkout --detach "$VERIFIED_COMMIT"'
 expect_file_excludes "$RUNBOOK" 'git checkout[[:space:]]+<verified-commit>'
@@ -373,6 +399,27 @@ expect_if_block_contains "$RUNBOOK" "${negative_probe_prefix}5432;[[:space:]]*th
 expect_if_block_contains "$RUNBOOK" "${negative_probe_prefix}6443;[[:space:]]*then" 'exit[[:space:]]+1'
 expect_markdown_fences_valid "$RUNBOOK"
 expect_markdown_relative_links_exist "$RUNBOOK"
+
+expect_file_contains "$EVIDENCE" 'bash infra/two-host/test\.sh'
+expect_file_contains "$EVIDENCE" 'bash -n'
+expect_file_contains "$EVIDENCE" 'npm run check'
+expect_file_contains "$EVIDENCE" 'python3 benchmarks/minecraft/summarize\.py --self-test'
+expect_file_contains "$EVIDENCE" 'No live reinstall'
+expect_file_contains "$EVIDENCE" 'TES-151 live installation evidence'
+expect_file_contains "$EVIDENCE" 'without replacing'
+expect_file_contains "$EVIDENCE" 'No secrets.*host addresses'
+expect_file_contains "$EVIDENCE" 'ignored local paths'
+expect_file_contains "$EVIDENCE" 'without Linear access'
+expect_file_contains "$EVIDENCE" '\[TES-151 live installation evidence\]\(tes-151-two-host-installation\.md\)'
+
+expect_file_contains "$ROOT_README" '\]\(infra/two-host/README\.md\)'
+expect_file_contains "$ROOT_README" '[Cc]anonical F1 guide'
+expect_file_contains "$INFRA_README" '\]\(two-host/README\.md\)'
+expect_file_contains "$INFRA_README" 'canonical F1 installation'
+
+expect_markdown_relative_links_exist "$EVIDENCE"
+expect_markdown_relative_links_exist "$ROOT_README"
+expect_markdown_relative_links_exist "$INFRA_README"
 
 operator_probe_fence="$(find_markdown_fence "Game direct address:")" || {
   echo "FAIL: operator probe fence not found" >&2
