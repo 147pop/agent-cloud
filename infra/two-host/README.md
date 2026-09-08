@@ -16,8 +16,9 @@ any other managed-service integration.
 
 The verified target is Ubuntu 24.04 with systemd on both machines:
 
-Both hosts also need Git and a POSIX shell. The examples use OpenSSL to
-generate local operator values and persistence markers.
+Both hosts also need Git and Bash; all commands in this guide are intended to
+run from Bash, not only from a generic POSIX shell. The examples use OpenSSL
+to generate local operator values and persistence markers.
 
 | Role | Architecture | Minimum capacity and required commands | Installed workload |
 | --- | --- | --- | --- |
@@ -118,6 +119,51 @@ game address roles and no `POSTGRES_PASSWORD` or `CLOUD_MACHINE_TOKEN` lines.
 The deployment script creates the Kubernetes Secret only on `control-1` from
 the protected full configuration.
 
+## Expected versions and capture commands
+
+The expected pinned inputs are recorded in the repository files below. These
+values are safe to compare with live state because the commands select only
+versions, image references and non-secret environment values:
+
+| Component | Repository source | Expected value |
+| --- | --- | --- |
+| K3s | [`config.example.env`](config.example.env), [`install-control.sh`](../k3s/install-control.sh) and [`install-game.sh`](../k3s/install-game.sh) | `v1.36.4+k3s1` |
+| Paper | [`deployment.yaml`](../../catalog/games/minecraft-java/paper/k8s/deployment.yaml) | `itzg/minecraft-server@sha256:efa878ddb49cf5251b2e5f2ad71b08fd2f7236c1f7907433f6697258b31d2ce4`; `VERSION=26.2`; `PAPER_BUILD=121` |
+| PostgreSQL | [`control.yaml.template`](templates/control.yaml.template) | `postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3` |
+| `cloud-control` | [`deploy.sh`](deploy.sh), [`Dockerfile`](../../apps/cloud-control/Dockerfile) and [`package.json`](../../apps/cloud-control/package.json) | local image `cloud-control:tes-151`; package `0.0.0`; Node `22.20.0-bookworm-slim@sha256:b21fe589dfbe5cc39365d0544b9be3f1f33f55f3c86c87a76ff65a02f8f5848e`, used by both Dockerfile stages |
+
+Run the following on `control-1` after deployment. Store the output only in
+the ignored local directory; these selectors do not print Secret data:
+
+```bash
+cd cloud
+mkdir -p infra/.local/tes-151-versions
+git rev-parse HEAD | tee infra/.local/tes-151-versions/commit.txt
+sudo k3s --version | tee infra/.local/tes-151-versions/k3s-version.txt
+sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
+  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
+  | tee infra/.local/tes-151-versions/paper-image.txt
+sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
+  -o jsonpath='{range .spec.template.spec.containers[0].env[?(@.name=="VERSION")]}{.value}{"\n"}{end}' \
+  | tee infra/.local/tes-151-versions/paper-version.txt
+sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
+  -o jsonpath='{range .spec.template.spec.containers[0].env[?(@.name=="PAPER_BUILD")]}{.value}{"\n"}{end}' \
+  | tee infra/.local/tes-151-versions/paper-build.txt
+sudo k3s kubectl get statefulset/cloud-postgres -n cloud-system \
+  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
+  | tee infra/.local/tes-151-versions/postgres-image.txt
+sudo k3s kubectl get deployment/cloud-control -n cloud-system \
+  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
+  | tee infra/.local/tes-151-versions/cloud-control-image.txt
+sudo k3s ctr images ls | grep 'cloud-control:tes-151' \
+  | tee infra/.local/tes-151-versions/cloud-control-import.txt
+```
+
+The effective Paper image, `VERSION`, `PAPER_BUILD`, PostgreSQL image and
+`cloud-control` image tag must match the table. The imported `cloud-control`
+record may also include a content digest selected by containerd; keep that
+record private and do not include credentials or full pod manifests.
+
 ## 3. Install and prepare `control-1`
 
 Run every command in this section on `control-1` from the repository root.
@@ -154,11 +200,41 @@ validated `/var/lib/cloud/` boundary with the required owner and mode:
 sudo infra/two-host/prepare-host.sh control infra/.local/tes-151.env
 ```
 
-### 3.3 Apply the control firewall
+### 3.3 Establish the UFW precondition without losing SSH
 
-The repository firewall uses `ufw` and leaves existing SSH rules untouched. It
-allows the game source address to reach the K3s API and WireGuard tunnel, and
-allows only the configured client CIDR to reach the control API port:
+Run the following on both `control-1` and `game-1` before applying either
+repository firewall script. UFW must already be active, and the existing
+operator SSH rule must remain allowed. The scripts add rules but do not enable
+UFW, choose an SSH port, or repair an unsafe SSH policy.
+
+First inspect the current state and verify that it reports exactly `Status: active`:
+
+```bash
+sudo ufw status verbose
+sudo ufw status | awk 'NR == 1 {print}'
+test "$(sudo ufw status | awk 'NR == 1 {print $2}')" = active
+```
+
+If the check fails, stop before applying the repository rules. Using the
+operator's already established SSH source and port, add or confirm that SSH
+allow rule through the host's normal access procedure, then enable UFW and
+rerun the check above. Do not invent a port, run `ufw reset`, or enable UFW
+until the current SSH channel is explicitly allowed. Confirm the rule before
+and after enabling with:
+
+```bash
+sudo ufw status numbered
+sudo ufw enable
+sudo ufw status verbose
+test "$(sudo ufw status | awk 'NR == 1 {print $2}')" = active
+```
+
+### 3.4 Apply the control firewall
+
+After the UFW precondition passes on `control-1`, apply the repository rules.
+They leave existing SSH rules untouched, allow the game source address to
+reach the K3s API and WireGuard tunnel, and allow only the configured client
+CIDR to reach the control API port:
 
 ```sh
 set -a
@@ -187,7 +263,7 @@ sudo cat /var/lib/rancher/k3s/server/node-token
 Run the next commands on `game-1`. Enter the token at the hidden prompt when
 asked; the shell variable is cleared immediately after installation:
 
-```sh
+```bash
 cd cloud
 set -a
 . infra/.local/tes-151.env
@@ -379,7 +455,7 @@ the durable-world probe; do not commit the marker value or any host output.
 Use the same verified commit and configuration values, and run the commands in
 this order. Run the first block on `control-1`:
 
-```sh
+```bash
 cd cloud
 set -a
 . infra/.local/tes-151.env
@@ -400,7 +476,7 @@ Run the next block on `game-1`. Transfer the current join token through the
 same protected prompt used for the first installation; never put it in the
 commands below, a file or a log:
 
-```sh
+```bash
 cd cloud
 set -a
 . infra/.local/tes-151.env
