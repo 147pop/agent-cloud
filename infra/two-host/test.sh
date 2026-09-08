@@ -65,6 +65,101 @@ expect_file_excludes() {
   fi
 }
 
+expect_file_contains_fixed() {
+  local file="$1"
+  local text="$2"
+  if ! grep -Fq -- "$text" "$file"; then
+    echo "FAIL: $file does not contain expected text: $text" >&2
+    exit 1
+  fi
+}
+
+expect_if_block_contains() {
+  local file="$1"
+  local start_pattern="$2"
+  local required_pattern="$3"
+  if ! awk -v start="$start_pattern" -v required="$required_pattern" '
+    $0 ~ start { in_block = 1 }
+    in_block && $0 ~ required { found = 1 }
+    in_block && /^[[:space:]]*fi[[:space:]]*$/ { exit(found ? 0 : 1) }
+    END { if (!in_block) exit 1 }
+  ' "$file"; then
+    echo "FAIL: $file block matching $start_pattern lacks $required_pattern" >&2
+    exit 1
+  fi
+}
+
+expect_markdown_fences_valid() {
+  local markdown="$1"
+  local in_fence=0
+  local language=""
+  local fence_file=""
+  local fence_number=0
+  local first_line=""
+  local last_line=""
+  local line
+  local trimmed_line
+
+  while IFS= read -r line || [ -n "$line" ]; do
+    trimmed_line="${line#"${line%%[![:space:]]*}"}"
+    trimmed_line="${trimmed_line%"${trimmed_line##*[![:space:]]}"}"
+    if [ "$in_fence" -eq 0 ] && [[ "$trimmed_line" == \`\`\`* ]]; then
+      in_fence=1
+      language="${trimmed_line:3}"
+      language="${language%%[[:space:]]*}"
+      fence_number=$((fence_number + 1))
+      fence_file="$TEST_ROOT/markdown-fence-$fence_number"
+      : >"$fence_file"
+    elif [ "$in_fence" -eq 1 ] && [ "$trimmed_line" = '```' ]; then
+      if [ "$language" = bash ] || [ "$language" = sh ]; then
+        if ! bash -n "$fence_file"; then
+          echo "FAIL: shell syntax is invalid in Markdown fence $fence_number of $markdown" >&2
+          exit 1
+        fi
+        if grep -Fq '. infra/.local/tes-151.env' "$fence_file"; then
+          first_line="$(awk 'NF { gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print; exit }' "$fence_file")"
+          last_line="$(awk 'NF { line = $0 } END { gsub(/^[[:space:]]+|[[:space:]]+$/, "", line); print line }' "$fence_file")"
+          if [ "$first_line" != '(' ] || [ "$last_line" != ')' ]; then
+            echo "FAIL: config-loading fence $fence_number is not contained in a subshell" >&2
+            exit 1
+          fi
+        fi
+      fi
+      in_fence=0
+      language=""
+      fence_file=""
+    elif [ "$in_fence" -eq 1 ]; then
+      printf '%s\n' "$line" >>"$fence_file"
+    fi
+  done <"$markdown"
+
+  if [ "$in_fence" -ne 0 ]; then
+    echo "FAIL: unclosed Markdown fence $fence_number in $markdown" >&2
+    exit 1
+  fi
+}
+
+expect_markdown_relative_links_exist() {
+  local markdown="$1"
+  local base_directory
+  local match
+  local target
+  base_directory="$(dirname "$markdown")"
+
+  while IFS= read -r match; do
+    target="${match#](}"
+    target="${target%)}"
+    case "$target" in
+      http://*|https://*|mailto:*|'#'*) continue ;;
+    esac
+    target="${target%%#*}"
+    if [ ! -e "$base_directory/$target" ]; then
+      echo "FAIL: missing relative Markdown link target in $markdown: $target" >&2
+      exit 1
+    fi
+  done < <(grep -oE '\]\([^)]*\)' "$markdown")
+}
+
 valid_config="$TEST_ROOT/valid.env"
 write_valid_config "$valid_config"
 load_two_host_config "$valid_config"
@@ -131,8 +226,10 @@ expect_file_contains "$K3S_DIR/install-game.sh" 'GAME_NODE_ADDRESS'
 expect_file_contains "$K3S_DIR/install-game.sh" '--node-ip=\$\{GAME_NODE_ADDRESS\}'
 expect_file_excludes "$K3S_DIR/install-game.sh" '--node-ip=\$\{GAME_CLUSTER_SOURCE_ADDRESS\}'
 expect_file_contains "$K3S_DIR/install-game.sh" '/dev/tty'
-expect_file_contains "$K3S_DIR/install-game.sh" 'read -r -s K3S_TOKEN </dev/tty'
+expect_file_contains "$K3S_DIR/install-game.sh" 'read[[:space:]]+-r[[:space:]]+-s[[:space:]]+K3S_TOKEN[[:space:]]*</dev/tty'
 expect_file_contains "$K3S_DIR/install-game.sh" 'no controlling TTY is available'
+expect_file_contains "$K3S_DIR/install-game.sh" 'K3S_TOKEN may be supplied for existing automation'
+expect_file_contains "$K3S_DIR/install-game.sh" 'if[[:space:]]+\[[[:space:]]+-z[[:space:]]+"\$\{K3S_TOKEN:-\}"[[:space:]]+\];[[:space:]]*then'
 
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'API_CLIENT_CIDR'
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'CONTROL_API_PORT'
@@ -239,15 +336,20 @@ expect_file_contains "$RUNBOOK" 'GAME_DIRECT_ADDRESS'
 expect_file_contains "$RUNBOOK" 'Troubleshooting'
 expect_file_contains "$RUNBOOK" 'TES-152'
 expect_file_contains "$RUNBOOK" 'F2/F3'
-for linked_file in \
-  "$SCRIPT_DIR/../../README.md" \
-  "$SCRIPT_DIR/../README.md" \
-  "$SCRIPT_DIR/../k3s/README.md" \
-  "$SCRIPT_DIR/config.example.env"; do
-  if [ ! -f "$linked_file" ]; then
-    echo "FAIL: documented relative target is missing: $linked_file" >&2
-    exit 1
-  fi
-done
+expect_file_contains_fixed "$RUNBOOK" 'git rev-parse --verify --quiet "$VERIFIED_COMMIT^{commit}"'
+expect_file_contains_fixed "$RUNBOOK" 'git checkout --detach "$VERIFIED_COMMIT"'
+expect_file_excludes "$RUNBOOK" 'git checkout[[:space:]]+<verified-commit>'
+expect_file_contains_fixed "$RUNBOOK" '`10.42.0.0/16`'
+expect_file_contains_fixed "$RUNBOOK" '`10.43.0.0/16`'
+expect_file_contains "$RUNBOOK" '\[control firewall script\]\(\.\./k3s/firewall-control\.sh\)'
+expect_file_contains "$RUNBOOK" '\[game firewall script\]\(\.\./k3s/firewall-game\.sh\)'
+expect_file_contains_fixed "$RUNBOOK" '/dev/tty'
+expect_file_excludes "$RUNBOOK" 'K3S_TOKEN="\$K3S_TOKEN"'
+expect_file_excludes "$RUNBOOK" '^[[:space:]]*![[:space:]]+nc[[:space:]]'
+negative_probe_prefix='if[[:space:]]+nc[[:space:]]+-vz[[:space:]]+-w[[:space:]]+3[[:space:]]+.*[[:space:]]+'
+expect_if_block_contains "$RUNBOOK" "${negative_probe_prefix}5432;[[:space:]]*then" 'exit[[:space:]]+1'
+expect_if_block_contains "$RUNBOOK" "${negative_probe_prefix}6443;[[:space:]]*then" 'exit[[:space:]]+1'
+expect_markdown_fences_valid "$RUNBOOK"
+expect_markdown_relative_links_exist "$RUNBOOK"
 
 echo "two-host tests passed"

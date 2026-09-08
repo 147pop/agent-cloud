@@ -8,7 +8,7 @@ connectivity, deployment, readiness and a non-destructive reapply.
 
 It does not implement token authentication, control-plane lifecycle
 operations or the complete playable journey. Those are F2/F3 work and are
-accepted separately by [TES-148](https://linear.app/workspace/issue/TES-148/l4-accept-the-clean-clone-local-journey).
+accepted separately by [TES-148](https://linear.app/workspace/issue/TES-148/f4-accept-the-reproducible-two-host-minecraft-foundation).
 This guide also does not configure public account onboarding, Cloudflare or
 any other managed-service integration.
 
@@ -54,10 +54,22 @@ Run the following on both `control-1` and `game-1`. Use the same verified
 commit on both hosts; do not mix a local checkout with a different branch or
 commit.
 
-```sh
+```bash
 git clone https://github.com/pjcdz/cloud.git cloud
 cd cloud
-git checkout <verified-commit>
+read -r -p 'Verified commit or ref: ' VERIFIED_COMMIT
+if [[ -z "$VERIFIED_COMMIT" || "$VERIFIED_COMMIT" == -* ||
+  "$VERIFIED_COMMIT" == *[!A-Za-z0-9._/-]* ||
+  "$VERIFIED_COMMIT" == *..* || "$VERIFIED_COMMIT" == *"@{"* ]]; then
+  echo 'VERIFIED_COMMIT must be a safe SHA or ref name' >&2
+  exit 1
+fi
+if ! git rev-parse --verify --quiet "$VERIFIED_COMMIT^{commit}" >/dev/null; then
+  echo 'VERIFIED_COMMIT must resolve to an existing commit' >&2
+  exit 1
+fi
+git checkout --detach "$VERIFIED_COMMIT"
+unset VERIFIED_COMMIT
 test -z "$(git status --short)"
 ```
 
@@ -178,6 +190,14 @@ sudo ufw status numbered
 Re-run the numbered status and both active/default-policy checks above after
 any change. Keep the SSH rule and current channel intact throughout.
 
+The pinned K3s installation also requires UFW to allow the default pod CIDR
+`10.42.0.0/16` and service CIDR `10.43.0.0/16` on both hosts. The repository's
+[control firewall script](../k3s/firewall-control.sh) and
+[game firewall script](../k3s/firewall-game.sh) add those versioned K3s-default
+rules while retaining the host-to-host rules above. See the
+[K3s networking requirements](https://docs.k3s.io/installation/requirements#networking)
+before applying them.
+
 ## Expected versions and capture commands
 
 The expected pinned inputs are recorded in the repository files below. These
@@ -228,6 +248,7 @@ Load only the values needed by the installer into the command environment and
 run the repository's pinned installer:
 
 ```sh
+(
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -236,6 +257,7 @@ sudo env \
   NODE_NAME="$CONTROL_NODE_NAME" \
   CONTROL_PRIVATE_ADDRESS="$CONTROL_PRIVATE_ADDRESS" \
   infra/k3s/install-control.sh
+)
 ```
 
 The installer uses the exact `K3S_VERSION` from the configuration, enables
@@ -261,6 +283,7 @@ reach the K3s API and WireGuard tunnel, and allow only the configured client
 CIDR to reach the control API port:
 
 ```sh
+(
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -268,6 +291,7 @@ sudo infra/k3s/firewall-control.sh \
   "$GAME_CLUSTER_SOURCE_ADDRESS" \
   "$CONTROL_API_CLIENT_CIDR" \
   "$CONTROL_API_PORT"
+)
 ```
 
 Any provider-level rule required for the two hosts' private path is an
@@ -284,24 +308,27 @@ channel; do not save it in a repository file, command history or log:
 sudo cat /var/lib/rancher/k3s/server/node-token
 ```
 
-Run the next commands on `game-1`. Enter the token at the hidden prompt when
-asked; the shell variable is cleared immediately after installation:
+Run the next commands on `game-1`. The already-privileged installer prompts
+on `/dev/tty` for the join token, so the token is never placed in `sudo`
+argv:
 
 ```bash
+(
 set -a
 . infra/.local/tes-151.env
 set +a
-read -r -s K3S_TOKEN
-printf '\n'
 sudo env \
   K3S_VERSION="$K3S_VERSION" \
   NODE_NAME="$GAME_NODE_NAME" \
   GAME_NODE_ADDRESS="$GAME_NODE_ADDRESS" \
   K3S_URL="https://$CONTROL_PRIVATE_ADDRESS:6443" \
-  K3S_TOKEN="$K3S_TOKEN" \
   infra/k3s/install-game.sh
-unset K3S_TOKEN
+)
 ```
+
+Non-interactive automation may instead set `K3S_TOKEN` directly in the root
+installer process environment. That compatibility path avoids the prompt; the
+interactive guide intentionally does not forward the token through `sudo`.
 
 The agent installer sets `GAME_NODE_ADDRESS` as the node IP and applies the
 `cloud.example/role=game` label. The control address used in `K3S_URL` must be
@@ -313,10 +340,12 @@ Still on `game-1`, allow the WireGuard tunnel from `control-1` and the direct
 Minecraft TCP port:
 
 ```sh
+(
 set -a
 . infra/.local/tes-151.env
 set +a
 sudo infra/k3s/firewall-game.sh "$CONTROL_PRIVATE_ADDRESS" "$GAME_PORT"
+)
 ```
 
 ### 4.2 Prepare the game host
@@ -340,19 +369,23 @@ Only after both the server and agent installations have completed, capture
 second on `game-1`; each host must be at the repository root:
 
 ```bash
+(
 set -a
 . infra/.local/tes-151.env
 set +a
 sudo k3s --version | tee infra/.local/tes-151-versions/control-1-k3s-version.txt
 grep -F "$K3S_VERSION" infra/.local/tes-151-versions/control-1-k3s-version.txt >/dev/null
+)
 ```
 
 ```bash
+(
 set -a
 . infra/.local/tes-151.env
 set +a
 sudo k3s --version | tee infra/.local/tes-151-versions/game-1-k3s-version.txt
 grep -F "$K3S_VERSION" infra/.local/tes-151-versions/game-1-k3s-version.txt >/dev/null
+)
 ```
 
 Transfer the non-secret `game-1` version file to the same ignored directory
@@ -448,8 +481,14 @@ for port_name in GAME_PORT CONTROL_API_PORT; do
 done
 nc -vz "$GAME_DIRECT_ADDRESS" "$GAME_PORT"
 curl --fail "http://$CONTROL_ADDRESS:$CONTROL_API_PORT/healthz"
-! nc -vz -w 3 "$CONTROL_ADDRESS" 5432
-! nc -vz -w 3 "$CONTROL_ADDRESS" 6443
+if nc -vz -w 3 "$CONTROL_ADDRESS" 5432; then
+  echo 'ERROR: PostgreSQL is exposed to the operator probe host' >&2
+  exit 1
+fi
+if nc -vz -w 3 "$CONTROL_ADDRESS" 6443; then
+  echo 'ERROR: the K3s API is exposed to the operator probe host' >&2
+  exit 1
+fi
 unset GAME_DIRECT_ADDRESS GAME_PORT CONTROL_API_PORT CONTROL_ADDRESS
 ```
 
@@ -477,6 +516,7 @@ creates one uniquely identified PostgreSQL row, and captures its `id|value`
 pair:
 
 ```sh
+(
 mkdir -p infra/.local/tes-151-persistence/before
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -506,6 +546,7 @@ cut -d '|' -f 1 infra/.local/tes-151-persistence/before/postgres-probe.tsv \
   > infra/.local/tes-151-persistence/before/postgres-probe.id
 cut -d '|' -f 2- infra/.local/tes-151-persistence/before/postgres-probe.tsv \
   > infra/.local/tes-151-persistence/before/postgres-probe.value
+)
 ```
 
 The generated row is not a password or machine token. Keep the captured ID
@@ -532,6 +573,7 @@ sudo k3s kubectl wait --for=delete "pod/$PAPER_POD" \
 Now run this marker block on `game-1`:
 
 ```sh
+(
 mkdir -p infra/.local/tes-151-persistence/before
 set -a
 . infra/.local/tes-151.env
@@ -542,6 +584,7 @@ printf '%s\n' "$MARKER_VALUE" | sudo tee "$MARKER_PATH" >/dev/null
 sudo sha256sum "$MARKER_PATH" \
   > infra/.local/tes-151-persistence/before/world-marker.sha256
 unset MARKER_VALUE
+)
 ```
 
 The marker remains below the configured game data path. The private hash is
@@ -553,6 +596,7 @@ Use the same verified commit and configuration values, and run the commands in
 this order. Run the first block on `control-1`:
 
 ```bash
+(
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -566,6 +610,7 @@ sudo infra/k3s/firewall-control.sh \
   "$CONTROL_API_CLIENT_CIDR" \
   "$CONTROL_API_PORT"
 sudo infra/two-host/prepare-host.sh control infra/.local/tes-151.env
+)
 ```
 
 Run the next block on `game-1`. Transfer the current join token through the
@@ -573,21 +618,19 @@ same protected prompt used for the first installation; never put it in the
 commands below, a file or a log:
 
 ```bash
+(
 set -a
 . infra/.local/tes-151.env
 set +a
-read -r -s -p 'K3S join token: ' K3S_TOKEN
-printf '\n'
 sudo env \
   K3S_VERSION="$K3S_VERSION" \
   NODE_NAME="$GAME_NODE_NAME" \
   GAME_NODE_ADDRESS="$GAME_NODE_ADDRESS" \
   K3S_URL="https://$CONTROL_PRIVATE_ADDRESS:6443" \
-  K3S_TOKEN="$K3S_TOKEN" \
   infra/k3s/install-game.sh
-unset K3S_TOKEN
 sudo infra/k3s/firewall-game.sh "$CONTROL_PRIVATE_ADDRESS" "$GAME_PORT"
 sudo infra/two-host/prepare-host.sh game infra/.local/tes-151.env
+)
 ```
 
 Finish on `control-1` so the Deployment recreates Paper and all three
@@ -604,6 +647,7 @@ On `control-1`, create `after/`, capture the same PVC/PV identities, query the
 same PostgreSQL row by its saved ID, and compare the exact `id|value` pair:
 
 ```sh
+(
 mkdir -p infra/.local/tes-151-persistence/after
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -635,12 +679,14 @@ cmp infra/.local/tes-151-persistence/before/postgres-probe.tsv \
   infra/.local/tes-151-persistence/after/postgres-probe.tsv
 diff -ru infra/.local/tes-151-persistence/before/ \
   infra/.local/tes-151-persistence/after/
+)
 ```
 
 On `game-1`, create the matching `after/` directory, capture the marker hash,
 and compare it with the baseline:
 
 ```sh
+(
 mkdir -p infra/.local/tes-151-persistence/after
 set -a
 . infra/.local/tes-151.env
@@ -650,6 +696,7 @@ sudo sha256sum "$MARKER_PATH" \
   > infra/.local/tes-151-persistence/after/world-marker.sha256
 diff -ru infra/.local/tes-151-persistence/before/ \
   infra/.local/tes-151-persistence/after/
+)
 ```
 
 The reapply gate passes only when both directory comparisons and the
