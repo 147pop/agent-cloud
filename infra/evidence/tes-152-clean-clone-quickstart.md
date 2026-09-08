@@ -51,11 +51,15 @@ disk reserve.
 | PostgreSQL | `postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3` |
 | `cloud-control` | local image `cloud-control:tes-151`, package `0.0.0`, Node `22.20.0-bookworm-slim@sha256:b21fe589dfbe5cc39365d0544b9be3f1f33f55f3c86c87a76ff65a02f8f5848e` in both Dockerfile stages |
 
-The quickstart names the repository files that pin each value. On each live
-host, the operator captures the checked-out commit, installed K3s version and
-effective non-secret workload values below ignored
-`infra/.local/tes-151-versions/`, then compares both hosts. That local capture
-is not committed.
+The quickstart names the repository files that pin each value. The operator
+captures the checked-out commit and installed K3s version separately on both
+live hosts below ignored `infra/.local/tes-151-versions/`, transfers the
+non-secret `game-1` captures to `control-1`, and compares each pair there.
+After deployment, the operator uses Kubernetes from `control-1` to capture the
+effective Paper image, version and build plus the PostgreSQL and
+`cloud-control` image references, and uses K3s containerd on `control-1` to
+capture the local `cloud-control` import record. These local captures are not
+committed.
 
 ## Local verification results
 
