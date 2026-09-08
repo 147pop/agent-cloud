@@ -12,10 +12,16 @@ GAME_IP="${1:?Usage: firewall-control.sh <game-1-ip> <api-client-cidr> [api-port
 API_CLIENT_CIDR="${2:?Usage: firewall-control.sh <game-1-ip> <api-client-cidr> [api-port]}"
 CONTROL_API_PORT="${3:-3000}"
 
+# K3s v1.36.4+k3s1 pinned defaults: permit pod and service network traffic.
+K3S_POD_CIDR_DEFAULT="10.42.0.0/16"
+K3S_SERVICE_CIDR_DEFAULT="10.43.0.0/16"
+
 validate_ipv4 GAME_IP
 validate_ipv4_cidr API_CLIENT_CIDR
 validate_port CONTROL_API_PORT
 
+ufw allow from "$K3S_POD_CIDR_DEFAULT" to any comment "k3s pinned pod CIDR"
+ufw allow from "$K3S_SERVICE_CIDR_DEFAULT" to any comment "k3s pinned service CIDR"
 ufw allow from "$GAME_IP" to any port 6443 proto tcp comment "k3s api: game-1"
 ufw allow from "$GAME_IP" to any port 51820 proto udp comment "k3s flannel wireguard-native: game-1"
 ufw allow from "$API_CLIENT_CIDR" to any port "$CONTROL_API_PORT" proto tcp comment "cloud-control api: operator client"

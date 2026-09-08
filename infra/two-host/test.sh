@@ -134,6 +134,12 @@ expect_file_excludes "$K3S_DIR/install-game.sh" '--node-ip=\$\{GAME_CLUSTER_SOUR
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'API_CLIENT_CIDR'
 expect_file_contains "$K3S_DIR/firewall-control.sh" 'CONTROL_API_PORT'
 expect_file_contains "$K3S_DIR/firewall-game.sh" 'GAME_PORT'
+for firewall_script in "$K3S_DIR/firewall-control.sh" "$K3S_DIR/firewall-game.sh"; do
+  expect_file_contains "$firewall_script" 'K3S_POD_CIDR_DEFAULT="10\.42\.0\.0/16"'
+  expect_file_contains "$firewall_script" 'K3S_SERVICE_CIDR_DEFAULT="10\.43\.0\.0/16"'
+  expect_file_contains "$firewall_script" 'ufw allow from "\$K3S_POD_CIDR_DEFAULT" to any'
+  expect_file_contains "$firewall_script" 'ufw allow from "\$K3S_SERVICE_CIDR_DEFAULT" to any'
+done
 expect_file_contains "$K3S_DIR/verify.sh" 'kubectl wait'
 expect_file_contains "$K3S_DIR/verify.sh" 'CONTROL_NODE_NAME'
 expect_file_contains "$K3S_DIR/verify.sh" 'GAME_NODE_NAME'
@@ -230,7 +236,6 @@ expect_file_contains "$RUNBOOK" 'GAME_DIRECT_ADDRESS'
 expect_file_contains "$RUNBOOK" 'Troubleshooting'
 expect_file_contains "$RUNBOOK" 'TES-152'
 expect_file_contains "$RUNBOOK" 'F2/F3'
-
 for linked_file in \
   "$SCRIPT_DIR/../../README.md" \
   "$SCRIPT_DIR/../README.md" \
