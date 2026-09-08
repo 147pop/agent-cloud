@@ -2,19 +2,21 @@
 
 This record separates implementation and documentation provenance:
 
-- `38cdd84` (`38cdd844b3e425b80fd9b8f10150ed8e841222dc`) is the state of
-  the scripts and canonical
-  [two-host clean-clone quickstart](../two-host/README.md) against which the
-  functional checks below ran on 2026-09-08.
+- `37c23af` (`37c23afc5b5403a53ab01a73ad2a304b358bfd4c`) is the state of
+  the scripts, canonical
+  [two-host clean-clone quickstart](../two-host/README.md), repository entry
+  points and static documentation gates against which the functional checks
+  below ran on 2026-09-08.
 - `8cb294c` introduced the two repository entry points and this TES-152
   evidence record.
 - `991c7fc` corrected this record's description of which values are captured
   on each host.
+- `5d70248` added the TES-152 static documentation gates, and `37c23af`
+  removed three redundant assertions without weakening their coverage.
 
-The documentation diff, relative-link and privacy checks ran on the worktree
-that includes `8cb294c`, `991c7fc` and this correction. They validate the
-resulting documentation; they do not imply that the entry points or this
-record existed at `38cdd84`.
+The documentation diff, relative-link and privacy checks were rerun on the
+resulting worktree after this provenance correction. This record does not
+attempt to reference its own commit.
 
 ## Installation boundary
 
@@ -73,8 +75,8 @@ committed.
 
 ## Local verification results
 
-The following exact functional commands passed against the scripts and
-quickstart at implementation state `38cdd84`:
+The following exact functional commands passed against the scripts,
+quickstart, entry points and static gates at implementation state `37c23af`:
 
 ```text
 $ bash infra/two-host/test.sh
@@ -92,7 +94,7 @@ Metric parsing checks passed
 ```
 
 `benchmarks/minecraft/package.json` and
-`benchmarks/minecraft/package-lock.json` were unchanged from `38cdd84`.
+`benchmarks/minecraft/package-lock.json` were unchanged from `37c23af`.
 
 ## Reapply and persistence boundary
 
