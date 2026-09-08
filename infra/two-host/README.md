@@ -20,7 +20,7 @@ Both hosts also need Git, Bash and the `netcat-openbsd` package (`nc`) for
 the documented network probes; all commands in this guide are intended to run
 from Bash, not only from a generic POSIX shell. The examples use OpenSSL to
 generate local operator values and persistence markers. The operator machine
-used for direct/private probes also needs `nc`.
+used for direct/private probes also needs `curl` and `netcat-openbsd` (`nc`).
 
 | Role | Architecture | Minimum capacity and required commands | Installed workload |
 | --- | --- | --- | --- |
@@ -61,6 +61,11 @@ git checkout <verified-commit>
 test -z "$(git status --short)"
 ```
 
+Run `cd cloud` once per host session as shown above. Stay at this repository
+root for the rest of the guide; later command blocks intentionally omit a
+second `cd cloud`. If you reconnect later, change into `cloud` once before
+resuming.
+
 For an unpushed review commit, transfer a Git bundle over the same authorized
 SSH channel and clone that bundle. The checkout must still be clean before any
 installation command runs.
@@ -77,7 +82,6 @@ On `control-1`, create the full configuration and edit it in a protected
 editor:
 
 ```sh
-cd cloud
 mkdir -p infra/.local
 cp infra/two-host/config.example.env infra/.local/tes-151.env
 chmod 600 infra/.local/tes-151.env
@@ -108,7 +112,6 @@ remove both secret fields. Use the same relative path so the public-mode host
 scripts can load it:
 
 ```sh
-cd cloud
 mkdir -p infra/.local
 cp infra/two-host/config.example.env infra/.local/tes-151.env
 sed -i '/^POSTGRES_PASSWORD=/d; /^CLOUD_MACHINE_TOKEN=/d' infra/.local/tes-151.env
@@ -188,74 +191,31 @@ versions, image references and non-secret environment values:
 | PostgreSQL | [`control.yaml.template`](templates/control.yaml.template) | `postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3` |
 | `cloud-control` | [`deploy.sh`](deploy.sh), [`Dockerfile`](../../apps/cloud-control/Dockerfile) and [`package.json`](../../apps/cloud-control/package.json) | local image `cloud-control:tes-151`; package `0.0.0`; Node `22.20.0-bookworm-slim@sha256:b21fe589dfbe5cc39365d0544b9be3f1f33f55f3c86c87a76ff65a02f8f5848e`, used by both Dockerfile stages |
 
-Capture the source commit and installed K3s version separately on both hosts
-after the K3s server/agent installation. Run the first block on `control-1`
-and the second block on `game-1`:
+Capture the source commit on both hosts before installing K3s. Run the first
+block on `control-1` and the second block on `game-1`:
 
 ```bash
-cd cloud
 mkdir -p infra/.local/tes-151-versions
 git rev-parse HEAD | tee infra/.local/tes-151-versions/control-1-commit.txt
-sudo k3s --version | tee infra/.local/tes-151-versions/control-1-k3s-version.txt
 ```
 
 ```bash
-cd cloud
 mkdir -p infra/.local/tes-151-versions
 git rev-parse HEAD | tee infra/.local/tes-151-versions/game-1-commit.txt
-sudo k3s --version | tee infra/.local/tes-151-versions/game-1-k3s-version.txt
 ```
 
-Transfer only the two non-secret `game-1` version files to the same ignored
-operator directory on `control-1` through the authorized SSH channel. On
-`control-1`,
-compare the commits exactly and verify that both installed K3s versions
-contain the pinned `K3S_VERSION` from the local configuration:
+Transfer the non-secret `game-1` commit file to the same ignored operator
+directory on `control-1` through the authorized SSH channel. On `control-1`,
+compare the commits exactly:
 
 ```bash
-cd cloud
-set -a
-. infra/.local/tes-151.env
-set +a
 cmp infra/.local/tes-151-versions/control-1-commit.txt \
   infra/.local/tes-151-versions/game-1-commit.txt
-grep -F "$K3S_VERSION" infra/.local/tes-151-versions/control-1-k3s-version.txt >/dev/null
-grep -F "$K3S_VERSION" infra/.local/tes-151-versions/game-1-k3s-version.txt >/dev/null
 ```
 
-The `cmp` result proves both hosts use the same repository commit. The two
-`grep` checks prove both installed K3s versions match the pinned configuration;
-they do not print credentials or join tokens.
-
-Run the following on `control-1` after deployment. Store the output only in
-the ignored local directory; these selectors do not print Secret data:
-
-```bash
-cd cloud
-mkdir -p infra/.local/tes-151-versions
-sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
-  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
-  | tee infra/.local/tes-151-versions/paper-image.txt
-sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
-  -o jsonpath='{range .spec.template.spec.containers[0].env[?(@.name=="VERSION")]}{.value}{"\n"}{end}' \
-  | tee infra/.local/tes-151-versions/paper-version.txt
-sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
-  -o jsonpath='{range .spec.template.spec.containers[0].env[?(@.name=="PAPER_BUILD")]}{.value}{"\n"}{end}' \
-  | tee infra/.local/tes-151-versions/paper-build.txt
-sudo k3s kubectl get statefulset/cloud-postgres -n cloud-system \
-  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
-  | tee infra/.local/tes-151-versions/postgres-image.txt
-sudo k3s kubectl get deployment/cloud-control -n cloud-system \
-  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
-  | tee infra/.local/tes-151-versions/cloud-control-image.txt
-sudo k3s ctr images ls | grep 'cloud-control:tes-151' \
-  | tee infra/.local/tes-151-versions/cloud-control-import.txt
-```
-
-The effective Paper image, `VERSION`, `PAPER_BUILD`, PostgreSQL image and
-`cloud-control` image tag must match the table. The imported `cloud-control`
-record may also include a content digest selected by containerd; keep that
-record private and do not include credentials or full pod manifests.
+The `cmp` result proves both hosts use the same repository commit. It does not
+print credentials or join tokens. K3s version capture and comparison happen
+only after both K3s services have been installed below.
 
 ## 3. Install and prepare `control-1`
 
@@ -328,7 +288,6 @@ Run the next commands on `game-1`. Enter the token at the hidden prompt when
 asked; the shell variable is cleared immediately after installation:
 
 ```bash
-cd cloud
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -374,6 +333,40 @@ It checks `GAME_CPU + GAME_HOST_RESERVED_CPU`,
 `GAME_STORAGE_GIB + GAME_HOST_RESERVED_DISK_GIB`. The storage value remains a
 PVC allocation budget; it does not create a filesystem quota.
 
+### 4.3 Capture and compare installed K3s versions
+
+Only after both the server and agent installations have completed, capture
+`k3s --version` on each host. Run the first block on `control-1` and the
+second on `game-1`; each host must be at the repository root:
+
+```bash
+set -a
+. infra/.local/tes-151.env
+set +a
+sudo k3s --version | tee infra/.local/tes-151-versions/control-1-k3s-version.txt
+grep -F "$K3S_VERSION" infra/.local/tes-151-versions/control-1-k3s-version.txt >/dev/null
+```
+
+```bash
+set -a
+. infra/.local/tes-151.env
+set +a
+sudo k3s --version | tee infra/.local/tes-151-versions/game-1-k3s-version.txt
+grep -F "$K3S_VERSION" infra/.local/tes-151-versions/game-1-k3s-version.txt >/dev/null
+```
+
+Transfer the non-secret `game-1` version file to the same ignored directory
+on `control-1` through the authorized SSH channel, then run on `control-1`:
+
+```bash
+cmp infra/.local/tes-151-versions/control-1-k3s-version.txt \
+  infra/.local/tes-151-versions/game-1-k3s-version.txt
+```
+
+The two captures must both contain the pinned `K3S_VERSION`, and `cmp` proves
+the installed version output is identical on both hosts. These files contain
+no credentials or join token.
+
 ## 5. Deploy from `control-1` and verify installation readiness
 
 Run these commands on `control-1`. `deploy.sh` loads the full protected
@@ -382,7 +375,6 @@ builds and imports the pinned local `cloud-control` image, and applies the
 control, storage and Paper resources:
 
 ```sh
-cd cloud
 sudo infra/two-host/deploy.sh infra/.local/tes-151.env
 sudo infra/two-host/verify.sh infra/.local/tes-151.env
 ```
@@ -403,18 +395,62 @@ sudo infra/two-host/verify.sh infra/.local/tes-151.env
 - the control health endpoint works locally and the configured direct game TCP
   path works from `control-1`.
 
-From the authorized operator network, separately check the direct game path
-and the private administration boundary. Replace the angle-bracket values with
-the control host address only in your private terminal:
+After deploy.sh and verify.sh succeed, capture the effective non-secret image
+references and Paper values on control-1:
 
-```sh
-set -a
-. infra/.local/tes-151.env
-set +a
+```bash
+mkdir -p infra/.local/tes-151-versions
+sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
+  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
+  | tee infra/.local/tes-151-versions/paper-image.txt
+sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
+  -o jsonpath='{range .spec.template.spec.containers[0].env[?(@.name=="VERSION")]}{.value}{"\n"}{end}' \
+  | tee infra/.local/tes-151-versions/paper-version.txt
+sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
+  -o jsonpath='{range .spec.template.spec.containers[0].env[?(@.name=="PAPER_BUILD")]}{.value}{"\n"}{end}' \
+  | tee infra/.local/tes-151-versions/paper-build.txt
+sudo k3s kubectl get statefulset/cloud-postgres -n cloud-system \
+  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
+  | tee infra/.local/tes-151-versions/postgres-image.txt
+sudo k3s kubectl get deployment/cloud-control -n cloud-system \
+  -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
+  | tee infra/.local/tes-151-versions/cloud-control-image.txt
+sudo k3s ctr images ls | grep 'cloud-control:tes-151' \
+  | tee infra/.local/tes-151-versions/cloud-control-import.txt
+```
+
+Compare these files privately with the expected values in the table above.
+The local cloud-control:tes-151 import record may include an image digest;
+keep all captured output in the ignored directory.
+
+From an authorized operator machine, separately check the direct game path and
+the private administration boundary. This machine need not have the checkout
+or infra/.local/tes-151.env; do not source a repository config from a third
+host. The operator must provide these non-secret endpoint values privately:
+
+```bash
+read -r -p 'Game direct address: ' GAME_DIRECT_ADDRESS
+read -r -p 'Game TCP port: ' GAME_PORT
+read -r -p 'Control API port: ' CONTROL_API_PORT
+read -r -p 'Control address: ' CONTROL_ADDRESS
+for port_name in GAME_PORT CONTROL_API_PORT; do
+  port_value="${!port_name}"
+  case "$port_value" in
+    ''|*[!0-9]*)
+      echo "$port_name must be a decimal port" >&2
+      exit 1
+      ;;
+  esac
+  if [ "$port_value" -lt 1 ] || [ "$port_value" -gt 65535 ]; then
+    echo "$port_name must be between 1 and 65535" >&2
+    exit 1
+  fi
+done
 nc -vz "$GAME_DIRECT_ADDRESS" "$GAME_PORT"
-curl --fail "http://<control-address>:$CONTROL_API_PORT/healthz"
-! nc -vz -w 3 '<control-address>' 5432
-! nc -vz -w 3 '<control-address>' 6443
+curl --fail "http://$CONTROL_ADDRESS:$CONTROL_API_PORT/healthz"
+! nc -vz -w 3 "$CONTROL_ADDRESS" 5432
+! nc -vz -w 3 "$CONTROL_ADDRESS" 6443
+unset GAME_DIRECT_ADDRESS GAME_PORT CONTROL_API_PORT CONTROL_ADDRESS
 ```
 
 The first probe is the direct player-facing game path. PostgreSQL and K3s
@@ -441,7 +477,6 @@ creates one uniquely identified PostgreSQL row, and captures its `id|value`
 pair:
 
 ```sh
-cd cloud
 mkdir -p infra/.local/tes-151-persistence/before
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -485,7 +520,6 @@ terminate ensures the marker can be written while Paper is not using the data
 path:
 
 ```sh
-cd cloud
 PAPER_POD="$(sudo k3s kubectl get pod -n cloud-minecraft-paper \
   -l app=paper-e0-oracle -o jsonpath='{.items[0].metadata.name}')"
 test -n "$PAPER_POD"
@@ -498,7 +532,6 @@ sudo k3s kubectl wait --for=delete "pod/$PAPER_POD" \
 Now run this marker block on `game-1`:
 
 ```sh
-cd cloud
 mkdir -p infra/.local/tes-151-persistence/before
 set -a
 . infra/.local/tes-151.env
@@ -520,7 +553,6 @@ Use the same verified commit and configuration values, and run the commands in
 this order. Run the first block on `control-1`:
 
 ```bash
-cd cloud
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -541,7 +573,6 @@ same protected prompt used for the first installation; never put it in the
 commands below, a file or a log:
 
 ```bash
-cd cloud
 set -a
 . infra/.local/tes-151.env
 set +a
@@ -563,7 +594,6 @@ Finish on `control-1` so the Deployment recreates Paper and all three
 workloads return to Ready:
 
 ```sh
-cd cloud
 sudo infra/two-host/deploy.sh infra/.local/tes-151.env
 sudo infra/two-host/verify.sh infra/.local/tes-151.env
 ```
@@ -574,7 +604,6 @@ On `control-1`, create `after/`, capture the same PVC/PV identities, query the
 same PostgreSQL row by its saved ID, and compare the exact `id|value` pair:
 
 ```sh
-cd cloud
 mkdir -p infra/.local/tes-151-persistence/after
 for claim in cloud-system/cloud-postgres-data cloud-minecraft-paper/paper-e0-oracle-data; do
   namespace="${claim%/*}"
@@ -612,7 +641,6 @@ On `game-1`, create the matching `after/` directory, capture the marker hash,
 and compare it with the baseline:
 
 ```sh
-cd cloud
 mkdir -p infra/.local/tes-151-persistence/after
 set -a
 . infra/.local/tes-151.env
