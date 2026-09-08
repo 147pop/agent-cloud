@@ -1,10 +1,20 @@
 # TES-152 clean-clone quickstart evidence
 
-This record verifies the repository entry points and the canonical
-[two-host clean-clone quickstart](../two-host/README.md) against implementation
-state `38cdd84` (`38cdd844b3e425b80fd9b8f10150ed8e841222dc`) on 2026-09-08. The
-checks were run before this evidence-only documentation commit, so that commit
-does not change the tested scripts, application or pinned deployment inputs.
+This record separates implementation and documentation provenance:
+
+- `38cdd84` (`38cdd844b3e425b80fd9b8f10150ed8e841222dc`) is the state of
+  the scripts and canonical
+  [two-host clean-clone quickstart](../two-host/README.md) against which the
+  functional checks below ran on 2026-09-08.
+- `8cb294c` introduced the two repository entry points and this TES-152
+  evidence record.
+- `991c7fc` corrected this record's description of which values are captured
+  on each host.
+
+The documentation diff, relative-link and privacy checks ran on the worktree
+that includes `8cb294c`, `991c7fc` and this correction. They validate the
+resulting documentation; they do not imply that the entry points or this
+record existed at `38cdd84`.
 
 ## Installation boundary
 
@@ -63,7 +73,8 @@ committed.
 
 ## Local verification results
 
-The following exact commands passed at implementation state `38cdd84`:
+The following exact functional commands passed against the scripts and
+quickstart at implementation state `38cdd84`:
 
 ```text
 $ bash infra/two-host/test.sh
