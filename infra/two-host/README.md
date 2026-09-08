@@ -16,14 +16,16 @@ any other managed-service integration.
 
 The verified target is Ubuntu 24.04 with systemd on both machines:
 
-Both hosts also need Git and Bash; all commands in this guide are intended to
-run from Bash, not only from a generic POSIX shell. The examples use OpenSSL
-to generate local operator values and persistence markers.
+Both hosts also need Git, Bash and the `netcat-openbsd` package (`nc`) for
+the documented network probes; all commands in this guide are intended to run
+from Bash, not only from a generic POSIX shell. The examples use OpenSSL to
+generate local operator values and persistence markers. The operator machine
+used for direct/private probes also needs `nc`.
 
 | Role | Architecture | Minimum capacity and required commands | Installed workload |
 | --- | --- | --- | --- |
-| `control-1` | amd64 | 2 CPUs, 2 GiB RAM, 10 GiB free disk, `curl`, Docker Engine, `ufw` and root access | K3s server, PostgreSQL, `cloud-control` |
-| `game-1` | arm64 | 4 CPUs, 7 GiB RAM, 20 GiB free disk, `curl`, `ufw` and root access | K3s agent, Paper and its world |
+| `control-1` | amd64 | 2 CPUs, 2 GiB RAM, 10 GiB free disk, `curl`, Docker Engine, `ufw`, `netcat-openbsd` (`nc`) and root access | K3s server, PostgreSQL, `cloud-control` |
+| `game-1` | arm64 | 4 CPUs, 7 GiB RAM, 20 GiB free disk, `curl`, `ufw`, `netcat-openbsd` (`nc`) and root access | K3s agent, Paper and its world |
 
 The `game-1` minimum is the selected two-CPU workload plus a two-CPU host
 reserve, and the 3 GiB total container memory limit plus a 4 GiB host memory
@@ -119,6 +121,60 @@ game address roles and no `POSTGRES_PASSWORD` or `CLOUD_MACHINE_TOKEN` lines.
 The deployment script creates the Kubernetes Secret only on `control-1` from
 the protected full configuration.
 
+## Firewall precondition before installing K3s
+
+Run the following on both `control-1` and `game-1` before installing K3s or
+applying either repository firewall script. UFW must be active with
+`Default: deny (incoming)`, and the existing operator SSH channel must remain
+allowed. The scripts add rules but do not enable UFW, choose an SSH port, or
+repair an unsafe SSH policy.
+
+While connected through the SSH channel that must be preserved, inspect and
+record the existing rules:
+
+```bash
+sudo ufw status numbered
+sudo ufw status verbose
+```
+
+Identify the exact rule that permits the current SSH source and port. If it is
+missing, stop and use the host's established access procedure to add that
+specific allow rule before enabling UFW. Do not guess a port or source CIDR.
+If the default incoming policy is not deny, set it only after confirming that
+SSH rule. If UFW is inactive, enable it only after confirming that rule, then
+verify the state:
+
+```bash
+sudo ufw default deny incoming
+sudo ufw enable
+sudo ufw status verbose
+test "$(sudo ufw status | awk 'NR == 1 {print $2}')" = active
+sudo ufw status verbose | grep -Eq '^Default: deny \(incoming\)'
+```
+
+Before applying the repository rules, review `sudo ufw status numbered` for
+broad existing rules such as `Anywhere` that expose port 5432, port 6443 or
+the configured `CONTROL_API_PORT` outside the intended allowlists. Remove only
+an individually identified and reviewed rule through the normal UFW change
+procedure; never use `ufw reset` or a blind wildcard deletion. If a numbered
+rule must be removed, use an exact reviewed rule number and verify the result:
+
+```bash
+read -r -p 'Exact reviewed UFW rule number to remove (empty to skip): ' UFW_RULE_NUMBER
+if [[ -n "$UFW_RULE_NUMBER" ]]; then
+  [[ "$UFW_RULE_NUMBER" =~ ^[0-9]+$ ]] || {
+    echo 'rule number must be decimal' >&2
+    exit 1
+  }
+  sudo ufw delete "$UFW_RULE_NUMBER"
+fi
+unset UFW_RULE_NUMBER
+sudo ufw status numbered
+```
+
+Re-run the numbered status and both active/default-policy checks above after
+any change. Keep the SSH rule and current channel intact throughout.
+
 ## Expected versions and capture commands
 
 The expected pinned inputs are recorded in the repository files below. These
@@ -132,14 +188,51 @@ versions, image references and non-secret environment values:
 | PostgreSQL | [`control.yaml.template`](templates/control.yaml.template) | `postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3` |
 | `cloud-control` | [`deploy.sh`](deploy.sh), [`Dockerfile`](../../apps/cloud-control/Dockerfile) and [`package.json`](../../apps/cloud-control/package.json) | local image `cloud-control:tes-151`; package `0.0.0`; Node `22.20.0-bookworm-slim@sha256:b21fe589dfbe5cc39365d0544b9be3f1f33f55f3c86c87a76ff65a02f8f5848e`, used by both Dockerfile stages |
 
+Capture the source commit and installed K3s version separately on both hosts
+after the K3s server/agent installation. Run the first block on `control-1`
+and the second block on `game-1`:
+
+```bash
+cd cloud
+mkdir -p infra/.local/tes-151-versions
+git rev-parse HEAD | tee infra/.local/tes-151-versions/control-1-commit.txt
+sudo k3s --version | tee infra/.local/tes-151-versions/control-1-k3s-version.txt
+```
+
+```bash
+cd cloud
+mkdir -p infra/.local/tes-151-versions
+git rev-parse HEAD | tee infra/.local/tes-151-versions/game-1-commit.txt
+sudo k3s --version | tee infra/.local/tes-151-versions/game-1-k3s-version.txt
+```
+
+Transfer only the two non-secret `game-1` version files to the same ignored
+operator directory on `control-1` through the authorized SSH channel. On
+`control-1`,
+compare the commits exactly and verify that both installed K3s versions
+contain the pinned `K3S_VERSION` from the local configuration:
+
+```bash
+cd cloud
+set -a
+. infra/.local/tes-151.env
+set +a
+cmp infra/.local/tes-151-versions/control-1-commit.txt \
+  infra/.local/tes-151-versions/game-1-commit.txt
+grep -F "$K3S_VERSION" infra/.local/tes-151-versions/control-1-k3s-version.txt >/dev/null
+grep -F "$K3S_VERSION" infra/.local/tes-151-versions/game-1-k3s-version.txt >/dev/null
+```
+
+The `cmp` result proves both hosts use the same repository commit. The two
+`grep` checks prove both installed K3s versions match the pinned configuration;
+they do not print credentials or join tokens.
+
 Run the following on `control-1` after deployment. Store the output only in
 the ignored local directory; these selectors do not print Secret data:
 
 ```bash
 cd cloud
 mkdir -p infra/.local/tes-151-versions
-git rev-parse HEAD | tee infra/.local/tes-151-versions/commit.txt
-sudo k3s --version | tee infra/.local/tes-151-versions/k3s-version.txt
 sudo k3s kubectl get deployment/paper-e0-oracle -n cloud-minecraft-paper \
   -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}' \
   | tee infra/.local/tes-151-versions/paper-image.txt
@@ -200,36 +293,7 @@ validated `/var/lib/cloud/` boundary with the required owner and mode:
 sudo infra/two-host/prepare-host.sh control infra/.local/tes-151.env
 ```
 
-### 3.3 Establish the UFW precondition without losing SSH
-
-Run the following on both `control-1` and `game-1` before applying either
-repository firewall script. UFW must already be active, and the existing
-operator SSH rule must remain allowed. The scripts add rules but do not enable
-UFW, choose an SSH port, or repair an unsafe SSH policy.
-
-First inspect the current state and verify that it reports exactly `Status: active`:
-
-```bash
-sudo ufw status verbose
-sudo ufw status | awk 'NR == 1 {print}'
-test "$(sudo ufw status | awk 'NR == 1 {print $2}')" = active
-```
-
-If the check fails, stop before applying the repository rules. Using the
-operator's already established SSH source and port, add or confirm that SSH
-allow rule through the host's normal access procedure, then enable UFW and
-rerun the check above. Do not invent a port, run `ufw reset`, or enable UFW
-until the current SSH channel is explicitly allowed. Confirm the rule before
-and after enabling with:
-
-```bash
-sudo ufw status numbered
-sudo ufw enable
-sudo ufw status verbose
-test "$(sudo ufw status | awk 'NR == 1 {print $2}')" = active
-```
-
-### 3.4 Apply the control firewall
+### 3.3 Apply the control firewall
 
 After the UFW precondition passes on `control-1`, apply the repository rules.
 They leave existing SSH rules untouched, allow the game source address to
@@ -523,10 +587,16 @@ for volume in cloud-postgres-data cloud-paper-data; do
     > "infra/.local/tes-151-persistence/after/${volume}.pv.uid"
 done
 POSTGRES_PROBE_ID="$(cat infra/.local/tes-151-persistence/before/postgres-probe.id)"
+case "$POSTGRES_PROBE_ID" in
+  ''|*[!0-9]*)
+    echo "invalid PostgreSQL probe ID" >&2
+    exit 1
+    ;;
+esac
 sudo k3s kubectl exec -n cloud-system statefulset/cloud-postgres -- \
-  psql -v ON_ERROR_STOP=1 -v probe_id="$POSTGRES_PROBE_ID" \
+  psql -v ON_ERROR_STOP=1 \
   -U cloud -d cloud -AtF '|' -c \
-  'SELECT id, value FROM tes_146_reapply_probe WHERE id = :probe_id;' \
+  "SELECT id, value FROM tes_146_reapply_probe WHERE id = ${POSTGRES_PROBE_ID};" \
   > infra/.local/tes-151-persistence/after/postgres-probe.tsv
 cut -d '|' -f 1 infra/.local/tes-151-persistence/after/postgres-probe.tsv \
   > infra/.local/tes-151-persistence/after/postgres-probe.id
@@ -558,7 +628,9 @@ The reapply gate passes only when both directory comparisons and the
 PostgreSQL `cmp` succeed, the saved PVC/PV identities are unchanged, the
 PostgreSQL probe row still has the same ID and value, the world marker hash is
 unchanged, and `verify.sh` reports the PostgreSQL, `cloud-control` and Paper
-workloads Ready. A second `deploy.sh` applies resources and restarts the
+workloads Ready. The saved ID is validated as decimal before safe shell
+interpolation into the SQL, so this query does not rely on `psql -v` variable
+substitution. A second `deploy.sh` applies resources and restarts the
 stateless control process; it does not delete durable PVCs or host data paths.
 
 The [TES-151 live installation evidence](../evidence/tes-151-two-host-installation.md)
