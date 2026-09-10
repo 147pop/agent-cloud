@@ -303,6 +303,25 @@ expect_file_contains "$game_manifest" 'hostPort: 25565'
 expect_file_contains "$game_manifest" 'memory: 3Gi'
 expect_file_contains "$game_manifest" 'cpu: "2"'
 expect_file_contains "$game_manifest" 'image: itzg/minecraft-server@sha256:efa878d'
+expect_file_contains "$game_manifest" 'startupProbe:'
+expect_file_contains "$game_manifest" 'readinessProbe:'
+expect_file_excludes "$game_manifest" 'tcpSocket:'
+startup_probe="$TEST_ROOT/startup-probe.yaml"
+readiness_probe="$TEST_ROOT/readiness-probe.yaml"
+sed -n '/^          startupProbe:/,/^          readinessProbe:/p' "$game_manifest" >"$startup_probe"
+sed -n '/^          readinessProbe:/,/^          resources:/p' "$game_manifest" >"$readiness_probe"
+for probe in "$startup_probe" "$readiness_probe"; do
+  expect_file_contains "$probe" '^[[:space:]]+- mc-monitor$'
+  expect_file_contains "$probe" '^[[:space:]]+- status$'
+  expect_file_contains "$probe" '^[[:space:]]+- 127\.0\.0\.1$'
+  expect_file_contains "$probe" '^[[:space:]]+- "25565"$'
+  expect_file_contains "$probe" '^[[:space:]]+periodSeconds: 10$'
+  expect_file_contains "$probe" '^[[:space:]]+timeoutSeconds: 5$'
+done
+expect_file_contains "$startup_probe" '^[[:space:]]+failureThreshold: 60$'
+expect_file_excludes "$startup_probe" '^[[:space:]]+failureThreshold: 3$'
+expect_file_contains "$readiness_probe" '^[[:space:]]+failureThreshold: 3$'
+expect_file_excludes "$readiness_probe" '^[[:space:]]+failureThreshold: 60$'
 expect_file_excludes "$rendered_dir/10-control.yaml" 'test-(postgres-password|machine-token)-151'
 expect_file_excludes "$rendered_dir/20-game-storage.yaml" 'test-(postgres-password|machine-token)-151'
 expect_file_excludes "$rendered_dir/30-game.yaml" 'test-(postgres-password|machine-token)-151'
@@ -344,6 +363,8 @@ expect_file_contains "$VERIFY_SCRIPT" 'cloud-postgres.*ClusterIP'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_HOST_RESERVED_CPU'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_NODE_ADDRESS'
 expect_file_contains "$VERIFY_SCRIPT" 'GAME_DIRECT_ADDRESS'
+expect_file_contains "$VERIFY_SCRIPT" 'rollout status deployment/paper-e0-oracle.*--timeout=600s'
+expect_file_contains "$VERIFY_SCRIPT" 'mc-monitor status --host 127\.0\.0\.1 --port 25565'
 expect_file_contains "$VERIFY_SCRIPT" 'auth can-i.*\|\| true'
 expect_file_excludes "$VERIFY_SCRIPT" 'POSTGRES_PASSWORD.*echo|echo.*POSTGRES_PASSWORD'
 
