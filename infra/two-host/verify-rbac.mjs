@@ -15,11 +15,13 @@ const workload = `${apps}/paper-e0-oracle`;
 const selector = 'labelSelector=app%3Dpaper-e0-oracle';
 
 async function api(method, path, body, expected = 200) {
+  const payload = body === undefined || method === 'GET' ? '' : JSON.stringify(body);
   const result = await new Promise((resolve, reject) => {
     const req = request(`https://kubernetes.default.svc${path}`, {
       method, ca, headers: {
         authorization: `Bearer ${token}`,
         'content-type': method === 'PATCH' ? 'application/merge-patch+json' : 'application/json',
+        'content-length': Buffer.byteLength(payload),
       }, timeout: 10000,
     }, res => {
       let data = '';
@@ -30,7 +32,7 @@ async function api(method, path, body, expected = 200) {
     });
     req.on('error', reject);
     req.on('timeout', () => req.destroy(new Error('Kubernetes request timed out')));
-    req.end(body === undefined || method === 'GET' ? undefined : JSON.stringify(body));
+    req.end(payload);
   });
   assert.equal(result.status, expected, `${method} ${path}`);
   return JSON.parse(result.body);
