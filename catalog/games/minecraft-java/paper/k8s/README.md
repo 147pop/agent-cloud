@@ -45,22 +45,21 @@ during an otherwise healthy slow start.
 
 ## Writer-lock mechanism under test
 
-Five independent layers prevent two processes from writing the same world:
+`Recreate` orders Deployment upgrades; it does not serialize every form of Pod
+deletion. `ReadWriteOnce` also permits multiple Pods on the same node. Neither
+setting alone proves writer exclusion.
 
-1. `strategy: Recreate` + `terminationGracePeriodSeconds: 120` — old Pod fully terminates
-   (itzg image traps SIGTERM, saves world) before a replacement starts.
-2. PVC on the `local-path-retain` StorageClass ([storageclass.yaml](storageclass.yaml):
-   `rancher.io/local-path` provisioner, `reclaimPolicy: Retain`, `volumeBindingMode:
-   WaitForFirstConsumer`), `ReadWriteOnce` — the PV binds to whichever node the first Pod lands
-   on and carries that node's affinity from then on, so any replacement Pod using the same PVC is
-   forced onto the same node/filesystem instance; `Retain` also means scaling to zero can never
-   delete the world.
-3. Backstop: Minecraft's own `world/session.lock` exclusive file lock — if timing ever races, the
-   second process fails to acquire the lock and crashes loudly instead of corrupting data.
-4. `hostPort: 25565` — the OS refuses a second bind to the same host port on `game-1`.
-5. A dedicated `ServiceAccount` ([serviceaccount.yaml](serviceaccount.yaml)) with no RoleBinding
-   and `automountServiceAccountToken: false` — not a writer-lock layer itself, but keeps a
-   compromised or buggy container from reaching the Kubernetes API to force a second replica.
+The two-host installer uses a retained static local PV with affinity to
+`game-1`. In the [TES-61 interruption test](../../../../../infra/evidence/tes-61-persistence-cycles.md),
+the old Java process remained alive while ordinary Pod deletion was pending.
+The replacement could not be scheduled because `hostPort: 25565` was still
+reserved; the control node's taint excluded placement there. The new container
+started after the old container exited cleanly, and the world marker survived.
+
+This result applies to the fixed manifest and ordinary deletion inside the
+120-second grace period. Changes to port allocation or replacement behavior
+require their own writer-exclusion proof. Minecraft's `world/session.lock`
+remains a backstop, and the game service account has token mounting disabled.
 
 The scenarios below exercise interrupted stops and replacement to confirm these hold.
 
@@ -69,7 +68,7 @@ The scenarios below exercise interrupted stops and replacement to confirm these 
 | # | Scenario | Command | Expected safe outcome |
 | --- | --- | --- | --- |
 | 1 | Clean scale down/up | `kubectl scale deploy/paper-e0-oracle -n cloud-minecraft-paper --replicas=0`, then `--replicas=1` | Old Pod saves & exits within the grace period; new Pod starts clean |
-| 2 | Ordinary delete | `kubectl delete pod <pod> -n cloud-minecraft-paper` | `Recreate` replaces after full termination; no lock conflict |
+| 2 | Ordinary delete | `kubectl delete pod <pod> -n cloud-minecraft-paper` | The replacement stays blocked while the old Pod reserves the fixed host port; verify its start follows the old exit |
 | 3 | Immediate scale race | `--replicas=0` then `--replicas=1` back-to-back, no wait | Replacement forced to the same node (PVC affinity); if the old process hasn't released the lock, the new container fails to acquire it and CrashLoopBackOffs — must not write |
 | 4 | Forced delete | `kubectl delete pod <pod> -n cloud-minecraft-paper --grace-period=0 --force` | Replacement still can't dual-write (`session.lock` backstop) |
 | 5 | Delete mid-startup | Delete the Pod before the world fully loads | Clean replacement once the prior Pod is confirmed gone |
