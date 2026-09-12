@@ -53,6 +53,7 @@ docker save cloud-control:tes-151 | k3s ctr images import -
 k3s kubectl apply -f "$render_dir/10-control.yaml"
 k3s kubectl apply -f "$render_dir/20-game-storage.yaml"
 k3s kubectl apply -f "$render_dir/30-game.yaml"
+k3s kubectl apply -f "$render_dir/40-control-rbac.yaml"
 
 # The repository commit may produce a new local image under the same private
 # tag. Restart only the stateless control process so it uses that import.

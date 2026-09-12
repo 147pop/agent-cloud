@@ -1,0 +1,51 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cloud-control
+  namespace: cloud-minecraft-paper
+rules:
+  - apiGroups: [apps]
+    resources: [deployments]
+    verbs: [get, list, create, patch]
+  - apiGroups: [""]
+    resources: [persistentvolumeclaims, services]
+    verbs: [get, list, create, patch]
+  - apiGroups: [""]
+    resources: [pods]
+    verbs: [get, list]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cloud-control
+  namespace: cloud-minecraft-paper
+subjects:
+  - kind: ServiceAccount
+    name: cloud-control
+    namespace: cloud-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cloud-control
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cloud-control-node-reader
+rules:
+  - apiGroups: [""]
+    resources: [nodes]
+    verbs: [get, list]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cloud-control-node-reader
+subjects:
+  - kind: ServiceAccount
+    name: cloud-control
+    namespace: cloud-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cloud-control-node-reader

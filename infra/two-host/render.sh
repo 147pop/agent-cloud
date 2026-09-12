@@ -63,6 +63,8 @@ render_common_template \
     "$PAPER_DIR/deployment.yaml"
 } >"$output_dir/30-game.yaml"
 
+cp "$TEMPLATE_DIR/control-rbac.yaml" "$output_dir/40-control-rbac.yaml"
+
 if grep -R '@[A-Z_][A-Z_]*@' "$output_dir" >/dev/null; then
   two_host_error "rendered manifests contain unresolved placeholders"
   exit 1
