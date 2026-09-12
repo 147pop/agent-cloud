@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import test from "node:test";
 import pg from "pg";
 import { ControlStore } from "../src/database.js";
-import { Reconciler, type Runtime, type RuntimeObservation, type ServerRecord } from "../src/lifecycle.js";
+import { Reconciler, type Mutation, type Runtime, type RuntimeObservation, type ServerRecord } from "../src/lifecycle.js";
 
 class FakeRuntime implements Runtime {
   public readonly resources = new Map<string, RuntimeObservation>();
@@ -155,6 +155,52 @@ test("durable desired state converges through effects, restart and changed inten
       runtime.crashAfterCreate = true;
       await assert.rejects(reconciler.tick(), AggregateError);
       assert.ok(runtime.resources.has(other.server_id));
+    });
+
+    await t.test("TES-70: concurrent mutations and controllers produce one lifecycle effect", async () => {
+      const secondStore = new ControlStore(new pg.Pool(options));
+      const secondReconciler = new Reconciler(secondStore, runtime);
+      const baseline = { creates: runtime.creates, starts: runtime.starts, stops: runtime.stops };
+      async function concurrentMutation(key: string, mutation: Mutation) {
+        const results = await Promise.all(Array.from({ length: 20 }, (_, i) =>
+          (i % 2 === 0 ? store : secondStore).mutate(owner.id, key, mutation)
+        ));
+        for (const result of results) assert.deepEqual(result, results[0]);
+        return results[0]!;
+      }
+      async function concurrentReconciliation(serverId: string) {
+        await Promise.all(Array.from({ length: 10 }, (_, i) =>
+          (i % 2 === 0 ? reconciler : secondReconciler).reconcile(serverId)
+        ));
+      }
+      try {
+        const accepted = await concurrentMutation("concurrent-create", { operation: "create", name: "concurrent" });
+        for (let i = 0; i < 3; i++) await concurrentReconciliation(accepted.server_id);
+        assert.equal((await store.getServer(owner.id, accepted.server_id)).state, "running");
+        assert.equal(runtime.creates - baseline.creates, 1);
+        assert.equal(runtime.starts - baseline.starts, 1);
+        await concurrentMutation("concurrent-stop", { operation: "stop", server_id: accepted.server_id });
+        await concurrentReconciliation(accepted.server_id);
+        assert.equal(runtime.stops - baseline.stops, 1);
+        runtime.resources.set(accepted.server_id, { state: "stopped" });
+        await concurrentReconciliation(accepted.server_id);
+        await concurrentMutation("concurrent-start", { operation: "start", server_id: accepted.server_id });
+        for (let i = 0; i < 2; i++) await concurrentReconciliation(accepted.server_id);
+        assert.equal(runtime.starts - baseline.starts, 2);
+        const server = await store.getServer(owner.id, accepted.server_id);
+        assert.equal(server.generation, 3);
+        assert.equal(server.state, "running");
+        assert.equal((await inspection.query("SELECT count(*) FROM runs WHERE server_id = $1", [server.id])).rows[0].count, "2");
+        assert.equal((await inspection.query("SELECT count(*) FROM runs WHERE server_id = $1 AND finished_at IS NULL", [server.id])).rows[0].count, "1");
+        assert.equal((await inspection.query("SELECT count(*) FROM events WHERE server_id = $1 AND event_type = 'intent_recorded'", [server.id])).rows[0].count, "3");
+        await assert.rejects(secondStore.mutate(owner.id, "concurrent-create", { operation: "create", name: "changed" }),
+          { code: "idempotency_key_reused", status: 409 });
+        await assert.rejects(secondStore.mutate(owner.id, "concurrent-create", { operation: "stop", server_id: server.id }),
+          { code: "idempotency_key_reused", status: 409 });
+        assert.deepEqual(await secondStore.mutate(owner.id, "concurrent-create", { operation: "create", name: "concurrent" }), accepted);
+      } finally {
+        await secondStore.close();
+      }
     });
   } finally {
     await store.close();
