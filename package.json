@@ -13,10 +13,12 @@
   "scripts": {
     "build": "npm run build --workspace @cloud/cloud-control",
     "test": "npm run test --workspace @cloud/cloud-control",
-    "check": "npm run build && npm run test:compiled --workspace @cloud/cloud-control"
+    "check": "npm run build && npm run test:compiled --workspace @cloud/cloud-control",
+    "test:integration": "npm run build && node --test apps/cloud-control/dist/test/*.integration.js"
   },
   "devDependencies": {
     "@types/node": "22.20.1",
+    "@types/pg": "^8.23.1",
     "typescript": "7.0.2"
   }
 }
