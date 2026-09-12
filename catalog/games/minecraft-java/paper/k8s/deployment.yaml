@@ -58,6 +58,8 @@ spec:
               value: normal
             - name: ENABLE_RCON
               value: "false"
+            - name: CREATE_CONSOLE_IN_PIPE
+              value: "true"
             - name: STOP_SERVER_ANNOUNCE_DELAY
               value: "0"
           ports:
