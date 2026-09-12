@@ -740,6 +740,27 @@ records an existing two-host result with the same persistence checks. It is a
 reference for the installation gate, not a place to copy private addresses,
 credentials, provider identifiers or raw logs.
 
+## Verify clean Paper shutdown
+
+With the fixed Paper workload running and no players connected, run this from
+the repository root on `control-1` (Python 3 and root K3s access are required):
+
+```sh
+sudo python3 infra/two-host/verify-shutdown.py
+```
+
+The probe writes a unique Minecraft command-storage value, scales Paper to
+zero, records the container exit code, starts a replacement Pod and reads the
+value back. It removes its value after verification. The console pipe stays
+inside the container; RCON remains disabled. The probe checks the selected
+CPU/memory limits, the 120-second grace period, protocol readiness and an
+empty player list before stopping the server. A failure requires inspecting
+the reported private evidence directory and workload state before retrying;
+if the stop phase fails, the server may remain stopped.
+
+The [TES-57 live evidence](../evidence/tes-57-clean-shutdown.md) records the
+verified result and its acceptance boundary.
+
 ## Troubleshooting
 
 - If the agent cannot join, verify that `GAME_NODE_ADDRESS` exists on a local
