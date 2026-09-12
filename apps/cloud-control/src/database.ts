@@ -1,9 +1,10 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 
 import pg from "pg";
 
 import { authenticateMachineToken, bootstrapOperator, type Principal } from "./auth.js";
 import { migrate } from "./migrations.js";
+import { ControlError, type AcceptedMutation, type Mutation, type RuntimeObservation, type ServerRecord, type ServerState } from "./lifecycle.js";
 
 const { Pool } = pg;
 
@@ -59,17 +60,18 @@ export class ControlStore {
     principalId: string,
     clientRequestId: string,
     operation: string,
-    requestBody: string
+    requestBody: string,
+    database: Pick<pg.PoolClient, "query"> = this.pool
   ): Promise<{ claimed: boolean; record: IdempotencyRecord }> {
     const requestDigest = createHash("sha256").update(requestBody).digest();
-    const inserted = await this.pool.query(
+    const inserted = await database.query(
       `INSERT INTO idempotency_keys
          (principal_id, client_request_id, operation, request_digest)
        VALUES ($1, $2, $3, $4)
        ON CONFLICT DO NOTHING`,
       [principalId, clientRequestId, operation, requestDigest]
     );
-    const result = await this.pool.query<{
+    const result = await database.query<{
       operation: string;
       request_digest: Buffer;
       response_status: number | null;
@@ -77,13 +79,13 @@ export class ControlStore {
     }>(
       `SELECT operation, request_digest, response_status, response_body
          FROM idempotency_keys
-        WHERE principal_id = $1 AND client_request_id = $2`,
+        WHERE principal_id = $1 AND client_request_id = $2 FOR UPDATE`,
       [principalId, clientRequestId]
     );
     const row = result.rows[0];
     if (row === undefined) throw new Error("idempotency claim disappeared");
     if (row.operation !== operation || !row.request_digest.equals(requestDigest)) {
-      throw new Error("idempotency_key_reused");
+      throw new ControlError("idempotency_key_reused", 409);
     }
     return {
       claimed: inserted.rowCount === 1,
@@ -100,9 +102,10 @@ export class ControlStore {
     principalId: string,
     clientRequestId: string,
     responseStatus: number,
-    responseBody: unknown
+    responseBody: unknown,
+    database: Pick<pg.PoolClient, "query"> = this.pool
   ): Promise<void> {
-    const result = await this.pool.query(
+    const result = await database.query(
       `UPDATE idempotency_keys
           SET response_status = $3, response_body = $4, completed_at = now()
         WHERE principal_id = $1
@@ -115,6 +118,148 @@ export class ControlStore {
 
   public async close(): Promise<void> {
     await this.pool.end();
+  }
+
+  public async mutate(principalId: string, requestId: string, mutation: Mutation): Promise<AcceptedMutation> {
+    if (!/^[A-Za-z0-9._:-]{1,128}$/.test(requestId)) throw new ControlError("invalid_request_id", 400);
+    if (mutation.operation === "create" && !/^[a-z0-9][a-z0-9-]{0,62}$/.test(mutation.name)) {
+      throw new ControlError("invalid_server_name", 400);
+    }
+    const body = mutation.operation === "create" ? JSON.stringify({ name: mutation.name }) :
+      JSON.stringify({ server_id: mutation.server_id });
+    const client = await this.pool.connect();
+    try {
+      await client.query("BEGIN");
+      const claim = await this.claimIdempotencyKey(principalId, requestId, mutation.operation, body, client);
+      if (claim.record.responseStatus !== null) {
+        await client.query("COMMIT");
+        return claim.record.responseBody as AcceptedMutation;
+      }
+      let server: ServerRecord;
+      if (mutation.operation === "create") {
+        const id = randomUUID();
+        const result = await client.query<ServerRecord>(
+          `INSERT INTO servers (id, principal_id, logical_name, recipe_id, profile_id, world_identity,
+             desired_state, state, generation, last_request_id)
+           VALUES ($1, $2, $3, 'paper-26.2-121', 'two-player', $4, 'running', 'queued', 1, $5)
+           RETURNING *`, [id, principalId, mutation.name, `cloud-world-${id}`, requestId]
+        );
+        server = result.rows[0]!;
+      } else {
+        const current = await client.query<ServerRecord>(
+          "SELECT * FROM servers WHERE id = $1 AND principal_id = $2 FOR UPDATE",
+          [mutation.server_id, principalId]
+        );
+        if (current.rows[0] === undefined) throw new ControlError("server_not_found", 404);
+        const desired = mutation.operation === "start" ? "running" : "stopped";
+        const state = desired === "running" ? (current.rows[0].state === "running" ? "running" : "queued") :
+          (current.rows[0].state === "stopped" ? "stopped" : "stopping");
+        const result = await client.query<ServerRecord>(
+          `UPDATE servers SET desired_state = $3, state = $4, generation = generation + 1,
+             last_request_id = $5, updated_at = now()
+           WHERE id = $1 AND principal_id = $2 RETURNING *`,
+          [mutation.server_id, principalId, desired, state, requestId]
+        );
+        server = result.rows[0]!;
+      }
+      if (server.desired_state === "running") {
+        await client.query(
+          `INSERT INTO runs (id, server_id, state) VALUES ($1, $2, 'queued')
+           ON CONFLICT (server_id) WHERE state IN ('queued', 'provisioning', 'running', 'stopping') DO NOTHING`,
+          [randomUUID(), server.id]
+        );
+      }
+      const response: AcceptedMutation = { request_id: requestId, server_id: server.id, state: server.state,
+        status_url: `/v1/servers/${server.id}` };
+      await client.query(
+        `INSERT INTO events (principal_id, server_id, event_type, payload)
+         VALUES ($1, $2, 'intent_recorded', $3)`,
+        [principalId, server.id, { request_id: requestId, operation: mutation.operation, generation: server.generation }]
+      );
+      await this.completeIdempotencyKey(principalId, requestId, 202, response, client);
+      await client.query("COMMIT");
+      return response;
+    } catch (error) {
+      await client.query("ROLLBACK");
+      if (error instanceof pg.DatabaseError && error.constraint === "servers_principal_id_logical_name_key") {
+        throw new ControlError("server_name_taken", 409);
+      }
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+
+  public async getServer(principalId: string, serverId: string): Promise<ServerRecord> {
+    const result = await this.pool.query<ServerRecord>(
+      "SELECT * FROM servers WHERE id = $1 AND principal_id = $2", [serverId, principalId]
+    );
+    if (result.rows[0] === undefined) throw new ControlError("server_not_found", 404);
+    return result.rows[0];
+  }
+
+  public async listServerIds(): Promise<string[]> {
+    const result = await this.pool.query<{ id: string }>(
+      "SELECT id FROM servers WHERE last_request_id IS NOT NULL ORDER BY updated_at"
+    );
+    return result.rows.map(row => row.id);
+  }
+
+  public async getDesiredServer(serverId: string, client: pg.PoolClient): Promise<ServerRecord | null> {
+    const result = await client.query<ServerRecord>("SELECT * FROM servers WHERE id = $1", [serverId]);
+    return result.rows[0] ?? null;
+  }
+
+  public async withServerLock(serverId: string, work: (client: pg.PoolClient) => Promise<void>): Promise<void> {
+    const client = await this.pool.connect();
+    let locked = false;
+    try {
+      const result = await client.query<{ locked: boolean }>(
+        "SELECT pg_try_advisory_lock(hashtextextended($1, 0)) AS locked", [serverId]
+      );
+      locked = result.rows[0]!.locked;
+      if (locked) await work(client);
+    } finally {
+      try {
+        if (locked) await client.query("SELECT pg_advisory_unlock(hashtextextended($1, 0))", [serverId]);
+      } finally {
+        client.release();
+      }
+    }
+  }
+
+  public async recordObservation(server: ServerRecord, observed: RuntimeObservation, client: pg.PoolClient): Promise<void> {
+    const state: ServerState = server.desired_state === "running" ?
+      (observed.state === "ready" ? "running" : "provisioning") :
+      (observed.state === "absent" || observed.state === "stopped" ? "stopped" : "stopping");
+    await client.query("BEGIN");
+    try {
+      const updated = await client.query(
+        `UPDATE servers SET state = $3, observed_generation = $2,
+           endpoint = COALESCE($4::jsonb, endpoint), updated_at = now()
+         WHERE id = $1 AND generation = $2 AND
+           (state IS DISTINCT FROM $3 OR observed_generation <> $2 OR
+            ($4::jsonb IS NOT NULL AND endpoint IS DISTINCT FROM $4::jsonb))`,
+        [server.id, server.generation, state, observed.endpoint ?? null]
+      );
+      if (updated.rowCount === 1) {
+        const run = await client.query<{ id: string }>(
+          `UPDATE runs SET state = $2, updated_at = now(),
+             finished_at = CASE WHEN $2 = 'stopped' THEN now() ELSE NULL END
+           WHERE server_id = $1 AND finished_at IS NULL RETURNING id`, [server.id, state]
+        );
+        await client.query(
+          `INSERT INTO events (principal_id, server_id, run_id, event_type, payload)
+           VALUES ($1, $2, $3, 'state_observed', $4)`,
+          [server.principal_id, server.id, run.rows[0]?.id ?? null,
+            { request_id: server.last_request_id, generation: server.generation, state }]
+        );
+      }
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    }
   }
 }
 

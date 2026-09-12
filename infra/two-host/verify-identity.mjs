@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import pg from "pg";
 import { ControlStore } from "./dist/src/database.js";
+import { migrations } from "./dist/src/migrations.js";
 
 const [phase, snapshot] = process.argv.slice(2);
 assert.ok(phase === "seed" || phase === "verify", "usage: node - seed | node - verify <snapshot-json>");
@@ -56,7 +57,8 @@ try {
     assert.deepEqual(replay.record.responseBody, { server_id: before.serverId });
     assert.equal((await pool.query("SELECT id FROM runs WHERE server_id = $1", [before.serverId])).rowCount, 1);
     assert.equal((await pool.query("SELECT id FROM events WHERE server_id = $1", [before.serverId])).rowCount, 1);
-    assert.deepEqual((await pool.query("SELECT version FROM schema_migrations ORDER BY version")).rows, [{ version: 1 }, { version: 2 }]);
+    assert.deepEqual((await pool.query("SELECT version FROM schema_migrations ORDER BY version")).rows,
+      migrations.map(({ version }) => ({ version })));
     await pool.query("DELETE FROM idempotency_keys WHERE principal_id = $1 AND client_request_id = $2", [principal.id, before.requestId]);
     await pool.query("DELETE FROM servers WHERE id = $1 AND principal_id = $2", [before.serverId, principal.id]);
     process.stdout.write(JSON.stringify({ result: "passed", identity: "preserved", records: "preserved", fixture: "removed" }) + "\n");
