@@ -740,6 +740,50 @@ records an existing two-host result with the same persistence checks. It is a
 reference for the installation gate, not a place to copy private addresses,
 credentials, provider identifiers or raw logs.
 
+## Verify the control service account
+
+The deployment grants `cloud-control` these Kubernetes permissions:
+
+| Scope | Resources | Operations |
+| --- | --- | --- |
+| `cloud-minecraft-paper` | Deployments, PVCs and Services | Get, list, create and patch |
+| `cloud-minecraft-paper` | Pods | Get and list |
+| Cluster | Nodes | Get and list |
+
+The control Pod receives a projected Kubernetes service-account token. This
+token is separate from the caller's machine token. PostgreSQL and Paper keep
+token mounting disabled; the control account cannot read Secrets, change
+other namespaces, modify nodes or RBAC, or delete retained PVCs. See the
+Kubernetes documentation for [service-account token mounting](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+and [RBAC scope](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
+
+From the repository root on `control-1`, while the fixed Paper workload is
+running, first confirm that no players will be interrupted and that the game
+container has no mounted Kubernetes token:
+
+```sh
+sudo k3s kubectl exec -n cloud-minecraft-paper deployment/paper-e0-oracle -- \
+  mc-monitor status --host 127.0.0.1 --port 25565 | grep ' online=0 '
+sudo k3s kubectl exec -n cloud-minecraft-paper deployment/paper-e0-oracle -- \
+  test ! -e /var/run/secrets/kubernetes.io/serviceaccount/token
+```
+
+Continue only if both commands succeed. The following probe runs inside the
+control Pod and uses its projected token and cluster CA without printing
+either. It checks allowed reads, three creation requests using Kubernetes
+server dry-run, six forbidden operations, and a real stop/start of Paper:
+
+```sh
+sudo k3s kubectl exec -i -n cloud-system deployment/cloud-control -- \
+  node --input-type=module < infra/two-host/verify-rbac.mjs
+```
+
+The stop/start check waits for the old Pod to disappear before starting a
+replacement and requiring Ready. If stopping fails, it attempts to restore
+one replica. Inspect the workload before retrying a failed probe. This checks
+the service account's runtime access; the product lifecycle API is TES-69
+and F3 work.
+
 ## Troubleshooting
 
 - If the agent cannot join, verify that `GAME_NODE_ADDRESS` exists on a local

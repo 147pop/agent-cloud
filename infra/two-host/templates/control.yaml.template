@@ -181,7 +181,7 @@ spec:
         app: cloud-control
     spec:
       serviceAccountName: cloud-control
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
       nodeSelector:
         cloud.example/role: control
         kubernetes.io/hostname: @CONTROL_NODE_NAME@
