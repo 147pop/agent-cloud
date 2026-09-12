@@ -85,6 +85,17 @@ CREATE TABLE events (
 CREATE INDEX events_server_order ON events (server_id, id);
 CREATE INDEX events_run_order ON events (run_id, id);
 `
+  },
+  {
+    version: 2,
+    name: "event_run_ownership",
+    sql: `
+ALTER TABLE runs ADD CONSTRAINT runs_id_server_unique UNIQUE (id, server_id);
+ALTER TABLE events ADD CONSTRAINT events_run_server_fk
+  FOREIGN KEY (run_id, server_id) REFERENCES runs(id, server_id);
+ALTER TABLE events ADD CONSTRAINT events_run_requires_server
+  CHECK (run_id IS NULL OR server_id IS NOT NULL);
+`
   }
 ];
 
