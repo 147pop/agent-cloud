@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import json
+import os
 import pathlib
 import runpy
 import subprocess
+import sys
 import tempfile
 import time
 import uuid
@@ -84,6 +86,17 @@ def verify():
         assert control("wait", server_id, "running") == ready
         assert identities(server_id) == before
         assert pods(server_id)[0]["metadata"]["uid"] == pod["metadata"]["uid"]
+        service_address = f"paper-{server_id}.{NS}.svc"
+        paper.kubectl("exec", pod["metadata"]["name"], "--", "mc-monitor", "status", "--host", service_address, "--port", "25565")
+        interruption = json.loads(subprocess.check_output(
+            [sys.executable, str(HERE / "verify-interruption.py")], text=True, timeout=800,
+            env={**os.environ, "CLOUD_VERIFY_DEPLOYMENT": f"paper-{server_id}",
+                 "CLOUD_VERIFY_SELECTOR": f"cloud.example/server-id={server_id}"}
+        ))
+        assert interruption["replacement_started_before_old_exit"] is False
+        print(json.dumps({"phase": "single-writer", **interruption}), flush=True)
+        control("wait", server_id, "running")
+        pod = pods(server_id)[0]
         path = f"/api/v1/namespaces/{NS}/pods?watch=1&resourceVersion={pod['metadata']['resourceVersion']}&fieldSelector=metadata.name%3D{pod['metadata']['name']}&timeoutSeconds=150"
         with (evidence / "stop-watch.jsonl").open("w") as output:
             watch = subprocess.Popen(["k3s", "kubectl", "get", "--raw", path], stdout=output, stderr=subprocess.DEVNULL)
@@ -112,11 +125,12 @@ def verify():
         replacement = replacement[0]
         assert replacement["metadata"]["uid"] != pod["metadata"]["uid"]
         assert replacement["status"]["containerStatuses"][0]["restartCount"] == 0
+        paper.kubectl("exec", replacement["metadata"]["name"], "--", "mc-monitor", "status", "--host", service_address, "--port", "25565")
         paper.console(replacement["metadata"]["name"], "data get storage cloud:acceptance kubernetes", key)
         paper.console(replacement["metadata"]["name"], "data remove storage cloud:acceptance kubernetes", "Modified storage cloud:acceptance")
         assert identities(server_id) == before
         result = {"result": "passed", "world_marker": "preserved", "resource_uids": "unchanged", "control_restarts": 2,
-                  "exit_code": 0, **timings, "private_evidence": str(evidence)}
+                  "exit_code": 0, "service_protocol": "passed", "single_writer": "passed", **timings, "private_evidence": str(evidence)}
     finally:
         if server_id is not None:
             control("stop", server_id, key + "-cleanup")

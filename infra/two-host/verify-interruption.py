@@ -7,13 +7,15 @@ import subprocess
 import tempfile
 import time
 import uuid
+from urllib.parse import quote
 
 module = importlib.util.spec_from_file_location("shutdown", "infra/two-host/verify-shutdown.py")
 shutdown = importlib.util.module_from_spec(module)
 module.loader.exec_module(shutdown)
 kubectl, console = shutdown.kubectl, shutdown.console
+deployment, selector = shutdown.DEPLOYMENT, shutdown.SELECTOR
 
-original_list = json.loads(kubectl("get", "pods", "-l", "app=paper-e0-oracle", "-o", "json"))
+original_list = json.loads(kubectl("get", "pods", "-l", selector, "-o", "json"))
 assert len(original_list["items"]) == 1
 original = original_list["items"][0]
 name = original["metadata"]["name"]
@@ -25,7 +27,7 @@ marker = str(uuid.uuid4())
 console(name, f'data modify storage cloud:acceptance interruption set value "{marker}"', "Modified storage cloud:acceptance")
 console(name, "data get storage cloud:acceptance interruption", marker)
 evidence = pathlib.Path(tempfile.mkdtemp(prefix="paper-interruption-"))
-watch_path = f"/api/v1/namespaces/cloud-minecraft-paper/pods?watch=1&resourceVersion={original_list['metadata']['resourceVersion']}&labelSelector=app%3Dpaper-e0-oracle&timeoutSeconds=140"
+watch_path = f"/api/v1/namespaces/cloud-minecraft-paper/pods?watch=1&resourceVersion={original_list['metadata']['resourceVersion']}&labelSelector={quote(selector, safe='')}&timeoutSeconds=140"
 
 with (evidence / "watch.jsonl").open("w") as output:
     watch = subprocess.Popen(["k3s", "kubectl", "get", "--raw", watch_path], stdout=output, stderr=subprocess.DEVNULL)
@@ -38,7 +40,7 @@ with (evidence / "watch.jsonl").open("w") as output:
             observed = 0
             deadline = time.monotonic() + 20
             while time.monotonic() < deadline:
-                pods = json.loads(kubectl("get", "pods", "-l", "app=paper-e0-oracle", "-o", "json"))["items"]
+                pods = json.loads(kubectl("get", "pods", "-l", selector, "-o", "json"))["items"]
                 old = next(item for item in pods if item["metadata"]["uid"] == original["metadata"]["uid"])
                 assert old["metadata"].get("deletionTimestamp")
                 assert old["status"]["containerStatuses"][0]["state"].get("running")
@@ -57,7 +59,7 @@ with (evidence / "watch.jsonl").open("w") as output:
             kubectl("exec", name, "--", "kill", "-CONT", pid)
         kubectl("wait", "--for=delete", f"pod/{name}", "--timeout=130s", timeout=140)
         stopped_seconds = time.monotonic() - started
-        kubectl("rollout", "status", "deployment/paper-e0-oracle", "--timeout=600s", timeout=620)
+        kubectl("rollout", "status", f"deployment/{deployment}", "--timeout=600s", timeout=620)
     finally:
         if watch.poll() is None:
             watch.terminate()
