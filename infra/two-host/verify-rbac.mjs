@@ -25,15 +25,15 @@ async function api(method, path, body, expected = 200) {
       let data = '';
       res.setEncoding('utf8');
       res.on('data', chunk => { data += chunk; });
-      res.on('end', () => resolve({ status: res.statusCode, body: JSON.parse(data) }));
+      res.on('end', () => resolve({ status: res.statusCode, body: data }));
       res.on('error', reject);
     });
     req.on('error', reject);
     req.on('timeout', () => req.destroy(new Error('Kubernetes request timed out')));
-    req.end(body === undefined ? undefined : JSON.stringify(body));
+    req.end(body === undefined || method === 'GET' ? undefined : JSON.stringify(body));
   });
   assert.equal(result.status, expected, `${method} ${path}`);
-  return result.body;
+  return JSON.parse(result.body);
 }
 
 async function waitForPods(check) {
