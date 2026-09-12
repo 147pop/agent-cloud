@@ -39,4 +39,15 @@ of each create/stop/start mutation through two database pools and races ten
 reconciliations at each stage. It verifies one effect per operation, one active
 run, durable response replay and a 409 control error for a changed body or
 operation. HTTP transport and real K3s repetitions remain F3/F4 checks. The
-complete crash-point campaign belongs to TES-71.
+TES-71 campaign starts a separate Node process running the production store
+and reconciler, with a fake runtime served over IPC. It sends `SIGKILL` before
+and after observation and each create/start/stop effect: twelve crash cases.
+For an after-effect crash, the fake resource changes before the child receives
+an acknowledgement. Fresh processes then recover against the same PostgreSQL
+records and runtime resources.
+
+Every case checks the final desired state, stable world identity, unchanged
+response replay, a traceable request ID and at most one active run. The fake
+runtime rejects a repeated effect. This proves process recovery for the
+shared contract; Kubernetes restart and partial-resource recovery still need
+the TES-69 and F4 runs.
