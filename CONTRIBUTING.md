@@ -22,6 +22,8 @@ For actual Minecraft runs, use the [benchmark guide](benchmarks/minecraft/README
 
 Install the pinned root toolchain with `npm install` and run the TypeScript application checks with `npm run check`. Documentation changes need working links and instructions checked against the files they describe. Runtime changes need the smallest check that fails when the intended behavior breaks.
 
+For control database changes, set `TEST_DATABASE_URL` to a disposable PostgreSQL database and run `npm run test:integration`. The test creates and removes its own schema. It checks actual database constraints, machine authentication and durable records across a new control store. It does not establish two-host acceptance.
+
 The first runtime target is K3s on two compatible hosts. Local containers, mocks and other development tools may shorten feedback, but they do not establish the two-host acceptance result or gate publication when the real deployment passes.
 
 ## Submit evidence with the change
