@@ -805,6 +805,29 @@ if the stop phase fails, the server may remain stopped.
 The [TES-57 live evidence](../evidence/tes-57-clean-shutdown.md) records the
 verified result and its acceptance boundary.
 
+For TES-61, run twenty cycles and the interrupted-termination check from the
+same repository root. Each cycle checks for zero connected players before
+changing state. Run this Bash block as root on `control-1`:
+
+```bash
+set -euo pipefail
+umask 077
+mkdir -p infra/.local/tes-61
+for cycle in {1..20}; do
+  python3 infra/two-host/verify-shutdown.py \
+    | tee "infra/.local/tes-61/cycle-$cycle.json"
+done
+python3 infra/two-host/verify-interruption.py \
+  | tee infra/.local/tes-61/interruption.json
+```
+
+The interruption probe pauses Java, requests ordinary Pod deletion and
+observes the replacement while the old process remains alive. It resumes
+Java after twenty seconds; a forty-five-second fallback also resumes it if
+the operator connection is lost. It checks a clean exit, persisted Minecraft
+state, a blocked replacement and container timestamps that place the new
+start after the old exit. See [the TES-61 results](../evidence/tes-61-persistence-cycles.md).
+
 ## Troubleshooting
 
 - If the agent cannot join, verify that `GAME_NODE_ADDRESS` exists on a local
