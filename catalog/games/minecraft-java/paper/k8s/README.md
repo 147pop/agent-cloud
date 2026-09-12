@@ -24,6 +24,25 @@ kubectl apply -f deployment.yaml
 kubectl -n cloud-minecraft-paper get pods -w
 ```
 
+## Startup and readiness
+
+The container uses the bundled `mc-monitor` binary for both Kubernetes probes.
+A successful TCP connection is not enough: the Pod remains unready until
+`mc-monitor status --host 127.0.0.1 --port 25565` completes a Minecraft status
+request successfully.
+
+The startup probe allows up to ten minutes for a cold Paper start and prevents
+the readiness probe from running during that window. After startup succeeds,
+the readiness probe repeats the protocol check every ten seconds and removes
+the Pod from ready endpoints after three consecutive failures. There is no
+liveness probe in this manifest; TES-62 does not add a restart policy for a
+server that becomes unavailable after startup.
+
+For a cold-start check, watch the Pod from creation through readiness and record
+its restart count. `Ready` must remain false before the first successful
+`mc-monitor` result, become true afterward, and the container must not restart
+during an otherwise healthy slow start.
+
 ## Writer-lock mechanism under test
 
 Five independent layers prevent two processes from writing the same world:

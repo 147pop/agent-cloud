@@ -434,8 +434,14 @@ sudo infra/two-host/verify.sh infra/.local/tes-151.env
 - both PVCs are Bound and their PVs use `Retain`;
 - Paper's configured CPU, memory and host port match the configuration and the
   game node still satisfies the CPU reserve;
-- the control health endpoint works locally and the configured direct game TCP
-  path works from `control-1`.
+- the control health endpoint works locally, Paper answers a Minecraft protocol
+  status request through `mc-monitor`, and the configured direct game TCP path
+  works from `control-1`.
+
+The Paper rollout may wait up to ten minutes, matching its startup probe. The
+Pod does not become Ready merely because port 25565 accepts TCP; both rollout
+completion and the explicit `mc-monitor` check require a successful Minecraft
+status response.
 
 After deploy.sh and verify.sh succeed, capture the effective non-secret image
 references and Paper values on control-1:

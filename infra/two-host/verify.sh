@@ -22,7 +22,7 @@ CONTROL_NODE_NAME="$CONTROL_NODE_NAME" GAME_NODE_NAME="$GAME_NODE_NAME" \
 
 k3s kubectl rollout status statefulset/cloud-postgres -n cloud-system --timeout=60s
 k3s kubectl rollout status deployment/cloud-control -n cloud-system --timeout=60s
-k3s kubectl rollout status deployment/paper-e0-oracle -n cloud-minecraft-paper --timeout=60s
+k3s kubectl rollout status deployment/paper-e0-oracle -n cloud-minecraft-paper --timeout=600s
 
 control_pod_node="$(k3s kubectl get pod -n cloud-system -l app=cloud-control -o jsonpath='{.items[0].spec.nodeName}')"
 postgres_pod_node="$(k3s kubectl get pod -n cloud-system -l app=cloud-postgres -o jsonpath='{.items[0].spec.nodeName}')"
@@ -96,6 +96,8 @@ if ((node_cpu < GAME_CPU + GAME_HOST_RESERVED_CPU)); then
 fi
 
 curl -fsS "http://127.0.0.1:$CONTROL_API_PORT/healthz" >/dev/null
+k3s kubectl exec -n cloud-minecraft-paper deployment/paper-e0-oracle -- \
+  mc-monitor status --host 127.0.0.1 --port 25565 >/dev/null
 timeout 5 bash -c "</dev/tcp/$GAME_DIRECT_ADDRESS/$GAME_PORT"
 
 printf '%s\n' \
@@ -106,4 +108,5 @@ printf '%s\n' \
   "Paper runtime: cpu=$GAME_CPU heap=$GAME_JAVA_HEAP memory=$GAME_MEMORY" \
   "Paper storage budget: ${GAME_STORAGE_GIB}Gi (PVC request, not a filesystem quota)" \
   "game host reserve: cpu=$GAME_HOST_RESERVED_CPU memory=${GAME_HOST_RESERVED_MEMORY_GIB}Gi disk=${GAME_HOST_RESERVED_DISK_GIB}Gi" \
+  "Minecraft protocol readiness verified with mc-monitor" \
   "direct game path verified: configured worker address and TCP port"
