@@ -96,6 +96,24 @@ ALTER TABLE events ADD CONSTRAINT events_run_server_fk
 ALTER TABLE events ADD CONSTRAINT events_run_requires_server
   CHECK (run_id IS NULL OR server_id IS NOT NULL);
 `
+  },
+  {
+    version: 3,
+    name: "durable_desired_state",
+    sql: `
+ALTER TABLE servers
+  ADD COLUMN desired_state text NOT NULL DEFAULT 'stopped'
+    CHECK (desired_state IN ('running', 'stopped')),
+  ADD COLUMN state text NOT NULL DEFAULT 'stopped'
+    CHECK (state IN ('queued', 'provisioning', 'running', 'stopping', 'stopped')),
+  ADD COLUMN generation integer NOT NULL DEFAULT 0 CHECK (generation >= 0),
+  ADD COLUMN observed_generation integer NOT NULL DEFAULT 0
+    CHECK (observed_generation >= 0 AND observed_generation <= generation),
+  ADD COLUMN last_request_id text,
+  ADD COLUMN endpoint jsonb,
+  ADD FOREIGN KEY (principal_id, last_request_id)
+    REFERENCES idempotency_keys (principal_id, client_request_id);
+`
   }
 ];
 
