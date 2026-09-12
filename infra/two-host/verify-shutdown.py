@@ -24,7 +24,7 @@ def pod():
 
 
 def console(name, command, expected):
-    kubectl("exec", name, "--", "mc-send-to-console", command, timeout=10)
+    kubectl("exec", name, "--", "gosu", "1000:1000", "mc-send-to-console", command, timeout=10)
     deadline = time.monotonic() + 15
     while time.monotonic() < deadline:
         if expected in kubectl("logs", name, "--tail=100"):
