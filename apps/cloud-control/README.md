@@ -18,10 +18,21 @@ desired-state generation so an older observation cannot replace newer intent.
 `tick` visits managed servers, including converged ones so runtime drift can
 be observed, and reports failures after allowing other servers to progress.
 
-The process currently exposes health and machine identity. TES-69 connects
-this lifecycle contract to real Kubernetes operations; F3 connects the same
-mutation contract to REST, MCP and CLI. The focused tests use real PostgreSQL
-with a controllable fake runtime; they do not establish K3s acceptance.
+With `CLOUD_RUNTIME=kubernetes`, the process reconciles every second through
+its projected service-account token and cluster CA. It loads the pinned Paper
+recipe from `catalog/games/minecraft-java/paper/k8s/deployment.yaml`; the image
+includes that file. `CLOUD_PAPER_RECIPE` can override its path for development.
+The installer applies the retained local-path StorageClass. Each logical
+server has its own deterministic Deployment, PVC and Service. Create retries
+preserve existing resources and replicas. Stop retains both the PVC and Service;
+start waits until all old Pods are gone. The private host port also reserves
+the single qualified worker slot during termination.
+
+Readiness comes from the recipe's Minecraft protocol probe. TES-69 returns an
+internal Service address; TES-77 supplies the stable external endpoint. The
+process exposes health and machine identity; F3 connects REST, MCP and CLI to
+the same mutation contract. PostgreSQL tests use a controllable fake runtime;
+live Kubernetes acceptance has a separate operator probe.
 
 From the repository root:
 

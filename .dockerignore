@@ -8,6 +8,11 @@ dist
 **/dist
 *.tsbuildinfo
 benchmarks
-catalog
+catalog/**
+!catalog/games/
+!catalog/games/minecraft-java/
+!catalog/games/minecraft-java/paper/
+!catalog/games/minecraft-java/paper/k8s/
+!catalog/games/minecraft-java/paper/k8s/deployment.yaml
 docs
 prototypes

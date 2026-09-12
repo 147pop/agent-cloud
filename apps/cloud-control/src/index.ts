@@ -2,6 +2,8 @@ import { createServer } from "node:http";
 
 import { createRequestHandler } from "./app.js";
 import { ControlStore } from "./database.js";
+import { KubernetesRuntime } from "./kubernetes.js";
+import { Reconciler } from "./lifecycle.js";
 
 const host = process.env.HOST ?? "127.0.0.1";
 const port = Number(process.env.PORT ?? "3000");
@@ -17,9 +19,21 @@ const store = ControlStore.fromEnvironment(process.env);
 await store.initialize(machineToken);
 
 const server = createServer(createRequestHandler(store));
+const reconciler = process.env.CLOUD_RUNTIME === "kubernetes" ? new Reconciler(store, KubernetesRuntime.inCluster()) : null;
+let reconciling = false;
+let pending = Promise.resolve();
+const timer = setInterval(() => {
+  if (reconciling || reconciler === null) return;
+  reconciling = true;
+  pending = reconciler.tick().catch(error => {
+    process.stderr.write(`${JSON.stringify({ event: "reconciliation_failed", error: String(error) })}\n`);
+  }).finally(() => { reconciling = false; });
+}, 1000);
 
 async function shutdown(): Promise<void> {
-  server.close();
+  clearInterval(timer);
+  await new Promise<void>(resolve => server.close(() => resolve()));
+  await pending;
   await store.close();
 }
 

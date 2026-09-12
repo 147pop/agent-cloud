@@ -54,6 +54,7 @@ k3s kubectl apply -f "$render_dir/10-control.yaml"
 k3s kubectl apply -f "$render_dir/20-game-storage.yaml"
 k3s kubectl apply -f "$render_dir/30-game.yaml"
 k3s kubectl apply -f "$render_dir/40-control-rbac.yaml"
+k3s kubectl apply -f "$render_dir/50-managed-storage.yaml"
 
 # The repository commit may produce a new local image under the same private
 # tag. Restart only the stateless control process so it uses that import.
