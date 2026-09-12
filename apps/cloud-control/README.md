@@ -34,5 +34,9 @@ TEST_DATABASE_URL='<disposable PostgreSQL connection URL>' npm run test:integrat
 The integration tests create and remove isolated schemas. They cover delayed
 termination, world identity across restart, an effect completed before a
 control restart, intent changed during a start, stale readiness and progress
-past an individual runtime failure. The full concurrency and crash-point
-campaigns belong to TES-70 and TES-71.
+past an individual runtime failure. TES-70 also sends twenty concurrent copies
+of each create/stop/start mutation through two database pools and races ten
+reconciliations at each stage. It verifies one effect per operation, one active
+run, durable response replay and a 409 control error for a changed body or
+operation. HTTP transport and real K3s repetitions remain F3/F4 checks. The
+complete crash-point campaign belongs to TES-71.
