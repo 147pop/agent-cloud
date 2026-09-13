@@ -16,7 +16,7 @@ export interface ServerRecord {
   last_request_id: string | null;
   endpoint: Endpoint | null;
 }
-export type Mutation = { operation: "create"; name: string } |
+export type Mutation = { operation: "create"; name: string; eula_accepted: true } |
   { operation: "start" | "stop"; server_id: string };
 export interface AcceptedMutation {
   request_id: string;

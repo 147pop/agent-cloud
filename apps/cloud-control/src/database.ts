@@ -125,7 +125,8 @@ export class ControlStore {
     if (mutation.operation === "create" && !/^[a-z0-9][a-z0-9-]{0,62}$/.test(mutation.name)) {
       throw new ControlError("invalid_server_name", 400);
     }
-    const body = mutation.operation === "create" ? JSON.stringify({ name: mutation.name }) :
+    const body = mutation.operation === "create" ?
+      JSON.stringify({ name: mutation.name, eula_accepted: mutation.eula_accepted }) :
       JSON.stringify({ server_id: mutation.server_id });
     const client = await this.pool.connect();
     try {
@@ -174,7 +175,12 @@ export class ControlStore {
       await client.query(
         `INSERT INTO events (principal_id, server_id, event_type, payload)
          VALUES ($1, $2, 'intent_recorded', $3)`,
-        [principalId, server.id, { request_id: requestId, operation: mutation.operation, generation: server.generation }]
+        [principalId, server.id, {
+          request_id: requestId,
+          operation: mutation.operation,
+          generation: server.generation,
+          ...(mutation.operation === "create" ? { eula_accepted: true } : {})
+        }]
       );
       await this.completeIdempotencyKey(principalId, requestId, 202, response, client);
       await client.query("COMMIT");

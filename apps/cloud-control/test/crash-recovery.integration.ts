@@ -4,7 +4,7 @@ import { randomUUID } from "node:crypto";
 import test from "node:test";
 import pg from "pg";
 import { ControlStore } from "../src/database.js";
-import type { Runtime, RuntimeObservation } from "../src/lifecycle.js";
+import type { Mutation, Runtime, RuntimeObservation } from "../src/lifecycle.js";
 import type { EffectMessage } from "./fixtures/reconcile-process.js";
 
 test("TES-71: killed control processes recover every external-effect boundary", async (t) => {
@@ -91,7 +91,9 @@ test("TES-71: killed control processes recover every external-effect boundary", 
         for (const when of ["before", "after"] as const) {
           await t.test(`${operation}: killed ${when} ${effect}`, async () => {
             const name = `crash-${operation}-${effect}-${when}`;
-            const created = await store.mutate(owner.id, `${name}-create`, { operation: "create", name });
+            const created = await store.mutate(owner.id, `${name}-create`, {
+              operation: "create", name, eula_accepted: true
+            });
             const id = created.server_id;
             if (operation !== "create") {
               for (let i = 0; i < 3; i++) await runProcess(id);
@@ -101,7 +103,8 @@ test("TES-71: killed control processes recover every external-effect boundary", 
               }
             }
             const requestId = operation === "create" ? `${name}-create` : `${name}-request`;
-            const mutation = operation === "create" ? { operation, name } : { operation, server_id: id };
+            const mutation: Mutation = operation === "create" ?
+              { operation, name, eula_accepted: true } : { operation, server_id: id };
             const accepted = await store.mutate(owner.id, requestId, mutation);
             const before = await store.getServer(owner.id, id);
             await runProcess(id, { effect, when });
