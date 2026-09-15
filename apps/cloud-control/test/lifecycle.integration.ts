@@ -65,10 +65,19 @@ test("durable desired state converges through effects, restart and changed inten
     let reconciler = new Reconciler(store, runtime);
 
     await t.test("intent and replay commit before effects; stop waits for actual termination", async () => {
-      const accepted = await store.mutate(owner.id, "create-one", { operation: "create", name: "one" });
+      const accepted = await store.mutate(owner.id, "create-one", {
+        operation: "create", name: "one", eula_accepted: true
+      });
+      const creation = await inspection.query<{ payload: { eula_accepted?: boolean } }>(
+        "SELECT payload FROM events WHERE server_id = $1 AND event_type = 'intent_recorded' ORDER BY id LIMIT 1",
+        [accepted.server_id]
+      );
+      assert.equal(creation.rows[0]?.payload.eula_accepted, true);
       assert.equal(accepted.state, "queued");
       assert.equal(runtime.creates, 0);
-      assert.deepEqual(await store.mutate(owner.id, "create-one", { operation: "create", name: "one" }), accepted);
+      assert.deepEqual(await store.mutate(owner.id, "create-one", {
+        operation: "create", name: "one", eula_accepted: true
+      }), accepted);
       assert.equal((await inspection.query("SELECT count(*) FROM runs WHERE server_id = $1", [accepted.server_id])).rows[0].count, "1");
       await assert.rejects(store.getServer(randomUUID(), accepted.server_id), /server_not_found/);
       await reconciler.reconcile(accepted.server_id);
@@ -96,7 +105,9 @@ test("durable desired state converges through effects, restart and changed inten
     });
 
     await t.test("a new control process observes an effect completed before a crash", async () => {
-      const accepted = await store.mutate(owner.id, "create-recovery", { operation: "create", name: "recovery" });
+      const accepted = await store.mutate(owner.id, "create-recovery", {
+        operation: "create", name: "recovery", eula_accepted: true
+      });
       runtime.crashAfterCreate = true;
       await assert.rejects(reconciler.reconcile(accepted.server_id), /control_crashed_after_create/);
       const creates = runtime.creates;
@@ -108,13 +119,17 @@ test("durable desired state converges through effects, restart and changed inten
       await reconciler.reconcile(accepted.server_id);
       assert.equal(runtime.creates, creates);
       assert.equal((await store.getServer(owner.id, accepted.server_id)).state, "running");
-      assert.deepEqual(await store.mutate(owner.id, "create-recovery", { operation: "create", name: "recovery" }), accepted);
+      assert.deepEqual(await store.mutate(owner.id, "create-recovery", {
+        operation: "create", name: "recovery", eula_accepted: true
+      }), accepted);
       const events = await inspection.query("SELECT payload FROM events WHERE server_id = $1", [accepted.server_id]);
       assert.ok(events.rows.every(row => row.payload.request_id === "create-recovery"));
     });
 
     await t.test("a stop accepted during an older start converges to stopped", async () => {
-      const accepted = await store.mutate(owner.id, "create-race", { operation: "create", name: "race" });
+      const accepted = await store.mutate(owner.id, "create-race", {
+        operation: "create", name: "race", eula_accepted: true
+      });
       await reconciler.reconcile(accepted.server_id);
       runtime.beforeStart = async () => {
         await store.mutate(owner.id, "stop-race", { operation: "stop", server_id: accepted.server_id });
@@ -133,7 +148,9 @@ test("durable desired state converges through effects, restart and changed inten
     });
 
     await t.test("a stale readiness observation cannot overwrite a newer stop intent", async () => {
-      const accepted = await store.mutate(owner.id, "create-observation", { operation: "create", name: "observation" });
+      const accepted = await store.mutate(owner.id, "create-observation", {
+        operation: "create", name: "observation", eula_accepted: true
+      });
       await reconciler.reconcile(accepted.server_id);
       await reconciler.reconcile(accepted.server_id);
       await reconciler.reconcile(accepted.server_id);
@@ -150,8 +167,12 @@ test("durable desired state converges through effects, restart and changed inten
     });
 
     await t.test("one failed server does not prevent another from making progress", async () => {
-      await store.mutate(owner.id, "create-failing", { operation: "create", name: "failing" });
-      const other = await store.mutate(owner.id, "create-independent", { operation: "create", name: "independent" });
+      await store.mutate(owner.id, "create-failing", {
+        operation: "create", name: "failing", eula_accepted: true
+      });
+      const other = await store.mutate(owner.id, "create-independent", {
+        operation: "create", name: "independent", eula_accepted: true
+      });
       runtime.crashAfterCreate = true;
       await assert.rejects(reconciler.tick(), AggregateError);
       assert.ok(runtime.resources.has(other.server_id));
@@ -174,7 +195,9 @@ test("durable desired state converges through effects, restart and changed inten
         ));
       }
       try {
-        const accepted = await concurrentMutation("concurrent-create", { operation: "create", name: "concurrent" });
+        const accepted = await concurrentMutation("concurrent-create", {
+          operation: "create", name: "concurrent", eula_accepted: true
+        });
         for (let i = 0; i < 3; i++) await concurrentReconciliation(accepted.server_id);
         assert.equal((await store.getServer(owner.id, accepted.server_id)).state, "running");
         assert.equal(runtime.creates - baseline.creates, 1);
@@ -193,11 +216,15 @@ test("durable desired state converges through effects, restart and changed inten
         assert.equal((await inspection.query("SELECT count(*) FROM runs WHERE server_id = $1", [server.id])).rows[0].count, "2");
         assert.equal((await inspection.query("SELECT count(*) FROM runs WHERE server_id = $1 AND finished_at IS NULL", [server.id])).rows[0].count, "1");
         assert.equal((await inspection.query("SELECT count(*) FROM events WHERE server_id = $1 AND event_type = 'intent_recorded'", [server.id])).rows[0].count, "3");
-        await assert.rejects(secondStore.mutate(owner.id, "concurrent-create", { operation: "create", name: "changed" }),
+        await assert.rejects(secondStore.mutate(owner.id, "concurrent-create", {
+          operation: "create", name: "changed", eula_accepted: true
+        }),
           { code: "idempotency_key_reused", status: 409 });
         await assert.rejects(secondStore.mutate(owner.id, "concurrent-create", { operation: "stop", server_id: server.id }),
           { code: "idempotency_key_reused", status: 409 });
-        assert.deepEqual(await secondStore.mutate(owner.id, "concurrent-create", { operation: "create", name: "concurrent" }), accepted);
+        assert.deepEqual(await secondStore.mutate(owner.id, "concurrent-create", {
+          operation: "create", name: "concurrent", eula_accepted: true
+        }), accepted);
       } finally {
         await secondStore.close();
       }

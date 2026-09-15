@@ -6,6 +6,33 @@ desired state, active run and event in one PostgreSQL transaction. Repeating
 the same key and body returns the original response. Ownership is checked for
 existing servers; a changed operation or body raises a 409 `ControlError`.
 
+## REST create and status
+
+The machine-token bearer identity can create a logical server asynchronously:
+
+```sh
+curl -X POST "$CONTROL_URL/v1/servers" \
+  -H "Authorization: Bearer $CLOUD_MACHINE_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"client_request_id":"create-one","name":"one","eula_accepted":true}'
+```
+
+Creation returns `202` with `request_id`, `server_id`, a typed state and
+`status_url`. Explicit EULA acceptance is required and included in the durable
+mutation evidence. Omitting it returns `409` with `action_required` set to
+`accept_eula`.
+
+Poll the returned status URL with the same bearer token:
+
+```sh
+curl -H "Authorization: Bearer $CLOUD_MACHINE_TOKEN" \
+  "$CONTROL_URL/v1/servers/<server_id>"
+```
+
+Status is owner-scoped. It reports the current `cold` allocation path and only
+includes `endpoint` after the reconciler has observed Minecraft protocol
+readiness and changed the state to `running`. Warm allocation remains TES-153.
+
 `Reconciler.reconcile` observes the runtime before applying one missing effect.
 The runtime receives the stable logical server and world identities. Its
 create, start and stop operations must be idempotent under those identities.
