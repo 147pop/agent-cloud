@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 
 import { createRequestHandler } from "./app.js";
 import { ControlStore } from "./database.js";
+import { DockerRuntime } from "./docker.js";
 import { KubernetesRuntime } from "./kubernetes.js";
 import { Reconciler } from "./lifecycle.js";
 
@@ -19,7 +20,9 @@ const store = ControlStore.fromEnvironment(process.env);
 await store.initialize(machineToken);
 
 const server = createServer(createRequestHandler(store));
-const reconciler = process.env.CLOUD_RUNTIME === "kubernetes" ? new Reconciler(store, KubernetesRuntime.inCluster()) : null;
+const runtime = process.env.CLOUD_RUNTIME === "kubernetes" ? KubernetesRuntime.inCluster() :
+  process.env.CLOUD_RUNTIME === "docker" ? DockerRuntime.fromEnvironment(process.env) : null;
+const reconciler = runtime === null ? null : new Reconciler(store, runtime);
 let reconciling = false;
 let pending = Promise.resolve();
 const timer = setInterval(() => {

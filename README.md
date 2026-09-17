@@ -1,14 +1,15 @@
 # Cloud
 
-Cloud is a project for hosting game servers and curated applications on managed infrastructure. **Host** covers games. **Deploy** covers applications. The first delivery is a reproducible Minecraft Java foundation on two real hosts. It must turn one complete agent request into a playable server, preserve its world, and expose the same lifecycle through API, MCP and a CLI client.
+Cloud is a project for hosting game servers and curated applications on managed infrastructure. **Host** covers games. **Deploy** covers applications. The current supported local delivery is a reproducible Minecraft Java foundation on one computer with Docker Compose. It must turn one complete agent request into a playable server, preserve its world, and expose the same lifecycle through API, MCP and a CLI client.
 
-The project is in pre-beta development. This repository contains benchmark tools and evidence, the selected Paper profile, a pinned two-host K3s installation, a packaged minimal TypeScript `cloud-control` application, design records and product prototypes. It does not yet contain a working request-to-play platform.
+The project is in pre-beta development. This repository contains benchmark tools and evidence, the selected Paper profile, the supported Compose installation, historical two-host K3s evidence, a packaged minimal TypeScript `cloud-control` application, design records and product prototypes. F3 and F4 still add and verify the complete external request-to-play journey.
 
 ## Start here
 
 | Read | Find |
 | --- | --- |
-| [Two-host clean-clone quickstart](infra/two-host/README.md) | Canonical F1 guide for installing and safely reapplying `control-1` and `game-1`; F2/F3 operations and TES-148 acceptance remain separate |
+| [Single-host Compose quickstart](infra/compose/README.md) | Supported local installation for PostgreSQL, `cloud-control` and one fixed Paper `game-1` service |
+| [Two-host clean-clone quickstart](infra/two-host/README.md) | Historical F1 guide for installing and safely reapplying `control-1` and `game-1`; the K3s path is retained as evidence |
 | [Architecture](docs/architecture.md) | How the two-host foundation and later managed service are intended to work |
 | [Decisions](docs/decisions.md) | Chosen directions, replaced assumptions and open decisions |
 | [Catalog](catalog/README.md) | Recipes, tested profiles and the requirements for offering them |
@@ -24,7 +25,8 @@ The [Cloud reproducible Minecraft foundation](https://linear.app/workspace/proje
 | --- | --- |
 | Evidence and selected profile | Preserve the completed two-host inventory and benchmark evidence and the selected Paper profile without treating them as platform proof |
 | Repository and two-host installation | From a clean clone, install `control-1` and `game-1` with operator-owned credentials |
-| Control plane and Kubernetes | Deploy the TypeScript `cloud-control`, PostgreSQL, K3s server, K3s agent, Paper and persistent world resources |
+| Control plane and Kubernetes | Historical two-host delivery of the TypeScript `cloud-control`, PostgreSQL, K3s server, K3s agent, Paper and persistent world resources |
+| Docker runtime and Compose installation | Run the supported single-host Docker Compose delivery with one fixed Paper service, one persistent world, an explicit EULA gate and a clean-clone setup |
 | Agent access and warm allocation | Expose one lifecycle contract through API and MCP, use it from the CLI, and prove cold start and ready unowned warm assignment in separate trials |
 | Two-host acceptance | Complete an agent request to a playable endpoint and prove readiness, ownership, persistence, durable idempotency, control restart and bounded admission |
 | [Code publication](https://linear.app/workspace/project/cloud-public-source-release-02a68856fb69) | Publish the foundation code, two-host deployment instructions and evidence after a clean clone can reproduce the bounded result |

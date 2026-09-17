@@ -1,6 +1,6 @@
 # Architecture
 
-This is the selected design for Cloud's reproducible two-host foundation and the later managed service. It describes work to implement and verify. The [repository overview](../README.md) distinguishes the available tools and evidence from the planned runtime; [decisions](decisions.md) records changes to the design.
+This is the selected design for Cloud's reproducible single-host Compose foundation and the later managed service. The two-host K3s path remains historical evidence from F1/F2. The [repository overview](../README.md) distinguishes the available tools and evidence from the planned runtime; [decisions](decisions.md) records changes to the design.
 
 ## Product boundaries
 
@@ -10,7 +10,40 @@ Minecraft Java is the first Host workload. Its selected profile is Paper 26.2 bu
 
 The [catalog](../catalog/README.md) separates the product, its executable recipe, the tested resource profile, the evidence and the commercial offer. A recipe describes how to run a workload. A profile identifies exactly what was tested. An offer applies access, limits and pricing to a qualified profile. Adding an offer does not make an untested configuration supported.
 
-## First reproducible path
+## Supported local Compose path
+
+The supported local installation runs one `cloud-control` container, PostgreSQL
+and one fixed Paper `game-1` container under Docker Compose. PostgreSQL and the
+world use named volumes. `game-1` is created stopped, then `cloud-control`
+starts and stops it through the Docker Engine socket. The socket is mounted
+only into `cloud-control`; Paper receives no Docker credentials.
+
+The runtime discovers the fixed container through the Compose project and
+service labels and verifies its name and `/data` volume before every action.
+Its healthcheck uses a Minecraft protocol status request. A healthy container
+returns the stable loopback endpoint; a running container without protocol
+readiness remains `starting`. Docker's stop request uses the Paper save grace
+period and returns only after the container exits.
+
+One Compose installation admits one logical server. A second distinct create
+returns a durable capacity error. PostgreSQL serializes competing creates for
+the operator before checking the configured `CLOUD_MAX_SERVERS` limit. Setup
+and shutdown preserve named volumes; volume removal is a separate explicit
+destructive command.
+
+```mermaid
+flowchart TD
+    Agent[Agent client] -->|REST, MCP or CLI| Control[cloud-control]
+    Control --> DB[(PostgreSQL named volume)]
+    Control -->|Docker Engine socket| Game[fixed game-1 Paper container]
+    Game --> World[(Persistent named world volume)]
+    Player[Minecraft client] -->|127.0.0.1:25565| Game
+```
+
+The current F3/F4 tasks add the remaining REST, MCP and CLI operations and
+exercise the complete request-to-play journey on this supported path.
+
+## Historical two-host path
 
 ```mermaid
 flowchart TD
@@ -29,7 +62,7 @@ flowchart TD
 
 `cloud-control` will start as one TypeScript process for REST, MCP, admission and reconciliation. PostgreSQL will store ownership, requested state and pending work so a control restart can resume an operation. A CLI will use the same API contract. It is a client, not a separate control path. A web interface may use the API later, but it is not a foundation prerequisite.
 
-The first topology has two roles:
+The historical topology has two roles:
 
 | Role | Runs |
 | --- | --- |
