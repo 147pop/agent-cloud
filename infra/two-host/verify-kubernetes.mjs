@@ -9,7 +9,7 @@ const principal = await store.authenticate(process.env.CLOUD_MACHINE_TOKEN);
 assert.ok(principal);
 try {
   if (["create", "start", "stop"].includes(action)) {
-    const mutation = action === "create" ? { operation: action, name: value } : { operation: action, server_id: value };
+    const mutation = action === "create" ? { operation: action, name: value, eula_accepted: true } : { operation: action, server_id: value };
     const accepted = await store.mutate(principal.id, requestId, mutation);
     assert.deepEqual(await store.mutate(principal.id, requestId, mutation), accepted);
     process.stdout.write(JSON.stringify(accepted));
