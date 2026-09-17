@@ -90,3 +90,13 @@ runtime rejects a repeated effect. This proves process recovery for the
 shared contract. [TES-69 live evidence](../../infra/evidence/tes-69-kubernetes-runtime.md)
 covers Kubernetes lifecycle retries and control restarts. F4 retains the
 external client acceptance campaign.
+
+With `CLOUD_RUNTIME=docker`, the process uses the Docker Engine API over
+`DOCKER_SOCKET_PATH` (default `/var/run/docker.sock`). It discovers the fixed
+Compose service by `CLOUD_COMPOSE_PROJECT` and `CLOUD_COMPOSE_SERVICE`, verifies
+the container name and persistent `/data` volume, and never acts on an
+identity-mismatched container. The Docker healthcheck is the Minecraft
+protocol readiness gate. `CLOUD_MAX_SERVERS=1` provides the single-installation
+capacity boundary used by the Compose quickstart. See
+[`infra/compose/README.md`](../../infra/compose/README.md) for the operator
+commands and credential boundary.

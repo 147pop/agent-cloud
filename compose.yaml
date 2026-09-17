@@ -1,0 +1,88 @@
+name: cloud
+
+services:
+  postgres:
+    image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+    container_name: cloud-postgres
+    environment:
+      POSTGRES_DB: cloud
+      POSTGRES_USER: cloud
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloud -d cloud"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: "no"
+
+  cloud-control:
+    build:
+      context: .
+      dockerfile: apps/cloud-control/Dockerfile
+    container_name: cloud-control
+    user: "0:0"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: cloud
+      DATABASE_USER: cloud
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      CLOUD_MACHINE_TOKEN: ${CLOUD_MACHINE_TOKEN:?Set CLOUD_MACHINE_TOKEN in .env}
+      CLOUD_RUNTIME: docker
+      CLOUD_MAX_SERVERS: 1
+      CLOUD_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME:-cloud}
+      CLOUD_COMPOSE_SERVICE: game-1
+      CLOUD_GAME_CONTAINER_NAME: cloud-game-1
+      CLOUD_GAME_HOST: 127.0.0.1
+      CLOUD_GAME_PORT: ${GAME_PORT:-25565}
+      DOCKER_SOCKET_PATH: /var/run/docker.sock
+    ports:
+      - "127.0.0.1:${CONTROL_API_PORT:-3000}:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: "no"
+
+  game-1:
+    image: itzg/minecraft-server@sha256:efa878ddb49cf5251b2e5f2ad71b08fd2f7236c1f7907433f6697258b31d2ce4
+    container_name: cloud-game-1
+    environment:
+      EULA: ${MINECRAFT_EULA:?Set MINECRAFT_EULA=TRUE in .env}
+      TYPE: PAPER
+      VERSION: "26.2"
+      PAPER_BUILD: "121"
+      UID: "1000"
+      GID: "1000"
+      MEMORY: 2G
+      JVM_XX_OPTS: "-XX:ActiveProcessorCount=2"
+      SEED: "20260904"
+      VIEW_DISTANCE: "6"
+      SIMULATION_DISTANCE: "4"
+      MAX_PLAYERS: "2"
+      MODE: survival
+      DIFFICULTY: normal
+      ENABLE_RCON: "false"
+      CREATE_CONSOLE_IN_PIPE: "true"
+      STOP_SERVER_ANNOUNCE_DELAY: "0"
+    ports:
+      - "127.0.0.1:${GAME_PORT:-25565}:25565"
+    volumes:
+      - game-world:/data
+    healthcheck:
+      test: ["CMD", "mc-monitor", "status", "--host", "127.0.0.1", "--port", "25565"]
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 60
+    stop_grace_period: 120s
+    restart: "no"
+
+volumes:
+  postgres-data:
+  game-world:

@@ -76,6 +76,21 @@ Pablo accepted the repeated bot workload and local recovery evidence for TES-144
 
 The profile is selected for the foundation. The [K3s recipe](../catalog/games/minecraft-java/paper/k8s/) uses the accepted game settings; its lifecycle checks, platform backups and recovery remain separate work. This decision does not claim human-client, warm-plus-active capacity or public-route evidence.
 
+## Supported local runtime, 2026-09-17
+
+F2.5 replaces K3s as the supported clean-clone installation for one computer.
+The K3s implementation and live two-host evidence remain historical F1/F2
+results and are preserved in their original environment.
+
+| Decision | Reason and consequence |
+| --- | --- |
+| Use Docker Compose for the local foundation | A clean clone can run PostgreSQL, `cloud-control` and one fixed Paper `game-1` service on an announced arm64 or amd64 Linux/macOS computer without a second host or K3s installation. |
+| Keep one fixed Compose game container and one named world volume | The Docker runtime can verify Compose identity, preserve the world and return one stable loopback endpoint while the durable control contract remains unchanged. |
+| Give only `cloud-control` the Docker Engine socket | The control process owns lifecycle operations. Paper and API clients receive no Docker credentials; the socket boundary is local-installation operator trust. |
+| Require explicit EULA and local credentials | Setup fails without operator-owned values and `MINECRAFT_EULA=TRUE`; the values remain in an untracked mode-600 `.env`. |
+| Bound each installation to one logical server | The first create owns the fixed game and world. PostgreSQL serializes competing creates and returns `capacity_unavailable` for a distinct second server. |
+| Preserve named volumes during shutdown and reapplication | Normal setup and shutdown keep PostgreSQL and the world. Removing volumes requires a separate explicit destructive command. |
+
 ## D5, public game TCP and worker IP exposure, updated 2026-09-06
 
 The earlier comments in [TES-18](https://linear.app/workspace/issue/TES-18) differed between direct DNS and a Cloudflare-facing IP. The owners selected Cloudflare Spectrum in PR 4. Pablo then placed Spectrum implementation and validation at the end of the functional product work, before public opening. This is the current sequence.
