@@ -16,7 +16,7 @@ export interface IdempotencyRecord {
 }
 
 export class ControlStore {
-  public constructor(private readonly pool: pg.Pool) {}
+  public constructor(private readonly pool: pg.Pool, private readonly maxServers = 0) {}
 
   public static fromEnvironment(environment: NodeJS.ProcessEnv): ControlStore {
     const host = requireValue(environment, "DATABASE_HOST");
@@ -31,7 +31,7 @@ export class ControlStore {
       user: requireValue(environment, "DATABASE_USER"),
       password: requireValue(environment, "DATABASE_PASSWORD"),
       max: 10
-    }));
+    }), capacityValue(environment.CLOUD_MAX_SERVERS));
   }
 
   public async initialize(machineToken: string): Promise<Principal> {
@@ -138,6 +138,15 @@ export class ControlStore {
       }
       let server: ServerRecord;
       if (mutation.operation === "create") {
+        if (this.maxServers > 0) {
+          await client.query("SELECT pg_advisory_xact_lock(hashtextextended($1, 0))", [principalId]);
+          const count = await client.query<{ count: string }>(
+            "SELECT count(*) AS count FROM servers WHERE principal_id = $1", [principalId]
+          );
+          if (Number(count.rows[0]?.count ?? "0") >= this.maxServers) {
+            throw new ControlError("capacity_unavailable", 409);
+          }
+        }
         const id = randomUUID();
         const result = await client.query<ServerRecord>(
           `INSERT INTO servers (id, principal_id, logical_name, recipe_id, profile_id, world_identity,
@@ -273,4 +282,11 @@ function requireValue(environment: NodeJS.ProcessEnv, name: string): string {
   const value = environment[name];
   if (value === undefined || value.length === 0) throw new Error(`${name} is required`);
   return value;
+}
+
+function capacityValue(value: string | undefined): number {
+  if (value === undefined) return 0;
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < 0) throw new Error("CLOUD_MAX_SERVERS must be a non-negative integer");
+  return parsed;
 }

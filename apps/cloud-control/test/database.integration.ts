@@ -97,6 +97,25 @@ test("PostgreSQL preserves machine identity, ownership and operation records", a
       assert.equal((await pool.query("SELECT id FROM runs WHERE id = $1", [runId])).rowCount, 1);
       assert.equal((await pool.query("SELECT id FROM events WHERE run_id = $1", [runId])).rowCount, 1);
     });
+
+    await t.test("a configured one-server capacity gate serializes competing creates", async () => {
+      const capacityPrincipal = randomUUID();
+      await pool.query("INSERT INTO principals (id, subject) VALUES ($1, $2)", [capacityPrincipal, `capacity-${capacityPrincipal}`]);
+      const limited = new ControlStore(new pg.Pool(options), 1);
+      try {
+        const results = await Promise.allSettled([
+          limited.mutate(capacityPrincipal, "capacity-one", { operation: "create", name: "one", eula_accepted: true }),
+          limited.mutate(capacityPrincipal, "capacity-two", { operation: "create", name: "two", eula_accepted: true })
+        ]);
+        assert.equal(results.filter(result => result.status === "fulfilled").length, 1);
+        const rejected = results.find(result => result.status === "rejected");
+        assert.ok(rejected && rejected.status === "rejected");
+        assert.equal(rejected.reason.code, "capacity_unavailable");
+        assert.equal(rejected.reason.status, 409);
+      } finally {
+        await limited.close();
+      }
+    });
   } finally {
     await store.close();
     await pool.end();
