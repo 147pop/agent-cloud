@@ -20,6 +20,7 @@ WORKDIR /app
 COPY --from=build --chown=node:node /workspace/apps/cloud-control/dist/src ./dist/src
 COPY --from=build --chown=node:node /workspace/node_modules ./node_modules
 COPY --from=build --chown=node:node /workspace/package.json ./package.json
+COPY --chown=node:node catalog/games/minecraft-java/paper/k8s/deployment.yaml ./catalog/games/minecraft-java/paper/k8s/deployment.yaml
 
 USER node
 EXPOSE 3000

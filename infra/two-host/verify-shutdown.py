@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import os
 import pathlib
 import subprocess
 import tempfile
@@ -8,7 +9,8 @@ import uuid
 
 
 NAMESPACE = "cloud-minecraft-paper"
-DEPLOYMENT = "paper-e0-oracle"
+DEPLOYMENT = os.environ.get("CLOUD_VERIFY_DEPLOYMENT", "paper-e0-oracle")
+SELECTOR = os.environ.get("CLOUD_VERIFY_SELECTOR", f"app={DEPLOYMENT}")
 
 
 def kubectl(*args, timeout=30):
@@ -18,7 +20,7 @@ def kubectl(*args, timeout=30):
 
 
 def pod():
-    pods = json.loads(kubectl("get", "pods", "-l", f"app={DEPLOYMENT}", "-o", "json"))["items"]
+    pods = json.loads(kubectl("get", "pods", "-l", SELECTOR, "-o", "json"))["items"]
     assert len(pods) == 1, "expected exactly one Paper Pod"
     return pods[0]
 

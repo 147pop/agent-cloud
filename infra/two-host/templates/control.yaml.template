@@ -211,6 +211,8 @@ spec:
               value: 0.0.0.0
             - name: PORT
               value: "3000"
+            - name: CLOUD_RUNTIME
+              value: kubernetes
             - name: CLOUD_MACHINE_TOKEN
               valueFrom:
                 secretKeyRef:
