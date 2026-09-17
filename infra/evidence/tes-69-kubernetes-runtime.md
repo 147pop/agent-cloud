@@ -43,6 +43,40 @@ volume. Each run leaves its uniquely named logical server stopped, retains its
 world, and restores the reference `paper-e0-oracle` deployment. Its marker is
 removed only after a successful restart read.
 
+## Revalidation on 2026-09-17 UTC
+
+The current two-host installation was revalidated before closing F2. Both
+nodes ran K3s `v1.36.4+k3s1`. The final application and probe source was
+`2a1008f9b501a97d7af1d312085ef5019f317995`, which incorporates `main` at
+`7dc73d2` and preserves the merged TES-67 REST implementation. The lifecycle
+probe now supplies the explicit EULA acceptance required by that contract.
+
+A clean bundle checkout built `cloud-control:tes-69-2a1008f` on the control
+host. The observed container image ID was
+`sha256:cb90fb0b95c59cdbaa3bffb1eaa7ac9e1fe03b68e6b1fb98cd788e517309c620`.
+PostgreSQL and the existing manifests were backed up before deployment.
+
+The first preflight found a pending TES-67 live-test request occupying the
+managed slot. The operator stopped that test through the durable control
+contract, preserving its records and PVC. The final campaign used a separate
+test server. The reference Paper world remained retained throughout.
+
+The integrated source passed 12 unit tests, 24 PostgreSQL integration tests
+and the two-host script checks. Live HTTP checks also passed: valid machine
+authentication, rejection of unauthenticated requests, the existing REST
+status route, no endpoint for a stopped server, and EULA `action_required`
+before any creation without explicit acceptance.
+
+The live lifecycle campaign passed on that exact source and image. Create
+including a control restart took 74.686 seconds, stop took 4.119 seconds,
+and restart took 35.449 seconds. Two control restarts preserved the resource
+UIDs and world marker; the Service passed Minecraft protocol checks before
+and after restart. The interrupted-writer test recorded ten blocked
+replacement observations, a clean exit after 23.054 seconds including the
+pause, and no replacement container before the old writer exited. The new
+container had zero restarts. The campaign left its managed test server
+stopped and restored the reference Paper deployment to Ready.
+
 ## Reproduction
 
 Use a clean checkout on `control-1` with the existing protected two-host

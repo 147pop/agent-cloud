@@ -56,10 +56,10 @@ start waits until all old Pods are gone. The private host port also reserves
 the single qualified worker slot during termination.
 
 Readiness comes from the recipe's Minecraft protocol probe. TES-69 returns an
-internal Service address; TES-77 supplies the stable external endpoint. The
-process exposes health and machine identity; F3 connects REST, MCP and CLI to
-the same mutation contract. PostgreSQL tests use a controllable fake runtime;
-live Kubernetes acceptance has a separate operator probe.
+internal Service address; TES-77 supplies the stable external endpoint. REST
+create and status already use the shared contract. The remaining REST
+operations, MCP and CLI belong to F3. PostgreSQL tests use a controllable fake
+runtime; live Kubernetes acceptance has a separate operator probe.
 
 From the repository root:
 
