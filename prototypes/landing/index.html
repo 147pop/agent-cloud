@@ -308,6 +308,9 @@
     .language-switcher button { min-width: 36px; min-height: 44px; padding: 0 6px; border: 0; background: transparent; color: inherit; cursor: pointer; }
     .language-switcher button:hover, .language-switcher button[aria-pressed="true"] { color: #111; }
     .language-switcher button[aria-pressed="true"] { font-weight: 700; }
+    .localized-copy { display: inline-grid; min-width: 0; max-width: 100%; vertical-align: top; }
+    .localized-copy > span { grid-area: 1 / 1; min-width: 0; }
+    html:lang(en) .localized-copy > :lang(es), html:lang(es) .localized-copy > :lang(en) { visibility: hidden; }
 
     .hero-grid { display: block; width: var(--shell); padding-block: clamp(86px, 12vw, 150px) 112px; }
     .hero-copy { display: flex; padding: 0; align-items: center; flex-direction: column; text-align: center; }
@@ -341,7 +344,7 @@
     .native-tool > div:first-child { display: flex; min-width: 0; gap: 8px; align-items: baseline; }
     .native-marker { flex: 0 0 auto; color: #4ea96f; }
     .native-command { min-width: 0; color: #c0caf5; overflow-wrap: anywhere; }
-    .native-tool-result { padding-left: 24px; color: #85858e; white-space: pre-wrap; }
+    .native-tool-result { display: flex; align-items: baseline; gap: 0.5ch; padding-left: 24px; color: #85858e; white-space: pre-wrap; }
     .claude-tool .native-command { color: #c0caf5; }
     .codex-tool .native-command { color: #5cc2e0; }
     .grok-tool .native-command { color: #e1e1e1; }
@@ -493,8 +496,7 @@
     }
     @media (max-width: 480px) {
       :root { --shell: min(100% - 20px, 1080px); }
-      h1 { font-size: clamp(3rem, 14vw, 4rem); }
-      html:lang(es) h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+      h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
       h2 { font-size: 2.35rem; }
       .topbar nav > a { display: none; }
       .hero-grid { padding-top: 64px; }
@@ -505,7 +507,7 @@
       .resource-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 14px; padding: 13px 4px; }
       .resource-name small { display: block; margin: 3px 0 0; }
       .resource-meta { grid-column: 1; color: #6f6f76; }
-      .resource-meta::before { content: 'expires '; }
+      .resource-meta::before { content: 'expires '; display: inline-block; width: 8ch; }
       html:lang(es) .resource-meta::before { content: 'vence '; }
       .resource-spend { grid-column: 2; grid-row: 2; }
       .log-output time { display: block; margin: 0 0 2px; }
@@ -819,11 +821,19 @@
     };
     var localizedElements = Array.from(document.querySelectorAll('[data-i18n]'), function(element) {
       var attribute = element.dataset.i18n;
-      return { element: element, attribute: attribute, text: attribute ? element.getAttribute(attribute) : element.textContent };
+      var text = attribute ? element.getAttribute(attribute) : element.textContent;
+      if (!attribute && element.closest('body')) element.innerHTML = localizedHTML(text);
+      return { element: element, attribute: attribute, text: text };
     });
 
     function t(text) {
       return activeLanguage === 'es' && Object.hasOwn(spanish, text) ? spanish[text] : text;
+    }
+
+    function localizedHTML(text, translation) {
+      if (translation === undefined) translation = spanish[text];
+      if (translation === undefined || translation === text) return escapeHTML(text);
+      return '<span class="localized-copy"><span lang="en">' + escapeHTML(text) + '</span><span lang="es">' + escapeHTML(translation) + '</span></span>';
     }
 
     function selectLanguage(language) {
@@ -831,12 +841,12 @@
       document.documentElement.lang = language;
       localizedElements.forEach(function(item) {
         if (item.attribute) item.element.setAttribute(item.attribute, t(item.text));
-        else item.element.textContent = t(item.text);
+        else if (!item.element.closest('body')) item.element.textContent = t(item.text);
       });
       document.querySelectorAll('[data-language]').forEach(function(button) {
         button.setAttribute('aria-pressed', String(button.dataset.language === language));
       });
-      startDemo();
+      document.getElementById('terminalTitle').textContent = agents[activeAgent].label + ' · ' + t(flows[activeFlow].label);
     }
 
     var activeFlow = 'host';
@@ -949,7 +959,7 @@
     }
 
     function demoPrompt(flow) {
-      return t(isCompactDemo() ? flow.mobilePrompt : flow.prompt);
+      return isCompactDemo() ? flow.mobilePrompt : flow.prompt;
     }
 
     function schedule(callback, delay) {
@@ -965,63 +975,67 @@
       document.getElementById('sessionHeader').innerHTML = html;
     }
 
-    function renderComposer(text, typing) {
-      var safe = escapeHTML(text);
+    function renderComposer(text, typing, translation) {
+      var safe = localizedHTML(text, translation);
       var caretClass = typing ? ' typing-caret' : '';
       var html = '';
       if (activeAgent === 'claude') {
-        html = '<div class="claude-composer"><div class="effort">◉ xhigh · /effort</div><div class="claude-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="composer-mode"><b>⏵⏵ ' + t('auto mode on') + '</b><span class="composer-hint"> ' + t('(shift+tab to cycle) · ← for agents') + '</span></div></div>';
+        html = '<div class="claude-composer"><div class="effort">◉ xhigh · /effort</div><div class="claude-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="composer-mode"><b>⏵⏵ ' + localizedHTML('auto mode on') + '</b><span class="composer-hint"> ' + localizedHTML('(shift+tab to cycle) · ← for agents') + '</span></div></div>';
       } else if (activeAgent === 'codex') {
         html = '<div class="codex-composer"><div class="codex-input"><span class="caret" aria-hidden="true">›</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="codex-meta-line">' + escapeHTML(agents.codex.model) + '<span class="codex-path"> · ~/projects/agent-cloud</span></div></div>';
       } else {
-        html = '<div class="grok-composer"><div class="grok-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span><span class="grok-model">' + escapeHTML(agents.grok.model) + ' · ' + t('plan approval') + '</span></div></div>';
+        html = '<div class="grok-composer"><div class="grok-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span><span class="grok-model">' + escapeHTML(agents.grok.model) + ' · ' + localizedHTML('plan approval') + '</span></div></div>';
       }
       document.getElementById('termComposer').innerHTML = html;
     }
 
     function userMessage(text) {
       var caret = activeAgent === 'codex' ? '›' : '❯';
-      return '<div class="user-message"><span class="caret" aria-hidden="true">' + caret + '</span><span>' + escapeHTML(text) + '</span></div>';
+      return '<div class="user-message"><span class="caret" aria-hidden="true">' + caret + '</span><span>' + localizedHTML(text) + '</span></div>';
     }
 
     function assistantMessage(text) {
-      return '<div class="assistant-message">' + escapeHTML(t(text)) + '</div>';
+      return '<div class="assistant-message">' + localizedHTML(text) + '</div>';
     }
 
     function toolLine(name, result) {
-      result = t(result);
+      result = localizedHTML(result);
       if (activeAgent === 'claude') {
-        return '<div class="native-tool claude-tool"><div><span class="native-marker" aria-hidden="true">⏺</span><span class="native-command">' + escapeHTML(name) + '</span></div><div class="native-tool-result"><span aria-hidden="true">⎿</span> ' + escapeHTML(result) + '</div></div>';
+        return '<div class="native-tool claude-tool"><div><span class="native-marker" aria-hidden="true">⏺</span><span class="native-command">' + escapeHTML(name) + '</span></div><div class="native-tool-result"><span aria-hidden="true">⎿</span> ' + result + '</div></div>';
       }
       if (activeAgent === 'codex') {
-        return '<div class="native-tool codex-tool"><div><span class="native-marker" aria-hidden="true">•</span><span class="native-command">' + t('Called') + ' ' + escapeHTML(name) + '</span></div><div class="native-tool-result">└ ' + escapeHTML(result) + '</div></div>';
+        return '<div class="native-tool codex-tool"><div><span class="native-marker" aria-hidden="true">•</span><span class="native-command">' + localizedHTML('Called') + ' ' + escapeHTML(name) + '</span></div><div class="native-tool-result">└ ' + result + '</div></div>';
       }
-      return '<div class="native-tool grok-tool"><div><span class="native-marker" aria-hidden="true">◆</span><strong>' + t('Run') + ' ' + escapeHTML(name) + '</strong> <span class="hook-count">[hooks: <b>1</b>]</span></div><div class="native-tool-result">' + escapeHTML(result) + '</div></div>';
+      return '<div class="native-tool grok-tool"><div><span class="native-marker" aria-hidden="true">◆</span><strong>' + localizedHTML('Run') + ' ' + escapeHTML(name) + '</strong> <span class="hook-count">[hooks: <b>1</b>]</span></div><div class="native-tool-result">' + result + '</div></div>';
     }
 
     function planBox(flow) {
       var output = ['plan_id  plan_' + flow.hash.slice(7, 15), 'hash     ' + flow.hash];
+      var translation = output.slice();
       var plan = isCompactDemo() ? flow.plan.filter(function(pair) { return flow.mobilePlanLabels.includes(pair[0]); }) : flow.plan;
-      plan.forEach(function(pair) { output.push(t(pair[0]).toLowerCase().padEnd(activeLanguage === 'es' ? 12 : 9, ' ') + t(pair[1])); });
+      plan.forEach(function(pair) {
+        output.push(pair[0].toLowerCase().padEnd(9, ' ') + pair[1]);
+        translation.push((spanish[pair[0]] || pair[0]).toLowerCase().padEnd(12, ' ') + (spanish[pair[1]] || pair[1]));
+      });
       var prefix = activeAgent === 'claude' ? '<span aria-hidden="true">⎿</span> ' : activeAgent === 'codex' ? '└ ' : '';
-      return '<div class="native-plan agent-native-output">' + prefix + '<pre>' + escapeHTML(output.join('\n')) + '</pre></div>';
+      return '<div class="native-plan agent-native-output">' + prefix + '<pre>' + localizedHTML(output.join('\n'), translation.join('\n')) + '</pre></div>';
     }
 
     function approvalBox(flow) {
       var hash = escapeHTML(flow.hash);
-      var approval = escapeHTML(t(isCompactDemo() ? flow.mobileApproval : flow.approval));
+      var approval = localizedHTML(isCompactDemo() ? flow.mobileApproval : flow.approval);
       if (activeAgent === 'claude') {
-        return '<fieldset class="native-permission claude-permission approval-box" id="approvalBox"><legend>' + t('Plan approval') + '</legend><div class="approval-title">' + t('Approve') + ' ' + hash + '</div><div class="approval-copy">' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">❯</span> 1. ' + t('Yes') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. ' + t('No, change the plan') + '</button></div></fieldset>';
+        return '<fieldset class="native-permission claude-permission approval-box" id="approvalBox"><legend>' + localizedHTML('Plan approval') + '</legend><div class="approval-title">' + localizedHTML('Approve') + ' ' + hash + '</div><div class="approval-copy">' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">❯</span> 1. ' + localizedHTML('Yes') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. ' + localizedHTML('No, change the plan') + '</button></div></fieldset>';
       }
       if (activeAgent === 'codex') {
-        return '<div class="native-permission codex-permission approval-box" id="approvalBox"><div class="approval-title">' + t('Approve exact plan?') + '</div><div class="approval-copy">' + hash + ' · ' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">›</span> 1. ' + t('Approve and run') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. ' + t('Reject and add feedback') + '</button></div><div class="permission-hint">' + t('Press enter to confirm or esc to go back') + '</div></div>';
+        return '<div class="native-permission codex-permission approval-box" id="approvalBox"><div class="approval-title">' + localizedHTML('Approve exact plan?') + '</div><div class="approval-copy">' + hash + ' · ' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">›</span> 1. ' + localizedHTML('Approve and run') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. ' + localizedHTML('Reject and add feedback') + '</button></div><div class="permission-hint">' + localizedHTML('Press enter to confirm or esc to go back') + '</div></div>';
       }
-      return '<div class="native-permission grok-permission approval-box" id="approvalBox"><div class="permission-rule"><div class="approval-title">' + t('Approve exact plan') + '</div><div class="approval-copy">' + hash + '<br>' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()">1 <span aria-hidden="true">(●)</span> ' + t('Yes, proceed') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()">2 <span aria-hidden="true">(○)</span> ' + t('No, reject') + '</button></div></div><div class="permission-hint"><b>1/2</b>:' + t('select') + ' │ Ctrl+c:' + t('cancel') + '</div></div>';
+      return '<div class="native-permission grok-permission approval-box" id="approvalBox"><div class="permission-rule"><div class="approval-title">' + localizedHTML('Approve exact plan') + '</div><div class="approval-copy">' + hash + '<br>' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()">1 <span aria-hidden="true">(●)</span> ' + localizedHTML('Yes, proceed') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()">2 <span aria-hidden="true">(○)</span> ' + localizedHTML('No, reject') + '</button></div></div><div class="permission-hint"><b>1/2</b>:' + localizedHTML('select') + ' │ Ctrl+c:' + localizedHTML('cancel') + '</div></div>';
     }
 
     function resultBox(flow) {
       var lead = activeAgent === 'grok' && !isCompactDemo() ? 'Turn completed. ' : '';
-      return '<div class="native-result"><div class="assistant-message">' + escapeHTML(t(lead) + t(flow.resultTitle) + '.') + '</div><pre>' + escapeHTML(t(flow.result)) + '</pre></div>';
+      return '<div class="native-result"><div class="assistant-message">' + localizedHTML(lead + flow.resultTitle + '.', (spanish[lead] || lead) + spanish[flow.resultTitle] + '.') + '</div><pre>' + localizedHTML(flow.result) + '</pre></div>';
     }
 
     function appendTranscript(html) {
@@ -1050,6 +1064,7 @@
 
     function typePrompt(run) {
       var prompt = demoPrompt(flows[activeFlow]);
+      var translation = spanish[prompt] || prompt;
       if (reducedMotion || isCompactDemo()) {
         renderComposer(prompt, false);
         showPlan(run);
@@ -1059,7 +1074,7 @@
       function typeNext() {
         if (run !== demoRun) return;
         index += 1;
-        renderComposer(prompt.slice(0, index), index < prompt.length);
+        renderComposer(prompt.slice(0, index), index < prompt.length, translation.slice(0, Math.ceil(index / prompt.length * translation.length)));
         if (index < prompt.length) {
           var timer = window.setTimeout(typeNext, 11);
           demoTimers.push(timer);
@@ -1107,8 +1122,8 @@
       var box = document.getElementById('approvalBox');
       if (!box || box.classList.contains('approved')) return;
       box.classList.add('approved');
-      box.querySelector('.approval-title').textContent = t('✓ Exact plan approved');
-      box.querySelector('.approval-copy').textContent = flow.hash + ' ' + t(isCompactDemo() ? 'matched.' : 'matched. Applying once with the approved limits.');
+      box.querySelector('.approval-title').innerHTML = localizedHTML('✓ Exact plan approved');
+      box.querySelector('.approval-copy').innerHTML = escapeHTML(flow.hash) + ' ' + localizedHTML(isCompactDemo() ? 'matched.' : 'matched. Applying once with the approved limits.');
       flow.postTools.forEach(function(pair, index) {
         schedule(function() {
           if (run !== demoRun) return;
@@ -1124,8 +1139,8 @@
     function rejectPlan() {
       var box = document.getElementById('approvalBox');
       if (!box) return;
-      box.querySelector('.approval-title').textContent = t('Plan rejected');
-      box.querySelector('.approval-copy').textContent = t('Nothing ran and no credits were held. Ask the agent to change the plan.');
+      box.querySelector('.approval-title').innerHTML = localizedHTML('Plan rejected');
+      box.querySelector('.approval-copy').innerHTML = localizedHTML('Nothing ran and no credits were held. Ask the agent to change the plan.');
       box.querySelector('.approval-actions').remove();
     }
 
@@ -1155,6 +1170,7 @@
     compactMedia.addEventListener('change', startDemo);
     var browserLanguage = (navigator.languages || [navigator.language]).find(function(language) { return /^(es|en)(-|$)/i.test(language); }) || 'en';
     selectLanguage(browserLanguage.slice(0, 2).toLowerCase());
+    startDemo();
   </script>
 </body>
 </html>
