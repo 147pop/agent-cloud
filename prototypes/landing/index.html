@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ask your agent for infrastructure. See the price and limits. Approve the exact plan. Then it runs.">
-  <title>Agent cloud | Infrastructure in one prompt</title>
+  <meta name="description" data-i18n="content" content="Ask your agent for infrastructure. See the price and limits. Approve the exact plan. Then it runs.">
+  <title data-i18n>Agent cloud | Infrastructure in one prompt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600;700&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -245,7 +245,6 @@
     }
     @media (max-width: 760px) {
       :root { --shell: min(100% - 28px, 1180px); }
-      .topbar nav { display: none; }
       .hero-grid { padding-top: 52px; }
       .hero-copy { display: block; }
       .hero-copy > p { margin-top: 24px; }
@@ -305,6 +304,10 @@
     .topbar nav { gap: 22px; }
     .topbar nav a { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; color: #666; }
     .topbar nav a:hover { color: #000; }
+    .language-switcher { display: inline-flex; align-items: center; color: #666; }
+    .language-switcher button { min-width: 36px; min-height: 44px; padding: 0 6px; border: 0; background: transparent; color: inherit; cursor: pointer; }
+    .language-switcher button:hover, .language-switcher button[aria-pressed="true"] { color: #111; }
+    .language-switcher button[aria-pressed="true"] { font-weight: 700; }
 
     .hero-grid { display: block; width: var(--shell); padding-block: clamp(86px, 12vw, 150px) 112px; }
     .hero-copy { display: flex; padding: 0; align-items: center; flex-direction: column; text-align: center; }
@@ -449,7 +452,8 @@
     }
     @media (max-width: 760px) {
       :root { --shell: min(100% - 28px, 1080px); }
-      .topbar { display: none; }
+      .topbar { gap: 12px; }
+      .topbar nav { gap: 12px; }
       .hero-grid { padding-block: 72px 84px; }
       .demo-stage { margin-top: 54px; }
       .demo-picker { align-items: stretch; border-radius: 8px; flex-direction: column; }
@@ -490,8 +494,9 @@
     @media (max-width: 480px) {
       :root { --shell: min(100% - 20px, 1080px); }
       h1 { font-size: clamp(3rem, 14vw, 4rem); }
+      html:lang(es) h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
       h2 { font-size: 2.35rem; }
-      .topbar nav { display: none; }
+      .topbar nav > a { display: none; }
       .hero-grid { padding-top: 64px; }
       .picker-group button { min-height: 44px; }
       .cloud-terminal { font-size: 0.875rem; }
@@ -501,51 +506,57 @@
       .resource-name small { display: block; margin: 3px 0 0; }
       .resource-meta { grid-column: 1; color: #6f6f76; }
       .resource-meta::before { content: 'expires '; }
+      html:lang(es) .resource-meta::before { content: 'vence '; }
       .resource-spend { grid-column: 2; grid-row: 2; }
       .log-output time { display: block; margin: 0 0 2px; }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+  <a class="skip-link" href="#main-content" data-i18n>Skip to content</a>
 
   <main id="main-content">
     <section class="hero" aria-labelledby="hero-title">
       <header class="topbar">
-        <a class="brand" href="#main-content" aria-label="Agent cloud home">agent cloud</a>
-        <nav aria-label="Primary navigation">
+        <a class="brand" href="#main-content" aria-label="Agent cloud home" data-i18n="aria-label">agent cloud</a>
+        <nav aria-label="Primary navigation" data-i18n="aria-label">
           <a href="#demo">Demo</a>
-          <a href="#capabilities">Capabilities</a>
+          <a href="#capabilities" data-i18n>Capabilities</a>
+          <div class="language-switcher" role="group" aria-label="Language" data-i18n="aria-label">
+            <button type="button" data-language="es" lang="es" aria-label="Español" aria-pressed="false">ES</button>
+            <span aria-hidden="true">|</span>
+            <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          </div>
         </nav>
       </header>
 
       <div class="hero-grid">
         <div class="hero-copy reveal">
-          <h1 id="hero-title">Infrastructure in one prompt.</h1>
-          <p>Host a server, deploy a repository, or keep working in the cloud from Claude, Codex, or Grok. See the price and limits. Approve the hash. Then it runs.</p>
+          <h1 id="hero-title" data-i18n>Infrastructure in one prompt.</h1>
+          <p data-i18n>Host a server, deploy a repository, or keep working in the cloud from Claude, Codex, or Grok. See the price and limits. Approve the hash. Then it runs.</p>
           <div class="hero-actions">
-            <a class="cta primary" href="#demo">Try the demo</a>
+            <a class="cta primary" href="#demo" data-i18n>Try the demo</a>
           </div>
         </div>
 
         <div class="demo-stage reveal delay" id="demo">
           <div class="demo-picker">
-            <div class="picker-group flow-picker" role="group" aria-label="Choose a cloud flow">
-              <span class="picker-label">Flow</span>
-              <button type="button" aria-pressed="true" data-flow="host">Host</button>
-              <button type="button" aria-pressed="false" data-flow="deploy">Deploy</button>
-              <button type="button" aria-pressed="false" data-flow="continue">Continue</button>
+            <div class="picker-group flow-picker" role="group" aria-label="Choose a cloud flow" data-i18n="aria-label">
+              <span class="picker-label" data-i18n>Flow</span>
+              <button type="button" aria-pressed="true" data-flow="host" data-i18n>Host</button>
+              <button type="button" aria-pressed="false" data-flow="deploy" data-i18n>Deploy</button>
+              <button type="button" aria-pressed="false" data-flow="continue" data-i18n>Continue</button>
             </div>
-            <div class="picker-group agent-picker" role="group" aria-label="Choose an agent">
+            <div class="picker-group agent-picker" role="group" aria-label="Choose an agent" data-i18n="aria-label">
               <button type="button" aria-pressed="false" data-agent="grok">Grok</button>
               <button type="button" aria-pressed="false" data-agent="codex">Codex</button>
               <button type="button" aria-pressed="true" data-agent="claude">Claude</button>
-              <span class="picker-label">Agent</span>
+              <span class="picker-label" data-i18n>Agent</span>
             </div>
             <span class="sr-only" id="terminalTitle">Claude Code · Host</span>
           </div>
 
-          <section class="term-window agent-claude" aria-label="Interactive agent conversation" aria-live="polite">
+          <section class="term-window agent-claude" aria-label="Interactive agent conversation" aria-live="polite" data-i18n="aria-label">
             <div class="term-screen">
               <div class="session-header" id="sessionHeader"></div>
               <div class="transcript" id="transcript"></div>
@@ -556,14 +567,14 @@
       </div>
     </section>
 
-    <section class="capabilities" id="capabilities" aria-label="What one prompt can run">
+    <section class="capabilities" id="capabilities" aria-label="What one prompt can run" data-i18n="aria-label">
       <article class="capability host" aria-labelledby="host-title">
         <div class="shell">
           <header class="capability-head">
-            <h2 id="host-title">Host</h2>
-            <p>Spin up a ready-to-play server for tonight. It sleeps when empty and shuts down on schedule.</p>
+            <h2 id="host-title" data-i18n>Host</h2>
+            <p data-i18n>Spin up a ready-to-play server for tonight. It sleeps when empty and shuts down on schedule.</p>
           </header>
-          <div class="logo-rail" aria-label="Game server templates">
+          <div class="logo-rail" aria-label="Game server templates" data-i18n="aria-label">
             <div class="logo-track">
               <div class="logo-set">
                 <figure class="logo-item"><div class="logo-art minecraft-logo"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/minecraft.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Minecraft</figcaption></figure>
@@ -583,10 +594,10 @@
       <article class="capability deploy dark" aria-labelledby="deploy-title">
         <div class="shell">
           <header class="capability-head">
-            <h2 id="deploy-title">Deploy</h2>
-            <p>Ship an app, database, or worker from one prompt. Keep it private and set a hard spending limit.</p>
+            <h2 id="deploy-title" data-i18n>Deploy</h2>
+            <p data-i18n>Ship an app, database, or worker from one prompt. Keep it private and set a hard spending limit.</p>
           </header>
-          <div class="logo-rail" aria-label="Deployment templates">
+          <div class="logo-rail" aria-label="Deployment templates" data-i18n="aria-label">
             <div class="logo-track">
               <div class="logo-set">
                 <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/docker.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Docker</figcaption></figure>
@@ -606,10 +617,10 @@
       <article class="capability continue" aria-labelledby="continue-title">
         <div class="shell">
           <header class="capability-head">
-            <h2 id="continue-title">Continue</h2>
-            <p>Send your workspace to the cloud and keep the agent working after your laptop closes.</p>
+            <h2 id="continue-title" data-i18n>Continue</h2>
+            <p data-i18n>Send your workspace to the cloud and keep the agent working after your laptop closes.</p>
           </header>
-          <div class="logo-rail" aria-label="Supported coding agents and editors">
+          <div class="logo-rail" aria-label="Supported coding agents and editors" data-i18n="aria-label">
             <div class="logo-track">
               <div class="logo-set">
                 <figure class="logo-item"><div class="logo-art"><img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/claude.svg" alt="" loading="lazy" decoding="async"></div><figcaption>Claude</figcaption></figure>
@@ -630,34 +641,34 @@
     <section class="section operations" id="operations" aria-labelledby="operations-title">
       <div class="shell">
         <header class="operations-head">
-          <h2 id="operations-title">Use the CLI.</h2>
-          <p>The same commands work for you and your agent.</p>
+          <h2 id="operations-title" data-i18n>Use the CLI.</h2>
+          <p data-i18n>The same commands work for you and your agent.</p>
         </header>
 
-        <div class="cloud-terminal" role="region" aria-label="Cloud command line example">
+        <div class="cloud-terminal" role="region" aria-label="Cloud command line example" data-i18n="aria-label">
           <div class="cloud-terminal-body">
             <div class="cli-block">
               <div class="cli-command"><span aria-hidden="true">$</span><code>cloud list</code></div>
-              <div class="resource-list" aria-label="Active cloud workloads">
-                <div class="resource-row resource-head" aria-hidden="true"><span>workload</span><span>status</span><span>expires</span><span>spend</span></div>
-                <div class="resource-row"><span class="resource-name">game_7H9 <small>minecraft</small></span><span class="terminal-status">sleeping</span><span class="resource-meta">4h 12m</span><span class="resource-spend">$0.00</span></div>
-                <div class="resource-row"><span class="resource-name">deploy_482 <small>web + postgres</small></span><span class="terminal-status">running</span><span class="resource-meta">47h 56m</span><span class="resource-spend">$0.18 / $3</span></div>
-                <div class="resource-row"><span class="resource-name">workspace_123 <small>agent</small></span><span class="terminal-status">testing</span><span class="resource-meta">10h 41m</span><span class="resource-spend">$0.86 / $2</span></div>
+              <div class="resource-list" aria-label="Active cloud workloads" data-i18n="aria-label">
+                <div class="resource-row resource-head" aria-hidden="true"><span data-i18n>workload</span><span data-i18n>status</span><span data-i18n>expires</span><span data-i18n>spend</span></div>
+                <div class="resource-row"><span class="resource-name">game_7H9 <small>minecraft</small></span><span class="terminal-status" data-i18n>sleeping</span><span class="resource-meta">4h 12m</span><span class="resource-spend">$0.00</span></div>
+                <div class="resource-row"><span class="resource-name">deploy_482 <small>web + postgres</small></span><span class="terminal-status" data-i18n>running</span><span class="resource-meta">47h 56m</span><span class="resource-spend">$0.18 / $3</span></div>
+                <div class="resource-row"><span class="resource-name">workspace_123 <small data-i18n>agent</small></span><span class="terminal-status" data-i18n>testing</span><span class="resource-meta">10h 41m</span><span class="resource-spend">$0.86 / $2</span></div>
               </div>
             </div>
 
             <div class="cli-block">
               <div class="cli-command"><span aria-hidden="true">$</span><code>cloud usage</code></div>
               <dl class="usage-output">
-                <div><dt>credits</dt><dd>$7.42</dd></div>
-                <div><dt>running</dt><dd>$1.04</dd></div>
-                <div><dt>limits</dt><dd>$5.00</dd></div>
+                <div><dt data-i18n>credits</dt><dd>$7.42</dd></div>
+                <div><dt data-i18n>running</dt><dd>$1.04</dd></div>
+                <div><dt data-i18n>limits</dt><dd>$5.00</dd></div>
               </dl>
             </div>
 
             <div class="cli-block">
               <div class="cli-command"><span aria-hidden="true">$</span><code>cloud logs workspace_123 --tail 3</code></div>
-              <div class="log-output"><span><time>18:42:14</time> workspace resumed on worker-04</span><span><time>18:42:19</time> npm test</span><span><time>18:42:51</time> 128 passed · 0 failed</span></div>
+              <div class="log-output"><span><time>18:42:14</time> <span data-i18n>workspace resumed on worker-04</span></span><span><time>18:42:19</time> npm test</span><span><time>18:42:51</time> <span data-i18n>128 passed · 0 failed</span></span></div>
             </div>
           </div>
         </div>
@@ -666,16 +677,168 @@
 
     <section class="closing" aria-labelledby="closing-title">
       <div class="shell closing-grid">
-        <h2 id="closing-title">Infrastructure in one prompt.</h2>
+        <h2 id="closing-title" data-i18n>Infrastructure in one prompt.</h2>
         <div class="closing-side">
-          <p>Host. Deploy. Continue.</p>
-          <a href="#demo">Try the demo ↑</a>
+          <p data-i18n>Host. Deploy. Continue.</p>
+          <a href="#demo" data-i18n>Try the demo ↑</a>
         </div>
       </div>
     </section>
   </main>
 
   <script>
+    var activeLanguage = 'en';
+    var spanish = {
+      "Ask your agent for infrastructure. See the price and limits. Approve the exact plan. Then it runs.": "Pedile infraestructura a tu agente. Revisá el precio y los límites. Aprobá el plan exacto. Después se ejecuta.",
+      "Agent cloud | Infrastructure in one prompt": "Agent cloud | Infraestructura en un solo prompt",
+      "Skip to content": "Ir al contenido",
+      "Agent cloud home": "Inicio de Agent cloud",
+      "Primary navigation": "Navegación principal",
+      "Capabilities": "Funciones",
+      "Language": "Idioma",
+      "Infrastructure in one prompt.": "Infraestructura en un solo prompt.",
+      "Host a server, deploy a repository, or keep working in the cloud from Claude, Codex, or Grok. See the price and limits. Approve the hash. Then it runs.": "Alojá un servidor, desplegá un repositorio o seguí trabajando en la nube desde Claude, Codex o Grok. Revisá el precio y los límites. Aprobá el hash. Después se ejecuta.",
+      "Try the demo": "Probá la demo",
+      "Choose a cloud flow": "Elegí qué hacer en la nube",
+      "Flow": "Acción",
+      "Choose an agent": "Elegí un agente",
+      "Agent": "Agente",
+      "Interactive agent conversation": "Conversación interactiva con el agente",
+      "What one prompt can run": "Lo que podés ejecutar con un prompt",
+      "Spin up a ready-to-play server for tonight. It sleeps when empty and shuts down on schedule.": "Creá un servidor listo para jugar esta noche. Se suspende cuando queda vacío y se apaga a la hora programada.",
+      "Game server templates": "Plantillas de servidores de juegos",
+      "Ship an app, database, or worker from one prompt. Keep it private and set a hard spending limit.": "Desplegá una aplicación, una base de datos o un worker con un prompt. Mantenelo privado y fijá un límite de gasto.",
+      "Deployment templates": "Plantillas de despliegue",
+      "Send your workspace to the cloud and keep the agent working after your laptop closes.": "Llevá tu espacio de trabajo a la nube y dejá que el agente siga trabajando después de cerrar tu laptop.",
+      "Supported coding agents and editors": "Agentes de programación y editores compatibles",
+      "Use the CLI.": "Usá la CLI.",
+      "The same commands work for you and your agent.": "Los mismos comandos sirven para vos y para tu agente.",
+      "Cloud command line example": "Ejemplo de la línea de comandos de Cloud",
+      "Active cloud workloads": "Recursos activos en la nube",
+      "workload": "recurso",
+      "status": "estado",
+      "expires": "vence",
+      "spend": "gasto",
+      "sleeping": "suspendido",
+      "running": "en ejecución",
+      "agent": "agente",
+      "testing": "en pruebas",
+      "credits": "créditos",
+      "limits": "límites",
+      "workspace resumed on worker-04": "espacio de trabajo reanudado en worker-04",
+      "128 passed · 0 failed": "128 pruebas pasaron · 0 fallaron",
+      "Host. Deploy. Continue.": "Alojá. Desplegá. Continuá.",
+      "Try the demo ↑": "Probá la demo ↑",
+      "Host": "Alojar",
+      "Deploy": "Desplegar",
+      "Continue": "Continuar",
+      "Host a private Minecraft Java server for eight friends tonight. Use the free tier if available, stop it after six hours, and keep the world for seven days.": "Alojá esta noche un servidor privado de Minecraft Java para ocho amigos. Usá el plan gratuito si está disponible, detenelo después de seis horas y conservá el mundo durante siete días.",
+      "Host a private Minecraft server for eight friends tonight. Stop it after six hours.": "Alojá esta noche un servidor privado de Minecraft para ocho amigos. Detenelo después de seis horas.",
+      "Template": "Plantilla",
+      "Access": "Acceso",
+      "Limit": "Límite",
+      "Price": "Precio",
+      "Approve this server with its six-hour lease and free-tier limits.": "Aprobá este servidor con su duración de seis horas y los límites del plan gratuito.",
+      "I'll check capacity and show the exact plan. Nothing runs yet.": "Voy a comprobar la capacidad y mostrarte el plan exacto. Todavía no se ejecuta nada.",
+      "Plan ready · no charge · no server created": "Plan listo · sin cargo · no se creó ningún servidor",
+      "Private allowlist · Java 1.21": "Lista de acceso privada · Java 1.21",
+      "Start": "Inicio",
+      "Spare capacity or queue": "Capacidad disponible o cola",
+      "6-hour TTL · idle suspend": "TTL de 6 horas · suspensión por inactividad",
+      "World": "Mundo",
+      "Retain 7 days": "Conservar durante 7 días",
+      "USD 0.00 · free tier": "USD 0.00 · plan gratuito",
+      "Approve this exact server plan. Public routing and the six-hour lease start only after approval.": "Aprobá este plan exacto del servidor. El enrutamiento público y el período de seis horas empiezan recién después de la aprobación.",
+      "Placement reserved · worker-03": "Ubicación reservada · worker-03",
+      "Paper ready · 8 slots · event_seq 12": "Paper listo · 8 lugares · event_seq 12",
+      "Server ready": "Servidor listo",
+      "address  mc-7h9.play.example\nstatus   online\nexpires  today at 23:30\nworld    retained until Sep 7": "dirección  mc-7h9.play.example\nestado     en línea\nvence      hoy a las 23:30\nmundo      conservado hasta el 7 de sep.",
+      "Deploy this repository with Postgres. Keep the preview private for 48 hours and cap total spend at USD 3.": "Desplegá este repositorio con Postgres. Mantené la vista previa privada durante 48 horas y limitá el gasto total a USD 3.",
+      "Deploy this repository with Postgres. Keep it private and cap spend at USD 3.": "Desplegá este repositorio con Postgres. Mantenelo privado y limitá el gasto a USD 3.",
+      "Source": "Origen",
+      "Runtime": "Entorno",
+      "Estimate": "Estimación",
+      "Approve this private deployment with its USD 3 spending cap.": "Aprobá este despliegue privado con su límite de gasto de USD 3.",
+      "I'll inspect the repository and price the build. Nothing runs yet.": "Voy a inspeccionar el repositorio y calcular el costo del build. Todavía no se ejecuta nada.",
+      "Plan ready · repository read only · no build started": "Plan listo · repositorio en modo de solo lectura · no se inició ningún build",
+      "Current repository · branch main": "Repositorio actual · rama main",
+      "Node 22 · approved builder": "Node 22 · builder aprobado",
+      "Data": "Datos",
+      "Postgres 16 · 2 GB volume": "Postgres 16 · volumen de 2 GB",
+      "Private WorkOS preview": "Vista previa privada con WorkOS",
+      "48-hour TTL · USD 3.00 cap": "TTL de 48 horas · límite de USD 3.00",
+      "USD 1.42 from prepaid credits": "USD 1.42 de créditos prepagos",
+      "Approve this hash to reserve up to USD 3. Any image, access, or lifetime change creates a new plan.": "Aprobá este hash para reservar hasta USD 3. Cualquier cambio en la imagen, el acceso o la duración crea un plan nuevo.",
+      "Build started · idempotency key accepted": "Build iniciado · clave de idempotencia aceptada",
+      "Build passed · database healthy · route active": "Build aprobado · base de datos operativa · ruta activa",
+      "Private preview ready": "Vista previa privada lista",
+      "url      https://pr-482.preview.example\naccess   heyfardo organization\nspent    USD 0.18 of USD 3.00\nexpires  in 47h 56m": "url      https://pr-482.preview.example\nacceso   organización heyfardo\ngastado  USD 0.18 de USD 3.00\nvence    en 47 h 56 min",
+      "Move this task to the cloud and keep running the tests after I close my laptop. Stop after 12 hours and never spend more than USD 2.": "Mové esta tarea a la nube y seguí ejecutando las pruebas después de que cierre mi laptop. Detenela después de 12 horas y no gastes más de USD 2.",
+      "Move this task to the cloud for 12 hours and stop at USD 2.": "Mové esta tarea a la nube durante 12 horas y detenela al llegar a USD 2.",
+      "Workspace": "Espacio",
+      "Context": "Contexto",
+      "Secrets": "Secretos",
+      "Approve this handoff with its 12-hour lease and USD 2 cap.": "Aprobá este traspaso con su duración de 12 horas y su límite de USD 2.",
+      "I'll package the workspace and context, then show the exact cloud plan. Nothing uploads yet.": "Voy a empaquetar el espacio de trabajo y el contexto, y después te mostraré el plan exacto para la nube. Todavía no se sube nada.",
+      "Handoff verified · 183 MB · no upload started": "Traspaso verificado · 183 MB · no se inició ninguna carga",
+      "Repository + branch + local changes": "Repositorio + rama + cambios locales",
+      "Task summary + test evidence + env manifest": "Resumen de la tarea + evidencia de pruebas + manifiesto del entorno",
+      "Current agent in a durable workspace": "Agente actual en un espacio de trabajo persistente",
+      "Only explicitly approved credentials": "Solo credenciales aprobadas explícitamente",
+      "12-hour TTL · USD 2.00 cap": "TTL de 12 horas · límite de USD 2.00",
+      "USD 0.86 from prepaid credits": "USD 0.86 de créditos prepagos",
+      "Approve this handoff and spending cap. The platform moves workspace state and context, not a proprietary session format.": "Aprobá este traspaso y el límite de gasto. La plataforma mueve el estado y el contexto del espacio de trabajo, no un formato de sesión propietario.",
+      "Snapshot uploaded · worker-04 reserved": "Snapshot subido · worker-04 reservado",
+      "Agent resumed · tests running · event_seq 184": "Agente reanudado · pruebas en ejecución · event_seq 184",
+      "Work continues in the cloud": "El trabajo continúa en la nube",
+      "workspace  workspace_123\nbranch     feat/billing-policy\nstatus     tests running\nreturn     agent cloud pull workspace_123": "espacio    workspace_123\nrama       feat/billing-policy\nestado     pruebas en ejecución\nvolver     agent cloud pull workspace_123",
+      "auto mode on": "modo automático activado",
+      "(shift+tab to cycle) · ← for agents": "(shift+tab para cambiar) · ← para agentes",
+      "plan approval": "aprobación del plan",
+      "Called": "Llamó a",
+      "Run": "Ejecutar",
+      "Plan approval": "Aprobación del plan",
+      "Approve": "Aprobar",
+      "Yes": "Sí",
+      "No, change the plan": "No, cambiar el plan",
+      "Approve exact plan?": "¿Aprobar el plan exacto?",
+      "Approve and run": "Aprobar y ejecutar",
+      "Reject and add feedback": "Rechazar y agregar comentarios",
+      "Press enter to confirm or esc to go back": "Presioná Enter para confirmar o Esc para volver",
+      "Approve exact plan": "Aprobar el plan exacto",
+      "Yes, proceed": "Sí, continuar",
+      "No, reject": "No, rechazar",
+      "select": "seleccionar",
+      "cancel": "cancelar",
+      "Turn completed. ": "Turno completado. ",
+      "✓ Exact plan approved": "✓ Plan exacto aprobado",
+      "matched.": "coincide.",
+      "matched. Applying once with the approved limits.": "coincide. Se aplicará una sola vez con los límites aprobados.",
+      "Plan rejected": "Plan rechazado",
+      "Nothing ran and no credits were held. Ask the agent to change the plan.": "No se ejecutó nada ni se retuvieron créditos. Pedile al agente que cambie el plan."
+    };
+    var localizedElements = Array.from(document.querySelectorAll('[data-i18n]'), function(element) {
+      var attribute = element.dataset.i18n;
+      return { element: element, attribute: attribute, text: attribute ? element.getAttribute(attribute) : element.textContent };
+    });
+
+    function t(text) {
+      return activeLanguage === 'es' && Object.hasOwn(spanish, text) ? spanish[text] : text;
+    }
+
+    function selectLanguage(language) {
+      activeLanguage = language;
+      document.documentElement.lang = language;
+      localizedElements.forEach(function(item) {
+        if (item.attribute) item.element.setAttribute(item.attribute, t(item.text));
+        else item.element.textContent = t(item.text);
+      });
+      document.querySelectorAll('[data-language]').forEach(function(button) {
+        button.setAttribute('aria-pressed', String(button.dataset.language === language));
+      });
+      startDemo();
+    }
+
     var activeFlow = 'host';
     var activeAgent = 'claude';
     var demoRun = 0;
@@ -786,7 +949,7 @@
     }
 
     function demoPrompt(flow) {
-      return isCompactDemo() ? flow.mobilePrompt : flow.prompt;
+      return t(isCompactDemo() ? flow.mobilePrompt : flow.prompt);
     }
 
     function schedule(callback, delay) {
@@ -807,11 +970,11 @@
       var caretClass = typing ? ' typing-caret' : '';
       var html = '';
       if (activeAgent === 'claude') {
-        html = '<div class="claude-composer"><div class="effort">◉ xhigh · /effort</div><div class="claude-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="composer-mode"><b>⏵⏵ auto mode on</b><span class="composer-hint"> (shift+tab to cycle) · ← for agents</span></div></div>';
+        html = '<div class="claude-composer"><div class="effort">◉ xhigh · /effort</div><div class="claude-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="composer-mode"><b>⏵⏵ ' + t('auto mode on') + '</b><span class="composer-hint"> ' + t('(shift+tab to cycle) · ← for agents') + '</span></div></div>';
       } else if (activeAgent === 'codex') {
         html = '<div class="codex-composer"><div class="codex-input"><span class="caret" aria-hidden="true">›</span><span class="composer-text' + caretClass + '">' + safe + '</span></div><div class="codex-meta-line">' + escapeHTML(agents.codex.model) + '<span class="codex-path"> · ~/projects/agent-cloud</span></div></div>';
       } else {
-        html = '<div class="grok-composer"><div class="grok-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span><span class="grok-model">' + escapeHTML(agents.grok.model) + ' · plan approval</span></div></div>';
+        html = '<div class="grok-composer"><div class="grok-input"><span aria-hidden="true">❯</span><span class="composer-text' + caretClass + '">' + safe + '</span><span class="grok-model">' + escapeHTML(agents.grok.model) + ' · ' + t('plan approval') + '</span></div></div>';
       }
       document.getElementById('termComposer').innerHTML = html;
     }
@@ -822,42 +985,43 @@
     }
 
     function assistantMessage(text) {
-      return '<div class="assistant-message">' + escapeHTML(text) + '</div>';
+      return '<div class="assistant-message">' + escapeHTML(t(text)) + '</div>';
     }
 
     function toolLine(name, result) {
+      result = t(result);
       if (activeAgent === 'claude') {
         return '<div class="native-tool claude-tool"><div><span class="native-marker" aria-hidden="true">⏺</span><span class="native-command">' + escapeHTML(name) + '</span></div><div class="native-tool-result"><span aria-hidden="true">⎿</span> ' + escapeHTML(result) + '</div></div>';
       }
       if (activeAgent === 'codex') {
-        return '<div class="native-tool codex-tool"><div><span class="native-marker" aria-hidden="true">•</span><span class="native-command">Called ' + escapeHTML(name) + '</span></div><div class="native-tool-result">└ ' + escapeHTML(result) + '</div></div>';
+        return '<div class="native-tool codex-tool"><div><span class="native-marker" aria-hidden="true">•</span><span class="native-command">' + t('Called') + ' ' + escapeHTML(name) + '</span></div><div class="native-tool-result">└ ' + escapeHTML(result) + '</div></div>';
       }
-      return '<div class="native-tool grok-tool"><div><span class="native-marker" aria-hidden="true">◆</span><strong>Run ' + escapeHTML(name) + '</strong> <span class="hook-count">[hooks: <b>1</b>]</span></div><div class="native-tool-result">' + escapeHTML(result) + '</div></div>';
+      return '<div class="native-tool grok-tool"><div><span class="native-marker" aria-hidden="true">◆</span><strong>' + t('Run') + ' ' + escapeHTML(name) + '</strong> <span class="hook-count">[hooks: <b>1</b>]</span></div><div class="native-tool-result">' + escapeHTML(result) + '</div></div>';
     }
 
     function planBox(flow) {
       var output = ['plan_id  plan_' + flow.hash.slice(7, 15), 'hash     ' + flow.hash];
       var plan = isCompactDemo() ? flow.plan.filter(function(pair) { return flow.mobilePlanLabels.includes(pair[0]); }) : flow.plan;
-      plan.forEach(function(pair) { output.push(pair[0].toLowerCase().padEnd(9, ' ') + pair[1]); });
+      plan.forEach(function(pair) { output.push(t(pair[0]).toLowerCase().padEnd(activeLanguage === 'es' ? 12 : 9, ' ') + t(pair[1])); });
       var prefix = activeAgent === 'claude' ? '<span aria-hidden="true">⎿</span> ' : activeAgent === 'codex' ? '└ ' : '';
       return '<div class="native-plan agent-native-output">' + prefix + '<pre>' + escapeHTML(output.join('\n')) + '</pre></div>';
     }
 
     function approvalBox(flow) {
       var hash = escapeHTML(flow.hash);
-      var approval = escapeHTML(isCompactDemo() ? flow.mobileApproval : flow.approval);
+      var approval = escapeHTML(t(isCompactDemo() ? flow.mobileApproval : flow.approval));
       if (activeAgent === 'claude') {
-        return '<fieldset class="native-permission claude-permission approval-box" id="approvalBox"><legend>Plan approval</legend><div class="approval-title">Approve ' + hash + '</div><div class="approval-copy">' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">❯</span> 1. Yes</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. No, change the plan</button></div></fieldset>';
+        return '<fieldset class="native-permission claude-permission approval-box" id="approvalBox"><legend>' + t('Plan approval') + '</legend><div class="approval-title">' + t('Approve') + ' ' + hash + '</div><div class="approval-copy">' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">❯</span> 1. ' + t('Yes') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. ' + t('No, change the plan') + '</button></div></fieldset>';
       }
       if (activeAgent === 'codex') {
-        return '<div class="native-permission codex-permission approval-box" id="approvalBox"><div class="approval-title">Approve exact plan?</div><div class="approval-copy">' + hash + ' · ' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">›</span> 1. Approve and run</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. Reject and add feedback</button></div><div class="permission-hint">Press enter to confirm or esc to go back</div></div>';
+        return '<div class="native-permission codex-permission approval-box" id="approvalBox"><div class="approval-title">' + t('Approve exact plan?') + '</div><div class="approval-copy">' + hash + ' · ' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()"><span aria-hidden="true">›</span> 1. ' + t('Approve and run') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()"><span aria-hidden="true">&nbsp;</span> 2. ' + t('Reject and add feedback') + '</button></div><div class="permission-hint">' + t('Press enter to confirm or esc to go back') + '</div></div>';
       }
-      return '<div class="native-permission grok-permission approval-box" id="approvalBox"><div class="permission-rule"><div class="approval-title">Approve exact plan</div><div class="approval-copy">' + hash + '<br>' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()">1 <span aria-hidden="true">(●)</span> Yes, proceed</button><button class="reject-plan" type="button" onclick="rejectPlan()">2 <span aria-hidden="true">(○)</span> No, reject</button></div></div><div class="permission-hint"><b>1/2</b>:select │ Ctrl+c:cancel</div></div>';
+      return '<div class="native-permission grok-permission approval-box" id="approvalBox"><div class="permission-rule"><div class="approval-title">' + t('Approve exact plan') + '</div><div class="approval-copy">' + hash + '<br>' + approval + '</div><div class="approval-actions native-options"><button class="approve-plan selected-option" type="button" onclick="approvePlan()">1 <span aria-hidden="true">(●)</span> ' + t('Yes, proceed') + '</button><button class="reject-plan" type="button" onclick="rejectPlan()">2 <span aria-hidden="true">(○)</span> ' + t('No, reject') + '</button></div></div><div class="permission-hint"><b>1/2</b>:' + t('select') + ' │ Ctrl+c:' + t('cancel') + '</div></div>';
     }
 
     function resultBox(flow) {
       var lead = activeAgent === 'grok' && !isCompactDemo() ? 'Turn completed. ' : '';
-      return '<div class="native-result"><div class="assistant-message">' + escapeHTML(lead + flow.resultTitle + '.') + '</div><pre>' + escapeHTML(flow.result) + '</pre></div>';
+      return '<div class="native-result"><div class="assistant-message">' + escapeHTML(t(lead) + t(flow.resultTitle) + '.') + '</div><pre>' + escapeHTML(t(flow.result)) + '</pre></div>';
     }
 
     function appendTranscript(html) {
@@ -914,7 +1078,7 @@
       var agent = agents[activeAgent];
       var terminal = document.querySelector('.term-window');
       terminal.className = 'term-window agent-' + activeAgent;
-      document.getElementById('terminalTitle').textContent = agent.label + ' · ' + flow.label;
+      document.getElementById('terminalTitle').textContent = agent.label + ' · ' + t(flow.label);
       document.getElementById('transcript').innerHTML = '';
       renderSessionHeader();
       renderComposer('', true);
@@ -943,8 +1107,8 @@
       var box = document.getElementById('approvalBox');
       if (!box || box.classList.contains('approved')) return;
       box.classList.add('approved');
-      box.querySelector('.approval-title').textContent = '✓ Exact plan approved';
-      box.querySelector('.approval-copy').textContent = isCompactDemo() ? flow.hash + ' matched.' : flow.hash + ' matched. Applying once with the approved limits.';
+      box.querySelector('.approval-title').textContent = t('✓ Exact plan approved');
+      box.querySelector('.approval-copy').textContent = flow.hash + ' ' + t(isCompactDemo() ? 'matched.' : 'matched. Applying once with the approved limits.');
       flow.postTools.forEach(function(pair, index) {
         schedule(function() {
           if (run !== demoRun) return;
@@ -960,8 +1124,8 @@
     function rejectPlan() {
       var box = document.getElementById('approvalBox');
       if (!box) return;
-      box.querySelector('.approval-title').textContent = 'Plan rejected';
-      box.querySelector('.approval-copy').textContent = 'Nothing ran and no credits were held. Ask the agent to change the plan.';
+      box.querySelector('.approval-title').textContent = t('Plan rejected');
+      box.querySelector('.approval-copy').textContent = t('Nothing ran and no credits were held. Ask the agent to change the plan.');
       box.querySelector('.approval-actions').remove();
     }
 
@@ -983,8 +1147,14 @@
     document.querySelectorAll('[data-agent]').forEach(function(button) {
       button.addEventListener('click', function() { selectAgent(button.dataset.agent); });
     });
+    document.querySelectorAll('[data-language]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        if (button.dataset.language !== activeLanguage) selectLanguage(button.dataset.language);
+      });
+    });
     compactMedia.addEventListener('change', startDemo);
-    window.addEventListener('load', startDemo);
+    var browserLanguage = (navigator.languages || [navigator.language]).find(function(language) { return /^(es|en)(-|$)/i.test(language); }) || 'en';
+    selectLanguage(browserLanguage.slice(0, 2).toLowerCase());
   </script>
 </body>
 </html>
