@@ -33,6 +33,23 @@ Status is owner-scoped. It reports the current `cold` allocation path and only
 includes `endpoint` after the reconciler has observed Minecraft protocol
 readiness and changed the state to `running`. Warm allocation remains TES-153.
 
+## REST start and stop
+
+Start and stop record the owner's intent and return `202` before any runtime
+call:
+
+```sh
+curl -X POST "$CONTROL_URL/v1/servers/<server_id>/stop" \
+  -H "Authorization: Bearer $CLOUD_MACHINE_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"client_request_id":"stop-one"}'
+```
+
+`/start` takes the same body. Both use the durable `client_request_id` rules
+above, so a retried request returns the original response. Stop reports
+`stopping` until the reconciler observes an exited workload; start reuses the
+server's world and endpoint.
+
 `Reconciler.reconcile` observes the runtime before applying one missing effect.
 The runtime receives the stable logical server and world identities. Its
 create, start and stop operations must be idempotent under those identities.

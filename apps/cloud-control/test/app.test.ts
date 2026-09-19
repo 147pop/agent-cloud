@@ -104,6 +104,9 @@ function createControl() {
         : null,
       mutate: async (principalId: string, requestId: string, mutation: Mutation) => {
         assert.equal(principalId, "principal-1");
+        if (mutation.operation !== "create" && mutation.server_id !== SERVER_ID) {
+          throw new ControlError("server_not_found", 404);
+        }
         mutations.push(mutation);
         return { request_id: requestId, server_id: SERVER_ID, state: "queued" as const,
           status_url: `/v1/servers/${SERVER_ID}` };
@@ -223,6 +226,60 @@ test("REST create validates authentication, JSON size, fields and EULA", async (
     });
     assert.equal(invalidId.status, 400);
     assert.deepEqual(await invalidId.json(), { error: "invalid_server_id" });
+    assert.equal(fake.mutations.length, 0);
+  });
+});
+
+test("REST start and stop record asynchronous intent for an owned server", async () => {
+  const fake = createControl();
+  await withAuthenticatedServer(fake.control, async (origin) => {
+    const auth = { authorization: "Bearer operator-machine-token", "content-type": "application/json" };
+    for (const operation of ["stop", "start"] as const) {
+      const response = await fetch(`${origin}/v1/servers/${SERVER_ID}/${operation}`, {
+        method: "POST", headers: auth, body: JSON.stringify({ client_request_id: `${operation}-one` })
+      });
+      assert.equal(response.status, 202);
+      assert.deepEqual(await response.json(), {
+        request_id: `${operation}-one`,
+        server_id: SERVER_ID,
+        state: "queued",
+        status_url: `/v1/servers/${SERVER_ID}`
+      });
+    }
+    assert.deepEqual(fake.mutations, [
+      { operation: "stop", server_id: SERVER_ID },
+      { operation: "start", server_id: SERVER_ID }
+    ]);
+  });
+});
+
+test("REST start and stop validate authentication, identifiers and body", async () => {
+  const fake = createControl();
+  await withAuthenticatedServer(fake.control, async (origin) => {
+    const auth = { authorization: "Bearer operator-machine-token", "content-type": "application/json" };
+    const body = JSON.stringify({ client_request_id: "stop-one" });
+    const cases: Array<[string, RequestInit, number, object]> = [
+      [SERVER_ID, { method: "POST", headers: { "content-type": "application/json" }, body },
+        401, { error: "unauthorized" }],
+      ["not-a-uuid", { method: "POST", headers: auth, body }, 400, { error: "invalid_server_id" }],
+      [SERVER_ID, { method: "POST", headers: { authorization: auth.authorization }, body },
+        415, { error: "unsupported_media_type" }],
+      [SERVER_ID, { method: "POST", headers: auth, body: "{" }, 400, { error: "invalid_json" }],
+      [SERVER_ID, { method: "POST", headers: auth, body: "{}" }, 400, { error: "invalid_request" }],
+      [SERVER_ID, { method: "POST", headers: auth, body: JSON.stringify({ client_request_id: 1 }) },
+        400, { error: "invalid_request" }],
+      ["22e65178-a174-4ef3-8434-18765925c08f", { method: "POST", headers: auth, body },
+        404, { error: "server_not_found" }]
+    ];
+    for (const [serverId, request, status, expected] of cases) {
+      const response = await fetch(`${origin}/v1/servers/${serverId}/stop`, request);
+      assert.equal(response.status, status);
+      assert.deepEqual(await response.json(), expected);
+    }
+    const wrongMethod = await fetch(`${origin}/v1/servers/${SERVER_ID}/start`, {
+      headers: { authorization: auth.authorization }
+    });
+    assert.equal(wrongMethod.status, 404);
     assert.equal(fake.mutations.length, 0);
   });
 });
