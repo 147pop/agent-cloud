@@ -2,7 +2,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 
 import { parseBearerToken, type Principal } from "./auth.js";
 import type { ControlStore } from "./database.js";
-import { ControlError } from "./lifecycle.js";
+import { ControlError, type ServerRecord } from "./lifecycle.js";
 
 type ControlApi = Pick<ControlStore, "authenticate" | "mutate" | "getServer">;
 
@@ -75,13 +75,142 @@ function parseLifecycleRequest(body: unknown): { client_request_id: string } {
   return { client_request_id: (body as { client_request_id: string }).client_request_id };
 }
 
+function parseServerId(body: unknown): string {
+  const serverId = typeof body === "object" && body !== null ?
+    (body as Record<string, unknown>).server_id : undefined;
+  if (typeof serverId !== "string") throw new ControlError("invalid_request", 400);
+  if (!UUID.test(serverId)) throw new ControlError("invalid_server_id", 400);
+  return serverId;
+}
+
+function statusBody(server: ServerRecord) {
+  return {
+    server_id: server.id,
+    name: server.logical_name,
+    state: server.state,
+    allocation_path: "cold",
+    status_url: `/v1/servers/${server.id}`,
+    ...(server.state === "running" && server.endpoint !== null ?
+      { endpoint: server.endpoint } : {})
+  };
+}
+
+function errorBody(error: ControlError) {
+  return error.code === "action_required" ?
+    { error: error.code, action_required: "accept_eula" } : { error: error.code };
+}
+
 function sendError(response: ServerResponse, error: unknown): void {
   if (error instanceof ControlError) {
-    sendJson(response, error.status, error.code === "action_required" ?
-      { error: error.code, action_required: "accept_eula" } : { error: error.code });
+    sendJson(response, error.status, errorBody(error));
     return;
   }
   sendJson(response, 500, { error: "internal_error" });
+}
+
+const MCP_PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26"];
+const MCP_STRING = { type: "string" };
+const MCP_SERVER_ID = { type: "string", format: "uuid" };
+const MCP_LIFECYCLE_SCHEMA = {
+  type: "object",
+  properties: { client_request_id: MCP_STRING, server_id: MCP_SERVER_ID },
+  required: ["client_request_id", "server_id"]
+};
+const MCP_TOOLS = [
+  {
+    name: "minecraft_create",
+    description: "Create the Paper Minecraft server asynchronously. Poll minecraft_status " +
+      "until state is running; the endpoint is the playable address.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        client_request_id: MCP_STRING,
+        name: MCP_STRING,
+        eula_accepted: { type: "boolean", description: "Must be true to accept the Minecraft EULA." }
+      },
+      required: ["client_request_id", "name", "eula_accepted"]
+    }
+  },
+  {
+    name: "minecraft_start",
+    description: "Start a stopped server with its existing world. Asynchronous.",
+    inputSchema: MCP_LIFECYCLE_SCHEMA
+  },
+  {
+    name: "minecraft_stop",
+    description: "Stop a server after saving its world. Asynchronous.",
+    inputSchema: MCP_LIFECYCLE_SCHEMA
+  },
+  {
+    name: "minecraft_status",
+    description: "Report server state. Includes endpoint only once Minecraft is playable.",
+    inputSchema: { type: "object", properties: { server_id: MCP_SERVER_ID }, required: ["server_id"] }
+  }
+];
+
+function rpcError(id: unknown, code: number, message: string) {
+  return { jsonrpc: "2.0", id: id ?? null, error: { code, message } };
+}
+
+async function callTool(control: ControlApi, principal: Principal, name: string, args: unknown) {
+  if (name === "minecraft_create") {
+    const input = parseCreateRequest(args);
+    return control.mutate(principal.id, input.client_request_id, {
+      operation: "create", name: input.name, eula_accepted: true
+    });
+  }
+  if (name === "minecraft_start" || name === "minecraft_stop") {
+    const serverId = parseServerId(args);
+    const input = parseLifecycleRequest(args);
+    return control.mutate(principal.id, input.client_request_id, {
+      operation: name === "minecraft_start" ? "start" : "stop", server_id: serverId
+    });
+  }
+  return statusBody(await control.getServer(principal.id, parseServerId(args)));
+}
+
+// Stateless Streamable HTTP: one JSON-RPC message per POST, answered as JSON.
+async function handleMcp(message: unknown, principal: Principal, control: ControlApi) {
+  if (typeof message !== "object" || message === null || Array.isArray(message) ||
+      (message as Record<string, unknown>).jsonrpc !== "2.0") {
+    return rpcError(null, -32600, "invalid_request");
+  }
+  const { id, method, params } = message as Record<string, unknown>;
+  if (id === undefined || method === undefined) return null;
+  if ((typeof id !== "string" && typeof id !== "number") || typeof method !== "string") {
+    return rpcError(id, -32600, "invalid_request");
+  }
+  const input = typeof params === "object" && params !== null ? params as Record<string, unknown> : {};
+
+  if (method === "initialize") {
+    const requested = input.protocolVersion;
+    return { jsonrpc: "2.0", id, result: {
+      protocolVersion: typeof requested === "string" && MCP_PROTOCOL_VERSIONS.includes(requested) ?
+        requested : MCP_PROTOCOL_VERSIONS[0],
+      capabilities: { tools: {} },
+      serverInfo: { name: "cloud-control", version: "0.0.0" }
+    } };
+  }
+  if (method === "ping") return { jsonrpc: "2.0", id, result: {} };
+  if (method === "tools/list") return { jsonrpc: "2.0", id, result: { tools: MCP_TOOLS } };
+  if (method !== "tools/call") return rpcError(id, -32601, "method_not_found");
+
+  const name = input.name;
+  if (typeof name !== "string" || !MCP_TOOLS.some(tool => tool.name === name)) {
+    return rpcError(id, -32602, "unknown_tool");
+  }
+  try {
+    const result = await callTool(control, principal, name, input.arguments ?? {});
+    return { jsonrpc: "2.0", id, result: {
+      content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result
+    } };
+  } catch (error) {
+    if (!(error instanceof ControlError)) return rpcError(id, -32603, "internal_error");
+    const body = errorBody(error);
+    return { jsonrpc: "2.0", id, result: {
+      content: [{ type: "text", text: JSON.stringify(body) }], structuredContent: body, isError: true
+    } };
+  }
 }
 
 export function handleRequest(
@@ -144,16 +273,34 @@ export function createRequestHandler(control: ControlApi) {
         if (principal === null) return;
         const serverId = match[1]!;
         if (!UUID.test(serverId)) throw new ControlError("invalid_server_id", 400);
-        const server = await control.getServer(principal.id, serverId);
-        sendJson(response, 200, {
-          server_id: server.id,
-          name: server.logical_name,
-          state: server.state,
-          allocation_path: "cold",
-          status_url: `/v1/servers/${server.id}`,
-          ...(server.state === "running" && server.endpoint !== null ?
-            { endpoint: server.endpoint } : {})
-        });
+        sendJson(response, 200, statusBody(await control.getServer(principal.id, serverId)));
+        return;
+      }
+
+      if (path === "/mcp") {
+        if (request.method !== "POST") {
+          response.setHeader("allow", "POST");
+          sendJson(response, 405, { error: "method_not_allowed" });
+          return;
+        }
+        const principal = await requirePrincipal(request, response, control);
+        if (principal === null) return;
+        let message: unknown;
+        try {
+          message = await readJson(request);
+        } catch (error) {
+          if (!(error instanceof ControlError)) throw error;
+          sendJson(response, error.status,
+            rpcError(null, error.code === "invalid_json" ? -32700 : -32600, error.code));
+          return;
+        }
+        const reply = await handleMcp(message, principal, control);
+        if (reply === null) {
+          response.writeHead(202);
+          response.end();
+        } else {
+          sendJson(response, 200, reply);
+        }
         return;
       }
 
