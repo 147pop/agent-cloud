@@ -63,7 +63,19 @@ Stop becomes `stopped` only after Paper exits through its save grace period.
 
 Agents can run the same flow over MCP at `http://127.0.0.1:3000/mcp` with the
 same bearer header, using the `minecraft_create`, `minecraft_status`,
-`minecraft_stop` and `minecraft_start` tools. The CLI client is later F3 work.
+`minecraft_stop` and `minecraft_start` tools.
+
+Operators can use the CLI with the same token from the environment:
+
+```sh
+npm ci && npm run build
+set -a; . ./.env; set +a
+npm run -s cloud -- create one --accept-eula --wait
+npm run -s cloud -- stop <server_id> --wait
+npm run -s cloud -- start <server_id> --wait
+```
+
+It prints the request ID and state and, after readiness, the game endpoint.
 
 Stop the installation safely:
 
