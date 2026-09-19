@@ -49,8 +49,18 @@ curl -X POST http://127.0.0.1:3000/v1/servers \
 ```
 
 Poll the returned `status_url` until it reports `running` and an endpoint.
-The later F3 tasks add REST start/stop, MCP and CLI clients over this same
-durable contract.
+Stop and start the same server, and its world, with a new request ID each time:
+
+```sh
+curl -X POST http://127.0.0.1:3000/v1/servers/<server_id>/stop \
+  -H "Authorization: Bearer $CLOUD_MACHINE_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"client_request_id":"stop-one"}'
+```
+
+Stop becomes `stopped` only after Paper exits through its save grace period.
+`/start` takes the same body. The later F3 tasks add MCP and CLI clients over
+this same durable contract.
 
 Stop the installation safely:
 

@@ -67,6 +67,14 @@ function parseCreateRequest(body: unknown): { client_request_id: string; name: s
   return { client_request_id: input.client_request_id, name: input.name };
 }
 
+function parseLifecycleRequest(body: unknown): { client_request_id: string } {
+  if (typeof body !== "object" || body === null || Array.isArray(body) ||
+      typeof (body as Record<string, unknown>).client_request_id !== "string") {
+    throw new ControlError("invalid_request", 400);
+  }
+  return { client_request_id: (body as { client_request_id: string }).client_request_id };
+}
+
 function sendError(response: ServerResponse, error: unknown): void {
   if (error instanceof ControlError) {
     sendJson(response, error.status, error.code === "action_required" ?
@@ -110,6 +118,21 @@ export function createRequestHandler(control: ControlApi) {
         const input = parseCreateRequest(await readJson(request));
         const accepted = await control.mutate(principal.id, input.client_request_id, {
           operation: "create", name: input.name, eula_accepted: true
+        });
+        sendJson(response, 202, accepted);
+        return;
+      }
+
+      const lifecycle = request.method === "POST" ?
+        /^\/v1\/servers\/([^/]+)\/(start|stop)$/.exec(path) : null;
+      if (lifecycle !== null) {
+        const principal = await requirePrincipal(request, response, control);
+        if (principal === null) return;
+        const serverId = lifecycle[1]!;
+        if (!UUID.test(serverId)) throw new ControlError("invalid_server_id", 400);
+        const input = parseLifecycleRequest(await readJson(request));
+        const accepted = await control.mutate(principal.id, input.client_request_id, {
+          operation: lifecycle[2] as "start" | "stop", server_id: serverId
         });
         sendJson(response, 202, accepted);
         return;
