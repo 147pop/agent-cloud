@@ -60,6 +60,27 @@ Results carry the REST response as `structuredContent`; control errors return
 `isError: true` with the same `error` codes. Point an MCP client at
 `$CONTROL_URL/mcp` with an `Authorization: Bearer` header.
 
+## CLI
+
+`src/cli.ts` is a REST client for operators. It runs on the host, reads
+`CLOUD_MACHINE_TOKEN` and `CLOUD_CONTROL_URL` (default
+`http://127.0.0.1:3000`) from the environment, and never receives Docker or
+host credentials. From the repository root, after `npm run build`:
+
+```sh
+npm run -s cloud -- create one --accept-eula --wait
+npm run -s cloud -- status <server_id>
+npm run -s cloud -- stop <server_id> --wait
+npm run -s cloud -- start <server_id> --wait
+```
+
+Each command prints JSON lines. Mutations print the accepted response, which
+includes `request_id`. Pass `--request-id` to retry with the same durable
+`client_request_id`; without it a new UUID is used. `--wait` polls status and
+prints it once the server is `running`, with its endpoint, or `stopped`. It
+has no deadline; interrupt it to stop polling. Control errors go to stderr
+with exit code 1; usage and missing-token errors exit with code 2.
+
 `Reconciler.reconcile` observes the runtime before applying one missing effect.
 The runtime receives the stable logical server and world identities. Its
 create, start and stop operations must be idempotent under those identities.
@@ -83,8 +104,8 @@ start waits until all old Pods are gone. The private host port also reserves
 the single qualified worker slot during termination.
 
 Readiness comes from the recipe's Minecraft protocol probe. TES-69 returns an
-internal Service address; TES-77 supplies the stable external endpoint. REST
-and MCP already use the shared contract. The CLI belongs to F3. PostgreSQL tests use a controllable fake
+internal Service address; TES-77 supplies the stable external endpoint. REST,
+MCP and the CLI use the shared contract. PostgreSQL tests use a controllable fake
 runtime; live Kubernetes acceptance has a separate operator probe.
 
 From the repository root:
