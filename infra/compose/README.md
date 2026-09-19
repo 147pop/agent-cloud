@@ -77,6 +77,21 @@ npm run -s cloud -- start <server_id> --wait
 
 It prints the request ID and state and, after readiness, the game endpoint.
 
+## Game endpoint
+
+`game-1` publishes one fixed port, `GAME_PORT` (default `25565`), on
+`GAME_BIND_ADDRESS` (default `127.0.0.1`), and `cloud-control` reports exactly
+that address. The endpoint appears in status only while the server is
+`running`, which requires a successful Minecraft protocol status request.
+Stop/start, container recreation and `setup.sh` reapplication keep the same
+address and world volume. Point a Minecraft client at the reported
+`host:port`.
+
+LAN or public exposure is an explicit operator choice: set
+`GAME_BIND_ADDRESS` to one reachable host interface address (setup rejects
+`0.0.0.0` and `::`), rerun setup and verify that path separately, including
+firewalls. Optional DNS names are covered by TES-75.
+
 Stop the installation safely:
 
 ```sh

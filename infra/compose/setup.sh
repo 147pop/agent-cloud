@@ -16,6 +16,14 @@ if [ "$eula" != "TRUE" ]; then
   exit 1
 fi
 
+bind="$(sed -n 's/^GAME_BIND_ADDRESS=//p' "$ENV_FILE" | tail -n 1)"
+case "$bind" in
+  0.0.0.0|::|'[::]')
+    printf '%s\n' "GAME_BIND_ADDRESS must be one host address that clients can reach, not $bind" >&2
+    exit 1
+    ;;
+esac
+
 compose=(docker compose --env-file "$ENV_FILE" -f "$REPOSITORY_ROOT/compose.yaml")
 "${compose[@]}" config --quiet
 "${compose[@]}" up -d postgres
