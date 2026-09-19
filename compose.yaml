@@ -43,10 +43,14 @@ services:
       CLOUD_GAME_HOST: ${GAME_BIND_ADDRESS:-127.0.0.1}
       CLOUD_GAME_PORT: ${GAME_PORT:-25565}
       DOCKER_SOCKET_PATH: /var/run/docker.sock
+      CLOUD_STORAGE_PATH: /game-world
+      CLOUD_STORAGE_MIN_FREE_MIB: ${STORAGE_MIN_FREE_MIB:-2048}
     ports:
       - "127.0.0.1:${CONTROL_API_PORT:-3000}:3000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      # Read-only, only to measure free space on the world's filesystem.
+      - game-world:/game-world:ro
     restart: "no"
 
   game-1:
@@ -80,6 +84,8 @@ services:
       timeout: 5s
       start_period: 10s
       retries: 60
+    cpus: 2
+    mem_limit: 3g
     stop_grace_period: 120s
     restart: "no"
 

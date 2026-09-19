@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { assertFreeSpace } from "../src/database.js";
 import { digestMachineToken, parseBearerToken, validateMachineToken } from "../src/auth.js";
 import { migrations } from "../src/migrations.js";
 
@@ -35,4 +36,12 @@ test("minimum schema encodes ownership, active-run and durable idempotency const
   assert.match(sql, /FOREIGN KEY \(server_id, principal_id\) REFERENCES servers\(id, principal_id\)/);
   assert.equal(migrations[0]?.name, "minimum_control_plane");
   assert.doesNotMatch(sql, /docker/i);
+});
+
+test("storage reserve rejects creation below the free-space boundary", async () => {
+  const stat = async () => ({ bavail: 1024, bsize: 4096 });
+  await assert.doesNotReject(assertFreeSpace(null, stat));
+  await assert.doesNotReject(assertFreeSpace({ path: "/data", minFreeBytes: 4 * 1024 * 1024 }, stat));
+  await assert.rejects(assertFreeSpace({ path: "/data", minFreeBytes: 4 * 1024 * 1024 + 1 }, stat),
+    { code: "insufficient_storage", status: 507 });
 });

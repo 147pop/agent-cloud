@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import { statfs } from "node:fs/promises";
 
 import pg from "pg";
 
@@ -15,8 +16,27 @@ export interface IdempotencyRecord {
   readonly responseBody: unknown;
 }
 
+export interface StorageReserve {
+  readonly path: string;
+  readonly minFreeBytes: number;
+}
+
+// Refuses new worlds before the filesystem holding them drops below the reserve.
+export async function assertFreeSpace(
+  reserve: StorageReserve | null,
+  stat: (path: string) => Promise<{ bavail: number; bsize: number }> = statfs
+): Promise<void> {
+  if (reserve === null) return;
+  const stats = await stat(reserve.path);
+  if (stats.bavail * stats.bsize < reserve.minFreeBytes) throw new ControlError("insufficient_storage", 507);
+}
+
 export class ControlStore {
-  public constructor(private readonly pool: pg.Pool, private readonly maxServers = 0) {}
+  public constructor(
+    private readonly pool: pg.Pool,
+    private readonly maxServers = 0,
+    private readonly storage: StorageReserve | null = null
+  ) {}
 
   public static fromEnvironment(environment: NodeJS.ProcessEnv): ControlStore {
     const host = requireValue(environment, "DATABASE_HOST");
@@ -31,7 +51,7 @@ export class ControlStore {
       user: requireValue(environment, "DATABASE_USER"),
       password: requireValue(environment, "DATABASE_PASSWORD"),
       max: 10
-    }), capacityValue(environment.CLOUD_MAX_SERVERS));
+    }), capacityValue(environment.CLOUD_MAX_SERVERS), storageValue(environment));
   }
 
   public async initialize(machineToken: string): Promise<Principal> {
@@ -138,6 +158,7 @@ export class ControlStore {
       }
       let server: ServerRecord;
       if (mutation.operation === "create") {
+        await assertFreeSpace(this.storage);
         if (this.maxServers > 0) {
           await client.query("SELECT pg_advisory_xact_lock(hashtextextended($1, 0))", [principalId]);
           const count = await client.query<{ count: string }>(
@@ -289,4 +310,12 @@ function capacityValue(value: string | undefined): number {
   const parsed = Number(value);
   if (!Number.isInteger(parsed) || parsed < 0) throw new Error("CLOUD_MAX_SERVERS must be a non-negative integer");
   return parsed;
+}
+
+function storageValue(environment: NodeJS.ProcessEnv): StorageReserve | null {
+  const path = environment.CLOUD_STORAGE_PATH;
+  if (path === undefined || path.length === 0) return null;
+  const mib = Number(environment.CLOUD_STORAGE_MIN_FREE_MIB ?? "2048");
+  if (!Number.isInteger(mib) || mib < 0) throw new Error("CLOUD_STORAGE_MIN_FREE_MIB must be a non-negative integer");
+  return { path, minFreeBytes: mib * 1024 * 1024 };
 }

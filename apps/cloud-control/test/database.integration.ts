@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
+import { tmpdir } from "node:os";
 import test from "node:test";
 
 import pg from "pg";
@@ -114,6 +115,32 @@ test("PostgreSQL preserves machine identity, ownership and operation records", a
         assert.equal(rejected.reason.status, 409);
       } finally {
         await limited.close();
+      }
+    });
+
+    await t.test("low free space rejects a new world without recording the request", async () => {
+      const principal = randomUUID();
+      await pool.query("INSERT INTO principals (id, subject) VALUES ($1, $2)", [principal, `storage-${principal}`]);
+      const full = new ControlStore(new pg.Pool(options), 1, { path: tmpdir(), minFreeBytes: Number.MAX_SAFE_INTEGER });
+      const roomy = new ControlStore(new pg.Pool(options), 1, { path: tmpdir(), minFreeBytes: 0 });
+      try {
+        await assert.rejects(
+          full.mutate(principal, "storage-one", { operation: "create", name: "one", eula_accepted: true }),
+          { code: "insufficient_storage", status: 507 }
+        );
+        const counts = await pool.query(
+          `SELECT (SELECT count(*) FROM servers WHERE principal_id = $1)::int AS servers,
+                  (SELECT count(*) FROM idempotency_keys WHERE principal_id = $1)::int AS keys`, [principal]
+        );
+        assert.deepEqual(counts.rows, [{ servers: 0, keys: 0 }]);
+        const created = await roomy.mutate(principal, "storage-one", { operation: "create", name: "one", eula_accepted: true });
+        assert.deepEqual(
+          await full.mutate(principal, "storage-one", { operation: "create", name: "one", eula_accepted: true }),
+          created
+        );
+      } finally {
+        await full.close();
+        await roomy.close();
       }
     });
   } finally {

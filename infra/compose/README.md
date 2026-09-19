@@ -11,6 +11,38 @@ two-host evidence and is not required by this quickstart.
 - Docker Engine or Docker Desktop with Compose v2
 - An operator-owned machine token with at least 20 bytes
 - Explicit acceptance of the Minecraft EULA
+- Resources available to Docker: at least 2 CPUs, 4 GiB RAM and 4 GiB free
+  disk (see below)
+
+### Resources and storage
+
+`game-1` runs with the qualified profile limits: 2 CPUs, a 2 GiB Java heap
+and a 3 GiB container memory limit. `cloud-control` and PostgreSQL have no
+limits. Measured on macOS 26.5 arm64 with Docker Desktop (TES-86 evidence),
+with the server running and idle:
+
+| Component | RAM | CPU | Disk |
+| --- | --- | --- | --- |
+| `game-1` (Paper) | 1.6 GiB, capped at 3 GiB | 3–12% of one CPU | 347 MB image, 245 MB world volume |
+| `cloud-control` | 20 MiB | < 1% | 349 MB image |
+| PostgreSQL | 25 MiB | < 1% | 638 MB image, 48 MB volume |
+
+Plan for 3.5 GiB RAM for the stack plus the Docker and host overhead. With
+Docker Desktop this budget comes from the Docker VM (Settings → Resources),
+not the whole computer; keep at least 4 GiB assigned to it. The images need
+about 1.4 GB. Player activity grows the world. These numbers are one idle
+measurement, not a performance qualification for every host; the active
+two-player qualification remains the Oracle A1 evidence.
+
+Named volumes have no filesystem quota: the world and PostgreSQL share the
+free space of the filesystem that holds Docker data (`/var/lib/docker` on
+Linux, the Docker Desktop disk image on macOS). `cloud-control` mounts the
+world volume read-only and refuses to create a new server while that
+filesystem has less than `STORAGE_MIN_FREE_MIB` (default 2048) free, with
+`507 {"error":"insufficient_storage"}`. The refusal changes no data and does
+not consume the request ID, so the same request can be retried after freeing
+space. The check applies to creation only; a running world is not stopped
+when space runs low, so monitor free space.
 
 Copy the example configuration and edit it without committing the result:
 
