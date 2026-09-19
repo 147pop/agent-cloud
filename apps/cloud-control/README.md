@@ -50,6 +50,16 @@ above, so a retried request returns the original response. Stop reports
 `stopping` until the reconciler observes an exited workload; start reuses the
 server's world and endpoint.
 
+## MCP tools
+
+`POST /mcp` serves MCP Streamable HTTP in stateless JSON mode with the same
+bearer machine token. It exposes `minecraft_create`, `minecraft_start`,
+`minecraft_stop` and `minecraft_status`. Their arguments match the REST bodies
+plus `server_id`, and they call the same durable mutation and status code.
+Results carry the REST response as `structuredContent`; control errors return
+`isError: true` with the same `error` codes. Point an MCP client at
+`$CONTROL_URL/mcp` with an `Authorization: Bearer` header.
+
 `Reconciler.reconcile` observes the runtime before applying one missing effect.
 The runtime receives the stable logical server and world identities. Its
 create, start and stop operations must be idempotent under those identities.
@@ -74,8 +84,7 @@ the single qualified worker slot during termination.
 
 Readiness comes from the recipe's Minecraft protocol probe. TES-69 returns an
 internal Service address; TES-77 supplies the stable external endpoint. REST
-create and status already use the shared contract. The remaining REST
-operations, MCP and CLI belong to F3. PostgreSQL tests use a controllable fake
+and MCP already use the shared contract. The CLI belongs to F3. PostgreSQL tests use a controllable fake
 runtime; live Kubernetes acceptance has a separate operator probe.
 
 From the repository root:

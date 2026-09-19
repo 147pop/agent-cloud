@@ -283,3 +283,141 @@ test("REST start and stop validate authentication, identifiers and body", async 
     assert.equal(fake.mutations.length, 0);
   });
 });
+
+async function mcp(origin: string, message: object, token = "operator-machine-token") {
+  return fetch(`${origin}/mcp`, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
+      accept: "application/json, text/event-stream"
+    },
+    body: JSON.stringify(message)
+  });
+}
+
+async function callTool(origin: string, name: string, args: object) {
+  const response = await mcp(origin, {
+    jsonrpc: "2.0", id: name, method: "tools/call", params: { name, arguments: args }
+  });
+  assert.equal(response.status, 200);
+  const reply = await response.json() as { id: string; result: {
+    content: Array<{ type: string; text: string }>; structuredContent: unknown; isError?: boolean
+  } };
+  assert.equal(reply.id, name);
+  assert.deepEqual(JSON.parse(reply.result.content[0]!.text), reply.result.structuredContent);
+  return reply.result;
+}
+
+test("MCP initializes and lists the four Minecraft tools", async () => {
+  await withAuthenticatedServer(createControl().control, async (origin) => {
+    const initialized = await mcp(origin, { jsonrpc: "2.0", id: 1, method: "initialize",
+      params: { protocolVersion: "2025-03-26", capabilities: {},
+        clientInfo: { name: "test", version: "1" } } });
+    assert.deepEqual(await initialized.json(), { jsonrpc: "2.0", id: 1, result: {
+      protocolVersion: "2025-03-26",
+      capabilities: { tools: {} },
+      serverInfo: { name: "cloud-control", version: "0.0.0" }
+    } });
+
+    const unknownVersion = await mcp(origin, { jsonrpc: "2.0", id: 2, method: "initialize",
+      params: { protocolVersion: "1999-01-01" } });
+    assert.equal(((await unknownVersion.json()) as { result: { protocolVersion: string } })
+      .result.protocolVersion, "2025-06-18");
+
+    const notified = await mcp(origin, { jsonrpc: "2.0", method: "notifications/initialized" });
+    assert.equal(notified.status, 202);
+    assert.equal(await notified.text(), "");
+
+    const listed = await mcp(origin, { jsonrpc: "2.0", id: 3, method: "tools/list" });
+    const tools = ((await listed.json()) as { result: { tools: Array<{ name: string }> } }).result.tools;
+    assert.deepEqual(tools.map(tool => tool.name),
+      ["minecraft_create", "minecraft_start", "minecraft_stop", "minecraft_status"]);
+  });
+});
+
+test("MCP tools run the shared lifecycle and gate the endpoint on readiness", async () => {
+  const fake = createControl();
+  await withAuthenticatedServer(fake.control, async (origin) => {
+    const accepted = (operation: string) => ({ request_id: `${operation}-one`, server_id: SERVER_ID,
+      state: "queued", status_url: `/v1/servers/${SERVER_ID}` });
+
+    const created = await callTool(origin, "minecraft_create",
+      { client_request_id: "create-one", name: "one", eula_accepted: true });
+    assert.equal(created.isError, undefined);
+    assert.deepEqual(created.structuredContent, accepted("create"));
+
+    const queued = await callTool(origin, "minecraft_status", { server_id: SERVER_ID });
+    assert.deepEqual(queued.structuredContent, { server_id: SERVER_ID, name: "one", state: "queued",
+      allocation_path: "cold", status_url: `/v1/servers/${SERVER_ID}` });
+
+    fake.setRunning();
+    const running = await callTool(origin, "minecraft_status", { server_id: SERVER_ID });
+    assert.deepEqual((running.structuredContent as { endpoint: unknown }).endpoint,
+      { host: "game.invalid", port: 30_001 });
+
+    for (const operation of ["stop", "start"]) {
+      const result = await callTool(origin, `minecraft_${operation}`,
+        { client_request_id: `${operation}-one`, server_id: SERVER_ID });
+      assert.deepEqual(result.structuredContent, accepted(operation));
+    }
+    assert.deepEqual(fake.mutations, [
+      { operation: "create", name: "one", eula_accepted: true },
+      { operation: "stop", server_id: SERVER_ID },
+      { operation: "start", server_id: SERVER_ID }
+    ]);
+  });
+});
+
+test("MCP reports control errors as tool errors without mutating", async () => {
+  const fake = createControl();
+  await withAuthenticatedServer(fake.control, async (origin) => {
+    const cases: Array<[string, object, object]> = [
+      ["minecraft_create", { client_request_id: "create-one", name: "one" },
+        { error: "action_required", action_required: "accept_eula" }],
+      ["minecraft_create", { name: "one", eula_accepted: true }, { error: "invalid_request" }],
+      ["minecraft_stop", { server_id: SERVER_ID }, { error: "invalid_request" }],
+      ["minecraft_start", { client_request_id: "start-one" }, { error: "invalid_request" }],
+      ["minecraft_start", { client_request_id: "start-one", server_id: "not-a-uuid" },
+        { error: "invalid_server_id" }],
+      ["minecraft_status", { server_id: "22e65178-a174-4ef3-8434-18765925c08f" },
+        { error: "server_not_found" }]
+    ];
+    for (const [name, args, expected] of cases) {
+      const result = await callTool(origin, name, args);
+      assert.equal(result.isError, true);
+      assert.deepEqual(result.structuredContent, expected);
+    }
+    assert.equal(fake.mutations.length, 0);
+  });
+});
+
+test("MCP requires the machine token and valid JSON-RPC", async () => {
+  await withAuthenticatedServer(createControl().control, async (origin) => {
+    const unauthorized = await mcp(origin, { jsonrpc: "2.0", id: 1, method: "tools/list" }, "wrong");
+    assert.equal(unauthorized.status, 401);
+    assert.equal(unauthorized.headers.get("www-authenticate"), "Bearer");
+
+    const get = await fetch(`${origin}/mcp`, { headers: { authorization: "Bearer operator-machine-token" } });
+    assert.equal(get.status, 405);
+
+    const parse = await fetch(`${origin}/mcp`, { method: "POST", body: "{",
+      headers: { authorization: "Bearer operator-machine-token", "content-type": "application/json" } });
+    assert.equal(parse.status, 400);
+    assert.deepEqual(await parse.json(),
+      { jsonrpc: "2.0", id: null, error: { code: -32700, message: "invalid_json" } });
+
+    const cases: Array<[object, object]> = [
+      [[{ jsonrpc: "2.0", id: 1, method: "ping" }], { id: null, error: { code: -32600, message: "invalid_request" } }],
+      [{ jsonrpc: "2.0", id: 2, method: "resources/list" }, { id: 2, error: { code: -32601, message: "method_not_found" } }],
+      [{ jsonrpc: "2.0", id: 3, method: "tools/call", params: { name: "docker_exec" } },
+        { id: 3, error: { code: -32602, message: "unknown_tool" } }],
+      [{ jsonrpc: "2.0", id: 4, method: "ping" }, { id: 4, result: {} }]
+    ];
+    for (const [message, expected] of cases) {
+      const response = await mcp(origin, message);
+      assert.equal(response.status, 200);
+      assert.deepEqual(await response.json(), { jsonrpc: "2.0", ...expected });
+    }
+  });
+});

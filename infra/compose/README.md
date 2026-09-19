@@ -59,8 +59,11 @@ curl -X POST http://127.0.0.1:3000/v1/servers/<server_id>/stop \
 ```
 
 Stop becomes `stopped` only after Paper exits through its save grace period.
-`/start` takes the same body. The later F3 tasks add MCP and CLI clients over
-this same durable contract.
+`/start` takes the same body.
+
+Agents can run the same flow over MCP at `http://127.0.0.1:3000/mcp` with the
+same bearer header, using the `minecraft_create`, `minecraft_status`,
+`minecraft_stop` and `minecraft_start` tools. The CLI client is later F3 work.
 
 Stop the installation safely:
 
