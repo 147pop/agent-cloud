@@ -40,7 +40,7 @@ services:
       CLOUD_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME:-cloud}
       CLOUD_COMPOSE_SERVICE: game-1
       CLOUD_GAME_CONTAINER_NAME: cloud-game-1
-      CLOUD_GAME_HOST: 127.0.0.1
+      CLOUD_GAME_HOST: ${GAME_BIND_ADDRESS:-127.0.0.1}
       CLOUD_GAME_PORT: ${GAME_PORT:-25565}
       DOCKER_SOCKET_PATH: /var/run/docker.sock
     ports:
@@ -71,7 +71,7 @@ services:
       CREATE_CONSOLE_IN_PIPE: "true"
       STOP_SERVER_ANNOUNCE_DELAY: "0"
     ports:
-      - "127.0.0.1:${GAME_PORT:-25565}:25565"
+      - "${GAME_BIND_ADDRESS:-127.0.0.1}:${GAME_PORT:-25565}:25565"
     volumes:
       - game-world:/data
     healthcheck:
