@@ -144,6 +144,28 @@ The one-server capacity limit is deliberate. A distinct second create returns
 `409 {"error":"capacity_unavailable"}` and cannot replace the existing owner,
 world or endpoint.
 
+## Journey automation
+
+`infra/compose/journey.sh` automates the complete agent-to-play journey
+against one clean Compose installation: setup, typed-error checks, REST
+create and status polling, a real Minecraft protocol handshake, MCP tools,
+CLI use, a world marker across stop and start, second-create capacity and a
+safe shutdown that preserves the named volumes.
+
+```sh
+bash infra/compose/journey.sh --accept-eula
+bash infra/compose/journey.sh --accept-eula --clone /tmp/cloud-journey
+```
+
+The script refuses to run when `cloud-*` containers exist; pass `--fresh` to
+destroy the named volumes first (destructive). It reads the same `.env` as
+setup and generates one with random credentials when missing, never printing
+the values. `--clone DIR` clones the current checkout to prove the journey
+from a fresh tree; `--no-install` skips `npm ci` and `npm run build` for
+repeat runs. Each step prints its own duration and the script exits non-zero
+on the first failure. F4.1 evidence lives in
+`infra/evidence/tes-155-agent-to-play-journey.md`.
+
 ## Verification
 
 Run package checks from the repository root:
