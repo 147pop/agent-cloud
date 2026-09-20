@@ -166,6 +166,27 @@ repeat runs. Each step prints its own duration and the script exits non-zero
 on the first failure. F4.1 evidence lives in
 `infra/evidence/tes-155-agent-to-play-journey.md`.
 
+## Trials automation
+
+`infra/compose/trials.sh` runs the F4.2 adversarial trials on one clean
+Compose installation with the same flags: three distinct creates race for
+the single server slot, repeated mutation keys return the one recorded
+effect, a changed body on a used key conflicts, the control process is
+restarted while a start and a stop converge, and the game container is
+force-recreated while keeping the same world and endpoint.
+
+```sh
+bash infra/compose/trials.sh --accept-eula
+bash infra/compose/trials.sh --accept-eula --clone /tmp/cloud-trials
+```
+
+After each trial the script asserts that the Docker container state, the
+durable PostgreSQL rows (`servers`, `runs`, `idempotency_keys`) and the
+endpoint returned to clients agree, and that exactly one `cloud-game-1`
+container and at most one active run exist. Both scripts share
+`journey-lib.sh`. F4.2 evidence lives in
+`infra/evidence/tes-156-persistence-idempotency-restart.md`.
+
 ## Verification
 
 Run package checks from the repository root:
