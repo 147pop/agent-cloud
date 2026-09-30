@@ -1,6 +1,6 @@
 # Minecraft benchmarks
 
-This directory contains the historical E0 study and the optimized free-profile qualification. [Catalog entries](../../catalog/README.md) describe their status. [Linear](https://linear.app/workspace/issue/TES-140) tracks qualification of the optimized free profile.
+This directory contains the historical E0 study and the optimized free-profile qualification. [Catalog entries](../../catalog/README.md) describe their status. Linear tracks qualification of the optimized free profile.
 
 ## Results
 
@@ -30,10 +30,10 @@ The move from `infra/benchmark` preserved every exported evidence file. `source_
 
 | Run | Source references |
 | --- | --- |
-| Vanilla acceptance | [Recipe and runner at 050c761](https://github.com/pjcdz/cloud/tree/050c76141f415c522967cdea2790547ed393422c/infra/benchmark) |
-| Oracle Paper acceptance | [run.py at 396d001](https://github.com/pjcdz/cloud/blob/396d0011964254985b662c44f2ddb7dadd645739/infra/benchmark/run.py), [players.js at e731fcd](https://github.com/pjcdz/cloud/blob/e731fcdc2530240fb83b8264a5d370aff92edf5b/infra/benchmark/players.js), base recipe and lockfile from [050c761](https://github.com/pjcdz/cloud/tree/050c76141f415c522967cdea2790547ed393422c/infra/benchmark) |
-| Contabo Paper attempts | [Runner, players and 2-core recipe at e731fcd](https://github.com/pjcdz/cloud/tree/e731fcdc2530240fb83b8264a5d370aff92edf5b/infra/benchmark); the 3-core attempt used [this base recipe at 050c761](https://github.com/pjcdz/cloud/blob/050c76141f415c522967cdea2790547ed393422c/infra/benchmark/compose.yml) |
-| Paced network run | [network.py at 050c761](https://github.com/pjcdz/cloud/blob/050c76141f415c522967cdea2790547ed393422c/infra/benchmark/network.py) with the application guard from [run.py at e731fcd](https://github.com/pjcdz/cloud/blob/e731fcdc2530240fb83b8264a5d370aff92edf5b/infra/benchmark/run.py) |
+| Vanilla acceptance | [Recipe and runner at 050c761](https://github.com/147pop/agent-cloud/tree/66df2c084f1593d90666288663f0929239723320/infra/benchmark) |
+| Oracle Paper acceptance | [run.py at 396d001](https://github.com/147pop/agent-cloud/blob/fb02ddcc79e581866b24064ebb74eeadf45bb55b/infra/benchmark/run.py), [players.js at e731fcd](https://github.com/147pop/agent-cloud/blob/a060f508be38e259e7f0201c6fe54a86cd377021/infra/benchmark/players.js), base recipe and lockfile from [050c761](https://github.com/147pop/agent-cloud/tree/66df2c084f1593d90666288663f0929239723320/infra/benchmark) |
+| Contabo Paper attempts | [Runner, players and 2-core recipe at e731fcd](https://github.com/147pop/agent-cloud/tree/a060f508be38e259e7f0201c6fe54a86cd377021/infra/benchmark); the 3-core attempt used [this base recipe at 050c761](https://github.com/147pop/agent-cloud/blob/66df2c084f1593d90666288663f0929239723320/infra/benchmark/compose.yml) |
+| Paced network run | [network.py at 050c761](https://github.com/147pop/agent-cloud/blob/66df2c084f1593d90666288663f0929239723320/infra/benchmark/network.py) with the application guard from [run.py at e731fcd](https://github.com/147pop/agent-cloud/blob/a060f508be38e259e7f0201c6fe54a86cd377021/infra/benchmark/run.py) |
 
 Profiles and raw files retain their original names and historical decisions. The [catalog](../../catalog/README.md) states whether a profile is currently eligible for an offer.
 
@@ -64,7 +64,7 @@ Hardware observations from September 4 and 5, 2026:
 | Oracle `VM.Standard.A1.Flex` | Santiago, `sa-santiago-1` | 4 OCPU, Neoverse-N1, ARM64 | 23.41 GiB | Ubuntu 24.04.4, cgroup v2 |
 | Contabo | US inferred from GeoIP; provider datacenter unconfirmed | 4 vCPU, AMD EPYC, x86-64 | 7.76 GiB | Ubuntu 24.04.4, cgroup v2 |
 
-The game resource limits are recorded separately in the results table and profiles. Current operator access and full host records are maintained privately in [TES-53](https://linear.app/workspace/issue/TES-53). Historical measurements retain the test endpoints they recorded. These observations are not a live inventory.
+The game resource limits are recorded separately in the results table and profiles. Current operator access and full host records are maintained privately in TES-53. Historical measurements retain the test endpoints they recorded. These observations are not a live inventory.
 
 | Requirement | Oracle | Contabo |
 | --- | --- | --- |

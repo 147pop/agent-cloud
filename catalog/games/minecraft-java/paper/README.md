@@ -20,7 +20,7 @@ The benchmark recipe uses offline operator bots, creative mode and private RCON.
 
 The [controlled free comparison](../../../../benchmarks/minecraft/free-profile-results.md) uses Minecraft 26.2 build 121, two CPU quota units, a 2 GiB heap, a 3 GiB container limit and native tick percentiles. Its [recipe and profile](../../../../benchmarks/minecraft/free-profile.md) are separate from the older study. Two nearby synthetic players passed both repetitions, including populated worlds and clean backup/restore.
 
-Paper also passed two repetitions with player routes 256 blocks apart. The longer density workload passed twice with one instance and two players. Two instances failed the RCON response cut during a save; this does not establish the host's physical maximum. The [profile](../../../../benchmarks/minecraft/free-profile.json) records the owner's acceptance of the synthetic result and its E1 scope. No gameplay plugins were added to the comparison. Spectrum implementation and authenticated external play are final public-opening checks in [TES-18](https://linear.app/workspace/issue/TES-18).
+Paper also passed two repetitions with player routes 256 blocks apart. The longer density workload passed twice with one instance and two players. Two instances failed the RCON response cut during a save; this does not establish the host's physical maximum. The [profile](../../../../benchmarks/minecraft/free-profile.json) records the owner's acceptance of the synthetic result and its E1 scope. No gameplay plugins were added to the comparison. Spectrum implementation and authenticated external play are final public-opening checks in TES-18.
 
 ## Gameplay differences
 

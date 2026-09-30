@@ -1,11 +1,15 @@
 # Security
 
-Cloud is in pre-beta development and has no supported production release. The [architecture](docs/architecture.md#trust-boundaries) describes intended controls; it does not certify a deployed service.
+Agent Cloud is in pre-beta development. The supported release is the single-host [Docker Compose foundation](infra/compose/README.md); there is no managed production service yet. The [architecture](docs/architecture.md#trust-boundaries) describes intended controls; it does not certify a deployed service.
 
-## Report a concern
+## Report a vulnerability
 
-Repository collaborators should contact a maintainer through their existing private project channel for credentials, tenant data, exploitable vulnerabilities or private infrastructure details. Do not put that material in an issue, pull request, benchmark artifact or screenshot.
+Report vulnerabilities privately through [GitHub private vulnerability reporting](https://github.com/147pop/agent-cloud/security/advisories/new). Only the maintainers can see the report. Include the affected commit, component, expected behavior, observed behavior and a minimal reproduction with synthetic data.
 
-For a non-sensitive concern, open a [GitHub issue](https://github.com/pjcdz/cloud/issues). Include the affected commit, component, expected behavior, observed behavior and a minimal reproduction with synthetic data.
+Do not put credentials, tenant data, exploit details or private infrastructure details in a public issue, pull request, benchmark artifact or screenshot.
 
-An external private reporting channel has not yet been verified. Before the repository becomes public, the maintainers must configure and test that channel, then replace these collaborator-only reporting instructions with its exact address or link.
+For a non-sensitive concern, open a [GitHub issue](https://github.com/147pop/agent-cloud/issues).
+
+## Supported versions
+
+Only the current `main` branch receives fixes.

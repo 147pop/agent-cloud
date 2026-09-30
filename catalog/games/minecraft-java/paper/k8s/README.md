@@ -86,4 +86,4 @@ The scenarios below exercise interrupted stops and replacement to confirm these 
 
 ## Out of scope here
 
-Applying these manifests and running the lifecycle scenarios require evidence from the authorized hosts. Record the two-host lifecycle evidence in [TES-28](https://linear.app/workspace/issue/TES-28) and [TES-7](https://linear.app/workspace/issue/TES-7). [TES-18](https://linear.app/workspace/issue/TES-18) tracks Spectrum configuration, authenticated external play and reconnect after the functional invited beta, before public opening. See [the decision](../../../../../docs/decisions.md#d5-public-game-tcp-and-worker-ip-exposure-updated-2026-09-06).
+Applying these manifests and running the lifecycle scenarios require evidence from the authorized hosts. Record the two-host lifecycle evidence in TES-28 and TES-7. TES-18 tracks Spectrum configuration, authenticated external play and reconnect after the functional invited beta, before public opening. See [the decision](../../../../../docs/decisions.md#d5-public-game-tcp-and-worker-ip-exposure-updated-2026-09-06).

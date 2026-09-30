@@ -55,15 +55,15 @@ Agustín Pedernera recorded these approvals in the decision issues. The later bi
 
 | Decision | Accepted rule |
 | --- | --- |
-| [D1, scope](https://linear.app/workspace/issue/TES-15) | Account, EULA, MCP token, create, start, status, stop, stable address, queue, confirmation, AutoStop, persistence, automatic backup and operator-run restore. User-selected versions, plugins, console, world import and self-service restore follow later. |
-| [D2, audience](https://linear.app/workspace/issue/TES-16) | Known users, English and Spanish, at most 20 accounts, two weeks. |
-| [D3, free rules](https://linear.app/workspace/issue/TES-17) | One logical server and one active server per account, 4 GB soft storage threshold, five-minute AutoStop, five-minute turn confirmation and operator-confirmed deletion before replacement. |
-| [D4, recovery](https://linear.app/workspace/issue/TES-19) | The protection target is the last clean stop. Managed recovery acceptance must measure recovery before any duration is promised. The target does not guarantee preservation of an unfinished session. |
-| [D6, client](https://linear.app/workspace/issue/TES-20) | Codex with a revocable bearer token is the first client to qualify through the complete managed request-to-play journey. |
-| [D7, billing](https://linear.app/workspace/issue/TES-21) | The first beta is free. Billing follows 100 real runs, proven recovery between workers and measured costs. |
-| [D8, availability](https://linear.app/workspace/issue/TES-22) | Accept one control host for the invited beta, conditional on restoring it on a clean host and assigning an incident owner before opening the beta. |
+| D1, scope | Account, EULA, MCP token, create, start, status, stop, stable address, queue, confirmation, AutoStop, persistence, automatic backup and operator-run restore. User-selected versions, plugins, console, world import and self-service restore follow later. |
+| D2, audience | Known users, English and Spanish, at most 20 accounts, two weeks. |
+| D3, free rules | One logical server and one active server per account, 4 GB soft storage threshold, five-minute AutoStop, five-minute turn confirmation and operator-confirmed deletion before replacement. |
+| D4, recovery | The protection target is the last clean stop. Managed recovery acceptance must measure recovery before any duration is promised. The target does not guarantee preservation of an unfinished session. |
+| D6, client | Codex with a revocable bearer token is the first client to qualify through the complete managed request-to-play journey. |
+| D7, billing | The first beta is free. Billing follows 100 real runs, proven recovery between workers and measured costs. |
+| D8, availability | Accept one control host for the invited beta, conditional on restoring it on a clean host and assigning an incident owner before opening the beta. |
 
-These are acceptance rules, not completed test results. [D9's authorizations and incident ownership](https://linear.app/workspace/issue/TES-23) remain in the private project record.
+These are acceptance rules, not completed test results. D9's authorizations and incident ownership remain in the private project record.
 
 ## Free Paper profile, accepted 2026-09-06
 
@@ -93,7 +93,7 @@ results and are preserved in their original environment.
 
 ## D5, public game TCP and worker IP exposure, updated 2026-09-06
 
-The earlier comments in [TES-18](https://linear.app/workspace/issue/TES-18) differed between direct DNS and a Cloudflare-facing IP. The owners selected Cloudflare Spectrum in PR 4. Pablo then placed Spectrum implementation and validation at the end of the functional product work, before public opening. This is the current sequence.
+The earlier comments in TES-18 differed between direct DNS and a Cloudflare-facing IP. The owners selected Cloudflare Spectrum in PR 4. Pablo then placed Spectrum implementation and validation at the end of the functional product work, before public opening. This is the current sequence.
 
 | Stage | Required path and evidence |
 | --- | --- |
@@ -106,7 +106,7 @@ TES-18 stays open for that final gate after invited-beta acceptance. Synthetic c
 
 | Decision | Reason and consequence |
 | --- | --- |
-| License the repository under MIT | Pablo and Agustín Pedernera agreed a permissive license favoring reuse and third-party installation over restricting competing hosting offers. See [LICENSE](../LICENSE). Publication still requires a reproducible two-host foundation, its instructions and evidence, plus the third-party code and asset review and operational-identifier sanitization tracked in [TES-138](https://linear.app/workspace/issue/TES-138). |
+| License the repository under MIT | Pablo and Agustín Pedernera agreed a permissive license favoring reuse and third-party installation over restricting competing hosting offers. See [LICENSE](../LICENSE). Publication still requires a reproducible two-host foundation, its instructions and evidence, plus the third-party code and asset review and operational-identifier sanitization tracked in TES-138. |
 
 ## Open decisions
 
