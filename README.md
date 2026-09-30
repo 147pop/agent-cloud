@@ -30,27 +30,33 @@ cloud ▸ running · endpoint 127.0.0.1:25565   ← only after a real Minecraft 
 
 ## Quickstart
 
-You need Git, Docker with Compose v2, Node.js 22+ and at least 2 CPUs, 4 GiB RAM and 4 GiB free disk for Docker. Linux and macOS on arm64 and amd64 are supported.
+You need Git and Docker with Compose v2, with at least 2 CPUs, 4 GiB RAM and 4 GiB free disk for Docker. Linux and macOS on arm64 and amd64 are supported.
 
 ```sh
 git clone https://github.com/147pop/agent-cloud.git
 cd agent-cloud
-cp infra/compose/config.example.env .env && chmod 600 .env
-# edit .env: set CLOUD_MACHINE_TOKEN, POSTGRES_PASSWORD and MINECRAFT_EULA=TRUE
-bash infra/compose/setup.sh
+bash infra/compose/up.sh --accept-eula
 ```
 
-Then create your server from the CLI:
+About a minute later it prints `endpoint=127.0.0.1:25565`: open Minecraft Java Edition → Multiplayer → Direct Connection and paste it. `up.sh` generates private credentials in `.env`, starts the stack and waits for a real Minecraft handshake. Run it again anytime: it returns the same server and starts it if it was stopped. `--accept-eula` means you accept the [Minecraft EULA](https://aka.ms/MinecraftEULA).
 
-```sh
-npm ci && npm run build
-set -a; . ./.env; set +a
-npm run -s cloud -- create tonight --accept-eula --wait
+Stop safely with `bash infra/compose/shutdown.sh`; your world survives shutdowns, restarts and reinstalls. The full guide, including update, recovery and LAN exposure, is the [single-host Compose quickstart](infra/compose/README.md).
+
+### With an agent
+
+Open Claude Code, Codex or any agent that reads [`AGENTS.md`](AGENTS.md) in the cloned folder and say what you want:
+
+```text
+> I want a private Minecraft server to play tonight.
 ```
 
-Point a Minecraft Java client at the printed `host:port`. Stop safely with `bash infra/compose/shutdown.sh`; your world survives shutdowns, restarts and reinstalls.
+The agent asks one question, whether you accept the Minecraft EULA, then runs `up.sh` and hands you the endpoint. In a verified run from a clean clone this took one command and under a minute. After that it manages the server over MCP or the CLI:
 
-Setting `MINECRAFT_EULA=TRUE` means you accept the [Minecraft EULA](https://www.minecraft.net/eula). The full guide, including update, recovery and LAN exposure, is the [single-host Compose quickstart](infra/compose/README.md).
+| Client | Setup |
+| --- | --- |
+| Claude Code | Preconfigured in [`.mcp.json`](.mcp.json); approve the `agent-cloud` server once. The token is read from `.env`, never stored in the config. |
+| Codex | `codex mcp add agent-cloud --url http://127.0.0.1:3000/mcp --bearer-token-env-var CLOUD_MACHINE_TOKEN`, then start Codex after `set -a; . ./.env; set +a`. |
+| Anything else | `bash infra/compose/cloud.sh <create\|start\|stop\|status> …`: the CLI inside the container, no Node.js or token export needed. |
 
 <details>
 <summary><b>Prefer to watch the whole journey run by itself?</b></summary>
