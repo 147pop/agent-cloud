@@ -57,6 +57,28 @@ default. PostgreSQL, RCON and the Docker socket are private to the Compose
 project. Only `cloud-control` receives the Docker socket; the Paper container
 does not receive host or Docker credentials.
 
+## One command
+
+```sh
+bash infra/compose/up.sh --accept-eula
+```
+
+`up.sh` is the fastest path and the one agents use (see
+[AGENTS.md](../../AGENTS.md)). Without `.env` it requires `--accept-eula` and
+writes one with random credentials (mode 600, never printed); it refuses to
+generate new credentials over volumes left by a previous installation. It then
+runs `setup.sh`, creates the server `minecraft` (`--name` changes it) with the
+fixed request ID `up-<name>`, starts it if it is stopped and waits for
+`running` (`--timeout`, default 300 seconds). It ends with `READY`,
+`server_id=` and `endpoint=host:port`. Reruns replay the same create, so they
+return the same server instead of reporting capacity. A server created through
+another request ID is not adopted: manage it with its `server_id`.
+
+`bash infra/compose/cloud.sh <command> …` runs the CLI below inside the
+`cloud-control` container, so it needs neither host Node.js nor an exported
+token. `infra/compose/mcp-headers.sh` prints the MCP bearer header from
+`.env` for Claude Code's `headersHelper` in [.mcp.json](../../.mcp.json).
+
 ## Setup and lifecycle
 
 Run setup from the repository root:
