@@ -8,7 +8,7 @@ connectivity, deployment, readiness and a non-destructive reapply.
 
 It does not implement token authentication, control-plane lifecycle
 operations or the complete playable journey. Those are F2/F3 work and are
-accepted separately by [TES-148](https://linear.app/workspace/issue/TES-148/f4-accept-the-reproducible-two-host-minecraft-foundation).
+accepted separately by TES-148.
 This guide also does not configure public account onboarding, Cloudflare or
 any other managed-service integration.
 
@@ -55,7 +55,7 @@ commit on both hosts; do not mix a local checkout with a different branch or
 commit.
 
 ```bash
-git clone https://github.com/pjcdz/cloud.git cloud
+git clone https://github.com/147pop/agent-cloud.git cloud
 cd cloud
 read -r -p 'Verified commit or ref: ' VERIFIED_COMMIT
 if [[ -z "$VERIFIED_COMMIT" || "$VERIFIED_COMMIT" == -* ||

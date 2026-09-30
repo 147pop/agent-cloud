@@ -28,7 +28,7 @@ a non-destructive reapply using credentials owned by the operator.
 It does not claim token enforcement, lifecycle operations, API/MCP/CLI
 parity, allocation behavior or a playable endpoint. Those remain F2/F3 work,
 and the complete journey is accepted separately by
-[TES-148](https://linear.app/workspace/issue/TES-148/f4-accept-the-reproducible-two-host-minecraft-foundation).
+TES-148.
 
 No live reinstall was run for TES-152. The existing
 [TES-151 live installation evidence](tes-151-two-host-installation.md) records

@@ -1,51 +1,148 @@
-# Cloud
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="agent cloud — Infrastructure in a prompt." width="100%">
+</p>
 
-Cloud is a project for hosting game servers and curated applications on managed infrastructure. **Host** covers games. **Deploy** covers applications. The current supported local delivery is a reproducible Minecraft Java foundation on one computer with Docker Compose. It must turn one complete agent request into a playable server, preserve its world, and expose the same lifecycle through API, MCP and a CLI client.
+<p align="center">
+  <b>Ask an agent for a Minecraft server. Get a playable address. Keep your world.</b><br>
+  <sub>Infraestructura en un prompt · open source under the <a href="LICENSE">MIT license</a></sub>
+</p>
 
-The project is in pre-beta development. This repository contains benchmark tools and evidence, the selected Paper profile, the supported Compose installation, historical two-host K3s evidence, a packaged minimal TypeScript `cloud-control` application, design records and product prototypes. F3 and F4 still add and verify the complete external request-to-play journey.
+<p align="center">
+  <a href="#quickstart">Quickstart</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#what-is-proven">Evidence</a> ·
+  <a href="#roadmap">Roadmap</a> ·
+  <a href="#the-story">The story</a>
+</p>
 
-## Start here
+---
 
-| Read | Find |
+**Agent Cloud** is an open platform for requesting servers and digital services in natural language. The platform proposes what it will create, what limits apply and what it costs; nothing runs until a person approves it. The complexity stays in the platform, and the decision stays with the person.
+
+This first public release is the **reproducible foundation**: a single-host Docker Compose stack that turns one agent request into a real, playable Minecraft Java server with a persistent world, exposed through the same lifecycle over **REST**, **MCP** and a **CLI**.
+
+```text
+you  ▸ "I want a private Minecraft server to play tonight."
+agent ▸ minecraft_create { name: "tonight", eula_accepted: true }
+cloud ▸ 202 accepted · state: starting
+cloud ▸ running · endpoint 127.0.0.1:25565   ← only after a real Minecraft handshake
+```
+
+## Quickstart
+
+You need Git, Docker with Compose v2, Node.js 22+ and at least 2 CPUs, 4 GiB RAM and 4 GiB free disk for Docker. Linux and macOS on arm64 and amd64 are supported.
+
+```sh
+git clone https://github.com/147pop/agent-cloud.git
+cd agent-cloud
+cp infra/compose/config.example.env .env && chmod 600 .env
+# edit .env: set CLOUD_MACHINE_TOKEN, POSTGRES_PASSWORD and MINECRAFT_EULA=TRUE
+bash infra/compose/setup.sh
+```
+
+Then create your server from the CLI:
+
+```sh
+npm ci && npm run build
+set -a; . ./.env; set +a
+npm run -s cloud -- create tonight --accept-eula --wait
+```
+
+Point a Minecraft Java client at the printed `host:port`. Stop safely with `bash infra/compose/shutdown.sh`; your world survives shutdowns, restarts and reinstalls.
+
+Setting `MINECRAFT_EULA=TRUE` means you accept the [Minecraft EULA](https://www.minecraft.net/eula). The full guide, including update, recovery and LAN exposure, is the [single-host Compose quickstart](infra/compose/README.md).
+
+<details>
+<summary><b>Prefer to watch the whole journey run by itself?</b></summary>
+
+```sh
+bash infra/compose/journey.sh --accept-eula
+```
+
+It performs setup, REST create and status, a real Minecraft protocol handshake, the four MCP tools, the CLI, a world marker across stop and start, the second-create capacity check and a safe shutdown. Each step prints its duration, and the script stops at the first failure.
+
+</details>
+
+## How it works
+
+```mermaid
+flowchart LR
+    A["Agent<br/>(Codex, Claude, …)"] -- "MCP /mcp" --> C
+    U["Operator"] -- "CLI" --> C
+    H["Any client"] -- "REST /v1/servers" --> C
+    C["cloud-control<br/>TypeScript"] -- "durable intents,<br/>idempotency keys" --> P[("PostgreSQL")]
+    C -- "Docker API<br/>(labelled game only)" --> G["game-1<br/>Paper 26.2"]
+    G --- W[("world volume")]
+    Player(("Player")) -- "TCP 25565" --> G
+```
+
+| Piece | What it does |
 | --- | --- |
-| [Single-host Compose quickstart](infra/compose/README.md) | Supported local installation for PostgreSQL, `cloud-control` and one fixed Paper `game-1` service |
-| [Two-host clean-clone quickstart](infra/two-host/README.md) | Historical F1 guide for installing and safely reapplying `control-1` and `game-1`; the K3s path is retained as evidence |
-| [Architecture](docs/architecture.md) | How the two-host foundation and later managed service are intended to work |
-| [Decisions](docs/decisions.md) | Chosen directions, replaced assumptions and open decisions |
-| [Catalog](catalog/README.md) | Recipes, tested profiles and the requirements for offering them |
-| [Minecraft benchmarks](benchmarks/minecraft/README.md) | Recorded results, their limits and reproduction instructions |
-| [Infrastructure](infra/README.md) | Reusable infrastructure material and operator records |
-| [Contributing](CONTRIBUTING.md) | Local checks, changes and evidence for review |
+| **`cloud-control`** | One lifecycle contract: `create`, `status`, `start`, `stop`. It records every intent and its `client_request_id` in PostgreSQL before touching Docker, so retries return the original result and a control restart resumes the work. |
+| **Three interfaces, one contract** | REST at `/v1/servers`, MCP at `/mcp` (`minecraft_create`, `minecraft_status`, `minecraft_start`, `minecraft_stop`) and the `cloud` CLI, all behind the same bearer token. |
+| **Honest readiness** | An endpoint appears only after a real Minecraft protocol status request succeeds. |
+| **Safe stops** | Paper gets a 120-second save grace period. Named volumes keep PostgreSQL and the world across stop, recreation and reinstall. |
+| **Deliberate limits** | One logical server per installation. A second, distinct create returns `409 capacity_unavailable` and never replaces your world. Creation refuses with `507` when free disk falls below the reserved threshold. |
 
-## Delivery plan
+The selected game profile is Paper 26.2 with two CPUs, a 2 GiB heap and a 3 GiB container limit, qualified for two concurrent players. The Paper container never receives Docker or host credentials.
 
-The [Cloud reproducible Minecraft foundation](https://linear.app/workspace/project/cloud-reproducible-minecraft-foundation-b16cc0163842) project follows these results in order:
+## What is proven
 
-| Delivery | Required result |
+Every claim above has published evidence, recorded from a clean clone:
+
+| Result | Evidence |
 | --- | --- |
-| Evidence and selected profile | Preserve the completed two-host inventory and benchmark evidence and the selected Paper profile without treating them as platform proof |
-| Repository and two-host installation | From a clean clone, install `control-1` and `game-1` with operator-owned credentials |
-| Control plane and Kubernetes | Historical two-host delivery of the TypeScript `cloud-control`, PostgreSQL, K3s server, K3s agent, Paper and persistent world resources |
-| Docker runtime and Compose installation | Run the supported single-host Docker Compose delivery with one fixed Paper service, one persistent world, an explicit EULA gate and a clean-clone setup |
-| Agent access and warm allocation | Expose one lifecycle contract through API and MCP, use it from the CLI, and prove cold start and ready unowned warm assignment in separate trials |
-| Two-host acceptance | Complete an agent request to a playable endpoint and prove readiness, ownership, persistence, durable idempotency, control restart and bounded admission |
-| [Code publication](https://linear.app/workspace/project/cloud-public-source-release-02a68856fb69) | Publish the foundation code, two-host deployment instructions and evidence after a clean clone can reproduce the bounded result |
-| [Managed Minecraft beta](https://linear.app/workspace/project/cloud-managed-minecraft-beta-b8f51ce201e3) | Add public registration, managed edge access, public operating limits and disaster recovery, then use Cloudflare Spectrum as the final public-opening gate |
-| [Paid game catalog](https://linear.app/workspace/project/cloud-paid-game-catalog-7f20b95b4b7f) | Qualify more engines, configurations and games; measure cost and introduce billing against those profiles |
-| [Curated application hosting](https://linear.app/workspace/project/cloud-curated-application-hosting-fdd65aa7ca8c) | Qualify applications for their own persistence, networking, availability and recovery needs |
+| Agent-to-play journey over REST, MCP and CLI | [F4.1 journey](infra/evidence/tes-155-agent-to-play-journey.md) |
+| Racing creates, repeated keys, control restart mid-operation, container recreation | [F4.2 adversarial trials](infra/evidence/tes-156-persistence-idempotency-restart.md) |
+| Reproduction on macOS arm64, Linux arm64 and amd64 images (under Rosetta) | [F4.3 platform reproduction](infra/evidence/tes-157-platform-reproduction.md) |
+| Resource use and storage reservation | [Resources and storage](infra/evidence/tes-86-resources-storage.md) |
+| Why Paper, and how many players it holds | [Minecraft benchmarks](benchmarks/minecraft/README.md) · [free profile results](benchmarks/minecraft/free-profile-results.md) |
+| This public release, including history sanitization | [Public release record](infra/evidence/tes-139-public-release.md) |
 
-The selected profile uses Paper 26.2 build 121 with two CPU quota units, a 2 GiB heap and a 3 GiB total container RAM limit. The owner accepted the [repeated two-player bot and local recovery results](benchmarks/minecraft/free-profile-results.md) for one running instance with two players on the tested Oracle A1 host. A ready warm instance consumes that one qualified slot. Cold and warm paths can pass in separate trials. Refilling the warm slot while an owned server remains active needs new capacity evidence. The failed two-active-instance run does not decide whether an active server can coexist with an idle warm server. The profile's 4 GB world soft limit and the recipe's 10 GiB PVC request do not enforce or prove a storage quota.
+The earlier two-host K3s foundation is preserved as historical evidence in [infra/two-host](infra/two-host/README.md).
 
-The first playable endpoint may be a directly reachable worker IP and port or a DNS-only address. It is returned only after Minecraft accepts a protocol connection. Cloudflare Worker, Tunnel, Access and Spectrum belong to the later managed public service. Spectrum and authenticated external play are final checks before public opening. Official Vanilla is planned as a later paid option.
+## Roadmap
 
-Deploy starts with applications maintained in the catalog. Arbitrary user images and repositories need a later isolation design. Agent hosting, previously called Continue, is outside the current scope.
+Agent Cloud grows in three directions, released only after each one is proven:
 
-## Project records
+| | Direction | Status |
+| --- | --- | --- |
+| 🎮 | **Host**: game servers that are ready to play, with defined duration and access | Minecraft Java foundation **released** |
+| 🗄️ | **Deploy**: applications, databases and services from one instruction | Planned; curated recipes first |
+| 🔁 | **Continue**: development tasks that keep working in the cloud | Exploration |
 
-GitHub holds the design, runnable configuration and published evidence. The [Cloud delivery map](https://linear.app/workspace/document/cloud-delivery-map-c0e6db580d08) holds delivery planning, responsibility and work in progress. A public result must remain understandable without Linear access.
+Next up for Host is an invited, managed beta: accounts and revocable tokens, a managed network edge, AutoStop, backups with recovery on a replacement host, and then more games and paid profiles, each qualified against measured resource limits. Read the [architecture](docs/architecture.md) and the [decision record](docs/decisions.md) for the reasoning.
 
-Git history preserves earlier designs. The [landing](prototypes/landing/index.html) and [technical brief](prototypes/technical-brief/index.html) are historical prototypes.
+## Repository map
 
-Cloud is a project by Pablo Cardozo and Agustín Pedernera. The [Git history](https://github.com/pjcdz/cloud/graphs/contributors) records code contributions. The foundation must be reproducible before publication. A clean clone, two compatible hosts and operator-owned credentials must produce the bounded request-to-play result using the published instructions. This does not promise the later managed public service. The code is licensed under [MIT](LICENSE); third-party code and asset review still gates publication (see [Contributing](CONTRIBUTING.md)).
+| Path | Contents |
+| --- | --- |
+| [`apps/cloud-control`](apps/cloud-control/README.md) | The TypeScript control plane: REST, MCP, CLI, reconciler, Docker and Kubernetes runtimes |
+| [`infra/compose`](infra/compose/README.md) | The supported Docker Compose installation, journey and trials |
+| [`infra/evidence`](infra/evidence) | Acceptance evidence for each delivered result |
+| [`catalog`](catalog/README.md) | Qualified recipes and the rules for offering them |
+| [`benchmarks/minecraft`](benchmarks/minecraft/README.md) | Benchmark tooling, raw measurements and results |
+| [`docs`](docs) | Architecture, decisions and plans |
+| [`prototypes`](prototypes/README.md) | Historical landing and technical brief |
 
-For security concerns, read [SECURITY.md](SECURITY.md).
+Internal component names still use `cloud` (the Compose project, `cloud-control`, the `cloud` CLI) so existing installations keep their volumes. `TES-…` identifiers in the records refer to the maintainers' private tracker; every public document stands on its own without it.
+
+## The story
+
+Agent Cloud did not start with a technology. It started with people.
+
+At **NOA Innova 2026** in Salta, Argentina, Federico Umere Gorbal met Pablo Cardozo and Agustín Pedernera, whose team built Ánima, an award-winning proposal on mental health, at that hackathon. The university then sent Federico to **Gamescom 2026** in Cologne. Among 368,000 visitors from 131 countries he kept seeing the same obstacle: running infrastructure is still hard, and creative talent rarely has someone dedicated to it. Hosts like Aternos showed how simple access can be; Nitrado showed how much reliable operation matters behind the experience.
+
+Federico came back with one question for Pablo and Agustín:
+
+> *What if creating infrastructure could be as simple as explaining what we need?*
+
+This repository is their first answer. *Open to learn from. Operated to simplify.*
+
+## Contributing and security
+
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for local checks (`npm run check`) and what evidence a change needs. Report vulnerabilities privately through [GitHub security advisories](https://github.com/147pop/agent-cloud/security/advisories/new), as described in [SECURITY.md](SECURITY.md).
+
+## License
+
+[MIT](LICENSE) © Pablo Cardozo and Agustín Pedernera. Minecraft is a trademark of Mojang Synergies AB; this project is not affiliated with Mojang or Microsoft. Running a server requires accepting the Minecraft EULA.

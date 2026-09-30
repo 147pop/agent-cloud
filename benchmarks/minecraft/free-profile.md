@@ -1,6 +1,6 @@
 # Optimized free profile
 
-Status: `Qualified` for E1 under the owner's 2026-09-06 acceptance of the repeated bot workload in [TES-140](https://linear.app/workspace/issue/TES-140). Paper is selected for one instance with two players on the tested Oracle A1 host. The recipe and limits are pinned in [free-profile.json](free-profile.json) and [compose.free.yml](compose.free.yml). [Recorded results](free-profile-results.md) include TPS by activity and the remaining platform and public-launch checks. No public offer is active.
+Status: `Qualified` for E1 under the owner's 2026-09-06 acceptance of the repeated bot workload in TES-140. Paper is selected for one instance with two players on the tested Oracle A1 host. The recipe and limits are pinned in [free-profile.json](free-profile.json) and [compose.free.yml](compose.free.yml). [Recorded results](free-profile-results.md) include TPS by activity and the remaining platform and public-launch checks. No public offer is active.
 
 ## Candidate selection, 2026-09-06
 
@@ -45,9 +45,9 @@ Stop on an OOM, less than 2 GiB available host RAM, less than 20 GiB free disk, 
 
 ## Profile acceptance and public opening
 
-[TES-142](https://linear.app/workspace/issue/TES-142) owns the completed controlled comparison and [TES-143](https://linear.app/workspace/issue/TES-143) the concurrent-instance result. On 2026-09-06, Pablo accepted the repeated bot exploration, combat, block actions and local recovery for [TES-144](https://linear.app/workspace/issue/TES-144), allowing [TES-140](https://linear.app/workspace/issue/TES-140) to select Paper for E1. The [activity table](free-profile-results.md#tps-by-player-activity) and failed two-instance attempt define the accepted limit. This changes the acceptance criterion; it does not add human observations to the benchmark.
+TES-142 owns the completed controlled comparison and TES-143 the concurrent-instance result. On 2026-09-06, Pablo accepted the repeated bot exploration, combat, block actions and local recovery for TES-144, allowing TES-140 to select Paper for E1. The [activity table](free-profile-results.md#tps-by-player-activity) and failed two-instance attempt define the accepted limit. This changes the acceptance criterion; it does not add human observations to the benchmark.
 
-[D5](https://linear.app/workspace/issue/TES-18) keeps Cloudflare Spectrum as the public route. Its implementation and authenticated external-client validation follow the functional invited beta and must pass before public opening. Record the client version, approximate location, network context, visible stalls, gameplay differences and reconnect result without publishing identities or credentials. Spectrum does not block E1 profile selection or lifecycle work.
+D5 keeps Cloudflare Spectrum as the public route. Its implementation and authenticated external-client validation follow the functional invited beta and must pass before public opening. Record the client version, approximate location, network context, visible stalls, gameplay differences and reconnect result without publishing identities or credentials. Spectrum does not block E1 profile selection or lifecycle work.
 
 ## Reproduce the tests
 

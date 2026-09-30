@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="480" viewBox="0 0 1280 480" role="img" aria-labelledby="t d">
+  <title id="t">agent cloud</title>
+  <desc id="d">Infrastructure in a prompt. Ask for a server in plain language, review the plan, approve, play.</desc>
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#ffffff" fill-opacity="0.07"/>
+    </pattern>
+    <clipPath id="frame"><rect width="1280" height="480" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="1280" height="480" fill="#2639C9"/>
+    <rect width="1280" height="480" fill="url(#dots)"/>
+    <!-- lime arc, as on the brand sheet -->
+    <path d="M 960 520 L 960 410 A 210 210 0 0 1 1380 410" fill="none" stroke="#D4F54F" stroke-width="64"/>
+
+    <!-- logo -->
+    <circle cx="86" cy="80" r="17" fill="#ffffff"/>
+    <circle cx="86" cy="80" r="7.5" fill="#2639C9"/>
+    <text x="118" y="91" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#ffffff" letter-spacing="-0.5">agent cloud</text>
+    <text x="1200" y="90" text-anchor="end" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#D4F54F" letter-spacing="2.5">OPEN SOURCE · MIT</text>
+    <line x1="68" y1="126" x2="1212" y2="126" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.5"/>
+
+    <!-- headline -->
+    <text x="68" y="194" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#D4F54F" letter-spacing="2.5">BORN BETWEEN SALTA AND COLOGNE</text>
+    <text font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="78" font-weight="800" fill="#ffffff" letter-spacing="-3">
+      <tspan x="64" y="278">Infrastructure</tspan>
+      <tspan x="64" y="360">in a prompt.</tspan>
+    </text>
+
+    <!-- flow -->
+    <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="17" font-weight="600">
+      <text x="68" y="424" fill="#D4F54F">01 <tspan fill="#ffffff">Ask</tspan></text>
+      <text x="188" y="424" fill="#D4F54F">02 <tspan fill="#ffffff">Review</tspan></text>
+      <text x="338" y="424" fill="#D4F54F">03 <tspan fill="#ffffff">Approve</tspan></text>
+      <text x="498" y="424" fill="#D4F54F">04 <tspan fill="#ffffff">Play</tspan></text>
+    </g>
+  </g>
+</svg>
